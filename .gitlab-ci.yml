@@ -1,0 +1,34 @@
+stages:
+  - testdeploy
+  - deploy
+
+variables:
+  TWINE_DISABLE_KEYRING: 1
+
+test-build-package:
+  stage: testdeploy
+  image: python:3.11
+  script:
+    - cat "$PYPIRC" > /tmp/.pypirc
+    - apt-get update
+    - apt-get install -y sudo
+    - sudo apt-get install -y pandoc
+    - pip install twine pypandoc
+    - python setup.py  bdist_wheel
+    - python -m twine upload --repository testpypi dist/*.whl --config-file /tmp/.pypirc
+  only:
+    - preprod
+
+build-package:
+  stage: deploy
+  image: python:3.11
+  script:
+    - cat $PYPIRC > /tmp/.pypirc
+    - apt-get update
+    - apt-get install -y sudo
+    - sudo apt-get install -y pandoc
+    - pip install twine pypandoc
+    - python setup.py  bdist_wheel
+    - python -m twine upload --repository pypi dist/*.whl --config-file /tmp/.pypirc
+  only:
+    - prod

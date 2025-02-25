@@ -1,6 +1,6 @@
 # espn-api
 
-
+work in progress for hitting hidden espn api
 
 ## Getting started
 
