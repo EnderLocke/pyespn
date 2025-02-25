@@ -15,6 +15,9 @@ def get_nfl_player_ids():
                 athlete_response = requests.get(athlete['$ref'])
                 athlete_data = {'id': athlete_response.data.id,
                                 'name': athlete_data.data.full_name}
+                all_players.append(athlete_data)
+
+    return all_players
 
 
 def get_player_stats(player_id):
