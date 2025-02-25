@@ -1,6 +1,6 @@
 import click
 
-from espn.nfl import get_nfl_players_historical_stats
+from espn.nfl import get_nfl_players_historical_stats, get_player_info
 
 @click.command()
 @click.argument('player_ids',
@@ -31,5 +31,25 @@ def cli_pull_nfl_espn_stats(player_ids): #, save_excel_file: bool, save_path):
         }
         all_player_stats.append(this_json)
 
+
+@click.command()
+@click.argument('player_ids',
+                nargs=-1)
+def get_player_metadata(player_ids):
+    all_player_info = []
+    all_player_ids = list(player_ids)
+    if len(all_player_ids) <= 10:
+        pass
+    else:
+        raise click.BadParameter(
+            "only 10 ids max at a time"
+            f"you entered: {len(all_player_ids)}"
+        )
+    for player_id in all_player_ids:
+        player_info = get_player_info(player_id)
+        this_json = {
+            player_id: player_info
+        }
+        all_player_info.append(this_json)
 
 
