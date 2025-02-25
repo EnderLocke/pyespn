@@ -1,5 +1,5 @@
 # todo there is venue info could add a lookup for that specirfcally
-#  what else is out there/ add a teams logo call
+#  what else is out there/ add a teams logo call (its within team info data)
 #  build out a lookup table for a team name its not many lines
 import requests
 
