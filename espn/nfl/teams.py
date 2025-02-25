@@ -1,4 +1,5 @@
-# todo a func for getting team stats by year//
+# todo there is venue info could add a lookup for that specirfcally
+#  what else is out there
 #  build out a lookup table for a team name its not many lines
 import requests
 
