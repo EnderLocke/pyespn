@@ -1,6 +1,8 @@
 import click
+import datetime
 
-from espn.nfl import get_nfl_players_historical_stats, get_player_info
+from espn.nfl import (get_nfl_players_historical_stats, get_player_info,
+                      get_season_team_stats)
 
 @click.command()
 @click.argument('player_ids',
@@ -30,7 +32,7 @@ def cli_pull_nfl_espn_stats(player_ids): #, save_excel_file: bool, save_path):
             player_id: player_stats
         }
         all_player_stats.append(this_json)
-
+    print(all_player_stats)
 
 @click.command()
 @click.argument('player_ids',
@@ -51,5 +53,21 @@ def get_player_metadata(player_ids):
             player_id: player_info
         }
         all_player_info.append(this_json)
+    print(all_player_info)
 
+@click.argument('season')
+@click.argument('team_id')
+def get_team_season_stats(season, team_id):
+    current_year = datetime.datetime.now().year
+    if 1990 <= season <= current_year:
+        pass
+    else:
+        click.BadParameter(f'season must be between 1990 and {current_year}')
+    if 0 < team_id < 35:
+        pass
+    else:
+        click.BadParameter(f'team id must be between 1 and 34')
 
+    stats = get_season_team_stats(season=season,
+                                  team=team_id)
+    print(stats)
