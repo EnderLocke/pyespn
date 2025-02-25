@@ -2,3 +2,5 @@
 #  stats
 # http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2025/athletes/4277905?lang=en&region=us
 
+#  todo all players?
+# http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/athletes/
