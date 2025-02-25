@@ -13,4 +13,4 @@ def get_season_team_stats(season, team):
 def get_team_info(team_id):
     url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams/{team_id}?lang=en&region=us'
     response = requests.get(url)
-    return response
+    return response.content
