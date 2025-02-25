@@ -40,3 +40,4 @@ version = { attr = "google.cloud.bigquery.version.__version__" }
 include = ["espn*"]
 [project.scripts]
 nfl-player-stats = "espn.bin:get_nfl_players_historical_stats"
+nfl-player-info = "espn.bin:get_player_metadata"
