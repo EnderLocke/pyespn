@@ -55,6 +55,7 @@ def get_player_metadata(player_ids):
         all_player_info.append(this_json)
     print(all_player_info)
 
+@click.command()
 @click.argument('season')
 @click.argument('team_id')
 def get_team_season_stats(season, team_id):
