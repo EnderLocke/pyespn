@@ -12,3 +12,5 @@
   * added cli func
 * added func to get teams stats for a given year
   * added cli func
+* added func to pull all sports api urls
+  * cli added
