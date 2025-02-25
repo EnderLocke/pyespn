@@ -62,7 +62,7 @@ def get_player_stat_urls(player_id):
     except Exception as e:
         raise Exception(e)
     finally:
-        for stat in log_response.data['entries']:
+        for stat in log_response.content['entries']:
             stat_urls.append(stat['statistics'][0]['statistics']['$ref'])
 
     return stat_urls
@@ -72,7 +72,7 @@ def extract_stats_from_url(url):
     url_parts = url.split('/')
     year = url_parts[url_parts.index('seasons') + 1]
     player_id = url_parts[url_parts.index('athletes') + 1]
-    stats = response.data['splits']['categories']
+    stats = response.content['splits']['categories']
 
     for category in stats:
         category_name = category['name']
@@ -90,3 +90,5 @@ def extract_stats_from_url(url):
 
 def get_player_info(player_id):
     url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/{player_id}'
+    response = requests.get(url)
+    return response.content
