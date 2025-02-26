@@ -5,7 +5,7 @@ def get_nfl_player_ids():
     all_players = []
     nfl_ath_url = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes?lang=en&region=us'
     response = requests.get(nfl_ath_url)
-    num_pages = json.loads(response.content.decode('utf-8')).get('entries')
+    num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
     for i in range(1, num_pages):
         page_url = nfl_ath_url + f'&page={i}'
