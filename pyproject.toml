@@ -37,7 +37,7 @@ version = { attr = "google.cloud.bigquery.version.__version__" }
 [tool.setuptools.packages.find]
 # Only include packages under the 'espn' namespace. Do not include tests,
 # benchmarks, etc.
-include = ["espn*"]
+include = ["pyespn*"]
 [project.scripts]
 nfl-player-stats = "espn.bin:get_nfl_players_historical_stats"
 nfl-player-info = "espn.bin:get_player_metadata"
