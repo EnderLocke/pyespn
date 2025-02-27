@@ -3,7 +3,7 @@
 work in progress for hitting hidden espn api, more to come
 
 ## NFL
-
+includes information on apis available for the nfl
 
 ### pyespn.nfl.get_team_info(team_id) ⇒
 Gets team info from espn api
