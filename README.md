@@ -490,7 +490,95 @@ print(game_info)
 ### Betting Data
 functions under here get betting data, against the spread
 
+#### _pyespn.nba.get_year_nba_champ_futures(season, provider) ⇒_
+returns futures for finals winner for a given year
 
+| Param    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| season   | <code>number</code> | Year of season                                  |
+| provider | <code>string</code> | Betting provider. Options:                      |
+|          |                    | - DraftKings                                    |
+|          |                    | - SugarHouse                                    |
+|          |                    | - Caesars Sportsbook (New Jersey)               |
+|          |                    | - PointsBet                                     |
+|          |                    | - Caesars Sportsbook (Colorado)                 |
+|          |                    | - Holland Casino                                |
+|          |                    | - Caesars Sportsbook (Tennessee)                |
+|          |                    | - FanDuel                                       |
+|          |                    | - Unibet                                        |
+|          |                    | - Bet365                                        |
+
+```python
+from pyespn.nba import get_year_nba_champ_futures
+
+season = 2023
+provider = 'DraftKings'
+
+futures_record = get_year_nba_champ_futures(season=season,
+                                            provider=provider)
+
+print(futures_record)
+```
+
+#### _pyespn.nba.get_year_east_champ_futures(season, provider) ⇒_
+returns futures for east conf finals winner for a given year
+
+| Param    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| season   | <code>number</code> | Year of season                                  |
+| provider | <code>string</code> | Betting provider. Options:                      |
+|          |                    | - DraftKings                                    |
+|          |                    | - SugarHouse                                    |
+|          |                    | - Caesars Sportsbook (New Jersey)               |
+|          |                    | - PointsBet                                     |
+|          |                    | - Caesars Sportsbook (Colorado)                 |
+|          |                    | - Holland Casino                                |
+|          |                    | - Caesars Sportsbook (Tennessee)                |
+|          |                    | - FanDuel                                       |
+|          |                    | - Unibet                                        |
+|          |                    | - Bet365                                        |
+
+```python
+from pyespn.nba import get_year_east_champ_futures
+
+season = 2023
+provider = 'DraftKings'
+
+futures_record = get_year_east_champ_futures(season=season,
+                                            provider=provider)
+
+print(futures_record)
+```
+
+#### _pyespn.nba.get_year_west_champ_futures(season, provider) ⇒_
+returns futures for west conf finals winner for a given year
+
+| Param    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| season   | <code>number</code> | Year of season                                  |
+| provider | <code>string</code> | Betting provider. Options:                      |
+|          |                    | - DraftKings                                    |
+|          |                    | - SugarHouse                                    |
+|          |                    | - Caesars Sportsbook (New Jersey)               |
+|          |                    | - PointsBet                                     |
+|          |                    | - Caesars Sportsbook (Colorado)                 |
+|          |                    | - Holland Casino                                |
+|          |                    | - Caesars Sportsbook (Tennessee)                |
+|          |                    | - FanDuel                                       |
+|          |                    | - Unibet                                        |
+|          |                    | - Bet365                                        |
+
+```python
+from pyespn.nba import get_year_west_champ_futures
+
+season = 2023
+provider = 'DraftKings'
+
+futures_record = get_year_west_champ_futures(season=season,
+                                             provider=provider)
+
+print(futures_record)
+```
 
 #### _pyespn.nba.get_team_year_ats_overall(team_id, season) ⇒_
 returns a teams overall against the spread for a season
