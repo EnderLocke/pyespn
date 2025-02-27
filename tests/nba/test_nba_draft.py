@@ -20,7 +20,6 @@ def test_nba_draft(test_case):
                                   pick=test_case['pick'],
                                   season=test_case['season'])
 
-    print(content['team']['$ref'])
     athlete_id = content['athlete']['$ref'].split('/')[content['athlete']['$ref'].split('/').index('athletes') + 1].split('?')[0]
     team_id = content['team']['$ref'].split('/')[content['team']['$ref'].split('/').index('teams') + 1].split('?')[0]
 
