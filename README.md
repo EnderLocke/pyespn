@@ -478,6 +478,34 @@ ats_record = get_team_year_ats_home_underdog(team_id=team_id,
 print(ats_record)
 ```
 
+### Draft Data
+these functions pull data for the draft
+
+#### _pyespn.nba.get_draft_pick_data(team_id) ⇒_
+Gets team info from espn api
+
+| Param      | Type | Description                        |
+|------------| --- |------------------------------------|
+| pick_round | <code>number</code> | round of pick                      |
+| pick       | <code>number</code> | pick number in round (not overall) |
+| season     | <code>number</code> | season of draft                    |
+
+**example**
+
+```python
+from pyespn.nba import get_draft_pick_data
+
+season = 2021
+pick = 8
+pick_round = 2
+
+draft_pick_info = get_draft_pick_data(pick_round=pick_round,
+                                      pick=pick,
+                                      season=season)
+
+print(draft_pick_info)
+```
+
 
 
 ## MLB
