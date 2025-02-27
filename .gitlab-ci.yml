@@ -8,7 +8,7 @@ variables:
 
 pytest:
   stage: test
-  image: python:3.9
+  image: python:3.11
   before_script:
     - pip install -r requirements.txt
   script:
