@@ -758,7 +758,11 @@ draft_pick_info = get_draft_pick_data(pick_round=pick_round,
 print(draft_pick_info)
 ```
 
+## College Football | CFB
+coming..
 
+## College Basketball | CBB
+coming ...
 
 ## MLB
 coming ...
@@ -769,9 +773,5 @@ coming ..
 ## F1
 coming ...
 
-## College Basketball | CBB
-coming ...
 
-## College Football | CFB
-coming..
 
