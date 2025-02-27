@@ -21,7 +21,7 @@ ml_test_cases = [
 
 
 @pytest.mark.parametrize("test_case", ats_overall_test_cases)
-def test_ats(test_case):
+def test_ats_overall(test_case):
     content = get_team_year_ats_overall(team_id=test_case['team_id'],
                                         season=test_case['season'])
     assert content['wins'] == test_case['wins']
