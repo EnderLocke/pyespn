@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0
+
+### Features
+* initial nba and nfl functions to pull:
+  * team info
+  * betting info
+  * player info
+  * historical stats
+  * draft info
+
 ## 0.0.1
 
 ### Features
