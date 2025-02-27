@@ -18,6 +18,7 @@ from pyespn.nfl.data import nfl_teams_data
 print(nfl_teams_data)
 
 ```
+
 ### Team Data
 functions under here get team data
 
@@ -66,4 +67,15 @@ print(ats_record)
 
 ## NBA
 
+#### _pyespn.nba.data.nfl_teams_data ⇒_
+This is a list of ids/teams in json format
+
+**example**
+
+```python
+from pyespn.nba.data import nba_teams_data
+
+print(nba_teams_data)
+
+```
 **examples**
