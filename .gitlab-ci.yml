@@ -1,7 +1,7 @@
 stages:
+  - test
   - testdeploy
   - deploy
-  - test
 
 variables:
   TWINE_DISABLE_KEYRING: 1
