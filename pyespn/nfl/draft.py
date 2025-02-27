@@ -1,3 +1,10 @@
-# todo add api call to the draft api
+import requests
+import json
 
-# http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/draft/rounds/1/picks/22?lang=en&region=us
+
+def get_draft_pick_data(pick_round, pick, season):
+    url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/{season}/draft/rounds/{pick_round}/picks/{pick}'
+    response = requests.get(url)
+    content = json.loads(response.content)
+    return content
+
