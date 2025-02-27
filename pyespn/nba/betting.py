@@ -1,6 +1,3 @@
-# todo add any betting apis here
-
-# http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2023/futures?lang=en&region=us
 from pyespn.nba.data import nba_teams_data
 from pyespn.utilities import get_team_id
 import requests
