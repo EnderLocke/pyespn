@@ -20,10 +20,10 @@ def test_nfl_draft(test_case):
                                   pick=test_case['pick'],
                                   season=test_case['season'])
 
-    athlete_id = content['athlete']['$ref'].split('/')[content['athlete']['$ref'].split('/').index('athletes') + 1]
-    team_id = content['team']['$ref'].split('/')[content['team']['$ref'].split('/').index('teams') + 1]
+    athlete_id = content['athlete']['$ref'].split('/')[content['athlete']['$ref'].split('/').index('athletes') + 1].split('?')[0]
+    team_id = content['team']['$ref'].split('/')[content['team']['$ref'].split('/').index('teams') + 1].split('?')[0]
 
-    assert test_case['team_id'] == team_id
-    assert test_case['athlete_id'] == athlete_id
+    assert test_case['team_id'] == int(team_id)
+    assert test_case['athlete_id'] == int(athlete_id)
     assert test_case['traded'] == content['traded']
 
