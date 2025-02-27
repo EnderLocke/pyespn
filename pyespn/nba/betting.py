@@ -5,6 +5,11 @@ import requests
 import json
 
 
+def _get_futures_year(year):
+    url = f'http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/{year}/futures?lang=en&region=us'
+    response = requests.get(url)
+
+
 def _get_type_ats(data, ats_type):
     try:
         result = next(item for item in data["items"] if item["type"]["name"] == ats_type)
