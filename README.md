@@ -27,9 +27,9 @@ Gets team info from espn api
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 
-**examples**
+**example**
 
 ```python
 from pyespn.nfl import get_team_info
@@ -41,6 +41,55 @@ team_info = get_team_info(team_id=team_id)
 print(team_info)
 ```
 
+### Draft Data
+these functions pull data for the draft
+
+#### _pyespn.nfl.get_draft_pick_data(team_id) ⇒_
+Gets team info from espn api
+
+| Param      | Type | Description                        |
+|------------| --- |------------------------------------|
+| pick_round | <code>number</code> | round of pick                      |
+| pick       | <code>number</code> | pick number in round (not overall) |
+| season     | <code>number</code> | season of draft                    |
+
+**example**
+
+```python
+from pyespn.nfl import get_draft_pick_data
+
+season = 2020
+pick = 1
+pick_round = 1
+
+draft_pick_info = get_draft_pick_data(pick_round=pick_round,
+                                      pick=pick,
+                                      season=season)
+
+print(draft_pick_info)
+```
+
+### Game/Event Data
+functions under here retrieve event/game info. game id is required and is the same from espn front page
+
+#### _pyespn.nfl.get_game_info(team_id, season) ⇒_
+returns a teams overall against the spread for a season
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_game_info
+
+event_id = 401671889 # 2025 Super Bowl
+
+game_info = get_game_info(event_id=event_id)
+
+print(game_info)
+```
+
 ### Betting Data
 functions under here get betting data, against the spread
 
@@ -49,7 +98,7 @@ returns a teams overall against the spread for a season
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -69,7 +118,7 @@ returns a teams against the spread for a season as an underdog
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -89,7 +138,7 @@ returns a teams against the spread for a season as the away team
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -109,7 +158,7 @@ returns a teams against the spread for a season as the home team
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -129,7 +178,7 @@ returns a teams against the spread for a season as the home team and favorite
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -147,9 +196,9 @@ print(ats_record)
 ### _pyespn.nfl.get_team_year_ats_away_underdog(team_id, season) ⇒_
 returns a teams against the spread for a season as the away team and underdog
 
-| Param   | Type | Description |
-|---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| Param   | Type | Description    |
+|---------| --- |----------------|
+| team_id | <code>number</code> | id for team    |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -169,7 +218,7 @@ returns a teams against the spread for a season as the home team and underdog
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -198,4 +247,19 @@ from pyespn.nba.data import nba_teams_data
 print(nba_teams_data)
 
 ```
-**examples**
+
+## MLB
+coming ...
+
+## EPL
+coming ..
+
+## F1
+coming ...
+
+## College Basketball | CBB
+coming ...
+
+## College Football | CFB
+coming..
+
