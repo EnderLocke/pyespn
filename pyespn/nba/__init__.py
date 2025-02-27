@@ -3,3 +3,4 @@ from .betting import (get_team_year_ats_home_underdog, get_team_year_ats_away_un
                       get_team_year_ats_home_favorite, get_team_year_ats_home,
                       get_team_year_ats_away, get_team_year_ats_underdog,
                       get_team_year_ats_overall)
+from .players import get_player_info
