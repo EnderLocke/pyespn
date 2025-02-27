@@ -1,4 +1,4 @@
-from pyespn.nfl import get_draft_pick_data
+from pyespn.nba import get_draft_pick_data
 import pytest
 
 
@@ -15,11 +15,12 @@ draft_test_cases = [
 
 
 @pytest.mark.parametrize("test_case", draft_test_cases)
-def test_nfl_draft(test_case):
+def test_nba_draft(test_case):
     content = get_draft_pick_data(pick_round=test_case['round'],
                                   pick=test_case['pick'],
                                   season=test_case['season'])
 
+    print(content['team']['$ref'])
     athlete_id = content['athlete']['$ref'].split('/')[content['athlete']['$ref'].split('/').index('athletes') + 1].split('?')[0]
     team_id = content['team']['$ref'].split('/')[content['team']['$ref'].split('/').index('teams') + 1].split('?')[0]
 
