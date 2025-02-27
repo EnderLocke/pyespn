@@ -247,4 +247,19 @@ from pyespn.nba.data import nba_teams_data
 print(nba_teams_data)
 
 ```
-**examples**
+
+## MLB
+coming ...
+
+## EPL
+coming ..
+
+## F1
+coming ...
+
+## College Basketball | CBB
+coming ...
+
+## College Football | CFB
+coming..
+
