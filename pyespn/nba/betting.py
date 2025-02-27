@@ -48,7 +48,7 @@ def get_year_nba_champ_futures(season, provider="DraftKings"):
     futures_list = []
     for item in provider_futures['books']:
         team_id = get_team_id(item['team']['$ref'])
-        result = next(team for team in nba_teams_data['teams'] if team['team_id'] == team_id)
+        result = next(team for team in nba_teams_data if team['team_id'] == team_id)
 
         item_dict = {
             'team_name': result['team_name'],
