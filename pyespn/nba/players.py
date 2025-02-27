@@ -7,6 +7,7 @@
 import requests
 import json
 
+
 def get_nba_player_ids():
     all_players = []
     nba_ath_url = 'http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/athletes?lang=en&region=us'
