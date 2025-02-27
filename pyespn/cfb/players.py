@@ -77,6 +77,7 @@ def extract_stats_from_url(url):
 
     return all_stats
 
+
 def get_player_info(player_id):
     url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes/{player_id}'
     response = requests.get(url)
