@@ -1,5 +1,5 @@
 from pyespn.nba.data import nba_teams_data
-from pyespn.utilities import get_team_id
+from pyespn.utilities import get_team_id, get_type_futures, get_type_ats
 import requests
 import json
 
@@ -9,22 +9,6 @@ def _get_futures_year(year):
     response = requests.get(url)
     content = json.loads(response.content)
     return content
-
-
-def _get_type_futures(data, futures_type):
-    try:
-        result = next(item for item in data["items"] if item["name"] == futures_type)
-    except StopIteration:
-        result = None
-    return result
-
-
-def _get_type_ats(data, ats_type):
-    try:
-        result = next(item for item in data["items"] if item["type"]["name"] == ats_type)
-    except StopIteration:
-        result = None
-    return result
 
 
 def _get_team_year_ats(team_id, season):
@@ -37,7 +21,7 @@ def _get_team_year_ats(team_id, season):
 def get_year_nba_champ_futures(season, provider="DraftKings"):
     content = _get_futures_year(season)
 
-    nba_futures = _get_type_futures(data=content,
+    nba_futures = get_type_futures(data=content,
                                     futures_type='NBA - Winner')
 
     provider_futures = next(future for future in nba_futures['futures'] if future['provider']['name'] == provider)
@@ -60,7 +44,7 @@ def get_year_nba_champ_futures(season, provider="DraftKings"):
 def get_year_east_champ_futures(season, provider="DraftKings"):
     content = _get_futures_year(season)
 
-    nba_futures = _get_type_futures(data=content,
+    nba_futures = get_type_futures(data=content,
                                     futures_type='NBA - Eastern Conference - Winner')
 
     provider_futures = next(future for future in nba_futures['futures'] if future['provider']['name'] == provider)
@@ -83,7 +67,7 @@ def get_year_east_champ_futures(season, provider="DraftKings"):
 def get_year_west_champ_futures(season, provider="DraftKings"):
     content = _get_futures_year(season)
 
-    nba_futures = _get_type_futures(data=content,
+    nba_futures = get_type_futures(data=content,
                                     futures_type='NBA - Western Conference - Winner')
 
     provider_futures = next(future for future in nba_futures['futures'] if future['provider']['name'] == provider)
@@ -106,7 +90,7 @@ def get_year_west_champ_futures(season, provider="DraftKings"):
 def get_team_year_ats_overall(team_id, season):
     content = _get_team_year_ats(team_id=team_id,
                                  season=season)
-    ats = _get_type_ats(data=content,
+    ats = get_type_ats(data=content,
                     ats_type='atsOverall')
     return ats
 
@@ -114,7 +98,7 @@ def get_team_year_ats_overall(team_id, season):
 def get_team_year_ats_favorite(team_id, season):
     content = _get_team_year_ats(team_id=team_id,
                                  season=season)
-    ats = _get_type_ats(data=content,
+    ats = get_type_ats(data=content,
                     ats_type='atsFavorite')
     return ats
 
@@ -122,7 +106,7 @@ def get_team_year_ats_favorite(team_id, season):
 def get_team_year_ats_underdog(team_id, season):
     content = _get_team_year_ats(team_id=team_id,
                                  season=season)
-    ats = _get_type_ats(data=content,
+    ats = get_type_ats(data=content,
                         ats_type='atsUnderdog')
     return ats
 
@@ -130,7 +114,7 @@ def get_team_year_ats_underdog(team_id, season):
 def get_team_year_ats_away(team_id, season):
     content = _get_team_year_ats(team_id=team_id,
                                  season=season)
-    ats = _get_type_ats(data=content,
+    ats = get_type_ats(data=content,
                         ats_type='atsAway')
     return ats
 
@@ -138,7 +122,7 @@ def get_team_year_ats_away(team_id, season):
 def get_team_year_ats_home(team_id, season):
     content = _get_team_year_ats(team_id=team_id,
                                  season=season)
-    ats = _get_type_ats(data=content,
+    ats = get_type_ats(data=content,
                         ats_type='atsHome')
     return ats
 
@@ -146,7 +130,7 @@ def get_team_year_ats_home(team_id, season):
 def get_team_year_ats_home_favorite(team_id, season):
     content = _get_team_year_ats(team_id=team_id,
                                  season=season)
-    ats = _get_type_ats(data=content,
+    ats = get_type_ats(data=content,
                         ats_type='atsHomeFavorite')
     return ats
 
@@ -154,7 +138,7 @@ def get_team_year_ats_home_favorite(team_id, season):
 def get_team_year_ats_away_underdog(team_id, season):
     content = _get_team_year_ats(team_id=team_id,
                                  season=season)
-    ats = _get_type_ats(data=content,
+    ats = get_type_ats(data=content,
                         ats_type='atsAwayUnderdog')
     return ats
 
@@ -162,6 +146,6 @@ def get_team_year_ats_away_underdog(team_id, season):
 def get_team_year_ats_home_underdog(team_id, season):
     content = _get_team_year_ats(team_id=team_id,
                                  season=season)
-    ats = _get_type_ats(data=content,
+    ats = get_type_ats(data=content,
                         ats_type='atsHomeUnderdog')
     return ats
