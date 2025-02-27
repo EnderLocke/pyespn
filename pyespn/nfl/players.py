@@ -1,11 +1,11 @@
 import requests
-
+import json
 
 def get_nfl_player_ids():
     all_players = []
     nfl_ath_url = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes?lang=en&region=us'
     response = requests.get(nfl_ath_url)
-    num_pages = response['data']['entries']
+    num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
     for i in range(1, num_pages):
         page_url = nfl_ath_url + f'&page={i}'
@@ -62,7 +62,9 @@ def get_player_stat_urls(player_id):
     except Exception as e:
         raise Exception(e)
     finally:
-        for stat in log_response.content['entries']:
+        content_str = log_response.content.decode('utf-8')
+        content_dict = json.loads(content_str)
+        for stat in content_dict.get('entries'):
             stat_urls.append(stat['statistics'][0]['statistics']['$ref'])
 
     return stat_urls
@@ -72,7 +74,9 @@ def extract_stats_from_url(url):
     url_parts = url.split('/')
     year = url_parts[url_parts.index('seasons') + 1]
     player_id = url_parts[url_parts.index('athletes') + 1]
-    stats = response.content['splits']['categories']
+    content_str = response.content.decode('utf-8')
+    content_dict = json.loads(content_str)
+    stats = content_dict.get('splits').get('categories')
 
     for category in stats:
         category_name = category['name']

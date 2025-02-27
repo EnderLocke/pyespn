@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "espn-api"
+name = "pyespn"
 authors = [{ name = "Zach Stocker", email = "zacharystocker@gmail.com" }]
 license = { text = "MIT" }
 requires-python = ">=3.11"
@@ -37,7 +37,7 @@ version = { attr = "google.cloud.bigquery.version.__version__" }
 [tool.setuptools.packages.find]
 # Only include packages under the 'espn' namespace. Do not include tests,
 # benchmarks, etc.
-include = ["espn*"]
+include = ["pyespn*"]
 [project.scripts]
 nfl-player-stats = "espn.bin:get_nfl_players_historical_stats"
 nfl-player-info = "espn.bin:get_player_metadata"

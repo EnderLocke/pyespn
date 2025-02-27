@@ -1,8 +1,8 @@
 import click
 import datetime
 
-from espn.nfl import (get_nfl_players_historical_stats, get_player_info,
-                      get_season_team_stats)
+from pyespn.nfl import (get_nfl_players_historical_stats, get_player_info,
+                        get_season_team_stats)
 
 @click.command()
 @click.argument('player_ids',
