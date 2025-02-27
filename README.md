@@ -208,8 +208,8 @@ futures_record = get_year_afc_division_champ_futures(season=season,
 print(futures_record)
 ```
 
-#### _pyespn.nfl.get_year_afc_division_champ_futures(season, provider) ⇒_
-returns afc division champions futures
+#### _pyespn.nfl.get_year_nfc_division_champ_futures(season, provider) ⇒_
+returns nfc division champions futures
 
 | Param    | Type               | Description                                      |
 |----------|--------------------|--------------------------------------------------|
@@ -489,6 +489,8 @@ print(game_info)
 
 ### Betting Data
 functions under here get betting data, against the spread
+
+
 
 #### _pyespn.nba.get_team_year_ats_overall(team_id, season) ⇒_
 returns a teams overall against the spread for a season
