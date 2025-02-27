@@ -1,6 +1,7 @@
 import requests
 import json
 
+
 def get_nfl_player_ids():
     all_players = []
     nfl_ath_url = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes?lang=en&region=us'
@@ -22,35 +23,6 @@ def get_nfl_player_ids():
 
 def get_player_stat_urls(player_id):
     """ this function gets all the espn urls for a given player id
-
-    example:
-    {
-  "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/278/statisticslog?lang=en&region=us",
-  "entries": [
-    {
-      "season": {
-        "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2005?lang=en&region=us"
-      },
-      "statistics": [
-        {
-          "type": "total",
-          "statistics": {
-            "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2005/types/2/athletes/278/statistics/0?lang=en&region=us"
-          }
-        },
-        {
-          "type": "team",
-          "team": {
-            "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2005/teams/30?lang=en&region=us"
-          },
-          "statistics": {
-            "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2005/types/2/teams/30/athletes/278/statistics?lang=en&region=us"
-          }
-        }
-      ]
-    }
-    ]
-    }
 
     :param player_id:
     :return:
