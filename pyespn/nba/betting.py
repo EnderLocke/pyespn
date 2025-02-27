@@ -58,7 +58,7 @@ def get_year_nba_champ_futures(season, provider="DraftKings"):
         futures_list.append(item_dict)
 
     
-    return nba_futures
+    return futures_list
 
 
 def get_team_year_ats_overall(team_id, season):
