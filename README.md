@@ -41,6 +41,47 @@ team_info = get_team_info(team_id=team_id)
 print(team_info)
 ```
 
+### Player Data
+these functions pull player data
+
+#### _pyespn.nfl.get_player_info(player_id) ⇒_
+Gets player info from espn api
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.nfl import get_player_info
+
+player_id = 278 # Jimmy Smith, Goat
+
+player_info = get_player_info(player_id=player_id)
+
+print(player_info)
+```
+
+#### _pyespn.nfl.get_nfl_players_historical_stats(player_id) ⇒_
+Gets all players stats for career
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.nfl import get_nfl_players_historical_stats
+
+player_id = 278 # Jimmy Smith, Goat
+
+player_info = get_nfl_players_historical_stats(player_id=player_id)
+
+print(player_info)
+```
+
 ### Draft Data
 these functions pull data for the draft
 
@@ -236,6 +277,8 @@ print(ats_record)
 
 ## NBA
 
+### Data Feeds
+
 #### _pyespn.nba.data.nfl_teams_data ⇒_
 This is a list of ids/teams in json format
 
@@ -247,6 +290,30 @@ from pyespn.nba.data import nba_teams_data
 print(nba_teams_data)
 
 ```
+
+### Team Info
+
+#### _pyespn.nba.get_team_info(team_id) ⇒_
+Gets team info from espn api
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+
+**example**
+
+```python
+from pyespn.nba import get_team_info
+
+team_id = 26 # Jazz
+
+team_info = get_team_info(team_id=team_id)
+
+print(team_info)
+```
+
+
+
 
 ## MLB
 coming ...
