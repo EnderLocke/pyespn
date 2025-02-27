@@ -1,6 +1,12 @@
 # espn-api
-
 work in progress for hitting hidden espn api, right now there is nfl and nba functions, stay tuned for more
+
+# Table of Contents
+-[NFL](#nfl)
+  -[Data Files](#data-files)
+
+-[NBA](#nba)
+  -[Data Files](#data-files-1)
 
 ## NFL
 includes information on apis available for the nfl
