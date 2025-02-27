@@ -2,11 +2,21 @@
 work in progress for hitting hidden espn api, right now there is nfl and nba functions, stay tuned for more
 
 # Table of Contents
--[NFL](#nfl)
-  -[Data Files](#data-files)
+- [NFL](#nfl)
+  - [Data Files](#data-files)
+  - [Team Data](#team-data)
+  - [Player Data](#player-data)
+  - [Draft Data](#draft-data)
+  - [Game/Event Data](#gameevent-data)
+  - [Betting Data](#betting-data)
+- [NBA](#nba)
+  - [Data Files](#data-files-1)
+  - [Team Data](#team-data-1)
+  - [Player Data](#player-data-1)
+  - [Draft Data](#draft-data-1)
+  - [Game/Event Data](#gameevent-data-1)
+  - [Betting Data](#betting-data-1)
 
--[NBA](#nba)
-  -[Data Files](#data-files-1)
 
 ## NFL
 includes information on apis available for the nfl
@@ -403,7 +413,7 @@ print(nba_teams_data)
 
 ```
 
-### Team Info
+### Team Data
 
 #### _pyespn.nba.get_team_info(team_id) ⇒_
 Gets team info from espn api
