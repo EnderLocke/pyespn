@@ -1,6 +1,4 @@
 from pyespn.nfl import get_team_year_ats_overall, get_team_year_ml
-import json
-import requests
 import pytest
 
 ats_overall_test_cases = [
