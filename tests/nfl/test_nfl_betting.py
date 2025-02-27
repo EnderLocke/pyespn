@@ -16,13 +16,6 @@ ats_overall_test_cases = [
 ]
 
 
-ml_test_cases = [
-    {
-
-    }
-]
-
-
 @pytest.mark.parametrize("test_case", ats_overall_test_cases)
 def test_ats_overall(test_case):
     content = get_team_year_ats_overall(team_id=test_case['team_id'],
@@ -37,10 +30,11 @@ def test_ats_overall(test_case):
 def test_super_bowl_futures(test_case):
     content = get_year_nfl_super_bowl_futures(season=test_case['season'],
                                               provider=test_case['provider'])
+    test_match = content[test_case['index']]
 
-    assert content['team_name'] == test_case['team_name']
-    assert content['team_city'] == test_case['team_city']
-    assert content['champion_future'] == test_case['line']
+    assert test_match['team_name'] == test_case['team_name']
+    assert test_match['team_city'] == test_case['team_city']
+    assert test_match['champion_future'] == test_case['line']
 
 
 @pytest.mark.parametrize("test_case", afc_test_cases)

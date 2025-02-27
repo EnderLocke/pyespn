@@ -12,7 +12,7 @@ super_bowl_test_cases = [
 nfc_test_cases = [
     {
         'season': 2023,
-        'provider': 'DraftKings',
+        'provider': 'PointsBet',
         'team_name': 'Lions',
         'team_city': 'Detroit',
         'division': 'north',
@@ -24,7 +24,7 @@ nfc_test_cases = [
 afc_test_cases = [
     {
         'season': 2023,
-        'provider': 'DraftKings',
+        'provider': 'Caesars Sportsbook (New Jersey)',
         'team_name': 'Texans',
         'team_city': 'Houston',
         'division': 'south',
