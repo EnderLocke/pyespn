@@ -353,6 +353,27 @@ player_info = get_nba_players_historical_stats(player_id=player_id)
 print(player_info)
 ```
 
+### Game/Event Data
+functions under here retrieve event/game info. game id is required and is the same from espn front page
+
+#### _pyespn.nba.get_game_info(team_id, season) ⇒_
+returns a teams overall against the spread for a season
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_game_info
+
+event_id = 401705402 # a game
+
+game_info = get_game_info(event_id=event_id)
+
+print(game_info)
+```
+
 
 ### Betting Data
 functions under here get betting data, against the spread

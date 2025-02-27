@@ -1,9 +1,21 @@
 stages:
   - testdeploy
   - deploy
+  - test
 
 variables:
   TWINE_DISABLE_KEYRING: 1
+
+pytest:
+  stage: test
+  image: python:3.9
+  before_script:
+    - pip install -r requirements.txt
+  script:
+    - pytest tests/
+  only:
+    - preprod
+    - prod
 
 test-build-package:
   stage: testdeploy
