@@ -174,7 +174,7 @@ ats_record = get_team_year_ats_underdog(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_away(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_away(team_id, season) ⇒_
 returns a teams against the spread for a season as the away team
 
 | Param   | Type | Description |
@@ -194,7 +194,7 @@ ats_record = get_team_year_ats_away(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_home(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_home(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team
 
 | Param   | Type | Description |
@@ -214,7 +214,7 @@ ats_record = get_team_year_ats_home(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_home_favorite(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_home_favorite(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team and favorite
 
 | Param   | Type | Description |
@@ -234,7 +234,7 @@ ats_record = get_team_year_ats_home_favorite(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_away_underdog(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_away_underdog(team_id, season) ⇒_
 returns a teams against the spread for a season as the away team and underdog
 
 | Param   | Type | Description    |
@@ -254,7 +254,7 @@ ats_record = get_team_year_ats_away_underdog(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_home_underdog(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_home_underdog(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team and underdog
 
 | Param   | Type | Description |
@@ -378,7 +378,7 @@ ats_record = get_team_year_ats_underdog(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nba.get_team_year_ats_away(team_id, season) ⇒_
+#### _pyespn.nba.get_team_year_ats_away(team_id, season) ⇒_
 returns a teams against the spread for a season as the away team
 
 | Param   | Type | Description |
@@ -398,7 +398,7 @@ ats_record = get_team_year_ats_away(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nba.get_team_year_ats_home(team_id, season) ⇒_
+#### _pyespn.nba.get_team_year_ats_home(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team
 
 | Param   | Type | Description |
@@ -418,7 +418,7 @@ ats_record = get_team_year_ats_home(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nba.get_team_year_ats_home_favorite(team_id, season) ⇒_
+#### _pyespn.nba.get_team_year_ats_home_favorite(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team and favorite
 
 | Param   | Type | Description |
@@ -438,7 +438,7 @@ ats_record = get_team_year_ats_home_favorite(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nba.get_team_year_ats_away_underdog(team_id, season) ⇒_
+#### _pyespn.nba.get_team_year_ats_away_underdog(team_id, season) ⇒_
 returns a teams against the spread for a season as the away team and underdog
 
 | Param   | Type | Description    |
@@ -458,7 +458,7 @@ ats_record = get_team_year_ats_away_underdog(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nba.get_team_year_ats_home_underdog(team_id, season) ⇒_
+#### _pyespn.nba.get_team_year_ats_home_underdog(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team and underdog
 
 | Param   | Type | Description |
