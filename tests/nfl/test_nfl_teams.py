@@ -1,6 +1,5 @@
 from pyespn.nfl.data import nfl_teams_data
 from pyespn.nfl import get_team_info
-from pytest_check import check
 import random
 
 
@@ -15,7 +14,13 @@ def get_random_nfl_team_data():
 def test_nfl_team_ids():
     local_team_data, api_team_data = get_random_nfl_team_data()
 
-    with check:
-        assert local_team_data['team_abbv'] == api_team_data['abbreviation']
-        assert local_team_data['team_city'] == api_team_data['location']
-        assert local_team_data['team_name'] == api_team_data['name']
+    errors = []
+    if local_team_data['team_abbv'] != api_team_data['abbreviation']:
+        errors.append("Team abbreviation does not match")
+    if local_team_data['team_city'] != api_team_data['location']:
+        errors.append("Team city does not match")
+    if local_team_data['team_name'] != api_team_data['name']:
+        errors.append("Team name does not match")
+
+    if errors:
+        raise AssertionError("\n".join(errors))
