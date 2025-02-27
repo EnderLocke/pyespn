@@ -31,3 +31,9 @@ def get_cfb_player_ids():
     return all_players
 
 
+def get_player_info(player_id):
+    url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes/{player_id}'
+    response = requests.get(url)
+    content = json.loads(response.content)
+    return content
+
