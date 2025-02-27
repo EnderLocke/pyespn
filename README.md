@@ -1,93 +1,565 @@
 # espn-api
 
+work in progress for hitting hidden espn api, right now there is nfl and nba functions, stay tuned for more
 
+## NFL
+includes information on apis available for the nfl
 
-## Getting started
+### Data Files
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+#### _pyespn.nfl.data.nfl_teams_data ⇒_
+This is a list of ids/teams in json format
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+**example**
 
-## Add your files
+```python
+from pyespn.nfl.data import nfl_teams_data
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+print(nfl_teams_data)
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/zachstocker/espn-api.git
-git branch -M main
-git push -uf origin main
+
+### Team Data
+functions under here get team data
+
+#### _pyespn.nfl.get_team_info(team_id) ⇒_
+Gets team info from espn api
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+
+**example**
+
+```python
+from pyespn.nfl import get_team_info
+
+team_id = 30 # JAX
+
+team_info = get_team_info(team_id=team_id)
+
+print(team_info)
 ```
 
-## Integrate with your tools
+### Player Data
+these functions pull player data
 
-- [ ] [Set up project integrations](https://gitlab.com/zachstocker/espn-api/-/settings/integrations)
+#### _pyespn.nfl.get_player_info(player_id) ⇒_
+Gets player info from espn api
 
-## Collaborate with your team
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+**example**
 
-## Test and Deploy
+```python
+from pyespn.nfl import get_player_info
 
-Use the built-in continuous integration in GitLab.
+player_id = 278 # Jimmy Smith, Goat
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+player_info = get_player_info(player_id=player_id)
 
-***
+print(player_info)
+```
 
-# Editing this README
+#### _pyespn.nfl.get_nfl_players_historical_stats(player_id) ⇒_
+Gets all players stats for career
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
 
-## Suggestions for a good README
+**example**
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+```python
+from pyespn.nfl import get_nfl_players_historical_stats
 
-## Name
-Choose a self-explaining name for your project.
+player_id = 278 # Jimmy Smith, Goat
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+player_info = get_nfl_players_historical_stats(player_id=player_id)
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+print(player_info)
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Draft Data
+these functions pull data for the draft
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+#### _pyespn.nfl.get_draft_pick_data(team_id) ⇒_
+Gets team info from espn api
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+| Param      | Type | Description                        |
+|------------| --- |------------------------------------|
+| pick_round | <code>number</code> | round of pick                      |
+| pick       | <code>number</code> | pick number in round (not overall) |
+| season     | <code>number</code> | season of draft                    |
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+**example**
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```python
+from pyespn.nfl import get_draft_pick_data
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+season = 2020
+pick = 1
+pick_round = 1
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+draft_pick_info = get_draft_pick_data(pick_round=pick_round,
+                                      pick=pick,
+                                      season=season)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+print(draft_pick_info)
+```
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### Game/Event Data
+functions under here retrieve event/game info. game id is required and is the same from espn front page
 
-## License
-For open source projects, say how it is licensed.
+#### _pyespn.nfl.get_game_info(team_id, season) ⇒_
+returns a teams overall against the spread for a season
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_game_info
+
+event_id = 401671889 # 2025 Super Bowl
+
+game_info = get_game_info(event_id=event_id)
+
+print(game_info)
+```
+
+### Betting Data
+functions under here get betting data, against the spread
+
+#### _pyespn.nfl.get_team_year_ats_overall(team_id, season) ⇒_ 
+returns a teams overall against the spread for a season
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_overall
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_overall(team_id=team_id,
+                                       season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nfl.get_team_year_ats_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as an underdog
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_underdog
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_underdog(team_id=team_id,
+                                        season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nfl.get_team_year_ats_away(team_id, season) ⇒_
+returns a teams against the spread for a season as the away team
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_away
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_away(team_id=team_id,
+                                    season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nfl.get_team_year_ats_home(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_home
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_home(team_id=team_id,
+                                    season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nfl.get_team_year_ats_home_favorite(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team and favorite
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_home_favorite
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_home_favorite(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nfl.get_team_year_ats_away_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as the away team and underdog
+
+| Param   | Type | Description    |
+|---------| --- |----------------|
+| team_id | <code>number</code> | id for team    |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_away_underdog
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_away_underdog(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nfl.get_team_year_ats_home_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team and underdog
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_home_underdog
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_home_underdog(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+
+## NBA
+
+### Data Feeds
+
+#### _pyespn.nba.data.nfl_teams_data ⇒_
+This is a list of ids/teams in json format
+
+**example**
+
+```python
+from pyespn.nba.data import nba_teams_data
+
+print(nba_teams_data)
+
+```
+
+### Team Info
+
+#### _pyespn.nba.get_team_info(team_id) ⇒_
+Gets team info from espn api
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+
+**example**
+
+```python
+from pyespn.nba import get_team_info
+
+team_id = 26 # Jazz
+
+team_info = get_team_info(team_id=team_id)
+
+print(team_info)
+```
+
+## Player Data
+these functions pull player data
+
+#### _pyespn.nba.get_player_info(player_id) ⇒_
+Gets player info from espn api
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.nba import get_player_info
+
+player_id = 4397002 # Ayo
+
+player_info = get_player_info(player_id=player_id)
+
+print(player_info)
+```
+
+#### _pyespn.nba.get_nba_players_historical_stats(player_id) ⇒_
+Gets all players stats for career
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.nba import get_nba_players_historical_stats
+
+player_id = 4397002 # Ayo
+
+player_info = get_nba_players_historical_stats(player_id=player_id)
+
+print(player_info)
+```
+
+### Game/Event Data
+functions under here retrieve event/game info. game id is required and is the same from espn front page
+
+#### _pyespn.nba.get_game_info(team_id, season) ⇒_
+returns a teams overall against the spread for a season
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_game_info
+
+event_id = 401705402 # a game
+
+game_info = get_game_info(event_id=event_id)
+
+print(game_info)
+```
+
+
+### Betting Data
+functions under here get betting data, against the spread
+
+#### _pyespn.nba.get_team_year_ats_overall(team_id, season) ⇒_
+returns a teams overall against the spread for a season
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_overall
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_overall(team_id=team_id,
+                                       season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as an underdog
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_underdog
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_underdog(team_id=team_id,
+                                        season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_away(team_id, season) ⇒_
+returns a teams against the spread for a season as the away team
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_away
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_away(team_id=team_id,
+                                    season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_home(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_home
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_home(team_id=team_id,
+                                    season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_home_favorite(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team and favorite
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_home_favorite
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_home_favorite(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_away_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as the away team and underdog
+
+| Param   | Type | Description    |
+|---------| --- |----------------|
+| team_id | <code>number</code> | id for team    |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_away_underdog
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_away_underdog(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_home_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team and underdog
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_home_underdog
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_home_underdog(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+### Draft Data
+these functions pull data for the draft
+
+#### _pyespn.nba.get_draft_pick_data(team_id) ⇒_
+Gets team info from espn api
+
+| Param      | Type | Description                        |
+|------------| --- |------------------------------------|
+| pick_round | <code>number</code> | round of pick                      |
+| pick       | <code>number</code> | pick number in round (not overall) |
+| season     | <code>number</code> | season of draft                    |
+
+**example**
+
+```python
+from pyespn.nba import get_draft_pick_data
+
+season = 2021
+pick = 8
+pick_round = 2
+
+draft_pick_info = get_draft_pick_data(pick_round=pick_round,
+                                      pick=pick,
+                                      season=season)
+
+print(draft_pick_info)
+```
+
+
+
+## MLB
+coming ...
+
+## EPL
+coming ..
+
+## F1
+coming ...
+
+## College Basketball | CBB
+coming ...
+
+## College Football | CFB
+coming..
+
