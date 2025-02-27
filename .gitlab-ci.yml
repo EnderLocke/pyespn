@@ -15,7 +15,7 @@ test-build-package:
     - sudo apt-get install -y pandoc
     - pip install twine pypandoc
     - python setup.py  bdist_wheel
-    - python -m twine upload --repository testpypi dist/*.whl --config-file /tmp/.pypirc
+    - python -m twine upload --repository testpypi dist/*.whl --config-file /tmp/.pypirc --verbose
   only:
     - preprod
 
