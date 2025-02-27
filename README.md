@@ -13,6 +13,7 @@ Gets team info from espn api
 | id | <code>number</code> | team id. |
 
 **examples**
+
 ```python
 from pyespn.nfl import get_team_info
 
