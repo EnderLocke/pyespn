@@ -48,6 +48,7 @@ def get_player_stat_urls(player_id):
 def extract_stats_from_url(url):
     response = requests.get(url)
     url_parts = url.split('/')
+    all_stats = []
     year = url_parts[url_parts.index('seasons') + 1]
     player_id = url_parts[url_parts.index('athletes') + 1]
     content_str = response.content.decode('utf-8')
@@ -65,8 +66,8 @@ def extract_stats_from_url(url):
                 'stat_type_abbreviation': stat['abbreviation'],
                 'league': 'nfl'
             }
-
-    return this_stat
+            all_stats.append(this_stat)
+    return all_stats
 
 
 def get_player_info(player_id):
