@@ -47,6 +47,7 @@ def get_player_stat_urls(player_id):
 
     return stat_urls
 
+
 def extract_stats_from_url(url):
     response = requests.get(url)
     url_parts = url.split('/')
