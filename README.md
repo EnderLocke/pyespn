@@ -312,6 +312,29 @@ team_info = get_team_info(team_id=team_id)
 print(team_info)
 ```
 
+## Player Data
+these functions pull player data
+
+#### _pyespn.nba.get_player_info(player_id) ⇒_
+Gets player info from espn api
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.nba import get_player_info
+
+player_id = 4397002 # Ayo
+
+player_info = get_player_info(player_id=player_id)
+
+print(player_info)
+```
+
+
 ### Betting Data
 functions under here get betting data, against the spread
 
