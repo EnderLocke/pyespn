@@ -174,7 +174,7 @@ ats_record = get_team_year_ats_underdog(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_away(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_away(team_id, season) ⇒_
 returns a teams against the spread for a season as the away team
 
 | Param   | Type | Description |
@@ -194,7 +194,7 @@ ats_record = get_team_year_ats_away(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_home(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_home(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team
 
 | Param   | Type | Description |
@@ -214,7 +214,7 @@ ats_record = get_team_year_ats_home(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_home_favorite(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_home_favorite(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team and favorite
 
 | Param   | Type | Description |
@@ -234,7 +234,7 @@ ats_record = get_team_year_ats_home_favorite(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_away_underdog(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_away_underdog(team_id, season) ⇒_
 returns a teams against the spread for a season as the away team and underdog
 
 | Param   | Type | Description    |
@@ -254,7 +254,7 @@ ats_record = get_team_year_ats_away_underdog(team_id=team_id,
 print(ats_record)
 ```
 
-### _pyespn.nfl.get_team_year_ats_home_underdog(team_id, season) ⇒_
+#### _pyespn.nfl.get_team_year_ats_home_underdog(team_id, season) ⇒_
 returns a teams against the spread for a season as the home team and underdog
 
 | Param   | Type | Description |
@@ -312,6 +312,171 @@ team_info = get_team_info(team_id=team_id)
 print(team_info)
 ```
 
+## Player Data
+these functions pull player data
+
+#### _pyespn.nba.get_player_info(player_id) ⇒_
+Gets player info from espn api
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.nba import get_player_info
+
+player_id = 4397002 # Ayo
+
+player_info = get_player_info(player_id=player_id)
+
+print(player_info)
+```
+
+
+### Betting Data
+functions under here get betting data, against the spread
+
+#### _pyespn.nba.get_team_year_ats_overall(team_id, season) ⇒_
+returns a teams overall against the spread for a season
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_overall
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_overall(team_id=team_id,
+                                       season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as an underdog
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_underdog
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_underdog(team_id=team_id,
+                                        season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_away(team_id, season) ⇒_
+returns a teams against the spread for a season as the away team
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_away
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_away(team_id=team_id,
+                                    season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_home(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_home
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_home(team_id=team_id,
+                                    season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_home_favorite(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team and favorite
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_home_favorite
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_home_favorite(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_away_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as the away team and underdog
+
+| Param   | Type | Description    |
+|---------| --- |----------------|
+| team_id | <code>number</code> | id for team    |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_away_underdog
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_away_underdog(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+#### _pyespn.nba.get_team_year_ats_home_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team and underdog
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nba import get_team_year_ats_home_underdog
+
+team_id = 26 # Jazz
+season = 2020
+
+ats_record = get_team_year_ats_home_underdog(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
 
 
 

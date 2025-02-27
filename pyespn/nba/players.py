@@ -24,3 +24,10 @@ def get_nba_player_ids():
                 all_players.append(athlete_data)
 
     return all_players
+
+
+def get_player_info(player_id):
+    url = f'http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/athletes/{player_id}'
+    response = requests.get(url)
+    content = json.loads(response.content)
+    return content
