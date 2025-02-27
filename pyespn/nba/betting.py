@@ -57,7 +57,52 @@ def get_year_nba_champ_futures(season, provider="DraftKings"):
         }
         futures_list.append(item_dict)
 
-    
+    return futures_list
+
+
+def get_year_east_champ_futures(season, provider="DraftKings"):
+    content = _get_futures_year(season)
+
+    nba_futures = _get_type_futures(data=content,
+                                    futures_type='NBA - Eastern Conference - Winner')
+
+    provider_futures = next(future for future in nba_futures['futures'] if future['provider']['name'] == provider)
+
+    futures_list = []
+    for item in provider_futures['books']:
+        team_id = get_team_id(item['team']['$ref'])
+        result = next(team for team in nba_teams_data if team['team_id'] == team_id)
+
+        item_dict = {
+            'team_name': result['team_name'],
+            'team_city': result['team_city'],
+            'champion_future': item['value']
+        }
+        futures_list.append(item_dict)
+
+    return futures_list
+
+
+def get_year_west_champ_futures(season, provider="DraftKings"):
+    content = _get_futures_year(season)
+
+    nba_futures = _get_type_futures(data=content,
+                                    futures_type='NBA - Western Conference - Winner')
+
+    provider_futures = next(future for future in nba_futures['futures'] if future['provider']['name'] == provider)
+
+    futures_list = []
+    for item in provider_futures['books']:
+        team_id = get_team_id(item['team']['$ref'])
+        result = next(team for team in nba_teams_data if team['team_id'] == team_id)
+
+        item_dict = {
+            'team_name': result['team_name'],
+            'team_city': result['team_city'],
+            'champion_future': item['value']
+        }
+        futures_list.append(item_dict)
+
     return futures_list
 
 
