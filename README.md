@@ -138,7 +138,113 @@ print(game_info)
 ```
 
 ### Betting Data
-functions under here get betting data, against the spread
+functions under here get betting data, against the spread and futures
+
+#### _pyespn.nfl.get_year_nfl_super_bowl_futures(season, provider) ⇒_
+returns futures for superbowl winner for a given year
+
+| Param    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| season   | <code>number</code> | Year of season                                  |
+| provider | <code>string</code> | Betting provider. Options:                      |
+|          |                    | - DraftKings                                    |
+|          |                    | - SugarHouse                                    |
+|          |                    | - Caesars Sportsbook (New Jersey)               |
+|          |                    | - PointsBet                                     |
+|          |                    | - Caesars Sportsbook (Colorado)                 |
+|          |                    | - Holland Casino                                |
+|          |                    | - Caesars Sportsbook (Tennessee)                |
+|          |                    | - FanDuel                                       |
+|          |                    | - Unibet                                        |
+|          |                    | - Bet365                                        |
+
+```python
+from pyespn.nfl import get_year_nfl_super_bowl_futures
+
+season = 2023
+provider = 'DraftKings'
+
+futures_record = get_year_nfl_super_bowl_futures(season=season,
+                                                 provider=provider)
+
+print(futures_record)
+```
+
+#### _pyespn.nfl.get_year_nfc_division_champ_futures(season, provider) ⇒_
+returns afc division champions futures
+
+| Param    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| season   | <code>number</code> | Year of season                                  |
+| division | <code>string</code> | Division. Options:                              |
+|          |                    | - north                                         |
+|          |                    | - south                                         |
+|          |                    | - west                                          |
+|          |                    | - east                                          |
+|          |                    | - conf                                          |
+| provider | <code>string</code> | Betting provider. Options:                      |
+|          |                    | - DraftKings                                    |
+|          |                    | - SugarHouse                                    |
+|          |                    | - Caesars Sportsbook (New Jersey)               |
+|          |                    | - PointsBet                                     |
+|          |                    | - Caesars Sportsbook (Colorado)                 |
+|          |                    | - Holland Casino                                |
+|          |                    | - Caesars Sportsbook (Tennessee)                |
+|          |                    | - FanDuel                                       |
+|          |                    | - Unibet                                        |
+|          |                    | - Bet365                                        |
+
+```python
+from pyespn.nfl import get_year_afc_division_champ_futures
+
+season = 2023
+division = 'south'
+provider = 'DraftKings'
+
+futures_record = get_year_afc_division_champ_futures(season=season,
+                                                     division=division,
+                                                     provider=provider)
+
+print(futures_record)
+```
+
+#### _pyespn.nfl.get_year_afc_division_champ_futures(season, provider) ⇒_
+returns afc division champions futures
+
+| Param    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| season   | <code>number</code> | Year of season                                  |
+| division | <code>string</code> | Division. Options:                              |
+|          |                    | - north                                         |
+|          |                    | - south                                         |
+|          |                    | - west                                          |
+|          |                    | - east                                          |
+|          |                    | - conf                                          |
+| provider | <code>string</code> | Betting provider. Options:                      |
+|          |                    | - DraftKings                                    |
+|          |                    | - SugarHouse                                    |
+|          |                    | - Caesars Sportsbook (New Jersey)               |
+|          |                    | - PointsBet                                     |
+|          |                    | - Caesars Sportsbook (Colorado)                 |
+|          |                    | - Holland Casino                                |
+|          |                    | - Caesars Sportsbook (Tennessee)                |
+|          |                    | - FanDuel                                       |
+|          |                    | - Unibet                                        |
+|          |                    | - Bet365                                        |
+
+```python
+from pyespn.nfl import get_year_nfc_division_champ_futures
+
+season = 2023
+division = 'south'
+provider = 'DraftKings'
+
+futures_record = get_year_nfc_division_champ_futures(season=season,
+                                                     division=division,
+                                                     provider=provider)
+
+print(futures_record)
+```
 
 #### _pyespn.nfl.get_team_year_ats_overall(team_id, season) ⇒_ 
 returns a teams overall against the spread for a season
@@ -283,7 +389,7 @@ print(ats_record)
 
 ## NBA
 
-### Data Feeds
+### Data Files
 
 #### _pyespn.nba.data.nfl_teams_data ⇒_
 This is a list of ids/teams in json format
