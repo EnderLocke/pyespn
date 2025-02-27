@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.1
+* added in nba futures -> note there is not all data for every season
+
 ## 0.1.0
 
 ### Features
