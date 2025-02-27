@@ -1,0 +1,28 @@
+{
+  "teams": [
+    {
+      "team_id": 1,
+      "team_name": "Falcons",
+      "team_city": "Atlanta",
+      "team_abbv": "ATL"
+    },
+    {
+      "team_id": 2,
+      "team_name": "Bills",
+      "team_city": "Buffalo",
+      "team_abbv": "BUF"
+    },
+    {
+      "team_id": 3,
+      "team_name": "Bears",
+      "team_city": "Chicago",
+      "team_abbv": "CHI"
+    },
+    {
+      "team_id": 4,
+      "team_name": "Bengals",
+      "team_city": "Cincinnati",
+      "team_abbv": "CIN"
+    }
+  ]
+}
