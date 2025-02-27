@@ -53,8 +53,6 @@ Gets team info from espn api
 | pick       | <code>number</code> | pick number in round (not overall) |
 | season     | <code>number</code> | season of draft                    |
 
-
-
 **example**
 
 ```python
@@ -71,6 +69,26 @@ draft_pick_info = get_draft_pick_data(pick_round=pick_round,
 print(draft_pick_info)
 ```
 
+### Game/Event Data
+functions under here retrieve event/game info. game id is required and is the same from espn front page
+
+#### _pyespn.nfl.get_game_info(team_id, season) ⇒_
+returns a teams overall against the spread for a season
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_game_info
+
+event_id = 401671889 # 2025 Super Bowl
+
+game_info = get_game_info(event_id=event_id)
+
+print(game_info)
+```
 
 ### Betting Data
 functions under here get betting data, against the spread
