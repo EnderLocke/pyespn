@@ -27,9 +27,9 @@ Gets team info from espn api
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 
-**examples**
+**example**
 
 ```python
 from pyespn.nfl import get_team_info
@@ -49,7 +49,7 @@ returns a teams overall against the spread for a season
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -69,7 +69,7 @@ returns a teams against the spread for a season as an underdog
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -89,7 +89,7 @@ returns a teams against the spread for a season as the away team
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -109,7 +109,7 @@ returns a teams against the spread for a season as the home team
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -129,7 +129,7 @@ returns a teams against the spread for a season as the home team and favorite
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -147,9 +147,9 @@ print(ats_record)
 ### _pyespn.nfl.get_team_year_ats_away_underdog(team_id, season) ⇒_
 returns a teams against the spread for a season as the away team and underdog
 
-| Param   | Type | Description |
-|---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| Param   | Type | Description    |
+|---------| --- |----------------|
+| team_id | <code>number</code> | id for team    |
 | season | <code>number</code> | year of season |
 
 ```python
@@ -169,7 +169,7 @@ returns a teams against the spread for a season as the home team and underdog
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | team id. |
+| team_id | <code>number</code> | id for team |
 | season | <code>number</code> | year of season |
 
 ```python
