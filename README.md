@@ -125,7 +125,7 @@ print(ats_record)
 ```
 
 ### _pyespn.nfl.get_team_year_ats_home_favorite(team_id, season) ⇒_
-returns a teams against the spread for a season as the home team
+returns a teams against the spread for a season as the home team and favorite
 
 | Param   | Type | Description |
 |---------| --- |-------------|
@@ -139,7 +139,47 @@ team_id = 30 # JAX
 season = 2020
 
 ats_record = get_team_year_ats_home_favorite(team_id=team_id,
-                                    season=season)
+                                             season=season)
+
+print(ats_record)
+```
+
+### _pyespn.nfl.get_team_year_ats_away_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as the away team and underdog
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | team id. |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_away_underdog
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_away_underdog(team_id=team_id,
+                                             season=season)
+
+print(ats_record)
+```
+
+### _pyespn.nfl.get_team_year_ats_home_underdog(team_id, season) ⇒_
+returns a teams against the spread for a season as the home team and underdog
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | team id. |
+| season | <code>number</code> | year of season |
+
+```python
+from pyespn.nfl import get_team_year_ats_home_underdog
+
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_home_underdog(team_id=team_id,
+                                             season=season)
 
 print(ats_record)
 ```
