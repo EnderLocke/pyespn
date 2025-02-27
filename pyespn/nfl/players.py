@@ -11,11 +11,14 @@ def get_nfl_player_ids():
     for i in range(1, num_pages):
         page_url = nfl_ath_url + f'&page={i}'
         page_response = requests.get(page_url)
-        for athlete in page_response:
+        content = json.loads(page_response.content)
+
+        for athlete in content:
             if athlete['$ref']:
                 athlete_response = requests.get(athlete['$ref'])
-                athlete_data = {'id': athlete_response['data']['id'],
-                                'name': athlete_data['data']['full_name']}
+                athlete_content = json.loads(athlete_response.content)
+                athlete_data = {'id': athlete_content['id'],
+                                'name': athlete_content['full_name']}
                 all_players.append(athlete_data)
 
     return all_players
