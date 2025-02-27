@@ -22,7 +22,7 @@ def get_year_nba_champ_futures(season, provider="DraftKings"):
     content = _get_futures_year(season)
 
     nba_futures = get_type_futures(data=content,
-                                    futures_type='NBA - Winner')
+                                   futures_type='NBA - Winner')
 
     provider_futures = next(future for future in nba_futures['futures'] if future['provider']['name'] == provider)
 
@@ -45,7 +45,7 @@ def get_year_east_champ_futures(season, provider="DraftKings"):
     content = _get_futures_year(season)
 
     nba_futures = get_type_futures(data=content,
-                                    futures_type='NBA - Eastern Conference - Winner')
+                                   futures_type='NBA - Eastern Conference - Winner')
 
     provider_futures = next(future for future in nba_futures['futures'] if future['provider']['name'] == provider)
 
@@ -68,7 +68,7 @@ def get_year_west_champ_futures(season, provider="DraftKings"):
     content = _get_futures_year(season)
 
     nba_futures = get_type_futures(data=content,
-                                    futures_type='NBA - Western Conference - Winner')
+                                   futures_type='NBA - Western Conference - Winner')
 
     provider_futures = next(future for future in nba_futures['futures'] if future['provider']['name'] == provider)
 
