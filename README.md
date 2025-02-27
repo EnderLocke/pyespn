@@ -334,6 +334,25 @@ player_info = get_player_info(player_id=player_id)
 print(player_info)
 ```
 
+#### _pyespn.nba.get_nba_players_historical_stats(player_id) ⇒_
+Gets all players stats for career
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.nba import get_nba_players_historical_stats
+
+player_id = 4397002 # Ayo
+
+player_info = get_nba_players_historical_stats(player_id=player_id)
+
+print(player_info)
+```
+
 
 ### Betting Data
 functions under here get betting data, against the spread
