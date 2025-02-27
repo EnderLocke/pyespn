@@ -1,2 +1,2 @@
-from .players import extract_stats_from_url, get_player_stat_urls
+from .players import extract_stats_from_url, get_player_stat_urls, get_player_info
 from .orchestration import get_cfb_players_historical_stats
