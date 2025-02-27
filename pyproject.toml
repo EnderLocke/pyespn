@@ -33,7 +33,7 @@ dynamic = ["version"]
 [project.urls]
 Repository = "https://gitlab.com/zachstocker/espn-api"
 [tool.setuptools.dynamic]
-version = { attr = "google.cloud.bigquery.version.__version__" }
+version = { attr = "pyespn.api.version.__version__" }
 [tool.setuptools.packages.find]
 # Only include packages under the 'espn' namespace. Do not include tests,
 # benchmarks, etc.
