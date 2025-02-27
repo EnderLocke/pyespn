@@ -1,4 +1,5 @@
 from pyespn.nba.data import nba_teams_data
+from pytest_check import check
 import random
 import requests
 import json
@@ -17,4 +18,7 @@ def get_random_nba_team_data():
 def test_nba_team_ids():
     local_team_data, api_team_data = get_random_nba_team_data()
 
-    assert local_team_data['team_abbv'] == api_team_data['abbreviation']
+    with check:
+        assert local_team_data['team_abbv'] == api_team_data['abbreviation']
+        assert local_team_data['team_city'] == api_team_data['location']
+        assert local_team_data['team_name'] == api_team_data['name']

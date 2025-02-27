@@ -1,3 +1,4 @@
 requests
 click
 pytest
+pytest-check
