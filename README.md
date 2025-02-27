@@ -37,12 +37,13 @@ team_id = 30 # JAX
 
 team_info = get_team_info(team_id=team_id)
 
+print(team_info)
 ```
 
 ### Betting Data
 functions under here get betting data, against the spread
 
-#### _pyespn.nfl.get_team_ats_overall(team_id, season) ⇒_ 
+#### _pyespn.nfl.get_team_year_ats_overall(team_id, season) ⇒_ 
 returns a teams overall against the spread for a season
 
 | Param   | Type | Description |
@@ -51,7 +52,15 @@ returns a teams overall against the spread for a season
 | season | <code>number</code> | year of season |
 
 ```python
+from pyespn.nfl import get_team_year_ats_overall
 
+team_id = 30 # JAX
+season = 2020
+
+ats_record = get_team_year_ats_overall(team_id=team_id,
+                                       season=season)
+
+print(ats_record)
 ```
 
 
