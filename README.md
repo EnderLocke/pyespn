@@ -789,7 +789,7 @@ Gets team info from espn api
 ```python
 from pyespn.cfb import get_team_info
 
-team_id = 30 # JAX
+team_id = 356 # Illini
 
 team_info = get_team_info(team_id=team_id)
 
