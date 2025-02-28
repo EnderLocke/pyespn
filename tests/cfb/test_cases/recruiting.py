@@ -6,6 +6,8 @@ recruiting_test_cases = [
         'last_name': 'Fleming',
         'id': "229946",
         'position': 'WR',
-        'grade': 93
+        'grade': 93,
+        'max_pages': 10,
+        'rank': 1
     }
 ]

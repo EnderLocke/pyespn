@@ -7,11 +7,14 @@ import requests
 import json
 
 
-def get_recruiting_rankings(season):
+def get_recruiting_rankings(season, max_pages=None):
     url = f'https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/recruiting/{season}/athletes'
     response = requests.get(url)
     content = json.loads(response.content)
-    num_of_pages = content['pageCount']
+    if not max_pages:
+        num_of_pages = content['pageCount']
+    else:
+        num_of_pages = max_pages
 
     recruiting_data = []
     rank = 1
