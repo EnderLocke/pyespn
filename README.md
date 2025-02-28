@@ -486,12 +486,12 @@ print(player_info)
 functions under here retrieve event/game info. game id is required and is the same from espn front page
 
 #### _pyespn.nba.get_game_info(team_id, season) ⇒_
-returns a teams overall against the spread for a season
+returns a info related toa single event
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | id for team |
-| season | <code>number</code> | year of season |
+| event_id | <code>number</code> | id for event |
+
 
 ```python
 from pyespn.nba import get_game_info
