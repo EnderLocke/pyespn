@@ -760,7 +760,20 @@ print(draft_pick_info)
 
 ## College Football | CFB
 
-### Data Feeds
+### Data Files
+This is the data feeds for college football - note as of 0.1.2 there are still missing values
+
+#### _pyespn.cfb.data.cfb_teams_data ⇒_
+This is a list of ids/teams in json format - currently missing values
+
+**example**
+
+```python
+from pyespn.cfb.data import cfb_teams_data
+
+print(cfb_teams_data)
+
+```
 
 ### Team Data
 
