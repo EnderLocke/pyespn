@@ -759,7 +759,12 @@ print(draft_pick_info)
 ```
 
 ## College Football | CFB
-coming..
+
+### Data Feeds
+
+### Team Data
+
+### Player Data
 
 ## College Basketball | CBB
 coming ...
