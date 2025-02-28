@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.mark.parametrize("test_case", test_players)
-def test_nfl_events(test_case):
+def test_cfb_player_info(test_case):
     content = get_player_info(test_case['id'])
     assert content['fullName'] == test_case['full_name']
     assert content['dateOfBirth'] == test_case['dob']
