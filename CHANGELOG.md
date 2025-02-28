@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2
+* started to add in cfb functions
+* fixed nfl/nba get historical stats
+* fixed get all ids for nfl/nba
+* added in cfb teams lookup
+* 
+
 ## 0.1.1
 * added in nba futures -> note there is not all data for every season
 * added in nfl futures

@@ -16,6 +16,7 @@ work in progress for hitting hidden espn api, right now there is nfl and nba fun
   - [Draft Data](#draft-data-1)
   - [Game/Event Data](#gameevent-data-1)
   - [Betting Data](#betting-data-1)
+- [CFB](#college-football--cfb)
 
 
 ## NFL
@@ -759,7 +760,82 @@ print(draft_pick_info)
 ```
 
 ## College Football | CFB
-coming..
+
+### Data Files
+This is the data feeds for college football - note as of 0.1.2 there are still missing values
+
+#### _pyespn.cfb.data.cfb_teams_data ⇒_
+This is a list of ids/teams in json format - currently missing values
+
+**example**
+
+```python
+from pyespn.cfb.data import cfb_teams_data
+
+print(cfb_teams_data)
+
+```
+
+### Team Data
+
+#### _pyespn.cfb.get_team_info(team_id) ⇒_
+Gets team info from espn api
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+
+**example**
+
+```python
+from pyespn.cfb import get_team_info
+
+team_id = 356 # Illini
+
+team_info = get_team_info(team_id=team_id)
+
+print(team_info)
+```
+
+### Player Data
+
+#### _pyespn.cfb.get_player_info(player_id) ⇒_
+Gets player info from espn api
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.cfb import get_player_info
+
+player_id = 505719 # Blake Bortles, Garbage Time Goat
+
+player_info = get_player_info(player_id=player_id)
+
+print(player_info)
+```
+
+#### _pyespn.cfb.get_cfb_players_historical_stats(player_id) ⇒_
+Gets all players stats for career
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.cfb import get_cfb_players_historical_stats
+
+player_id = 505719 # Blake Bortles, Garbage Time Goat
+
+player_info = get_cfb_players_historical_stats(player_id=player_id)
+
+print(player_info)
+```
 
 ## College Basketball | CBB
 coming ...
