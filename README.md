@@ -843,8 +843,137 @@ player_info = get_cfb_players_historical_stats(player_id=player_id)
 print(player_info)
 ```
 
-## College Basketball | CBB
-coming ...
+
+### Recruiting Data
+
+#### _pyespn.cfb.get_recruiting_rankings(season) ⇒_
+Gets all players stats for career
+
+| Param     | Type | Description   |
+|-----------| --- |------------------|
+| season | <code>number</code> | season for rankings |
+
+**example**
+
+```python
+from pyespn.cfb import get_recruiting_rankings
+
+season = 2020
+
+recruiting_rankings = get_recruiting_rankings(season=season)
+
+for recruit in recruiting_rankings:
+  print(recruit)
+```
+
+
+### Game/Event Data
+functions under here retrieve event/game info. game id is required and is the same from espn front page
+
+#### _pyespn.cfb.get_game_info(event_id) ⇒_
+returns a info related toa single event
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| event_id | <code>number</code> | id for event |
+
+```python
+from pyespn.cfb import get_game_info
+
+event_id = 401677192 # 2025 cfp title game osu/nd
+
+game_info = get_game_info(event_id=event_id)
+
+print(game_info)
+```
+
+
+### Betting Data
+These functions have betting details, rn there are futures data. note there could be more providers
+
+#### _pyespn.cfb.get_year_cfb_champions_futures(season, provider) ⇒_
+returns futures for cfp champion for a given year
+
+| Param    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| season   | <code>number</code> | Year of season                                  |
+| provider | <code>string</code> | Betting provider. Options:                      |
+|          |                    | - DraftKings                                    |
+|          |                    | - SugarHouse                                    |
+|          |                    | - Caesars Sportsbook (New Jersey)               |
+|          |                    | - PointsBet                                     |
+|          |                    | - Caesars Sportsbook (Colorado)                 |
+|          |                    | - Holland Casino                                |
+|          |                    | - Caesars Sportsbook (Tennessee)                |
+|          |                    | - FanDuel                                       |
+|          |                    | - Unibet                                        |
+|          |                    | - Bet365                                        |
+
+```python
+from pyespn.cfb import get_year_cfb_champions_futures
+
+season = 2023
+provider = 'DraftKings'
+
+futures_record = get_year_cfb_champions_futures(season=season,
+                                                 provider=provider)
+
+print(futures_record)
+```
+
+#### _pyespn.cfb.get_year_conference_champ_futures(season, provider) ⇒_
+returns a conferences champions futures
+
+| Param      | Type               | Description                                      |
+|------------|--------------------|--------------------------------------------------|
+| season     | <code>number</code> | Year of season                                  |
+| conference | <code>string</code> | Conference. Options:                            |
+|            |                    | - big12                                         |
+|            |                    | - big10                                         |
+|            |                    | - big10 east                                    |
+|            |                    | - big10 west                                    |
+|            |                    | - acc                                           |
+|            |                    | - aac                                           |
+|            |                    | - usa                                           |
+|            |                    | - mid-am                                        |
+|            |                    | - mid-am east                                   |
+|            |                    | - mid-am west                                   |
+|            |                    | - mt west                                       |
+|            |                    | - pac12                                         |
+|            |                    | - sec                                           |
+|            |                    | - sec west                                      |
+|            |                    | - sec east                                      |
+|            |                    | - sun belt                                      |
+| provider   | <code>string</code> | Betting provider. Options:                      |
+|            |                    | - DraftKings                                    |
+|            |                    | - SugarHouse                                    |
+|            |                    | - Caesars Sportsbook (New Jersey)               |
+|            |                    | - PointsBet                                     |
+|            |                    | - Caesars Sportsbook (Colorado)                 |
+|            |                    | - Holland Casino                                |
+|            |                    | - Caesars Sportsbook (Tennessee)                |
+|            |                    | - FanDuel                                       |
+|            |                    | - Unibet                                        |
+|            |                    | - Bet365                                        |
+
+```python
+from pyespn.cfb import get_year_conference_champ_futures
+
+season = 2023
+conference = 'south'
+provider = 'DraftKings'
+
+futures_record = get_year_conference_champ_futures(season=season,
+                                                  conference=conference,
+                                                  provider=provider)
+
+print(futures_record)
+```
+
+
+## Men's College Basketball | MCBB
+next up ...
+
 
 ## MLB
 coming ...
