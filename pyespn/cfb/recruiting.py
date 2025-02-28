@@ -32,6 +32,7 @@ def get_recruiting_rankings(season, max_pages=None):
                 'class': recruit['recruitingClass'],
                 'grade': recruit['grade'],
                 'rank': rank,
+                'stars': None
 
             }
             rank += 1
