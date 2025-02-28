@@ -52,7 +52,7 @@ def get_year_conference_champ_futures(season, conference, provider="DraftKings")
     futures_list = []
     for item in provider_futures['books']:
         team_id = get_team_id(item['team']['$ref'])
-        result = next(team for team in cfb_teams_data if team['team_id'] == team_id)
+        result = next(team for team in cfb_teams_data if int(team['team_id']) == int(team_id))
 
         item_dict = {
             'team_name': result['team_name'],
