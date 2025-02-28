@@ -4649,6 +4649,48 @@
             "team_city": "Curry College",
             "team_id": 40,
             "team_abbv": "CUR"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Pittsburgh",
+            "team_id": 221,
+            "team_abbv": "PIT"
+        },
+        {
+            "team_name": "Cyclones",
+            "team_city": "Iowa State",
+            "team_id": 66,
+            "team_abbv": "ISU"
+        },
+        {
+            "team_name": "Fighting Illini",
+            "team_city": "Illinois",
+            "team_id": 356,
+            "team_abbv": "ILL"
+        },
+        {
+            "team_name": "Bulls",
+            "team_city": "South Florida",
+            "team_id": 58,
+            "team_abbv": "USF"
+        },
+        {
+            "team_name": "Cavaliers",
+            "team_city": "Virginia",
+            "team_id": 258,
+            "team_abbv": "UVA"
+        },
+        {
+            "team_name": "Aggies",
+            "team_city": "Utah State",
+            "team_id": 328,
+            "team_abbv": "USU"
+        },
+        {
+            "team_name": "Midshipmen",
+            "team_city": "Navy",
+            "team_id": 2426,
+            "team_abbv": "NAVY"
         }
     ]
 }
