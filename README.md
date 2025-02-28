@@ -777,6 +777,25 @@ print(cfb_teams_data)
 
 ### Team Data
 
+#### _pyespn.cfb.get_team_info(team_id) ⇒_
+Gets team info from espn api
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+
+**example**
+
+```python
+from pyespn.cfb import get_team_info
+
+team_id = 30 # JAX
+
+team_info = get_team_info(team_id=team_id)
+
+print(team_info)
+```
+
 ### Player Data
 
 ## College Basketball | CBB
