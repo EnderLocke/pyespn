@@ -17,6 +17,13 @@ work in progress for hitting hidden espn api, right now there is nfl and nba fun
   - [Game/Event Data](#gameevent-data-1)
   - [Betting Data](#betting-data-1)
 - [CFB](#college-football--cfb)
+  - [Data Files](#data-files-2)
+  - [Team Data](#team-data-2)
+  - [Player Data](#player-data-2)
+  - [Recruiting Data](#recruiting-data)
+  - [Game/Event Data](#gameevent-data-2)
+  - [Betting Data](#betting-data-2)
+- [MCBB](#mens-college-basketball--mcbb)
 
 
 ## NFL
