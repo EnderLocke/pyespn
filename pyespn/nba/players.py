@@ -14,7 +14,7 @@ def get_nba_player_ids():
     response = requests.get(nba_ath_url)
     num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
-    for i in range(1, num_pages):
+    for i in range(1, num_pages + 1):
         page_url = nba_ath_url + f'&page={i}'
         page_response = requests.get(page_url)
         content = json.loads(page_response.content)

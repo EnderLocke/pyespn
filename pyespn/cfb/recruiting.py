@@ -18,7 +18,7 @@ def get_recruiting_rankings(season, max_pages=None):
 
     recruiting_data = []
     rank = 1
-    for page in range(1, num_of_pages):
+    for page in range(1, num_of_pages + 1):
         paged_url = url + f'?page={page}'
         paged_response = requests.get(paged_url)
         paged_content = json.loads(paged_response.content)
