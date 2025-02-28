@@ -798,6 +798,44 @@ print(team_info)
 
 ### Player Data
 
+#### _pyespn.cfb.get_player_info(player_id) ⇒_
+Gets player info from espn api
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.cfb import get_player_info
+
+player_id = 505719 # Blake Bortles, Garbage Time Goat
+
+player_info = get_player_info(player_id=player_id)
+
+print(player_info)
+```
+
+#### _pyespn.cfb.get_cfb_players_historical_stats(player_id) ⇒_
+Gets all players stats for career
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.cfb import get_cfb_players_historical_stats
+
+player_id = 505719 # Blake Bortles, Garbage Time Goat
+
+player_info = get_cfb_players_historical_stats(player_id=player_id)
+
+print(player_info)
+```
+
 ## College Basketball | CBB
 coming ...
 
