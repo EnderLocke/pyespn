@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.3
+* adding in mcbb functions
+* 
+
+
+## 0.1.2
+* started to add in cfb functions
+* fixed nfl/nba get historical stats
+* fixed get all ids for nfl/nba
+* added in cfb teams lookup
+* added in doc for cfb functions
+* added in tests for cfb functions
+* *_note that cfb teams lookup still appears to be missing some teams_*
+
 ## 0.1.1
 * added in nba futures -> note there is not all data for every season
 * added in nfl futures

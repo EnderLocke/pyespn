@@ -14,14 +14,17 @@ def get_nba_player_ids():
     response = requests.get(nba_ath_url)
     num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
-    for i in range(1, num_pages):
+    for i in range(1, num_pages + 1):
         page_url = nba_ath_url + f'&page={i}'
         page_response = requests.get(page_url)
-        for athlete in page_response:
+        content = json.loads(page_response.content)
+
+        for athlete in content:
             if athlete['$ref']:
                 athlete_response = requests.get(athlete['$ref'])
-                athlete_data = {'id': athlete_response['data']['id'],
-                                'name': athlete_data['data']['full_name']}
+                athlete_content = json.loads(athlete_response.content)
+                athlete_data = {'id': athlete_content['id'],
+                                'name': athlete_content['full_name']}
                 all_players.append(athlete_data)
 
     return all_players
@@ -51,6 +54,7 @@ def get_player_stat_urls(player_id):
 def extract_stats_from_url(url):
     response = requests.get(url)
     url_parts = url.split('/')
+    all_stats = []
     year = url_parts[url_parts.index('seasons') + 1]
     player_id = url_parts[url_parts.index('athletes') + 1]
     content_str = response.content.decode('utf-8')
@@ -68,8 +72,10 @@ def extract_stats_from_url(url):
                 'stat_type_abbreviation': stat['abbreviation'],
                 'league': 'nfl'
             }
+            all_stats.append(this_stat)
 
-    return this_stat
+    return all_stats
+
 
 def get_player_info(player_id):
     url = f'http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/athletes/{player_id}'
