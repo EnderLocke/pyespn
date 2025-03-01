@@ -1,1 +1,1 @@
-from .betting_providers import FUTURE_PROVIDERS
+from .betting_providers import BETTING_PROVIDERS

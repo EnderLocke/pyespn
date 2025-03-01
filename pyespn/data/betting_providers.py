@@ -1,4 +1,4 @@
-FUTURE_PROVIDERS = [
+BETTING_PROVIDERS = [
     'DraftKings',
     'SugarHouse',
     'Caesars Sportsbook (New Jersey)',
@@ -9,4 +9,5 @@ FUTURE_PROVIDERS = [
     'FanDuel',
     'Unibet',
     'Bet365',
+    "Betradar"
 ]
