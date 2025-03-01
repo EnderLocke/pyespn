@@ -1,5 +1,5 @@
-from pyespn.cfb import get_recruiting_rankings
-from tests.cfb.test_cases.recruiting import recruiting_test_cases
+from pyespn.mcbb import get_recruiting_rankings
+from tests.mcbb.test_cases.recruiting import recruiting_test_cases
 import pytest
 
 
