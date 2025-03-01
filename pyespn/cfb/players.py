@@ -1,10 +1,4 @@
-# todo build out player stats by player id
-
-# https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes/${player_id}/statisticslog?lang=en&region=us
-
-# todo build out player info call
-
-# https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes/${playerId}
+from pyespn.core import get_player_info_core
 import requests
 import json
 
@@ -79,8 +73,5 @@ def extract_stats_from_url(url):
 
 
 def get_player_info(player_id):
-    url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes/{player_id}'
-    response = requests.get(url)
-    content = json.loads(response.content)
-    return content
-
+    return get_player_info_core(player_id=player_id,
+                                league_abbv='cfb')

@@ -1,9 +1,4 @@
-# todo add athlete stats and info
-#  stats
-# http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2025/athletes/4277905?lang=en&region=us
-
-#  todo all players?
-# http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/athletes/
+from pyespn.core import get_player_info_core
 import requests
 import json
 
@@ -78,7 +73,5 @@ def extract_stats_from_url(url):
 
 
 def get_player_info(player_id):
-    url = f'http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/athletes/{player_id}'
-    response = requests.get(url)
-    content = json.loads(response.content)
-    return content
+    return get_player_info_core(player_id=player_id,
+                                league_abbv='nba')

@@ -1,16 +1,17 @@
-from pyespn.core import get_player_info_core, get_player_ids_core, get_player_stat_urls_core
+from pyespn.utilities import lookup_league_api_info
 import requests
 import json
 
 
-def get_nfl_player_ids():
+def get_player_ids_core(league_abbv):
+    api_info = lookup_league_api_info(league_abbv=league_abbv)
     all_players = []
-    nfl_ath_url = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes?lang=en&region=us'
-    response = requests.get(nfl_ath_url)
+    cfb_ath_url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes?lang=en&region=us'
+    response = requests.get(cfb_ath_url)
     num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
     for i in range(1, num_pages + 1):
-        page_url = nfl_ath_url + f'&page={i}'
+        page_url = cfb_ath_url + f'&page={i}'
         page_response = requests.get(page_url)
         content = json.loads(page_response.content)
 
@@ -25,15 +26,17 @@ def get_nfl_player_ids():
     return all_players
 
 
-def get_player_stat_urls(player_id):
+def get_player_stat_urls_core(player_id, league_abbv):
     """ this function gets all the espn urls for a given player id
 
     :param player_id:
     :return:
     """
+    api_info = lookup_league_api_info(league_abbv=league_abbv)
+
     stat_urls = []
     try:
-        stat_log_url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/{player_id}/statisticslog?lang=en&region=us'
+        stat_log_url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}/statisticslog?lang=en&region=us'
         log_response = requests.get(stat_log_url)
     except Exception as e:
         raise Exception(e)
@@ -63,14 +66,20 @@ def extract_stats_from_url(url):
                 'category': category_name,
                 'season': year,
                 'player_id': player_id,
-                'stat_value': stat['value'],
-                'stat_type_abbreviation': stat['abbreviation'],
+                'stat_value': stat.get('value'),
+                'stat_type_abbreviation': stat.get('abbreviation'),
                 'league': 'nfl'
             }
             all_stats.append(this_stat)
+
     return all_stats
 
 
-def get_player_info(player_id):
-    return get_player_info_core(player_id=player_id,
-                                league_abbv='nfl')
+def get_player_info_core(player_id, league_abbv):
+    api_info = lookup_league_api_info(league_abbv=league_abbv)
+
+    url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}'
+    response = requests.get(url)
+    content = json.loads(response.content)
+    return content
+
