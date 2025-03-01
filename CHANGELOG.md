@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3
+* adding in mcbb functions
+* 
+
+
 ## 0.1.2
 * started to add in cfb functions
 * fixed nfl/nba get historical stats
