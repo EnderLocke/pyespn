@@ -1,10 +1,6 @@
-import requests
-import json
+from pyespn.core import get_game_info_core
 
 
 def get_game_info(event_id):
-    url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/events/{event_id}?lang=en&region=us'
-    response = requests.get(url)
-    content = json.loads(response.content)
-
-    return content
+    return get_game_info_core(event_id=event_id,
+                              league_abbv='cfb')
