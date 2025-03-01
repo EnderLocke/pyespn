@@ -9,14 +9,14 @@ import requests
 import json
 
 
-def get_cfb_player_ids():
+def get_mcbb_player_ids():
     all_players = []
-    nba_ath_url = 'http://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes?lang=en&region=us'
-    response = requests.get(nba_ath_url)
+    mcbb_ath_url = 'http://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes?lang=en&region=us'
+    response = requests.get(mcbb_ath_url)
     num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
     for i in range(1, num_pages + 1):
-        page_url = nba_ath_url + f'&page={i}'
+        page_url = mcbb_ath_url + f'&page={i}'
         page_response = requests.get(page_url)
         content = json.loads(page_response.content)
 
@@ -83,4 +83,3 @@ def get_player_info(player_id):
     response = requests.get(url)
     content = json.loads(response.content)
     return content
-
