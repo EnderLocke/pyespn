@@ -11,12 +11,12 @@ import json
 
 def get_cfb_player_ids():
     all_players = []
-    nba_ath_url = 'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes?lang=en&region=us'
-    response = requests.get(nba_ath_url)
+    cfb_ath_url = 'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes?lang=en&region=us'
+    response = requests.get(cfb_ath_url)
     num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
     for i in range(1, num_pages + 1):
-        page_url = nba_ath_url + f'&page={i}'
+        page_url = cfb_ath_url + f'&page={i}'
         page_response = requests.get(page_url)
         content = json.loads(page_response.content)
 
@@ -69,8 +69,8 @@ def extract_stats_from_url(url):
                 'category': category_name,
                 'season': year,
                 'player_id': player_id,
-                'stat_value': stat['value'],
-                'stat_type_abbreviation': stat['abbreviation'],
+                'stat_value': stat.get('value'),
+                'stat_type_abbreviation': stat.get('abbreviation'),
                 'league': 'nfl'
             }
             all_stats.append(this_stat)
