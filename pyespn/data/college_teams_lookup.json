@@ -1,0 +1,5206 @@
+{
+    "teams": [
+        {
+            "team_name": "Tigers",
+            "team_city": "Auburn",
+            "team_id": 2,
+            "team_abbv": "AUB"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Birmingham-Southern",
+            "team_id": 3,
+            "team_abbv": "BIRMI"
+        },
+        {
+            "team_name": "Blazers",
+            "team_city": "UAB",
+            "team_id": 5,
+            "team_abbv": "UAB"
+        },
+        {
+            "team_name": "Jaguars",
+            "team_city": "South Alabama",
+            "team_id": 6,
+            "team_abbv": "USA"
+        },
+        {
+            "team_name": "Mammoths",
+            "team_city": "Amherst",
+            "team_id": 7,
+            "team_abbv": "AMH"
+        },
+        {
+            "team_name": "Razorbacks",
+            "team_city": "Arkansas",
+            "team_id": 8,
+            "team_abbv": "ARK"
+        },
+        {
+            "team_name": "Sun Devils",
+            "team_city": "Arizona State",
+            "team_id": 9,
+            "team_abbv": "ASU"
+        },
+        {
+            "team_name": "Mavericks",
+            "team_city": "Colorado Mesa",
+            "team_id": 11,
+            "team_abbv": "MES"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Arizona",
+            "team_id": 12,
+            "team_abbv": "ARIZ"
+        },
+        {
+            "team_name": "Mustangs",
+            "team_city": "Cal Poly",
+            "team_id": 13,
+            "team_abbv": "CP"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Cal State-Chico",
+            "team_id": 14,
+            "team_abbv": "CSU"
+        },
+        {
+            "team_name": "Amcats",
+            "team_city": "Anna Maria College",
+            "team_id": 15,
+            "team_abbv": "ANN"
+        },
+        {
+            "team_name": "Hornets",
+            "team_city": "Sacramento State",
+            "team_id": 16,
+            "team_abbv": "SAC"
+        },
+        {
+            "team_name": "Stags",
+            "team_city": "Claremont Mudd Scripps College",
+            "team_id": 17,
+            "team_abbv": "CLA"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Bridgewater State",
+            "team_id": 18,
+            "team_abbv": "BRI"
+        },
+        {
+            "team_name": "Aztecs",
+            "team_city": "San Diego State",
+            "team_id": 21,
+            "team_abbv": "SDSU"
+        },
+        {
+            "team_name": "Gators",
+            "team_city": "San Francisco State",
+            "team_id": 22,
+            "team_abbv": "SF"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "San Jos\u00e9 State",
+            "team_id": 23,
+            "team_abbv": "SJSU"
+        },
+        {
+            "team_name": "Cardinal",
+            "team_city": "Stanford",
+            "team_id": 24,
+            "team_abbv": "STAN"
+        },
+        {
+            "team_name": "Golden Bears",
+            "team_city": "California",
+            "team_id": 25,
+            "team_abbv": "CAL"
+        },
+        {
+            "team_name": "Bruins",
+            "team_city": "UCLA",
+            "team_id": 26,
+            "team_abbv": "UCLA"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Redlands",
+            "team_id": 29,
+            "team_abbv": "RED"
+        },
+        {
+            "team_name": "Trojans",
+            "team_city": "USC",
+            "team_id": 30,
+            "team_abbv": "USC"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Carroll (WI)",
+            "team_id": 32,
+            "team_abbv": "CAR"
+        },
+        {
+            "team_name": "White Mules",
+            "team_city": "Colby College",
+            "team_id": 33,
+            "team_abbv": "COL"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Colorado State",
+            "team_id": 36,
+            "team_abbv": "CSU"
+        },
+        {
+            "team_name": "Buffaloes",
+            "team_city": "Colorado",
+            "team_id": 38,
+            "team_abbv": "COLO"
+        },
+        {
+            "team_name": "Colonels",
+            "team_city": "Curry College",
+            "team_id": 40,
+            "team_abbv": "CUR"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "UConn",
+            "team_id": 41,
+            "team_abbv": "CONN"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Yale",
+            "team_id": 43,
+            "team_abbv": "YALE"
+        },
+        {
+            "team_name": "Hoyas",
+            "team_city": "Georgetown",
+            "team_id": 46,
+            "team_abbv": "GTWN"
+        },
+        {
+            "team_name": "Bison",
+            "team_city": "Howard",
+            "team_id": 47,
+            "team_abbv": "HOW"
+        },
+        {
+            "team_name": "Blue Hens",
+            "team_city": "Delaware",
+            "team_id": 48,
+            "team_abbv": "DEL"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Dubuque",
+            "team_id": 49,
+            "team_abbv": "DUB"
+        },
+        {
+            "team_name": "Rattlers",
+            "team_city": "Florida A&M",
+            "team_id": 50,
+            "team_abbv": "FAMU"
+        },
+        {
+            "team_name": "Seminoles",
+            "team_city": "Florida State",
+            "team_id": 52,
+            "team_abbv": "FSU"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Florida Tech",
+            "team_id": 53,
+            "team_abbv": "FLTH"
+        },
+        {
+            "team_name": "Gamecocks",
+            "team_city": "Jacksonville State",
+            "team_id": 55,
+            "team_abbv": "JVST"
+        },
+        {
+            "team_name": "Hatters",
+            "team_city": "Stetson",
+            "team_id": 56,
+            "team_abbv": "STET"
+        },
+        {
+            "team_name": "Gators",
+            "team_city": "Florida",
+            "team_id": 57,
+            "team_abbv": "FLA"
+        },
+        {
+            "team_name": "Bulls",
+            "team_city": "South Florida",
+            "team_id": 58,
+            "team_abbv": "USF"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "Georgia Tech",
+            "team_id": 59,
+            "team_abbv": "GT"
+        },
+        {
+            "team_name": "Maroon Tigers",
+            "team_city": "Morehouse College",
+            "team_id": 60,
+            "team_abbv": "MOR"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Georgia",
+            "team_id": 61,
+            "team_abbv": "UGA"
+        },
+        {
+            "team_name": "Rainbow Warriors",
+            "team_city": "Hawai'i",
+            "team_id": 62,
+            "team_abbv": "HAW"
+        },
+        {
+            "team_name": "Beavers",
+            "team_city": "Buena Vista",
+            "team_id": 63,
+            "team_abbv": "BUE"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Grinnell",
+            "team_id": 65,
+            "team_abbv": "GRI"
+        },
+        {
+            "team_name": "Cyclones",
+            "team_city": "Iowa State",
+            "team_id": 66,
+            "team_abbv": "ISU"
+        },
+        {
+            "team_name": "Norse",
+            "team_city": "Luther",
+            "team_id": 67,
+            "team_abbv": "LUT"
+        },
+        {
+            "team_name": "Broncos",
+            "team_city": "Boise State",
+            "team_id": 68,
+            "team_abbv": "BOIS"
+        },
+        {
+            "team_name": "Vandals",
+            "team_city": "Idaho",
+            "team_id": 70,
+            "team_abbv": "IDHO"
+        },
+        {
+            "team_name": "Bluejays",
+            "team_city": "Elmhurst",
+            "team_id": 72,
+            "team_abbv": "ELM"
+        },
+        {
+            "team_name": "Big Blue",
+            "team_city": "Millikin",
+            "team_id": 74,
+            "team_abbv": "MLK"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "North Park",
+            "team_id": 75,
+            "team_abbv": "NP"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Northwestern",
+            "team_id": 77,
+            "team_abbv": "NU"
+        },
+        {
+            "team_name": "Salukis",
+            "team_city": "Southern Illinois",
+            "team_id": 79,
+            "team_abbv": "SIU"
+        },
+        {
+            "team_name": "Maroons",
+            "team_city": "Chicago",
+            "team_id": 80,
+            "team_abbv": "CHI"
+        },
+        {
+            "team_name": "Pride",
+            "team_city": "Springfield",
+            "team_id": 81,
+            "team_abbv": "SPRI"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "DePauw",
+            "team_id": 83,
+            "team_abbv": "DEP"
+        },
+        {
+            "team_name": "Hoosiers",
+            "team_city": "Indiana",
+            "team_id": 84,
+            "team_abbv": "IU"
+        },
+        {
+            "team_name": "Fightin' Engineers",
+            "team_city": "Rose-Hulman",
+            "team_id": 86,
+            "team_abbv": "RHIT"
+        },
+        {
+            "team_name": "Fighting Irish",
+            "team_city": "Notre Dame",
+            "team_id": 87,
+            "team_abbv": "ND"
+        },
+        {
+            "team_name": "Little Giants",
+            "team_city": "Wabash College",
+            "team_id": 89,
+            "team_abbv": "WAB"
+        },
+        {
+            "team_name": "Gorillas",
+            "team_city": "Pittsburg State",
+            "team_id": 90,
+            "team_abbv": "PST"
+        },
+        {
+            "team_name": "Racers",
+            "team_city": "Murray State",
+            "team_id": 93,
+            "team_abbv": "MUR"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Pikeville",
+            "team_id": 95,
+            "team_abbv": "PIKE"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Kentucky",
+            "team_id": 96,
+            "team_abbv": "UK"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Louisville",
+            "team_id": 97,
+            "team_abbv": "LOU"
+        },
+        {
+            "team_name": "Hilltoppers",
+            "team_city": "Western Kentucky",
+            "team_id": 98,
+            "team_abbv": "WKU"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "LSU",
+            "team_id": 99,
+            "team_abbv": "LSU"
+        },
+        {
+            "team_name": "Red Devils",
+            "team_city": "Eureka College",
+            "team_id": 101,
+            "team_abbv": "EUR"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Boston College",
+            "team_id": 103,
+            "team_abbv": "BC"
+        },
+        {
+            "team_name": "Crusaders",
+            "team_city": "Holy Cross",
+            "team_id": 107,
+            "team_abbv": "HC"
+        },
+        {
+            "team_name": "Crimson",
+            "team_city": "Harvard",
+            "team_id": 108,
+            "team_abbv": "HARV"
+        },
+        {
+            "team_name": "Engineers",
+            "team_city": "MIT",
+            "team_id": 109,
+            "team_abbv": "MAS"
+        },
+        {
+            "team_name": "Buccaneers",
+            "team_city": "Mass Maritime",
+            "team_id": 110,
+            "team_abbv": "MAS"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "Northeastern",
+            "team_id": 111,
+            "team_abbv": "NE"
+        },
+        {
+            "team_name": "Jumbos",
+            "team_city": "Tufts",
+            "team_id": 112,
+            "team_abbv": "TUF"
+        },
+        {
+            "team_name": "Minutemen",
+            "team_city": "Massachusetts",
+            "team_id": 113,
+            "team_abbv": "MASS"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Fitchburg State",
+            "team_id": 114,
+            "team_abbv": "FIT"
+        },
+        {
+            "team_name": "Blue Jays",
+            "team_city": "Johns Hopkins University",
+            "team_id": 118,
+            "team_abbv": "JHU"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Towson",
+            "team_id": 119,
+            "team_abbv": "TOW"
+        },
+        {
+            "team_name": "Terrapins",
+            "team_city": "Maryland",
+            "team_id": 120,
+            "team_abbv": "MD"
+        },
+        {
+            "team_name": "Bobcats",
+            "team_city": "Bates College",
+            "team_id": 121,
+            "team_abbv": "BAT"
+        },
+        {
+            "team_name": "Auggies",
+            "team_city": "Augsburg",
+            "team_id": 124,
+            "team_abbv": "AUG"
+        },
+        {
+            "team_name": "Lakers",
+            "team_city": "Grand Valley State",
+            "team_id": 125,
+            "team_abbv": "GRV"
+        },
+        {
+            "team_name": "Hornets",
+            "team_city": "Kalamazoo",
+            "team_id": 126,
+            "team_abbv": "KAL"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Michigan State",
+            "team_id": 127,
+            "team_abbv": "MSU"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Northern Michigan",
+            "team_id": 128,
+            "team_abbv": "NMI"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Saginaw Valley State",
+            "team_id": 129,
+            "team_abbv": "SVS"
+        },
+        {
+            "team_name": "Wolverines",
+            "team_city": "Michigan",
+            "team_id": 130,
+            "team_abbv": "MICH"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "Wayne State (MI)",
+            "team_id": 131,
+            "team_abbv": "WNST"
+        },
+        {
+            "team_name": "Beavers",
+            "team_city": "Bemidji State",
+            "team_id": 132,
+            "team_abbv": "BST"
+        },
+        {
+            "team_name": "Oles",
+            "team_city": "St. Olaf",
+            "team_id": 133,
+            "team_abbv": "OLAF"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Minnesota Duluth",
+            "team_id": 134,
+            "team_abbv": "UMD"
+        },
+        {
+            "team_name": "Golden Gophers",
+            "team_city": "Minnesota",
+            "team_id": 135,
+            "team_abbv": "MINN"
+        },
+        {
+            "team_name": "Griffons",
+            "team_city": "Missouri Western",
+            "team_id": 137,
+            "team_abbv": "MIS"
+        },
+        {
+            "team_name": "Bearcats",
+            "team_city": "Northwest Missouri State",
+            "team_id": 138,
+            "team_abbv": "NOR"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Missouri",
+            "team_id": 142,
+            "team_abbv": "MIZ"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Washington University-St. Louis",
+            "team_id": 143,
+            "team_abbv": "WSTL"
+        },
+        {
+            "team_name": "Rebels",
+            "team_city": "Ole Miss",
+            "team_id": 145,
+            "team_abbv": "MISS"
+        },
+        {
+            "team_name": "Wolverines",
+            "team_city": "Grove City College",
+            "team_id": 146,
+            "team_abbv": "GRO"
+        },
+        {
+            "team_name": "Bobcats",
+            "team_city": "Montana State",
+            "team_id": 147,
+            "team_abbv": "MTST"
+        },
+        {
+            "team_name": "Orediggers",
+            "team_city": "Montana Tech",
+            "team_id": 148,
+            "team_abbv": "MTTECH"
+        },
+        {
+            "team_name": "Grizzlies",
+            "team_city": "Montana",
+            "team_id": 149,
+            "team_abbv": "MONT"
+        },
+        {
+            "team_name": "Blue Devils",
+            "team_city": "Duke",
+            "team_id": 150,
+            "team_abbv": "DUKE"
+        },
+        {
+            "team_name": "Pirates",
+            "team_city": "East Carolina",
+            "team_id": 151,
+            "team_abbv": "ECU"
+        },
+        {
+            "team_name": "Wolfpack",
+            "team_city": "NC State",
+            "team_id": 152,
+            "team_abbv": "NCSU"
+        },
+        {
+            "team_name": "Tar Heels",
+            "team_city": "North Carolina",
+            "team_id": 153,
+            "team_abbv": "UNC"
+        },
+        {
+            "team_name": "Demon Deacons",
+            "team_city": "Wake Forest",
+            "team_id": 154,
+            "team_abbv": "WAKE"
+        },
+        {
+            "team_name": "Fighting Hawks",
+            "team_city": "North Dakota",
+            "team_id": 155,
+            "team_abbv": "UND"
+        },
+        {
+            "team_name": "Cornhuskers",
+            "team_city": "Nebraska",
+            "team_id": 158,
+            "team_abbv": "NEB"
+        },
+        {
+            "team_name": "Big Green",
+            "team_city": "Dartmouth",
+            "team_id": 159,
+            "team_abbv": "DART"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "New Hampshire",
+            "team_id": 160,
+            "team_abbv": "UNH"
+        },
+        {
+            "team_name": "Pipers",
+            "team_city": "Hamline",
+            "team_id": 162,
+            "team_abbv": "HAM"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Princeton",
+            "team_id": 163,
+            "team_abbv": "PRIN"
+        },
+        {
+            "team_name": "Scarlet Knights",
+            "team_city": "Rutgers",
+            "team_id": 164,
+            "team_abbv": "RUTG"
+        },
+        {
+            "team_name": "Aggies",
+            "team_city": "New Mexico State",
+            "team_id": 166,
+            "team_abbv": "NMSU"
+        },
+        {
+            "team_name": "Lobos",
+            "team_city": "New Mexico",
+            "team_id": 167,
+            "team_abbv": "UNM"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Columbia",
+            "team_id": 171,
+            "team_abbv": "COLU"
+        },
+        {
+            "team_name": "Big Red",
+            "team_city": "Cornell",
+            "team_id": 172,
+            "team_abbv": "COR"
+        },
+        {
+            "team_name": "Hawks",
+            "team_city": "Hartwick",
+            "team_id": 173,
+            "team_abbv": "HARW"
+        },
+        {
+            "team_name": "Statesmen",
+            "team_city": "Hobart College",
+            "team_id": 174,
+            "team_abbv": "HBRT"
+        },
+        {
+            "team_name": "Bombers",
+            "team_city": "Ithaca",
+            "team_id": 175,
+            "team_abbv": "ITH"
+        },
+        {
+            "team_name": "Orange",
+            "team_city": "Syracuse",
+            "team_id": 183,
+            "team_abbv": "SYR"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "University of Rochester (NY)",
+            "team_id": 184,
+            "team_abbv": "ROC"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "Baldwin Wallace",
+            "team_id": 188,
+            "team_abbv": "BALW"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Bowling Green",
+            "team_id": 189,
+            "team_abbv": "BGSU"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "Defiance",
+            "team_id": 190,
+            "team_abbv": "DEF"
+        },
+        {
+            "team_name": "Student Princes",
+            "team_city": "Heidelberg",
+            "team_id": 191,
+            "team_abbv": "HEI"
+        },
+        {
+            "team_name": "RedHawks",
+            "team_city": "Miami (OH)",
+            "team_id": 193,
+            "team_abbv": "M-OH"
+        },
+        {
+            "team_name": "Buckeyes",
+            "team_city": "Ohio State",
+            "team_id": 194,
+            "team_abbv": "OSU"
+        },
+        {
+            "team_name": "Bobcats",
+            "team_city": "Ohio",
+            "team_id": 195,
+            "team_abbv": "OHIO"
+        },
+        {
+            "team_name": "RiverHawks",
+            "team_city": "Northeastern State",
+            "team_id": 196,
+            "team_abbv": "NEOS"
+        },
+        {
+            "team_name": "Cowboys",
+            "team_city": "Oklahoma State",
+            "team_id": 197,
+            "team_abbv": "OKST"
+        },
+        {
+            "team_name": "Savage Storm",
+            "team_city": "Southeastern Oklahoma State",
+            "team_id": 199,
+            "team_abbv": "SEOS"
+        },
+        {
+            "team_name": "Crimson Storm",
+            "team_city": "Southern Nazarene",
+            "team_id": 200,
+            "team_abbv": "SN"
+        },
+        {
+            "team_name": "Sooners",
+            "team_city": "Oklahoma",
+            "team_id": 201,
+            "team_abbv": "OU"
+        },
+        {
+            "team_name": "Golden Hurricane",
+            "team_city": "Tulsa",
+            "team_id": 202,
+            "team_abbv": "TLSA"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Linfield",
+            "team_id": 203,
+            "team_abbv": "LIN"
+        },
+        {
+            "team_name": "Beavers",
+            "team_city": "Oregon State",
+            "team_id": 204,
+            "team_abbv": "ORST"
+        },
+        {
+            "team_name": "Boxers",
+            "team_city": "Pacific (OR)",
+            "team_id": 205,
+            "team_abbv": "PACO"
+        },
+        {
+            "team_name": "Bald Eagles",
+            "team_city": "Lock Haven University",
+            "team_id": 209,
+            "team_abbv": "LHU"
+        },
+        {
+            "team_name": "Marauders",
+            "team_city": "Millersville",
+            "team_id": 210,
+            "team_abbv": "MLR"
+        },
+        {
+            "team_name": "Nittany Lions",
+            "team_city": "Penn State",
+            "team_id": 213,
+            "team_abbv": "PSU"
+        },
+        {
+            "team_name": "The Rock",
+            "team_city": "Slippery Rock",
+            "team_id": 215,
+            "team_abbv": "SLI"
+        },
+        {
+            "team_name": "River Hawks",
+            "team_city": "Susquehanna",
+            "team_id": 216,
+            "team_abbv": "SUS"
+        },
+        {
+            "team_name": "Owls",
+            "team_city": "Temple",
+            "team_id": 218,
+            "team_abbv": "TEM"
+        },
+        {
+            "team_name": "Quakers",
+            "team_city": "Pennsylvania",
+            "team_id": 219,
+            "team_abbv": "PENN"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Pittsburgh",
+            "team_id": 221,
+            "team_abbv": "PITT"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Villanova",
+            "team_id": 222,
+            "team_abbv": "VILL"
+        },
+        {
+            "team_name": "Golden Rams",
+            "team_city": "West Chester",
+            "team_id": 223,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Brown",
+            "team_id": 225,
+            "team_abbv": "BRWN"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Rhode Island",
+            "team_id": 227,
+            "team_abbv": "URI"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Clemson",
+            "team_id": 228,
+            "team_abbv": "CLEM"
+        },
+        {
+            "team_name": "Paladins",
+            "team_city": "Furman",
+            "team_id": 231,
+            "team_abbv": "FUR"
+        },
+        {
+            "team_name": "Coyotes",
+            "team_city": "South Dakota",
+            "team_id": 233,
+            "team_abbv": "SDAK"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Memphis",
+            "team_id": 235,
+            "team_abbv": "MEM"
+        },
+        {
+            "team_name": "Mocs",
+            "team_city": "Chattanooga",
+            "team_id": 236,
+            "team_abbv": "UTC"
+        },
+        {
+            "team_name": "Garnet Chargers",
+            "team_city": "Union (NY)",
+            "team_id": 237,
+            "team_abbv": "UNNY"
+        },
+        {
+            "team_name": "Commodores",
+            "team_city": "Vanderbilt",
+            "team_id": 238,
+            "team_abbv": "VAN"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Baylor",
+            "team_id": 239,
+            "team_abbv": "BAY"
+        },
+        {
+            "team_name": "War Hawks",
+            "team_city": "McMurry",
+            "team_id": 241,
+            "team_abbv": "MMR"
+        },
+        {
+            "team_name": "Owls",
+            "team_city": "Rice",
+            "team_id": 242,
+            "team_abbv": "RICE"
+        },
+        {
+            "team_name": "Aggies",
+            "team_city": "Texas A&M",
+            "team_id": 245,
+            "team_abbv": "TA&M"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Juniata",
+            "team_id": 246,
+            "team_abbv": "JUN"
+        },
+        {
+            "team_name": "Monarchs",
+            "team_city": "Kings College (PA)",
+            "team_id": 247,
+            "team_abbv": "KING"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Houston",
+            "team_id": 248,
+            "team_abbv": "HOU"
+        },
+        {
+            "team_name": "Mean Green",
+            "team_city": "North Texas",
+            "team_id": 249,
+            "team_abbv": "UNT"
+        },
+        {
+            "team_name": "Mavericks",
+            "team_city": "UT Arlington",
+            "team_id": 250,
+            "team_abbv": "UTA"
+        },
+        {
+            "team_name": "Longhorns",
+            "team_city": "Texas",
+            "team_id": 251,
+            "team_abbv": "TEX"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "BYU",
+            "team_id": 252,
+            "team_abbv": "BYU"
+        },
+        {
+            "team_name": "Thunderbirds",
+            "team_city": "Southern Utah",
+            "team_id": 253,
+            "team_abbv": "SUU"
+        },
+        {
+            "team_name": "Utes",
+            "team_city": "Utah",
+            "team_id": 254,
+            "team_abbv": "UTAH"
+        },
+        {
+            "team_name": "Prairie Fire",
+            "team_city": "Knox College",
+            "team_id": 255,
+            "team_abbv": "KNO"
+        },
+        {
+            "team_name": "Dukes",
+            "team_city": "James Madison",
+            "team_id": 256,
+            "team_abbv": "JMU"
+        },
+        {
+            "team_name": "Spiders",
+            "team_city": "Richmond",
+            "team_id": 257,
+            "team_abbv": "RICH"
+        },
+        {
+            "team_name": "Cavaliers",
+            "team_city": "Virginia",
+            "team_id": 258,
+            "team_abbv": "UVA"
+        },
+        {
+            "team_name": "Hokies",
+            "team_city": "Virginia Tech",
+            "team_id": 259,
+            "team_abbv": "VT"
+        },
+        {
+            "team_name": "Foresters",
+            "team_city": "Lake Forest",
+            "team_id": 262,
+            "team_abbv": "LAK"
+        },
+        {
+            "team_name": "Duhawks",
+            "team_city": "Loras College",
+            "team_id": 263,
+            "team_abbv": "LOR"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "Washington",
+            "team_id": 264,
+            "team_abbv": "WASH"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Washington State",
+            "team_id": 265,
+            "team_abbv": "WSU"
+        },
+        {
+            "team_name": "Buccaneers",
+            "team_city": "Beloit College",
+            "team_id": 266,
+            "team_abbv": "BEL"
+        },
+        {
+            "team_name": "Fires",
+            "team_city": "Southeastern University",
+            "team_id": 267,
+            "team_abbv": "SOU"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Lawrence University",
+            "team_id": 268,
+            "team_abbv": "LAW"
+        },
+        {
+            "team_name": "Titans",
+            "team_city": "Wisconsin-Oshkosh",
+            "team_id": 271,
+            "team_abbv": "WISO"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Wisconsin-Platteville",
+            "team_id": 272,
+            "team_abbv": "WIPL"
+        },
+        {
+            "team_name": "Highlanders",
+            "team_city": "MacMurray College",
+            "team_id": 273,
+            "team_abbv": "MAC"
+        },
+        {
+            "team_name": "Mariners",
+            "team_city": "Maine Maritime",
+            "team_id": 274,
+            "team_abbv": "MAI"
+        },
+        {
+            "team_name": "Badgers",
+            "team_city": "Wisconsin",
+            "team_id": 275,
+            "team_abbv": "WIS"
+        },
+        {
+            "team_name": "Thundering Herd",
+            "team_city": "Marshall",
+            "team_id": 276,
+            "team_abbv": "MRSH"
+        },
+        {
+            "team_name": "Mountaineers",
+            "team_city": "West Virginia",
+            "team_id": 277,
+            "team_abbv": "WVU"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Fresno State",
+            "team_id": 278,
+            "team_abbv": "FRES"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Pacific",
+            "team_id": 279,
+            "team_abbv": "PAC"
+        },
+        {
+            "team_name": "Sycamores",
+            "team_city": "Indiana State",
+            "team_id": 282,
+            "team_abbv": "INST"
+        },
+        {
+            "team_name": "Skyhawks",
+            "team_city": "Stonehill",
+            "team_id": 284,
+            "team_abbv": "STO"
+        },
+        {
+            "team_name": "Battling Bishops",
+            "team_city": "North Carolina Wesleyan",
+            "team_id": 286,
+            "team_abbv": "NOR"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Georgia Southern",
+            "team_id": 290,
+            "team_abbv": "GASO"
+        },
+        {
+            "team_name": "Monarchs",
+            "team_city": "Methodist",
+            "team_id": 291,
+            "team_abbv": "MET"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Castleton",
+            "team_id": 293,
+            "team_abbv": "CAS"
+        },
+        {
+            "team_name": "Dolphins",
+            "team_city": "Jacksonville",
+            "team_id": 294,
+            "team_abbv": "JAX"
+        },
+        {
+            "team_name": "Monarchs",
+            "team_city": "Old Dominion",
+            "team_id": 295,
+            "team_abbv": "ODU"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Hampden-Sydney",
+            "team_id": 297,
+            "team_abbv": "HAC"
+        },
+        {
+            "team_name": "49ers",
+            "team_city": "Long Beach State",
+            "team_id": 299,
+            "team_abbv": "LBSU"
+        },
+        {
+            "team_name": "Anteaters",
+            "team_city": "UC Irvine",
+            "team_id": 300,
+            "team_abbv": "UCI"
+        },
+        {
+            "team_name": "Toreros",
+            "team_city": "San Diego",
+            "team_id": 301,
+            "team_abbv": "USD"
+        },
+        {
+            "team_name": "Aggies",
+            "team_city": "UC Davis",
+            "team_id": 302,
+            "team_abbv": "UCD"
+        },
+        {
+            "team_name": "Bengals",
+            "team_city": "Idaho State",
+            "team_id": 304,
+            "team_abbv": "IDST"
+        },
+        {
+            "team_name": "Titans",
+            "team_city": "Illinois Wesleyan",
+            "team_id": 306,
+            "team_abbv": "ILW"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Ashland",
+            "team_id": 308,
+            "team_abbv": "ASH"
+        },
+        {
+            "team_name": "Ragin' Cajuns",
+            "team_city": "Louisiana",
+            "team_id": 309,
+            "team_abbv": "UL"
+        },
+        {
+            "team_name": "Black Bears",
+            "team_city": "Maine",
+            "team_id": 311,
+            "team_abbv": "ME"
+        },
+        {
+            "team_name": "Gaels",
+            "team_city": "Iona",
+            "team_id": 314,
+            "team_abbv": "IONA"
+        },
+        {
+            "team_name": "Blue Hawks",
+            "team_city": "Dickinson State",
+            "team_id": 316,
+            "team_abbv": "DIC"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Marietta",
+            "team_id": 317,
+            "team_abbv": "MAR"
+        },
+        {
+            "team_name": "Bison",
+            "team_city": "Oklahoma Baptist",
+            "team_id": 319,
+            "team_abbv": "OKB"
+        },
+        {
+            "team_name": "Leopards",
+            "team_city": "Lafayette",
+            "team_id": 322,
+            "team_abbv": "LAF"
+        },
+        {
+            "team_name": "Greyhounds",
+            "team_city": "Moravian",
+            "team_id": 323,
+            "team_abbv": "MOR"
+        },
+        {
+            "team_name": "Chanticleers",
+            "team_city": "Coastal Carolina",
+            "team_id": 324,
+            "team_abbv": "CCU"
+        },
+        {
+            "team_name": "Bobcats",
+            "team_city": "Texas State",
+            "team_id": 326,
+            "team_abbv": "TXST"
+        },
+        {
+            "team_name": "Aggies",
+            "team_city": "Utah State",
+            "team_id": 328,
+            "team_abbv": "USU"
+        },
+        {
+            "team_name": "Trojans",
+            "team_city": "Virginia State",
+            "team_id": 330,
+            "team_abbv": "VIR"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Eastern Washington",
+            "team_id": 331,
+            "team_abbv": "EWU"
+        },
+        {
+            "team_name": "Fighting Muskies",
+            "team_city": "Muskingum",
+            "team_id": 332,
+            "team_abbv": "MUS"
+        },
+        {
+            "team_name": "Crimson Tide",
+            "team_city": "Alabama",
+            "team_id": 333,
+            "team_abbv": "ALA"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Wesleyan University (CT)",
+            "team_id": 336,
+            "team_abbv": "WCT"
+        },
+        {
+            "team_name": "Owls",
+            "team_city": "Kennesaw State",
+            "team_id": 338,
+            "team_abbv": "KENN"
+        },
+        {
+            "team_name": "Polar Bears",
+            "team_city": "Bowdoin",
+            "team_id": 340,
+            "team_abbv": "BOW"
+        },
+        {
+            "team_name": "Bobcats",
+            "team_city": "Frostburg State",
+            "team_id": 341,
+            "team_abbv": "FRO"
+        },
+        {
+            "team_name": "Fighting Blue Jays",
+            "team_city": "Polytechnic University",
+            "team_id": 342,
+            "team_abbv": "POL"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Mississippi State",
+            "team_id": 344,
+            "team_abbv": "MSST"
+        },
+        {
+            "team_name": "Continentals",
+            "team_city": "Hamilton",
+            "team_id": 348,
+            "team_abbv": "HAM"
+        },
+        {
+            "team_name": "Black Knights",
+            "team_city": "Army",
+            "team_id": 349,
+            "team_abbv": "ARMY"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Wingate",
+            "team_id": 351,
+            "team_abbv": "WIN"
+        },
+        {
+            "team_name": "Owls",
+            "team_city": "Kenyon",
+            "team_id": 352,
+            "team_abbv": "KEN"
+        },
+        {
+            "team_name": "Comets",
+            "team_city": "Olivet College",
+            "team_id": 354,
+            "team_abbv": "OLI"
+        },
+        {
+            "team_name": "Fighting Illini",
+            "team_city": "Illinois",
+            "team_id": 356,
+            "team_abbv": "ILL"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Otterbein",
+            "team_id": 359,
+            "team_abbv": "OTT"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Principia College",
+            "team_id": 363,
+            "team_abbv": "PRI"
+        },
+        {
+            "team_name": "Saxons",
+            "team_city": "Alfred",
+            "team_id": 365,
+            "team_abbv": "ALF"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Ferrum",
+            "team_id": 366,
+            "team_abbv": "FER"
+        },
+        {
+            "team_name": "Golden Knights",
+            "team_city": "Gannon",
+            "team_id": 367,
+            "team_abbv": "GAN"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "St. John Fisher University",
+            "team_id": 374,
+            "team_abbv": "SJFU"
+        },
+        {
+            "team_name": "Saints",
+            "team_city": "St. Scholastica",
+            "team_id": 375,
+            "team_abbv": "STS"
+        },
+        {
+            "team_name": "Corsairs",
+            "team_city": "UMASS Dartmouth",
+            "team_id": 379,
+            "team_abbv": "UMDA"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Trinity (TX)",
+            "team_id": 386,
+            "team_abbv": "TRI"
+        },
+        {
+            "team_name": "Flying Dutchmen",
+            "team_city": "Lebanon Valley",
+            "team_id": 388,
+            "team_abbv": "LEB"
+        },
+        {
+            "team_name": "Peacocks",
+            "team_city": "Upper Iowa",
+            "team_id": 389,
+            "team_abbv": "UPP"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Utica",
+            "team_id": 390,
+            "team_abbv": "UTI"
+        },
+        {
+            "team_name": "Yeomen",
+            "team_city": "Oberlin",
+            "team_id": 391,
+            "team_abbv": "OBE"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Saint Augustine's",
+            "team_id": 395,
+            "team_abbv": "STAUG"
+        },
+        {
+            "team_name": "Thunder",
+            "team_city": "Wheaton",
+            "team_id": 396,
+            "team_abbv": "WHE"
+        },
+        {
+            "team_name": "Colonels",
+            "team_city": "Wilkes University",
+            "team_id": 398,
+            "team_abbv": "WIL"
+        },
+        {
+            "team_name": "Great Danes",
+            "team_city": "UAlbany",
+            "team_id": 399,
+            "team_abbv": "ALB"
+        },
+        {
+            "team_name": "Lancers",
+            "team_city": "Worcester State College",
+            "team_id": 402,
+            "team_abbv": "WOR"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Concordia-Wisconsin",
+            "team_id": 409,
+            "team_abbv": "CONW"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Chapman University",
+            "team_id": 411,
+            "team_abbv": "CHA"
+        },
+        {
+            "team_name": "Bruins",
+            "team_city": "George Fox",
+            "team_id": 415,
+            "team_abbv": "GFX"
+        },
+        {
+            "team_name": "Bison",
+            "team_city": "Gallaudet",
+            "team_id": 417,
+            "team_abbv": "GAL"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "Hendrix College",
+            "team_id": 418,
+            "team_abbv": "HEN"
+        },
+        {
+            "team_name": "Mid-Am Nazarene",
+            "team_city": "Mid-America Nazarene",
+            "team_id": 419,
+            "team_abbv": "MIDAMNAZR"
+        },
+        {
+            "team_name": "Sabercats",
+            "team_city": "Maranatha Baptist College",
+            "team_id": 421,
+            "team_abbv": "MAR"
+        },
+        {
+            "team_name": "Comets",
+            "team_city": "Capital",
+            "team_id": 424,
+            "team_abbv": "CAP"
+        },
+        {
+            "team_name": "Wolves",
+            "team_city": "Northern State",
+            "team_id": 425,
+            "team_abbv": "NSU"
+        },
+        {
+            "team_name": "Raiders",
+            "team_city": "Mount Union",
+            "team_id": 426,
+            "team_abbv": "MOU"
+        },
+        {
+            "team_name": "Polar Bears",
+            "team_city": "Ohio Northern",
+            "team_id": 427,
+            "team_abbv": "ON"
+        },
+        {
+            "team_name": "Blue Jays",
+            "team_city": "Westminster (MO)",
+            "team_id": 433,
+            "team_abbv": "WMO"
+        },
+        {
+            "team_name": "Storm",
+            "team_city": "Lake Erie",
+            "team_id": 437,
+            "team_abbv": "LKE"
+        },
+        {
+            "team_name": "Knights",
+            "team_city": "Martin Luther",
+            "team_id": 446,
+            "team_abbv": "MAR"
+        },
+        {
+            "team_name": "Gulls",
+            "team_city": "Endicott College",
+            "team_id": 452,
+            "team_abbv": "END"
+        },
+        {
+            "team_name": "Bobcats",
+            "team_city": "West Virginia Wesleyan",
+            "team_id": 455,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Mustangs",
+            "team_city": "Stevenson",
+            "team_id": 471,
+            "team_abbv": "STEV"
+        },
+        {
+            "team_name": "Hawks",
+            "team_city": "Becker College",
+            "team_id": 479,
+            "team_abbv": "BEC"
+        },
+        {
+            "team_name": "Mustangs",
+            "team_city": "Mount Ida College",
+            "team_id": 481,
+            "team_abbv": "MOU"
+        },
+        {
+            "team_name": "Bacone",
+            "team_city": "Bacone",
+            "team_id": 487,
+            "team_abbv": "BACONE"
+        },
+        {
+            "team_name": "Baker",
+            "team_city": "Baker University",
+            "team_id": 488,
+            "team_abbv": "BAK"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Benedict College",
+            "team_id": 490,
+            "team_abbv": "BEN"
+        },
+        {
+            "team_name": "Bethany (Ks)",
+            "team_city": "Bethany (KS)",
+            "team_id": 492,
+            "team_abbv": "BET"
+        },
+        {
+            "team_name": "Ramblin' Rams",
+            "team_city": "Bluefield University",
+            "team_id": 495,
+            "team_abbv": "BLU"
+        },
+        {
+            "team_name": "Clippers",
+            "team_city": "Concordia-Nebraska",
+            "team_id": 507,
+            "team_abbv": "CON"
+        },
+        {
+            "team_name": "Polars",
+            "team_city": "Crown College",
+            "team_id": 509,
+            "team_abbv": "CROWN"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Culver-Stockton",
+            "team_id": 510,
+            "team_abbv": "CUL"
+        },
+        {
+            "team_name": "Indians",
+            "team_city": "Cumberland (KY)",
+            "team_id": 511,
+            "team_abbv": "CUMB"
+        },
+        {
+            "team_name": "Trojans",
+            "team_city": "Dakota State University",
+            "team_id": 512,
+            "team_abbv": "DAKOT"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Dakota Wesleyan",
+            "team_id": 513,
+            "team_abbv": "DWU"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Dana College",
+            "team_id": 515,
+            "team_abbv": "DAN"
+        },
+        {
+            "team_name": "Friends",
+            "team_city": "Friends University",
+            "team_id": 527,
+            "team_abbv": "FRI"
+        },
+        {
+            "team_name": "Graceland",
+            "team_city": "Graceland University",
+            "team_id": 530,
+            "team_abbv": "GRA"
+        },
+        {
+            "team_name": "Jayhawks",
+            "team_city": "Haskell Indian Nations",
+            "team_id": 535,
+            "team_abbv": "HAS"
+        },
+        {
+            "team_name": "Broncos",
+            "team_city": "Hastings College",
+            "team_id": 536,
+            "team_abbv": "HAS"
+        },
+        {
+            "team_name": "Ks Wesleyan",
+            "team_city": "Kansas Wesleyan University",
+            "team_id": 547,
+            "team_abbv": "KAN"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "LaGrange College",
+            "team_id": 548,
+            "team_abbv": "LAG"
+        },
+        {
+            "team_name": "Rouge-et-or",
+            "team_city": "University of Laval",
+            "team_id": 549,
+            "team_abbv": "LAV"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Malone",
+            "team_id": 556,
+            "team_abbv": "MAL"
+        },
+        {
+            "team_name": "Marauders",
+            "team_city": "University of Mary",
+            "team_id": 559,
+            "team_abbv": "MARY"
+        },
+        {
+            "team_name": "Comets",
+            "team_city": "Mayville State",
+            "team_id": 561,
+            "team_abbv": "MAY"
+        },
+        {
+            "team_name": "Midland Lutheran",
+            "team_city": "Midland University",
+            "team_id": 565,
+            "team_abbv": "MID"
+        },
+        {
+            "team_name": "Beavers",
+            "team_city": "Minot State",
+            "team_id": 568,
+            "team_abbv": "MNT"
+        },
+        {
+            "team_name": "Lights",
+            "team_city": "Montana State-Northern",
+            "team_id": 569,
+            "team_abbv": "MAQ"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Northwestern (MN)",
+            "team_id": 583,
+            "team_abbv": "NMN"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Notre Dame College (OH)",
+            "team_id": 587,
+            "team_abbv": "NDOH"
+        },
+        {
+            "team_name": "Peru State",
+            "team_city": "Peru State College",
+            "team_id": 596,
+            "team_abbv": "PER"
+        },
+        {
+            "team_name": "Presentation",
+            "team_city": "Presentation",
+            "team_id": 597,
+            "team_abbv": "PRE"
+        },
+        {
+            "team_name": "Lakers",
+            "team_city": "Robert Morris (IL)",
+            "team_id": 599,
+            "team_abbv": "ROB"
+        },
+        {
+            "team_name": "Griffins",
+            "team_city": "Seton Hill",
+            "team_id": 611,
+            "team_abbv": "SH"
+        },
+        {
+            "team_name": "Hardrockers",
+            "team_city": "South Dakota Mines",
+            "team_id": 613,
+            "team_abbv": "SDM"
+        },
+        {
+            "team_name": "Moundbuilders",
+            "team_city": "Southwestern College",
+            "team_id": 616,
+            "team_abbv": "SOU"
+        },
+        {
+            "team_name": "Sterling Ks",
+            "team_city": "Sterling College",
+            "team_id": 618,
+            "team_abbv": "STE"
+        },
+        {
+            "team_name": "Tabor",
+            "team_city": "Tabor College",
+            "team_id": 619,
+            "team_abbv": "TABOR"
+        },
+        {
+            "team_name": "Trojans",
+            "team_city": "Taylor",
+            "team_id": 620,
+            "team_abbv": "TAY"
+        },
+        {
+            "team_name": "Dragons",
+            "team_city": "Tiffin University",
+            "team_id": 625,
+            "team_abbv": "TIF"
+        },
+        {
+            "team_name": "Valley City St",
+            "team_city": "Valley City State",
+            "team_id": 628,
+            "team_abbv": "VAL"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Wayland Baptist",
+            "team_id": 630,
+            "team_abbv": "WAY"
+        },
+        {
+            "team_name": "TBD",
+            "team_city": null,
+            "team_id": 999,
+            "team_abbv": "TBD"
+        },
+        {
+            "team_name": "TBD",
+            "team_city": null,
+            "team_id": 1011,
+            "team_abbv": "TBD"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Abilene Christian",
+            "team_id": 2000,
+            "team_abbv": "ACU"
+        },
+        {
+            "team_name": "Grizzlies",
+            "team_city": "Adams State",
+            "team_id": 2001,
+            "team_abbv": "ADA"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Adrian",
+            "team_id": 2003,
+            "team_abbv": "ADR"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Air Force",
+            "team_id": 2005,
+            "team_abbv": "AFA"
+        },
+        {
+            "team_name": "Zips",
+            "team_city": "Akron",
+            "team_id": 2006,
+            "team_abbv": "AKR"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Alabama A&M",
+            "team_id": 2010,
+            "team_abbv": "AAMU"
+        },
+        {
+            "team_name": "Hornets",
+            "team_city": "Alabama State",
+            "team_id": 2011,
+            "team_abbv": "ALST"
+        },
+        {
+            "team_name": "Golden Rams",
+            "team_city": "Albany State",
+            "team_id": 2013,
+            "team_abbv": "ALBS"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Albright",
+            "team_id": 2015,
+            "team_abbv": "ALB"
+        },
+        {
+            "team_name": "Braves",
+            "team_city": "Alcorn State",
+            "team_id": 2016,
+            "team_abbv": "ALCN"
+        },
+        {
+            "team_name": "Battlers",
+            "team_city": "Alderson Broaddus",
+            "team_id": 2017,
+            "team_abbv": "ABC"
+        },
+        {
+            "team_name": "Gators",
+            "team_city": "Allegheny",
+            "team_id": 2018,
+            "team_abbv": "ALL"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "Allen",
+            "team_id": 2019,
+            "team_abbv": "ALN"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "American International",
+            "team_id": 2022,
+            "team_abbv": "AIC"
+        },
+        {
+            "team_name": "Ravens",
+            "team_city": "Anderson (IN)",
+            "team_id": 2023,
+            "team_abbv": "AND"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Angelo State",
+            "team_id": 2025,
+            "team_abbv": "ANG"
+        },
+        {
+            "team_name": "Mountaineers",
+            "team_city": "App State",
+            "team_id": 2026,
+            "team_abbv": "APP"
+        },
+        {
+            "team_name": "Boll Weevils",
+            "team_city": "Arkansas-Monticello",
+            "team_id": 2028,
+            "team_abbv": "ARK"
+        },
+        {
+            "team_name": "Golden Lions",
+            "team_city": "Arkansas-Pine Bluff",
+            "team_id": 2029,
+            "team_abbv": "UAPB"
+        },
+        {
+            "team_name": "Red Wolves",
+            "team_city": "Arkansas State",
+            "team_id": 2032,
+            "team_abbv": "ARST"
+        },
+        {
+            "team_name": "Wonder Boys",
+            "team_city": "Arkansas Tech",
+            "team_id": 2033,
+            "team_abbv": "ARK"
+        },
+        {
+            "team_name": "Greyhounds",
+            "team_city": "Assumption",
+            "team_id": 2038,
+            "team_abbv": "ASP"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Augustana (IL)",
+            "team_id": 2042,
+            "team_abbv": "AUG"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Augustana University (SD)",
+            "team_id": 2043,
+            "team_abbv": "AUSD"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Aurora",
+            "team_id": 2044,
+            "team_abbv": "AUR"
+        },
+        {
+            "team_name": "'Roos",
+            "team_city": "Austin",
+            "team_id": 2045,
+            "team_abbv": "AUS"
+        },
+        {
+            "team_name": "Governors",
+            "team_city": "Austin Peay",
+            "team_id": 2046,
+            "team_abbv": "APSU"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Averett",
+            "team_id": 2047,
+            "team_abbv": "AVE"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Avila College",
+            "team_id": 2048,
+            "team_abbv": "AVI"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Azusa Pacific",
+            "team_id": 2049,
+            "team_abbv": "AZU"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Ball State",
+            "team_id": 2050,
+            "team_abbv": "BALL"
+        },
+        {
+            "team_name": "Blazers",
+            "team_city": "Belhaven",
+            "team_id": 2056,
+            "team_abbv": "BEL"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Bentley",
+            "team_id": 2060,
+            "team_abbv": "BENT"
+        },
+        {
+            "team_name": "Bison",
+            "team_city": "Bethany (WV)",
+            "team_id": 2062,
+            "team_abbv": "BET"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Bethel (TN)",
+            "team_id": 2064,
+            "team_abbv": "BET"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Bethune-Cookman",
+            "team_id": 2065,
+            "team_abbv": "BCU"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "Black Hills State",
+            "team_id": 2069,
+            "team_abbv": "BHS"
+        },
+        {
+            "team_name": "Beavers",
+            "team_city": "Blackburn",
+            "team_id": 2070,
+            "team_abbv": "BLA"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "Bloomsburg",
+            "team_id": 2071,
+            "team_abbv": "BLOM"
+        },
+        {
+            "team_name": "Beavers",
+            "team_city": "Bluffton",
+            "team_id": 2074,
+            "team_abbv": "BLU"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Bowie State",
+            "team_id": 2075,
+            "team_abbv": "BSU"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Bridgewater (VA)",
+            "team_id": 2079,
+            "team_abbv": "BRI"
+        },
+        {
+            "team_name": "British Col",
+            "team_city": "British Columbia",
+            "team_id": 2080,
+            "team_abbv": "BRI"
+        },
+        {
+            "team_name": "Bison",
+            "team_city": "Bucknell",
+            "team_id": 2083,
+            "team_abbv": "BUCK"
+        },
+        {
+            "team_name": "Bulls",
+            "team_city": "Buffalo",
+            "team_id": 2084,
+            "team_abbv": "BUFF"
+        },
+        {
+            "team_name": "Bengals",
+            "team_city": "Buffalo State",
+            "team_id": 2085,
+            "team_abbv": "BUF"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Butler",
+            "team_id": 2086,
+            "team_abbv": "BUT"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "LIU Post",
+            "team_id": 2089,
+            "team_abbv": "LIU"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Cal State-East Bay",
+            "team_id": 2093,
+            "team_abbv": "CSH"
+        },
+        {
+            "team_name": "Kingsmen",
+            "team_city": "California Lutheran",
+            "team_id": 2094,
+            "team_abbv": "CAL"
+        },
+        {
+            "team_name": "Aggies",
+            "team_city": "Cameron",
+            "team_id": 2096,
+            "team_abbv": "CAM"
+        },
+        {
+            "team_name": "Fighting Camels",
+            "team_city": "Campbell",
+            "team_id": 2097,
+            "team_abbv": "CAM"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Campbellsville",
+            "team_id": 2098,
+            "team_abbv": "CAI"
+        },
+        {
+            "team_name": "Golden Griffins",
+            "team_city": "Canisius",
+            "team_id": 2099,
+            "team_abbv": "CAN"
+        },
+        {
+            "team_name": "Knights",
+            "team_city": "Carleton College",
+            "team_id": 2101,
+            "team_abbv": "CAR"
+        },
+        {
+            "team_name": "Tartans",
+            "team_city": "Carnegie Mellon",
+            "team_id": 2102,
+            "team_abbv": "CAR"
+        },
+        {
+            "team_name": "Fighting Saints",
+            "team_city": "Carroll (MT)",
+            "team_id": 2104,
+            "team_abbv": "CAR"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Carson-Newman",
+            "team_id": 2105,
+            "team_abbv": "CAR"
+        },
+        {
+            "team_name": "Firebirds",
+            "team_city": "Carthage",
+            "team_id": 2106,
+            "team_abbv": "CAR"
+        },
+        {
+            "team_name": "Indians",
+            "team_city": "Catawba",
+            "team_id": 2107,
+            "team_abbv": "CAT"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Catholic",
+            "team_id": 2108,
+            "team_abbv": "CAT"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Central Arkansas",
+            "team_id": 2110,
+            "team_abbv": "CARK"
+        },
+        {
+            "team_name": "Blue Devils",
+            "team_city": "Central Connecticut",
+            "team_id": 2115,
+            "team_abbv": "CCSU"
+        },
+        {
+            "team_name": "Knights",
+            "team_city": "UCF",
+            "team_id": 2116,
+            "team_abbv": "UCF"
+        },
+        {
+            "team_name": "Chippewas",
+            "team_city": "Central Michigan",
+            "team_id": 2117,
+            "team_abbv": "CMU"
+        },
+        {
+            "team_name": "Mules",
+            "team_city": "Central Missouri",
+            "team_id": 2118,
+            "team_abbv": "CENM"
+        },
+        {
+            "team_name": "Marauders",
+            "team_city": "Central State (OH)",
+            "team_id": 2119,
+            "team_abbv": "CEN"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Central Washington",
+            "team_id": 2120,
+            "team_abbv": "CEN"
+        },
+        {
+            "team_name": "Colonels",
+            "team_city": "Centre College",
+            "team_id": 2121,
+            "team_abbv": "CEN"
+        },
+        {
+            "team_name": "Bronchos",
+            "team_city": "Central Oklahoma",
+            "team_id": 2122,
+            "team_abbv": "CENO"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Chadron State",
+            "team_id": 2123,
+            "team_abbv": "CHA"
+        },
+        {
+            "team_name": "Buccaneers",
+            "team_city": "Charleston Southern",
+            "team_id": 2127,
+            "team_abbv": "CHSO"
+        },
+        {
+            "team_name": "Golden Eagles",
+            "team_city": "University Of Charleston (WV)",
+            "team_id": 2128,
+            "team_abbv": "CHWV"
+        },
+        {
+            "team_name": "Wolves",
+            "team_city": "Cheyney",
+            "team_id": 2129,
+            "team_abbv": "CHE"
+        },
+        {
+            "team_name": "Bearcats",
+            "team_city": "Cincinnati",
+            "team_id": 2132,
+            "team_abbv": "CIN"
+        },
+        {
+            "team_name": "Golden Eagles",
+            "team_city": "Clarion",
+            "team_id": 2134,
+            "team_abbv": "CLA"
+        },
+        {
+            "team_name": "Kohawks",
+            "team_city": "Coe College",
+            "team_id": 2141,
+            "team_abbv": "COE"
+        },
+        {
+            "team_name": "Raiders",
+            "team_city": "Colgate",
+            "team_id": 2142,
+            "team_abbv": "COLG"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Colorado College",
+            "team_id": 2144,
+            "team_abbv": "COLC"
+        },
+        {
+            "team_name": "Orediggers",
+            "team_city": "Colorado School of Mines",
+            "team_id": 2146,
+            "team_abbv": "COL"
+        },
+        {
+            "team_name": "Mountain Lions",
+            "team_city": "Concord",
+            "team_id": 2148,
+            "team_abbv": "CON"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Concordia-Chicago",
+            "team_id": 2151,
+            "team_abbv": "CON"
+        },
+        {
+            "team_name": "Cobbers",
+            "team_city": "Concordia-Moorhead",
+            "team_id": 2152,
+            "team_abbv": "CON"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Cornell College (IA)",
+            "team_id": 2155,
+            "team_abbv": "COR"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Cumberland (TN)",
+            "team_id": 2161,
+            "team_abbv": "CUMB"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Davidson",
+            "team_id": 2166,
+            "team_abbv": "DAV"
+        },
+        {
+            "team_name": "Flyers",
+            "team_city": "Dayton",
+            "team_id": 2168,
+            "team_abbv": "DAY"
+        },
+        {
+            "team_name": "Hornets",
+            "team_city": "Delaware State",
+            "team_id": 2169,
+            "team_abbv": "DSU"
+        },
+        {
+            "team_name": "Statesmen",
+            "team_city": "Delta State",
+            "team_id": 2170,
+            "team_abbv": "DELT"
+        },
+        {
+            "team_name": "Big Red",
+            "team_city": "Denison",
+            "team_id": 2171,
+            "team_abbv": "DEN"
+        },
+        {
+            "team_name": "Red Devils",
+            "team_city": "Dickinson (PA)",
+            "team_id": 2175,
+            "team_abbv": "DCK"
+        },
+        {
+            "team_name": "Firebirds",
+            "team_city": "District of Col.",
+            "team_id": 2177,
+            "team_abbv": "DDG"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Drake",
+            "team_id": 2181,
+            "team_abbv": "DRKE"
+        },
+        {
+            "team_name": "Dukes",
+            "team_city": "Duquesne",
+            "team_id": 2184,
+            "team_abbv": "DUQ"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "East Stroudsburg",
+            "team_id": 2188,
+            "team_abbv": "EAS"
+        },
+        {
+            "team_name": "Quakers",
+            "team_city": "Earlham College",
+            "team_id": 2189,
+            "team_abbv": "EARLHAM"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "East Central (OK)",
+            "team_id": 2191,
+            "team_abbv": "EAS"
+        },
+        {
+            "team_name": "Buccaneers",
+            "team_city": "East Tennessee State",
+            "team_id": 2193,
+            "team_abbv": "ETSU"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "East Texas Baptist",
+            "team_id": 2194,
+            "team_abbv": "EAS"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Eastern Illinois",
+            "team_id": 2197,
+            "team_abbv": "EIU"
+        },
+        {
+            "team_name": "Colonels",
+            "team_city": "Eastern Kentucky",
+            "team_id": 2198,
+            "team_abbv": "EKU"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Eastern Michigan",
+            "team_id": 2199,
+            "team_abbv": "EMU"
+        },
+        {
+            "team_name": "Greyhounds",
+            "team_city": "Eastern New Mexico",
+            "team_id": 2201,
+            "team_abbv": "EAS"
+        },
+        {
+            "team_name": "Eastern Oregon",
+            "team_city": "Eastern Oregon",
+            "team_id": 2202,
+            "team_abbv": "EOR"
+        },
+        {
+            "team_name": "Fighting Scots",
+            "team_city": "Edinboro",
+            "team_id": 2205,
+            "team_abbv": "EDI"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Edward Waters",
+            "team_id": 2206,
+            "team_abbv": "EAU"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Elizabeth City State",
+            "team_id": 2207,
+            "team_abbv": "ELIZ"
+        },
+        {
+            "team_name": "Phoenix",
+            "team_city": "Elon",
+            "team_id": 2210,
+            "team_abbv": "ELON"
+        },
+        {
+            "team_name": "Wasps",
+            "team_city": "Emory & Henry College",
+            "team_id": 2213,
+            "team_abbv": "EMO"
+        },
+        {
+            "team_name": "Hornets",
+            "team_city": "Emporia State",
+            "team_id": 2214,
+            "team_abbv": "EMP"
+        },
+        {
+            "team_name": "Stags",
+            "team_city": "Fairfield",
+            "team_id": 2217,
+            "team_abbv": "FAIR"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Faulkner",
+            "team_id": 2219,
+            "team_abbv": "FAU"
+        },
+        {
+            "team_name": "Broncos",
+            "team_city": "Fayetteville State",
+            "team_id": 2220,
+            "team_abbv": "FAY"
+        },
+        {
+            "team_name": "Devils",
+            "team_city": "FDU-Florham",
+            "team_id": 2221,
+            "team_abbv": "FDU"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Ferris State",
+            "team_id": 2222,
+            "team_abbv": "FRST"
+        },
+        {
+            "team_name": "Oilers",
+            "team_city": "Findlay",
+            "team_id": 2224,
+            "team_abbv": "FIN"
+        },
+        {
+            "team_name": "Owls",
+            "team_city": "Florida Atlantic",
+            "team_id": 2226,
+            "team_abbv": "FAU"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Florida International",
+            "team_id": 2229,
+            "team_abbv": "FIU"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Fordham",
+            "team_id": 2230,
+            "team_abbv": "FOR"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Fort Hays State",
+            "team_id": 2231,
+            "team_abbv": "FHSU"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Fort Valley State",
+            "team_id": 2232,
+            "team_abbv": "FVS"
+        },
+        {
+            "team_name": "Grizzlies",
+            "team_city": "Franklin",
+            "team_id": 2233,
+            "team_abbv": "FRNK"
+        },
+        {
+            "team_name": "Diplomats",
+            "team_city": "Franklin & Marshall",
+            "team_id": 2234,
+            "team_abbv": "FR&M"
+        },
+        {
+            "team_name": "Skyhawks",
+            "team_city": "Fort Lewis",
+            "team_id": 2237,
+            "team_abbv": "LEW"
+        },
+        {
+            "team_name": "Titans",
+            "team_city": "CSU Fullerton",
+            "team_id": 2239,
+            "team_abbv": "CSUF"
+        },
+        {
+            "team_name": "Runnin' Bulldogs",
+            "team_city": "Gardner-Webb",
+            "team_id": 2241,
+            "team_abbv": "GWEB"
+        },
+        {
+            "team_name": "Golden Tornadoes",
+            "team_city": "Geneva",
+            "team_id": 2242,
+            "team_abbv": "GEN"
+        },
+        {
+            "team_name": "Patriots",
+            "team_city": "George Mason",
+            "team_id": 2244,
+            "team_abbv": "GMU"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Georgetown (KY)",
+            "team_id": 2245,
+            "team_abbv": "GGA"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Georgia State",
+            "team_id": 2247,
+            "team_abbv": "GAST"
+        },
+        {
+            "team_name": "Bullets",
+            "team_city": "Gettysburg",
+            "team_id": 2248,
+            "team_abbv": "GET"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Glenville State",
+            "team_id": 2249,
+            "team_abbv": "GLN"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Grand View",
+            "team_id": 2254,
+            "team_abbv": "GRVW"
+        },
+        {
+            "team_name": "Pride",
+            "team_city": "Greensboro College",
+            "team_id": 2256,
+            "team_abbv": "GRE"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Greenville",
+            "team_id": 2257,
+            "team_abbv": "GRE"
+        },
+        {
+            "team_name": "Quakers",
+            "team_city": "Guilford",
+            "team_id": 2258,
+            "team_abbv": "GUI"
+        },
+        {
+            "team_name": "Pirates",
+            "team_city": "Hampton",
+            "team_id": 2261,
+            "team_abbv": "HAMP"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Hanover",
+            "team_id": 2262,
+            "team_abbv": "HAN"
+        },
+        {
+            "team_name": "Bisons",
+            "team_city": "Harding University",
+            "team_id": 2264,
+            "team_abbv": "HAR"
+        },
+        {
+            "team_name": "Reddies",
+            "team_city": "Henderson State",
+            "team_id": 2271,
+            "team_abbv": "HEN"
+        },
+        {
+            "team_name": "Chargers",
+            "team_city": "Hillsdale",
+            "team_id": 2273,
+            "team_abbv": "HIL"
+        },
+        {
+            "team_name": "Terriers",
+            "team_city": "Hiram College",
+            "team_id": 2274,
+            "team_abbv": "HIR"
+        },
+        {
+            "team_name": "Pride",
+            "team_city": "Hofstra",
+            "team_id": 2275,
+            "team_abbv": "HOF"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "Houston Christian",
+            "team_id": 2277,
+            "team_abbv": "HCU"
+        },
+        {
+            "team_name": "Lumberjacks",
+            "team_city": "Humboldt State",
+            "team_id": 2278,
+            "team_abbv": "HUM"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Husson",
+            "team_id": 2280,
+            "team_abbv": "HUS"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Benedictine University (IL)",
+            "team_id": 2283,
+            "team_abbv": "BENC"
+        },
+        {
+            "team_name": "Blueboys",
+            "team_city": "Illinois College",
+            "team_id": 2286,
+            "team_abbv": "ILL"
+        },
+        {
+            "team_name": "Redbirds",
+            "team_city": "Illinois State",
+            "team_id": 2287,
+            "team_abbv": "ILST"
+        },
+        {
+            "team_name": "Crimson Hawks",
+            "team_city": "Indiana-Pennsylvania",
+            "team_id": 2291,
+            "team_abbv": "IUP"
+        },
+        {
+            "team_name": "Greyhounds",
+            "team_city": "Indianapolis",
+            "team_id": 2292,
+            "team_abbv": "IND"
+        },
+        {
+            "team_name": "Hawkeyes",
+            "team_city": "Iowa",
+            "team_id": 2294,
+            "team_abbv": "IOWA"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Iowa Wesleyan",
+            "team_id": 2295,
+            "team_abbv": "IOW"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Jackson State",
+            "team_id": 2296,
+            "team_abbv": "JKST"
+        },
+        {
+            "team_name": "Blue Streaks",
+            "team_city": "John Carroll",
+            "team_id": 2302,
+            "team_abbv": "JOH"
+        },
+        {
+            "team_name": "Golden Bulls",
+            "team_city": "Johnson C Smith",
+            "team_id": 2304,
+            "team_abbv": "JOH"
+        },
+        {
+            "team_name": "Jayhawks",
+            "team_city": "Kansas",
+            "team_id": 2305,
+            "team_abbv": "KU"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Kansas State",
+            "team_id": 2306,
+            "team_abbv": "KSU"
+        },
+        {
+            "team_name": "Golden Flashes",
+            "team_city": "Kent State",
+            "team_id": 2309,
+            "team_abbv": "KENT"
+        },
+        {
+            "team_name": "Thorobreds",
+            "team_city": "Kentucky State",
+            "team_id": 2310,
+            "team_abbv": "KYST"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Knoxville",
+            "team_id": 2314,
+            "team_abbv": "KNOX"
+        },
+        {
+            "team_name": "Golden Bears",
+            "team_city": "Kutztown",
+            "team_id": 2315,
+            "team_abbv": "KUT"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Kentucky Wesleyan",
+            "team_id": 2316,
+            "team_abbv": "KYW"
+        },
+        {
+            "team_name": "Leopards",
+            "team_city": "La Verne",
+            "team_id": 2318,
+            "team_abbv": "LA"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Lamar",
+            "team_id": 2320,
+            "team_abbv": "LAM"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Lambuth",
+            "team_id": 2321,
+            "team_abbv": "LAM"
+        },
+        {
+            "team_name": "Dragons",
+            "team_city": "Lane",
+            "team_id": 2323,
+            "team_abbv": "LAC"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Langston",
+            "team_id": 2324,
+            "team_abbv": "LAN"
+        },
+        {
+            "team_name": "Explorers",
+            "team_city": "La Salle",
+            "team_id": 2325,
+            "team_abbv": "LAS"
+        },
+        {
+            "team_name": "Bobcats",
+            "team_city": "Lees-McRae",
+            "team_id": 2327,
+            "team_abbv": "LEES"
+        },
+        {
+            "team_name": "Mountain Hawks",
+            "team_city": "Lehigh",
+            "team_id": 2329,
+            "team_abbv": "LEH"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Lenoir-Rhyne",
+            "team_id": 2331,
+            "team_abbv": "LEN"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Lewis & Clark",
+            "team_id": 2333,
+            "team_abbv": "LEW"
+        },
+        {
+            "team_name": "Flames",
+            "team_city": "Liberty",
+            "team_id": 2335,
+            "team_abbv": "LIB"
+        },
+        {
+            "team_name": "Saints",
+            "team_city": "Limestone",
+            "team_id": 2336,
+            "team_abbv": "LIM"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Lincoln (PA)",
+            "team_id": 2339,
+            "team_abbv": "LINP"
+        },
+        {
+            "team_name": "Sharks",
+            "team_city": "Long Island University",
+            "team_id": 2341,
+            "team_abbv": "LIU"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Louisiana Christian University",
+            "team_id": 2347,
+            "team_abbv": "LCU"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Louisiana Tech",
+            "team_id": 2348,
+            "team_abbv": "LT"
+        },
+        {
+            "team_name": "River Hawks",
+            "team_city": "UMass Lowell",
+            "team_id": 2349,
+            "team_abbv": "UML"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "Lycoming",
+            "team_id": 2354,
+            "team_abbv": "LYC"
+        },
+        {
+            "team_name": "Dragons",
+            "team_city": "Virginia Lynchburg",
+            "team_id": 2355,
+            "team_abbv": "UVAL"
+        },
+        {
+            "team_name": "Scots",
+            "team_city": "Macalester",
+            "team_id": 2359,
+            "team_abbv": "MAC"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Manchester",
+            "team_id": 2362,
+            "team_abbv": "MNCH"
+        },
+        {
+            "team_name": "Mavericks",
+            "team_city": "Minnesota State Mankato",
+            "team_id": 2364,
+            "team_abbv": "MNST"
+        },
+        {
+            "team_name": "Mountaineers",
+            "team_city": "Mansfield",
+            "team_id": 2365,
+            "team_abbv": "MAN"
+        },
+        {
+            "team_name": "Marian",
+            "team_city": "Marian",
+            "team_id": 2366,
+            "team_abbv": "MAR"
+        },
+        {
+            "team_name": "Red Foxes",
+            "team_city": "Marist",
+            "team_id": 2368,
+            "team_abbv": "MRST"
+        },
+        {
+            "team_name": "Mountain Lions",
+            "team_city": "Mars Hill",
+            "team_id": 2369,
+            "team_abbv": "MH"
+        },
+        {
+            "team_name": "Crusaders",
+            "team_city": "Mary Hardin-Baylor",
+            "team_id": 2371,
+            "team_abbv": "MAR"
+        },
+        {
+            "team_name": "Scots",
+            "team_city": "Maryville College (TN)",
+            "team_id": 2373,
+            "team_abbv": "MVTN"
+        },
+        {
+            "team_name": "Cowboys",
+            "team_city": "McNeese",
+            "team_id": 2377,
+            "team_abbv": "MCN"
+        },
+        {
+            "team_name": "Retreivers",
+            "team_city": "UMBC",
+            "team_id": 2378,
+            "team_abbv": "UMBC"
+        },
+        {
+            "team_name": "Oaks",
+            "team_city": "Menlo College",
+            "team_id": 2381,
+            "team_abbv": "MENLO"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Mercer",
+            "team_id": 2382,
+            "team_abbv": "MER"
+        },
+        {
+            "team_name": "Mariners",
+            "team_city": "Merchant Marine",
+            "team_id": 2383,
+            "team_abbv": "MER"
+        },
+        {
+            "team_name": "Lakers",
+            "team_city": "Mercyhurst",
+            "team_id": 2385,
+            "team_abbv": "MERC"
+        },
+        {
+            "team_name": "Hurricanes",
+            "team_city": "Miami",
+            "team_id": 2390,
+            "team_abbv": "MIA"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "Michigan Tech",
+            "team_id": 2392,
+            "team_abbv": "MTU"
+        },
+        {
+            "team_name": "Blue Raiders",
+            "team_city": "Middle Tennessee",
+            "team_id": 2393,
+            "team_abbv": "MTSU"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Middlebury",
+            "team_id": 2394,
+            "team_abbv": "MID"
+        },
+        {
+            "team_name": "Mustangs",
+            "team_city": "Midwestern State",
+            "team_id": 2395,
+            "team_abbv": "MID"
+        },
+        {
+            "team_name": "Golden Bears",
+            "team_city": "Miles College",
+            "team_id": 2396,
+            "team_abbv": "MIL"
+        },
+        {
+            "team_name": "Majors",
+            "team_city": "Millsaps",
+            "team_id": 2398,
+            "team_abbv": "MLSP"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Minnesota Morris",
+            "team_id": 2399,
+            "team_abbv": "MINM"
+        },
+        {
+            "team_name": "Delta Devils",
+            "team_city": "Mississippi Valley State",
+            "team_id": 2400,
+            "team_abbv": "MVSU"
+        },
+        {
+            "team_name": "Choctaws",
+            "team_city": "Mississippi College",
+            "team_id": 2401,
+            "team_abbv": "MIS"
+        },
+        {
+            "team_name": "Miners",
+            "team_city": "Missouri S&T",
+            "team_id": 2402,
+            "team_abbv": "MS&T"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Missouri Southern State",
+            "team_id": 2403,
+            "team_abbv": "MOS"
+        },
+        {
+            "team_name": "Hawks",
+            "team_city": "Monmouth",
+            "team_id": 2405,
+            "team_abbv": "MONM"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Morehead State",
+            "team_id": 2413,
+            "team_abbv": "MORE"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Morgan State",
+            "team_id": 2415,
+            "team_abbv": "MORG"
+        },
+        {
+            "team_name": "Chiefs",
+            "team_city": "Morningside",
+            "team_id": 2416,
+            "team_abbv": "MOR"
+        },
+        {
+            "team_name": "Wolverines",
+            "team_city": "Morris Brown",
+            "team_id": 2417,
+            "team_abbv": "MB"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Mount St. Joseph",
+            "team_id": 2419,
+            "team_abbv": "MSJ"
+        },
+        {
+            "team_name": "Mules",
+            "team_city": "Muhlenberg",
+            "team_id": 2422,
+            "team_abbv": "MUH"
+        },
+        {
+            "team_name": "Cowboys",
+            "team_city": "New Mexico Highlands",
+            "team_id": 2424,
+            "team_abbv": "NMH"
+        },
+        {
+            "team_name": "Midshipmen",
+            "team_city": "Navy",
+            "team_id": 2426,
+            "team_abbv": "NAVY"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "North Carolina Central",
+            "team_id": 2428,
+            "team_abbv": "NCCU"
+        },
+        {
+            "team_name": "49ers",
+            "team_city": "Charlotte",
+            "team_id": 2429,
+            "team_abbv": "CLT"
+        },
+        {
+            "team_name": "Warhawks",
+            "team_city": "UL Monroe",
+            "team_id": 2433,
+            "team_abbv": "ULM"
+        },
+        {
+            "team_name": "Mavericks",
+            "team_city": "Omaha",
+            "team_id": 2437,
+            "team_abbv": "OMA"
+        },
+        {
+            "team_name": "Lopers",
+            "team_city": "Nebraska-Kearney",
+            "team_id": 2438,
+            "team_abbv": "NK"
+        },
+        {
+            "team_name": "Rebels",
+            "team_city": "UNLV",
+            "team_id": 2439,
+            "team_abbv": "UNLV"
+        },
+        {
+            "team_name": "Wolf Pack",
+            "team_city": "Nevada",
+            "team_id": 2440,
+            "team_abbv": "NEV"
+        },
+        {
+            "team_name": "Chargers",
+            "team_city": "New Haven",
+            "team_id": 2441,
+            "team_abbv": "NH"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "The College of New Jersey",
+            "team_id": 2442,
+            "team_abbv": "TCNJ"
+        },
+        {
+            "team_name": "Wolves",
+            "team_city": "Newberry",
+            "team_id": 2444,
+            "team_abbv": "NBR"
+        },
+        {
+            "team_name": "Colonels",
+            "team_city": "Nicholls",
+            "team_id": 2447,
+            "team_abbv": "NICH"
+        },
+        {
+            "team_name": "Aggies",
+            "team_city": "North Carolina A&T",
+            "team_id": 2448,
+            "team_abbv": "NCAT"
+        },
+        {
+            "team_name": "Bison",
+            "team_city": "North Dakota State",
+            "team_id": 2449,
+            "team_abbv": "NDSU"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Norfolk State",
+            "team_id": 2450,
+            "team_abbv": "NORF"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "North Alabama",
+            "team_id": 2453,
+            "team_abbv": "UNA"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Northern Colorado",
+            "team_id": 2458,
+            "team_abbv": "UNCO"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "Northern Illinois",
+            "team_id": 2459,
+            "team_abbv": "NIU"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Northern Iowa",
+            "team_id": 2460,
+            "team_abbv": "UNI"
+        },
+        {
+            "team_name": "Matadors",
+            "team_city": "CSU Northridge",
+            "team_id": 2463,
+            "team_abbv": "CSUN"
+        },
+        {
+            "team_name": "Lumberjacks",
+            "team_city": "Northern Arizona",
+            "team_id": 2464,
+            "team_abbv": "NAU"
+        },
+        {
+            "team_name": "Demons",
+            "team_city": "Northwestern State",
+            "team_id": 2466,
+            "team_abbv": "NWST"
+        },
+        {
+            "team_name": "Cadets",
+            "team_city": "Norwich",
+            "team_id": 2467,
+            "team_abbv": "NOR"
+        },
+        {
+            "team_name": "Nw College Iowa",
+            "team_city": "Northwestern (IA)",
+            "team_id": 2471,
+            "team_abbv": "NAD"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Occidental",
+            "team_id": 2475,
+            "team_abbv": "OCC"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Ohio Dominican",
+            "team_id": 2477,
+            "team_abbv": "OHDM"
+        },
+        {
+            "team_name": "Ducks",
+            "team_city": "Oregon",
+            "team_id": 2483,
+            "team_abbv": "ORE"
+        },
+        {
+            "team_name": "Lutes",
+            "team_city": "Pacific Lutheran",
+            "team_id": 2486,
+            "team_abbv": "PL"
+        },
+        {
+            "team_name": "Setters",
+            "team_city": "Pace",
+            "team_id": 2487,
+            "team_abbv": "PAC"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Paine",
+            "team_id": 2488,
+            "team_abbv": "PC"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Paul Quinn",
+            "team_id": 2491,
+            "team_abbv": "PPN"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Portland State",
+            "team_id": 2502,
+            "team_abbv": "PRST"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Prairie View A&M",
+            "team_id": 2504,
+            "team_abbv": "PV"
+        },
+        {
+            "team_name": "Blue Hose",
+            "team_city": "Presbyterian",
+            "team_id": 2506,
+            "team_abbv": "PRES"
+        },
+        {
+            "team_name": "Loggers",
+            "team_city": "Puget Sound",
+            "team_id": 2508,
+            "team_abbv": "PUG"
+        },
+        {
+            "team_name": "Boilermakers",
+            "team_city": "Purdue",
+            "team_id": 2509,
+            "team_abbv": "PUR"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "Randolph-Macon",
+            "team_id": 2516,
+            "team_abbv": "RAN"
+        },
+        {
+            "team_name": "Lynx",
+            "team_city": "Rhodes College",
+            "team_id": 2519,
+            "team_abbv": "RHO"
+        },
+        {
+            "team_name": "Colonials",
+            "team_city": "Robert Morris",
+            "team_id": 2523,
+            "team_abbv": "RMU"
+        },
+        {
+            "team_name": "Regents",
+            "team_city": "Rockford",
+            "team_id": 2524,
+            "team_abbv": "ROCK"
+        },
+        {
+            "team_name": "Engineers",
+            "team_city": "Rensselaer",
+            "team_id": 2528,
+            "team_abbv": "RPI"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Sacred Heart",
+            "team_id": 2529,
+            "team_abbv": "SHU"
+        },
+        {
+            "team_name": "Spirits",
+            "team_city": "Salem",
+            "team_id": 2530,
+            "team_abbv": "SFS"
+        },
+        {
+            "team_name": "Sea Gulls",
+            "team_city": "Salisbury University",
+            "team_id": 2532,
+            "team_abbv": "SAL"
+        },
+        {
+            "team_name": "Bearkats",
+            "team_city": "Sam Houston",
+            "team_id": 2534,
+            "team_abbv": "SHSU"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Samford",
+            "team_id": 2535,
+            "team_abbv": "SAM"
+        },
+        {
+            "team_name": "Broncos",
+            "team_city": "Santa Clara",
+            "team_id": 2541,
+            "team_abbv": "SCU"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Savannah State",
+            "team_id": 2542,
+            "team_abbv": "SAV"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "SE Louisiana",
+            "team_id": 2545,
+            "team_abbv": "SELA"
+        },
+        {
+            "team_name": "Redhawks",
+            "team_city": "Southeast Missouri State",
+            "team_id": 2546,
+            "team_abbv": "SEMO"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Shaw",
+            "team_id": 2551,
+            "team_abbv": "SHAW"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Sewanee",
+            "team_id": 2553,
+            "team_abbv": "SEW"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Coast Guard",
+            "team_id": 2557,
+            "team_abbv": "CGA"
+        },
+        {
+            "team_name": "Raiders",
+            "team_city": "Shippensburg",
+            "team_id": 2559,
+            "team_abbv": "SHIP"
+        },
+        {
+            "team_name": "Hawks",
+            "team_city": "Shorter",
+            "team_id": 2560,
+            "team_abbv": "SHOR"
+        },
+        {
+            "team_name": "Saints",
+            "team_city": "Siena",
+            "team_id": 2561,
+            "team_abbv": "SIE"
+        },
+        {
+            "team_name": "Saints",
+            "team_city": "Siena Heights",
+            "team_id": 2562,
+            "team_abbv": "SIE"
+        },
+        {
+            "team_name": "Storm",
+            "team_city": "Simpson College (IA)",
+            "team_id": 2564,
+            "team_abbv": "SCIA"
+        },
+        {
+            "team_name": "Mustangs",
+            "team_city": "SMU",
+            "team_id": 2567,
+            "team_abbv": "SMU"
+        },
+        {
+            "team_name": "Muleriders",
+            "team_city": "Southern Arkansas",
+            "team_id": 2568,
+            "team_abbv": "SA"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "South Carolina State",
+            "team_id": 2569,
+            "team_abbv": "SCST"
+        },
+        {
+            "team_name": "Thunderwolves",
+            "team_city": "Colorado State-Pueblo",
+            "team_id": 2570,
+            "team_abbv": "COLP"
+        },
+        {
+            "team_name": "Jackrabbits",
+            "team_city": "South Dakota State",
+            "team_id": 2571,
+            "team_abbv": "SDST"
+        },
+        {
+            "team_name": "Golden Eagles",
+            "team_city": "Southern Miss",
+            "team_id": 2572,
+            "team_abbv": "USM"
+        },
+        {
+            "team_name": "Cossacks",
+            "team_city": "Sonoma State",
+            "team_id": 2574,
+            "team_abbv": "SON"
+        },
+        {
+            "team_name": "Gamecocks",
+            "team_city": "South Carolina",
+            "team_id": 2579,
+            "team_abbv": "SC"
+        },
+        {
+            "team_name": "Jaguars",
+            "team_city": "Southern",
+            "team_id": 2582,
+            "team_abbv": "SOU"
+        },
+        {
+            "team_name": "Owls",
+            "team_city": "Southern Connecticut State",
+            "team_id": 2583,
+            "team_abbv": "SCSU"
+        },
+        {
+            "team_name": "Raiders",
+            "team_city": "Southern Oregon",
+            "team_id": 2584,
+            "team_abbv": "SOU"
+        },
+        {
+            "team_name": "Bearcats",
+            "team_city": "Southwest Baptist",
+            "team_id": 2586,
+            "team_abbv": "SWB"
+        },
+        {
+            "team_name": "Mustangs",
+            "team_city": "Southwest Minnesota State",
+            "team_id": 2587,
+            "team_abbv": "SWMN"
+        },
+        {
+            "team_name": "Pirates",
+            "team_city": "Southwestern University",
+            "team_id": 2588,
+            "team_abbv": "SU"
+        },
+        {
+            "team_name": "Fighting Bees",
+            "team_city": "St. Ambrose",
+            "team_id": 2591,
+            "team_abbv": "ST"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "St. Cloud State",
+            "team_id": 2594,
+            "team_abbv": "ST"
+        },
+        {
+            "team_name": "Fighting Saints",
+            "team_city": "St. Francis (IL)",
+            "team_id": 2595,
+            "team_abbv": "ST"
+        },
+        {
+            "team_name": "Red Flash",
+            "team_city": "St. Francis (PA)",
+            "team_id": 2598,
+            "team_abbv": "SFPA"
+        },
+        {
+            "team_name": "Red Storm",
+            "team_city": "St. John's",
+            "team_id": 2599,
+            "team_abbv": "SJU"
+        },
+        {
+            "team_name": "Johnnies",
+            "team_city": "Saint John's (MN)",
+            "team_id": 2600,
+            "team_abbv": "SJMN"
+        },
+        {
+            "team_name": "Pumas",
+            "team_city": "St. Joseph's (IN)",
+            "team_id": 2601,
+            "team_abbv": "ST"
+        },
+        {
+            "team_name": "Stmaryks",
+            "team_city": "St. Mary's (CA)",
+            "team_id": 2608,
+            "team_abbv": "SMC"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "St. Paul's College",
+            "team_id": 2611,
+            "team_abbv": "STP"
+        },
+        {
+            "team_name": "Peacocks",
+            "team_city": "St. Peter's",
+            "team_id": 2612,
+            "team_abbv": "SPC"
+        },
+        {
+            "team_name": "Bearcats",
+            "team_city": "Saint Vincent",
+            "team_id": 2614,
+            "team_abbv": "STVN"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "St. Xavier (IL)",
+            "team_id": 2615,
+            "team_abbv": "ST"
+        },
+        {
+            "team_name": "Lumberjacks",
+            "team_city": "Stephen F. Austin",
+            "team_id": 2617,
+            "team_abbv": "SFA"
+        },
+        {
+            "team_name": "Seawolves",
+            "team_city": "Stony Brook",
+            "team_id": 2619,
+            "team_abbv": "STBK"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Missouri State",
+            "team_id": 2623,
+            "team_abbv": "MOST"
+        },
+        {
+            "team_name": "Texans",
+            "team_city": "Tarleton State",
+            "team_id": 2627,
+            "team_abbv": "TAR"
+        },
+        {
+            "team_name": "Horned Frogs",
+            "team_city": "TCU",
+            "team_id": 2628,
+            "team_abbv": "TCU"
+        },
+        {
+            "team_name": "Skyhawks",
+            "team_city": "UT Martin",
+            "team_id": 2630,
+            "team_abbv": "UTM"
+        },
+        {
+            "team_name": "Volunteers",
+            "team_city": "Tennessee",
+            "team_id": 2633,
+            "team_abbv": "TENN"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Tennessee State",
+            "team_id": 2634,
+            "team_abbv": "TNST"
+        },
+        {
+            "team_name": "Golden Eagles",
+            "team_city": "Tennessee Tech",
+            "team_id": 2635,
+            "team_abbv": "TNTC"
+        },
+        {
+            "team_name": "Roadrunners",
+            "team_city": "UTSA",
+            "team_id": 2636,
+            "team_abbv": "UTSA"
+        },
+        {
+            "team_name": "Steers",
+            "team_city": "Texas College",
+            "team_id": 2637,
+            "team_abbv": "TC"
+        },
+        {
+            "team_name": "Miners",
+            "team_city": "UTEP",
+            "team_id": 2638,
+            "team_abbv": "UTEP"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Texas Lutheran",
+            "team_id": 2639,
+            "team_abbv": "TXL"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Texas Southern",
+            "team_id": 2640,
+            "team_abbv": "TXSO"
+        },
+        {
+            "team_name": "Red Raiders",
+            "team_city": "Texas Tech",
+            "team_id": 2641,
+            "team_abbv": "TTU"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "The Citadel",
+            "team_id": 2643,
+            "team_abbv": "CIT"
+        },
+        {
+            "team_name": "Tomcats",
+            "team_city": "Thiel",
+            "team_id": 2644,
+            "team_abbv": "THL"
+        },
+        {
+            "team_name": "Saints",
+            "team_city": "Thomas More College",
+            "team_id": 2646,
+            "team_abbv": "THO"
+        },
+        {
+            "team_name": "Rockets",
+            "team_city": "Toledo",
+            "team_id": 2649,
+            "team_abbv": "TOL"
+        },
+        {
+            "team_name": "Thunder",
+            "team_city": "Trine University",
+            "team_id": 2651,
+            "team_abbv": "TRI"
+        },
+        {
+            "team_name": "Trinity Il",
+            "team_city": "Trinity College IL",
+            "team_id": 2652,
+            "team_abbv": "TRINIL"
+        },
+        {
+            "team_name": "Trojans",
+            "team_city": "Troy",
+            "team_id": 2653,
+            "team_abbv": "TROY"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Truman State",
+            "team_id": 2654,
+            "team_abbv": "TRUM"
+        },
+        {
+            "team_name": "Green Wave",
+            "team_city": "Tulane",
+            "team_id": 2655,
+            "team_abbv": "TULN"
+        },
+        {
+            "team_name": "Golden Tigers",
+            "team_city": "Tuskegee",
+            "team_id": 2657,
+            "team_abbv": "TUSK"
+        },
+        {
+            "team_name": "Javelinas",
+            "team_city": "Texas A&M-Kingsville",
+            "team_id": 2658,
+            "team_abbv": "TXKI"
+        },
+        {
+            "team_name": "Blue Knights",
+            "team_city": "Urbana",
+            "team_id": 2666,
+            "team_abbv": "URB"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Ursinus",
+            "team_id": 2667,
+            "team_abbv": "URS"
+        },
+        {
+            "team_name": "Blazers",
+            "team_city": "Valdosta State",
+            "team_id": 2673,
+            "team_abbv": "VAL"
+        },
+        {
+            "team_name": "Beacons",
+            "team_city": "Valparaiso",
+            "team_id": 2674,
+            "team_abbv": "VAL"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Virginia Union",
+            "team_id": 2676,
+            "team_abbv": "VU"
+        },
+        {
+            "team_name": "Keydets",
+            "team_city": "VMI",
+            "team_id": 2678,
+            "team_abbv": "VMI"
+        },
+        {
+            "team_name": "Seahawks",
+            "team_city": "Wagner",
+            "team_id": 2681,
+            "team_abbv": "WAG"
+        },
+        {
+            "team_name": "Cavaliers",
+            "team_city": "Walsh",
+            "team_id": 2682,
+            "team_abbv": "WAL"
+        },
+        {
+            "team_name": "Royals",
+            "team_city": "Warner",
+            "team_id": 2683,
+            "team_abbv": "WAR"
+        },
+        {
+            "team_name": "Knights",
+            "team_city": "Wartburg College",
+            "team_id": 2685,
+            "team_abbv": "WAR"
+        },
+        {
+            "team_name": "Presidents",
+            "team_city": "Washington & Jefferson",
+            "team_id": 2686,
+            "team_abbv": "WJC"
+        },
+        {
+            "team_name": "Ichabods",
+            "team_city": "Washburn",
+            "team_id": 2687,
+            "team_abbv": "WASH"
+        },
+        {
+            "team_name": "Generals",
+            "team_city": "Washington and Lee",
+            "team_id": 2688,
+            "team_abbv": "WLEE"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "Webber International",
+            "team_id": 2691,
+            "team_abbv": "WEBB"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Weber State",
+            "team_id": 2692,
+            "team_abbv": "WEB"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "West Alabama",
+            "team_id": 2695,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Wolves",
+            "team_city": "West Georgia",
+            "team_id": 2698,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Hilltoppers",
+            "team_city": "West Liberty",
+            "team_id": 2699,
+            "team_abbv": "WLIB"
+        },
+        {
+            "team_name": "Green Terror",
+            "team_city": "McDaniel College",
+            "team_id": 2700,
+            "team_abbv": "MCD"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Montana-Western",
+            "team_id": 2701,
+            "team_abbv": "MTW"
+        },
+        {
+            "team_name": "Golden Bears",
+            "team_city": "Western New England",
+            "team_id": 2702,
+            "team_abbv": "WNE"
+        },
+        {
+            "team_name": "Mustangs",
+            "team_city": "Western New Mexico",
+            "team_id": 2703,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Buffaloes",
+            "team_city": "West Texas A&M",
+            "team_id": 2704,
+            "team_abbv": "WTAM"
+        },
+        {
+            "team_name": "Golden Bears",
+            "team_city": "West Virginia Tech",
+            "team_id": 2706,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "West Virginia State",
+            "team_id": 2707,
+            "team_abbv": "WVST"
+        },
+        {
+            "team_name": "Leathernecks",
+            "team_city": "Western Illinois",
+            "team_id": 2710,
+            "team_abbv": "WIU"
+        },
+        {
+            "team_name": "Broncos",
+            "team_city": "Western Michigan",
+            "team_id": 2711,
+            "team_abbv": "WMU"
+        },
+        {
+            "team_name": "Mountaineers",
+            "team_city": "Western Colorado",
+            "team_id": 2714,
+            "team_abbv": "WCOL"
+        },
+        {
+            "team_name": "Catamounts",
+            "team_city": "Western Carolina",
+            "team_id": 2717,
+            "team_abbv": "WCU"
+        },
+        {
+            "team_name": "Pirates",
+            "team_city": "Whitworth",
+            "team_id": 2721,
+            "team_abbv": "WHIT"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Wisconsin-River Falls",
+            "team_id": 2723,
+            "team_abbv": "WIRF"
+        },
+        {
+            "team_name": "Shockers",
+            "team_city": "Wichita State",
+            "team_id": 2724,
+            "team_abbv": "WICH"
+        },
+        {
+            "team_name": "Pride",
+            "team_city": "Widener",
+            "team_id": 2725,
+            "team_abbv": "WID"
+        },
+        {
+            "team_name": "Tribe",
+            "team_city": "William & Mary",
+            "team_id": 2729,
+            "team_abbv": "W&M"
+        },
+        {
+            "team_name": "Ephs",
+            "team_city": "Williams",
+            "team_id": 2731,
+            "team_abbv": "WILL"
+        },
+        {
+            "team_name": "Fightin' Quakers",
+            "team_city": "Wilmington (OH)",
+            "team_id": 2733,
+            "team_abbv": "WILM"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Winston-Salem",
+            "team_id": 2736,
+            "team_abbv": "WNSL"
+        },
+        {
+            "team_name": "Blugolds",
+            "team_city": "Wisconsin-Eau Claire",
+            "team_id": 2738,
+            "team_abbv": "WISE"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Wisconsin-Lacrosse",
+            "team_id": 2740,
+            "team_abbv": "WISL"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "Wisconsin Lutheran",
+            "team_id": 2741,
+            "team_abbv": "WIS"
+        },
+        {
+            "team_name": "Pointers",
+            "team_city": "Wisconsin-Stevens Pt",
+            "team_id": 2743,
+            "team_abbv": "WISP"
+        },
+        {
+            "team_name": "Blue Devils",
+            "team_city": "Wisconsin-Stout",
+            "team_id": 2744,
+            "team_abbv": "WISS"
+        },
+        {
+            "team_name": "Warhawks",
+            "team_city": "Wisconsin-Whitewater",
+            "team_id": 2745,
+            "team_abbv": "WISW"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Wittenberg",
+            "team_id": 2746,
+            "team_abbv": "WIT"
+        },
+        {
+            "team_name": "Terriers",
+            "team_city": "Wofford",
+            "team_id": 2747,
+            "team_abbv": "WOF"
+        },
+        {
+            "team_name": "Fighting Scots",
+            "team_city": "Wooster",
+            "team_id": 2748,
+            "team_abbv": "WOO"
+        },
+        {
+            "team_name": "Engineers",
+            "team_city": "WPI",
+            "team_id": 2749,
+            "team_abbv": "WPI"
+        },
+        {
+            "team_name": "Raiders",
+            "team_city": "Wright State",
+            "team_id": 2750,
+            "team_abbv": "WRST"
+        },
+        {
+            "team_name": "Cowboys",
+            "team_city": "Wyoming",
+            "team_id": 2751,
+            "team_abbv": "WYO"
+        },
+        {
+            "team_name": "Mustketeers",
+            "team_city": "Xavier",
+            "team_id": 2752,
+            "team_abbv": "XAV"
+        },
+        {
+            "team_name": "Penguins",
+            "team_city": "Youngstown State",
+            "team_id": 2754,
+            "team_abbv": "YSU"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Grambling",
+            "team_id": 2755,
+            "team_abbv": "GRAM"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Berry College",
+            "team_id": 2757,
+            "team_abbv": "BER"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "Howard Payne",
+            "team_id": 2758,
+            "team_abbv": "HOWP"
+        },
+        {
+            "team_name": "Manitoba",
+            "team_city": "Manitoba",
+            "team_id": 2770,
+            "team_abbv": "MAN"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "Merrimack",
+            "team_id": 2771,
+            "team_abbv": "MRMK"
+        },
+        {
+            "team_name": "Golden Eagles",
+            "team_city": "Minnesota-Crookston",
+            "team_id": 2772,
+            "team_abbv": "MIN"
+        },
+        {
+            "team_name": "Seahawks",
+            "team_city": "Salve Regina",
+            "team_id": 2776,
+            "team_abbv": "SAL"
+        },
+        {
+            "team_name": "Saints",
+            "team_city": "St. Lawrence",
+            "team_id": 2779,
+            "team_abbv": "USL"
+        },
+        {
+            "team_name": "Golden Eagles",
+            "team_city": "Brockport",
+            "team_id": 2781,
+            "team_abbv": "THE"
+        },
+        {
+            "team_name": "Red Dragons",
+            "team_city": "Cortland",
+            "team_id": 2782,
+            "team_abbv": "COR"
+        },
+        {
+            "team_name": "Britons",
+            "team_city": "Albion",
+            "team_id": 2790,
+            "team_abbv": "ALBI"
+        },
+        {
+            "team_name": "Scots",
+            "team_city": "Alma College",
+            "team_id": 2800,
+            "team_abbv": "ALM"
+        },
+        {
+            "team_name": "Royals",
+            "team_city": "Bethel (MN)",
+            "team_id": 2802,
+            "team_abbv": "BET"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Bryant",
+            "team_id": 2803,
+            "team_abbv": "BRY"
+        },
+        {
+            "team_name": "Hawks",
+            "team_city": "Chowan",
+            "team_id": 2804,
+            "team_abbv": "CHO"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Clark Atlanta",
+            "team_id": 2805,
+            "team_abbv": "CLA"
+        },
+        {
+            "team_name": "Aggies",
+            "team_city": "Delaware Valley",
+            "team_id": 2808,
+            "team_abbv": "DEL"
+        },
+        {
+            "team_name": "Cowboys",
+            "team_city": "Hardin-Simmons",
+            "team_id": 2810,
+            "team_abbv": "HAR"
+        },
+        {
+            "team_name": "Flying Dutchmen",
+            "team_city": "Hope",
+            "team_id": 2812,
+            "team_abbv": "HOP"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Lindenwood",
+            "team_id": 2815,
+            "team_abbv": "LIN"
+        },
+        {
+            "team_name": "Bearcats",
+            "team_city": "McKendree",
+            "team_id": 2816,
+            "team_abbv": "MCK"
+        },
+        {
+            "team_name": "Dragons",
+            "team_city": "Minnesota State Moorhead",
+            "team_id": 2817,
+            "team_abbv": "MNST"
+        },
+        {
+            "team_name": "Red Hawks",
+            "team_city": "Montclair State",
+            "team_id": 2818,
+            "team_abbv": "MON"
+        },
+        {
+            "team_name": "Gothic Knights",
+            "team_city": "New Jersey City University",
+            "team_id": 2820,
+            "team_abbv": "NAH"
+        },
+        {
+            "team_name": "Crusaders",
+            "team_city": "North Greenville",
+            "team_id": 2822,
+            "team_abbv": "NG"
+        },
+        {
+            "team_name": "Rangers",
+            "team_city": "Northwestern Oklahoma State",
+            "team_id": 2823,
+            "team_abbv": "NWOS"
+        },
+        {
+            "team_name": "Ok Panhandle St",
+            "team_city": "Oklahoma Panhandle State",
+            "team_id": 2824,
+            "team_abbv": "OKL"
+        },
+        {
+            "team_name": "Hawks",
+            "team_city": "Quincy",
+            "team_id": 2825,
+            "team_abbv": "QUI"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Rocky Mountain",
+            "team_id": 2826,
+            "team_abbv": "RRK"
+        },
+        {
+            "team_name": "Profs",
+            "team_city": "Rowan",
+            "team_id": 2827,
+            "team_abbv": "ROW"
+        },
+        {
+            "team_name": "Hornets",
+            "team_city": "Shenandoah",
+            "team_id": 2828,
+            "team_abbv": "SHEN"
+        },
+        {
+            "team_name": "Red Leafs",
+            "team_city": "Simon Fraser",
+            "team_id": 2829,
+            "team_abbv": "SIMONFRASR"
+        },
+        {
+            "team_name": "Hawks",
+            "team_city": "St. Anselm",
+            "team_id": 2830,
+            "team_abbv": "STA"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "St. Francis (IN)",
+            "team_id": 2831,
+            "team_abbv": "UNI"
+        },
+        {
+            "team_name": "Green Knights",
+            "team_city": "St. Norbert",
+            "team_id": 2832,
+            "team_abbv": "STNO"
+        },
+        {
+            "team_name": "Lobos",
+            "team_city": "Sul Ross State",
+            "team_id": 2834,
+            "team_abbv": "SROS"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "East Texas A&M",
+            "team_id": 2837,
+            "team_abbv": "ETAM"
+        },
+        {
+            "team_name": "Dragons",
+            "team_city": "Tiffin",
+            "team_id": 2838,
+            "team_abbv": "TIFF"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Tusculum",
+            "team_id": 2839,
+            "team_abbv": "TUSC"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Union College",
+            "team_id": 2841,
+            "team_abbv": "UNI"
+        },
+        {
+            "team_name": "Cavaliers",
+            "team_city": "UVA Wise",
+            "team_id": 2842,
+            "team_abbv": "UVAW"
+        },
+        {
+            "team_name": "Wolves",
+            "team_city": "Western Connecticut State",
+            "team_id": 2843,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Wayne State (NE)",
+            "team_id": 2844,
+            "team_abbv": "WNST"
+        },
+        {
+            "team_name": "Yellow Jackets",
+            "team_city": "Waynesburg",
+            "team_id": 2845,
+            "team_abbv": "WAYN"
+        },
+        {
+            "team_name": "Wolverines",
+            "team_city": "Wesley College",
+            "team_id": 2846,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Western Washington",
+            "team_id": 2847,
+            "team_abbv": "WES"
+        },
+        {
+            "team_name": "Wolves",
+            "team_city": "Western Oregon",
+            "team_id": 2848,
+            "team_abbv": "WOR"
+        },
+        {
+            "team_name": "Titans",
+            "team_city": "Westminster (PA)",
+            "team_id": 2849,
+            "team_abbv": "WPA"
+        },
+        {
+            "team_name": "Poets",
+            "team_city": "Whittier College",
+            "team_id": 2850,
+            "team_abbv": "WHI"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "Winona State",
+            "team_id": 2851,
+            "team_abbv": "WIN"
+        },
+        {
+            "team_name": "Vulcans",
+            "team_city": "California (PA)",
+            "team_id": 2858,
+            "team_abbv": "CAL"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Central Methodist",
+            "team_id": 2860,
+            "team_abbv": "CEN"
+        },
+        {
+            "team_name": "Crusaders",
+            "team_city": "Evangel",
+            "team_id": 2865,
+            "team_abbv": "EVA"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Kean",
+            "team_id": 2871,
+            "team_abbv": "KEA"
+        },
+        {
+            "team_name": "Blue Tigers",
+            "team_city": "Lincoln (MO)",
+            "team_id": 2876,
+            "team_abbv": "LIMO"
+        },
+        {
+            "team_name": "Lindsey",
+            "team_city": "Lindsey Wilson College",
+            "team_id": 2877,
+            "team_abbv": "LIN"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Missouri Baptist",
+            "team_id": 2880,
+            "team_abbv": "MBAP"
+        },
+        {
+            "team_name": "Braves",
+            "team_city": "UNC Pembroke",
+            "team_id": 2882,
+            "team_abbv": "NOR"
+        },
+        {
+            "team_name": "Bison",
+            "team_city": "Nichols College",
+            "team_id": 2884,
+            "team_abbv": "NIC"
+        },
+        {
+            "team_name": "Timberwolves",
+            "team_city": "Northwood (MI)",
+            "team_id": 2886,
+            "team_abbv": "NAR"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Ouachita Baptist",
+            "team_id": 2888,
+            "team_abbv": "OB"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Reinhardt",
+            "team_id": 2890,
+            "team_abbv": "REI"
+        },
+        {
+            "team_name": "Red Hawks",
+            "team_city": "Ripon",
+            "team_id": 2891,
+            "team_abbv": "RIP"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Sioux Falls",
+            "team_id": 2894,
+            "team_abbv": "SIO"
+        },
+        {
+            "team_name": "Knights",
+            "team_city": "Southern Virginia",
+            "team_id": 2896,
+            "team_abbv": "SV"
+        },
+        {
+            "team_name": "Tommies",
+            "team_city": "St. Thomas-Minnesota",
+            "team_id": 2900,
+            "team_abbv": "STMN"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Nelson University",
+            "team_id": 2904,
+            "team_abbv": "NEL"
+        },
+        {
+            "team_name": "Trojans",
+            "team_city": "Trinity International (IL)",
+            "team_id": 2907,
+            "team_abbv": "TRN"
+        },
+        {
+            "team_name": "Owls",
+            "team_city": "Westfield State",
+            "team_id": 2909,
+            "team_abbv": "WSTF"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "William Jewell",
+            "team_id": 2911,
+            "team_abbv": "WIJ"
+        },
+        {
+            "team_name": "Statesmen",
+            "team_city": "William Penn",
+            "team_id": 2912,
+            "team_abbv": "WIL"
+        },
+        {
+            "team_name": "Tornados",
+            "team_city": "Brevard College",
+            "team_id": 2913,
+            "team_abbv": "BRE"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Incarnate Word",
+            "team_id": 2916,
+            "team_abbv": "UIW"
+        },
+        {
+            "team_name": "Fighting Scots",
+            "team_city": "Monmouth (IL)",
+            "team_id": 2919,
+            "team_abbv": "MNM"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Olivet Nazarene",
+            "team_id": 2922,
+            "team_abbv": "ONZ"
+        },
+        {
+            "team_name": "Sagehens",
+            "team_city": "Pomona Pitzer",
+            "team_id": 2923,
+            "team_abbv": "POM"
+        },
+        {
+            "team_name": "Bulldogs",
+            "team_city": "Southwestern Oklahoma State",
+            "team_id": 2927,
+            "team_abbv": "SWOK"
+        },
+        {
+            "team_name": "Bearcats",
+            "team_city": "Willamette",
+            "team_id": 2930,
+            "team_abbv": "WLME"
+        },
+        {
+            "team_name": "Hawks",
+            "team_city": "Huntingdon College (AL)",
+            "team_id": 2938,
+            "team_abbv": "HUNT"
+        },
+        {
+            "team_name": "Jimmies",
+            "team_city": "Jamestown",
+            "team_id": 2939,
+            "team_abbv": "JAM"
+        },
+        {
+            "team_name": "Blue Bears",
+            "team_city": "Livingstone",
+            "team_id": 2940,
+            "team_abbv": "LIV"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Stillman",
+            "team_id": 2948,
+            "team_abbv": "STI"
+        },
+        {
+            "team_name": "Privateers",
+            "team_city": "SUNY Maritime",
+            "team_id": 2951,
+            "team_abbv": "SUNY"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Case Western Reserve",
+            "team_id": 2963,
+            "team_abbv": "CAS"
+        },
+        {
+            "team_name": "Dutch",
+            "team_city": "Central College",
+            "team_id": 2964,
+            "team_abbv": "CEN"
+        },
+        {
+            "team_name": "Crusaders",
+            "team_city": "Clarke College",
+            "team_id": 2965,
+            "team_abbv": "CCV"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Framingham State",
+            "team_id": 2967,
+            "team_abbv": "FRA"
+        },
+        {
+            "team_name": "Golden Gusties",
+            "team_city": "Gustavus Adolphus",
+            "team_id": 2968,
+            "team_abbv": "GUS"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "Misericordia",
+            "team_id": 2969,
+            "team_abbv": "MIS"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "William Paterson",
+            "team_id": 2970,
+            "team_abbv": "WLPT"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Plymouth State",
+            "team_id": 2972,
+            "team_abbv": "PLY"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Shepherd",
+            "team_id": 2974,
+            "team_abbv": "SHEP"
+        },
+        {
+            "team_name": "Bantams",
+            "team_city": "Trinity (CT)",
+            "team_id": 2977,
+            "team_abbv": "TRIN"
+        },
+        {
+            "team_name": "Battling Bishops",
+            "team_city": "Ohio Wesleyan",
+            "team_id": 2980,
+            "team_abbv": "OW"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Concordia College (MI)",
+            "team_id": 2985,
+            "team_abbv": "CON"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Fairmont State",
+            "team_id": 2986,
+            "team_abbv": "FAI"
+        },
+        {
+            "team_name": "Golden Bears",
+            "team_city": "Concordia-St. Paul",
+            "team_id": 3066,
+            "team_abbv": "CON"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "North Central College",
+            "team_id": 3071,
+            "team_abbv": "NOR"
+        },
+        {
+            "team_name": "Knights",
+            "team_city": "Kentucky Christian",
+            "team_id": 3077,
+            "team_abbv": "KYCH"
+        },
+        {
+            "team_name": "Warriors",
+            "team_city": "Waldorf",
+            "team_id": 3080,
+            "team_abbv": "WAL"
+        },
+        {
+            "team_name": "Hornets",
+            "team_city": "Concordia (AL)",
+            "team_id": 3099,
+            "team_abbv": "CON"
+        },
+        {
+            "team_name": "Borregos",
+            "team_city": "Monterrey Tech",
+            "team_id": 3100,
+            "team_abbv": "MON"
+        },
+        {
+            "team_name": "Trailblazers",
+            "team_city": "Utah Tech",
+            "team_id": 3101,
+            "team_abbv": "UTU"
+        },
+        {
+            "team_name": "Buccaneers",
+            "team_city": "Blinn College",
+            "team_id": 3102,
+            "team_abbv": "BLI"
+        },
+        {
+            "team_name": "Mustangs",
+            "team_city": "SUNY Morrisville",
+            "team_id": 3110,
+            "team_abbv": "MOR"
+        },
+        {
+            "team_name": "Builders",
+            "team_city": "Apprentice School",
+            "team_id": 3111,
+            "team_abbv": "APP"
+        },
+        {
+            "team_name": "Captains",
+            "team_city": "Christopher Newport",
+            "team_id": 3112,
+            "team_abbv": "CHR"
+        },
+        {
+            "team_name": null,
+            "team_city": "Golden West College",
+            "team_id": 3113,
+            "team_abbv": "GDWT"
+        },
+        {
+            "team_name": null,
+            "team_city": "LA Valley College",
+            "team_id": 3115,
+            "team_abbv": "LAV"
+        },
+        {
+            "team_name": "Mechanics",
+            "team_city": "Williamson Trade",
+            "team_id": 3130,
+            "team_abbv": "WIL"
+        },
+        {
+            "team_name": "All-Stars",
+            "team_city": "SOUTH",
+            "team_id": 3144,
+            "team_abbv": "SOU"
+        },
+        {
+            "team_name": "All-Stars",
+            "team_city": "NORTH",
+            "team_id": 3145,
+            "team_abbv": "NOR"
+        },
+        {
+            "team_name": "All-Stars",
+            "team_city": "East",
+            "team_id": 3146,
+            "team_abbv": "EAST"
+        },
+        {
+            "team_name": "All-Stars",
+            "team_city": "West",
+            "team_id": 3147,
+            "team_abbv": "WEST"
+        },
+        {
+            "team_name": "Titans",
+            "team_city": "Ohio State Newark",
+            "team_id": 3161,
+            "team_abbv": "OHI"
+        },
+        {
+            "team_name": "Pioneers",
+            "team_city": "Alfred State College",
+            "team_id": 3162,
+            "team_abbv": "ALF"
+        },
+        {
+            "team_name": "Gyrenes",
+            "team_city": "Ave Maria",
+            "team_id": 3178,
+            "team_abbv": "AVE"
+        },
+        {
+            "team_name": "Skyhawks",
+            "team_city": "Point University",
+            "team_id": 3179,
+            "team_abbv": "POI"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Shepherd Tech",
+            "team_id": 3181,
+            "team_abbv": "STC"
+        },
+        {
+            "team_name": "",
+            "team_city": "American",
+            "team_id": 3193,
+            "team_abbv": "AMER"
+        },
+        {
+            "team_name": "",
+            "team_city": "National",
+            "team_id": 3194,
+            "team_abbv": "NAT"
+        },
+        {
+            "team_name": "STARS",
+            "team_city": "NORTH FLORIDA",
+            "team_id": 3197,
+            "team_abbv": "UNF"
+        },
+        {
+            "team_name": "STARS",
+            "team_city": "SOUTH FLORIDA",
+            "team_id": 3198,
+            "team_abbv": "SFX"
+        },
+        {
+            "team_name": "Lynx",
+            "team_city": "Lindenwood Belleville",
+            "team_id": 3209,
+            "team_abbv": "LIN"
+        },
+        {
+            "team_name": "Jaguars",
+            "team_city": "Cole College",
+            "team_id": 3210,
+            "team_abbv": "COL"
+        },
+        {
+            "team_name": "Crusaders",
+            "team_city": "College of Faith",
+            "team_id": 3211,
+            "team_abbv": "FAI"
+        },
+        {
+            "team_name": "Mexico U",
+            "team_city": "University of Mexico",
+            "team_id": 3212,
+            "team_abbv": "UNI"
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Trinity Bible",
+            "team_id": 3214,
+            "team_abbv": "TRI"
+        },
+        {
+            "team_name": "Kats",
+            "team_city": "Erie Community College",
+            "team_id": 3236,
+            "team_abbv": "ERI"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Hudson Valley CC",
+            "team_id": 3237,
+            "team_abbv": "HUD"
+        },
+        {
+            "team_name": "Saints",
+            "team_city": "College of Faith - Charlotte",
+            "team_id": 3253,
+            "team_abbv": "FCH"
+        },
+        {
+            "team_name": "Glory Eagles",
+            "team_city": "University of Faith",
+            "team_id": 3254,
+            "team_abbv": "UFTH"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "University of Regina",
+            "team_id": 3257,
+            "team_abbv": "UREG"
+        },
+        {
+            "team_name": "Cougars",
+            "team_city": "BYU",
+            "team_id": 5439,
+            "team_abbv": "BYU"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Doane College",
+            "team_id": 5829,
+            "team_abbv": "DOANE"
+        },
+        {
+            "team_name": "Huron",
+            "team_city": "Huron",
+            "team_id": 6192,
+            "team_abbv": "HURON"
+        },
+        {
+            "team_name": "Muskies",
+            "team_city": "Lakeland University",
+            "team_id": 6353,
+            "team_abbv": "LAKE"
+        },
+        {
+            "team_name": "Mcpherson",
+            "team_city": "Mcpherson College",
+            "team_id": 6584,
+            "team_abbv": "MCPHE"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Missouri Valley College",
+            "team_id": 6776,
+            "team_abbv": "MISSO"
+        },
+        {
+            "team_name": "Mount Senario",
+            "team_city": "Mount Senario College",
+            "team_id": 6786,
+            "team_abbv": null
+        },
+        {
+            "team_name": "Prairie Wolves",
+            "team_city": "Nebraska Wesleyan",
+            "team_id": 6845,
+            "team_abbv": "NEBW"
+        },
+        {
+            "team_name": "Ottawa Ks",
+            "team_city": "Ottawa University Kansas",
+            "team_id": 7053,
+            "team_abbv": "OTTAW"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Arizona",
+            "team_id": 8801,
+            "team_abbv": "ARIZONA"
+        },
+        {
+            "team_name": "Falcons",
+            "team_city": "Atlanta",
+            "team_id": 8802,
+            "team_abbv": "ATLANTA"
+        },
+        {
+            "team_name": "Ravens",
+            "team_city": "Baltimore",
+            "team_id": 8803,
+            "team_abbv": "BALTIMORE"
+        },
+        {
+            "team_name": "Bills",
+            "team_city": "Buffalo",
+            "team_id": 8804,
+            "team_abbv": "BUFFALO"
+        },
+        {
+            "team_name": "Panthers",
+            "team_city": "Carolina",
+            "team_id": 8805,
+            "team_abbv": "CAROLINA"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Chicago",
+            "team_id": 8806,
+            "team_abbv": "CHICAGO"
+        },
+        {
+            "team_name": "Bengals",
+            "team_city": "Cincinnati",
+            "team_id": 8807,
+            "team_abbv": "CINCINNATI"
+        },
+        {
+            "team_name": "Browns",
+            "team_city": "Cleveland",
+            "team_id": 8808,
+            "team_abbv": "CLEVELAND"
+        },
+        {
+            "team_name": "Cowboys",
+            "team_city": "Dallas",
+            "team_id": 8809,
+            "team_abbv": "DALLAS"
+        },
+        {
+            "team_name": "Broncos",
+            "team_city": "Denver",
+            "team_id": 8810,
+            "team_abbv": null
+        },
+        {
+            "team_name": "Lions",
+            "team_city": "Detroit",
+            "team_id": 8811,
+            "team_abbv": "DETROIT"
+        },
+        {
+            "team_name": "Packers",
+            "team_city": "Green Bay",
+            "team_id": 8812,
+            "team_abbv": "GREENBAY"
+        },
+        {
+            "team_name": "Colts",
+            "team_city": "Indianapolis",
+            "team_id": 8813,
+            "team_abbv": "INDIANAPOL"
+        },
+        {
+            "team_name": "Jaguars",
+            "team_city": "Jacksonville",
+            "team_id": 8814,
+            "team_abbv": "JACKSONVIL"
+        },
+        {
+            "team_name": "Chiefs",
+            "team_city": "Kansas City",
+            "team_id": 8815,
+            "team_abbv": "KANSASCITY"
+        },
+        {
+            "team_name": "Dolphins",
+            "team_city": "Miami",
+            "team_id": 8816,
+            "team_abbv": "MIAMI"
+        },
+        {
+            "team_name": "Vikings",
+            "team_city": "Minnesota",
+            "team_id": 8817,
+            "team_abbv": "MINNESOTA"
+        },
+        {
+            "team_name": "Patriots",
+            "team_city": "New England",
+            "team_id": 8818,
+            "team_abbv": "NEWENGLAND"
+        },
+        {
+            "team_name": "Saints",
+            "team_city": "New Orleans",
+            "team_id": 8819,
+            "team_abbv": "NEWORLEANS"
+        },
+        {
+            "team_name": "Giants",
+            "team_city": "New York",
+            "team_id": 8820,
+            "team_abbv": "NYGIANTS"
+        },
+        {
+            "team_name": "Jets",
+            "team_city": "New York",
+            "team_id": 8821,
+            "team_abbv": "NYJETS"
+        },
+        {
+            "team_name": "Raiders",
+            "team_city": "Las Vegas",
+            "team_id": 8822,
+            "team_abbv": "LASVEGAS"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Philadelphia",
+            "team_id": 8823,
+            "team_abbv": "PHILADELPH"
+        },
+        {
+            "team_name": "Steelers",
+            "team_city": "Pittsburgh",
+            "team_id": 8824,
+            "team_abbv": "PITTSBURGH"
+        },
+        {
+            "team_name": "Chargers",
+            "team_city": "Los Angeles",
+            "team_id": 8825,
+            "team_abbv": "LACHARGERS"
+        },
+        {
+            "team_name": "49ers",
+            "team_city": "San Francisco",
+            "team_id": 8826,
+            "team_abbv": "SANFRNCSCO"
+        },
+        {
+            "team_name": "Seahawks",
+            "team_city": "Seattle",
+            "team_id": 8827,
+            "team_abbv": "SEATTLE"
+        },
+        {
+            "team_name": "Rams",
+            "team_city": "Los Angeles",
+            "team_id": 8828,
+            "team_abbv": "LARAMS"
+        },
+        {
+            "team_name": "Buccaneers",
+            "team_city": "Tampa Bay",
+            "team_id": 8829,
+            "team_abbv": "TAMPABAY"
+        },
+        {
+            "team_name": "Titans",
+            "team_city": "Tennessee",
+            "team_id": 8830,
+            "team_abbv": "TENNESSEE"
+        },
+        {
+            "team_name": "Tbdname",
+            "team_city": "Washington",
+            "team_id": 8831,
+            "team_abbv": "WSH"
+        }
+]
+}

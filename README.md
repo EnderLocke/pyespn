@@ -16,6 +16,14 @@ work in progress for hitting hidden espn api, right now there is nfl and nba fun
   - [Draft Data](#draft-data-1)
   - [Game/Event Data](#gameevent-data-1)
   - [Betting Data](#betting-data-1)
+- [CFB](#college-football--cfb)
+  - [Data Files](#data-files-2)
+  - [Team Data](#team-data-2)
+  - [Player Data](#player-data-2)
+  - [Recruiting Data](#recruiting-data)
+  - [Game/Event Data](#gameevent-data-2)
+  - [Betting Data](#betting-data-2)
+- [MCBB](#mens-college-basketball--mcbb)
 
 
 ## NFL
@@ -130,12 +138,11 @@ print(draft_pick_info)
 functions under here retrieve event/game info. game id is required and is the same from espn front page
 
 #### _pyespn.nfl.get_game_info(team_id, season) ⇒_
-returns a teams overall against the spread for a season
+returns a info related toa single event
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | id for team |
-| season | <code>number</code> | year of season |
+| event_id | <code>number</code> | id for event |
 
 ```python
 from pyespn.nfl import get_game_info
@@ -479,12 +486,12 @@ print(player_info)
 functions under here retrieve event/game info. game id is required and is the same from espn front page
 
 #### _pyespn.nba.get_game_info(team_id, season) ⇒_
-returns a teams overall against the spread for a season
+returns a info related toa single event
 
 | Param   | Type | Description |
 |---------| --- |-------------|
-| team_id | <code>number</code> | id for team |
-| season | <code>number</code> | year of season |
+| event_id | <code>number</code> | id for event |
+
 
 ```python
 from pyespn.nba import get_game_info
@@ -759,10 +766,214 @@ print(draft_pick_info)
 ```
 
 ## College Football | CFB
-coming..
 
-## College Basketball | CBB
-coming ...
+### Data Files
+This is the data feeds for college football - note as of 0.1.2 there are still missing values
+
+#### _pyespn.cfb.data.cfb_teams_data ⇒_
+This is a list of ids/teams in json format - currently missing values
+
+**example**
+
+```python
+from pyespn.cfb.data import cfb_teams_data
+
+print(cfb_teams_data)
+
+```
+
+### Team Data
+
+#### _pyespn.cfb.get_team_info(team_id) ⇒_
+Gets team info from espn api
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+
+**example**
+
+```python
+from pyespn.cfb import get_team_info
+
+team_id = 356 # Illini
+
+team_info = get_team_info(team_id=team_id)
+
+print(team_info)
+```
+
+### Player Data
+
+#### _pyespn.cfb.get_player_info(player_id) ⇒_
+Gets player info from espn api
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.cfb import get_player_info
+
+player_id = 505719 # Blake Bortles, Garbage Time Goat
+
+player_info = get_player_info(player_id=player_id)
+
+print(player_info)
+```
+
+#### _pyespn.cfb.get_cfb_players_historical_stats(player_id) ⇒_
+Gets all players stats for career
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+
+```python
+from pyespn.cfb import get_cfb_players_historical_stats
+
+player_id = 505719 # Blake Bortles, Garbage Time Goat
+
+player_info = get_cfb_players_historical_stats(player_id=player_id)
+
+print(player_info)
+```
+
+
+### Recruiting Data
+
+#### _pyespn.cfb.get_recruiting_rankings(season) ⇒_
+Gets all players stats for career
+
+| Param     | Type | Description   |
+|-----------| --- |------------------|
+| season | <code>number</code> | season for rankings |
+
+**example**
+
+```python
+from pyespn.cfb import get_recruiting_rankings
+
+season = 2020
+
+recruiting_rankings = get_recruiting_rankings(season=season)
+
+for recruit in recruiting_rankings:
+  print(recruit)
+```
+
+
+### Game/Event Data
+functions under here retrieve event/game info. game id is required and is the same from espn front page
+
+#### _pyespn.cfb.get_game_info(event_id) ⇒_
+returns a info related toa single event
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| event_id | <code>number</code> | id for event |
+
+```python
+from pyespn.cfb import get_game_info
+
+event_id = 401677192 # 2025 cfp title game osu/nd
+
+game_info = get_game_info(event_id=event_id)
+
+print(game_info)
+```
+
+
+### Betting Data
+These functions have betting details, rn there are futures data. note there could be more providers
+
+#### _pyespn.cfb.get_year_cfb_champions_futures(season, provider) ⇒_
+returns futures for cfp champion for a given year
+
+| Param    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| season   | <code>number</code> | Year of season                                  |
+| provider | <code>string</code> | Betting provider. Options:                      |
+|          |                    | - DraftKings                                    |
+|          |                    | - SugarHouse                                    |
+|          |                    | - Caesars Sportsbook (New Jersey)               |
+|          |                    | - PointsBet                                     |
+|          |                    | - Caesars Sportsbook (Colorado)                 |
+|          |                    | - Holland Casino                                |
+|          |                    | - Caesars Sportsbook (Tennessee)                |
+|          |                    | - FanDuel                                       |
+|          |                    | - Unibet                                        |
+|          |                    | - Bet365                                        |
+
+```python
+from pyespn.cfb import get_year_cfb_champions_futures
+
+season = 2023
+provider = 'DraftKings'
+
+futures_record = get_year_cfb_champions_futures(season=season,
+                                                 provider=provider)
+
+print(futures_record)
+```
+
+#### _pyespn.cfb.get_year_conference_champ_futures(season, provider) ⇒_
+returns a conferences champions futures
+
+| Param      | Type               | Description                                      |
+|------------|--------------------|--------------------------------------------------|
+| season     | <code>number</code> | Year of season                                  |
+| conference | <code>string</code> | Conference. Options:                            |
+|            |                    | - big12                                         |
+|            |                    | - big10                                         |
+|            |                    | - big10 east                                    |
+|            |                    | - big10 west                                    |
+|            |                    | - acc                                           |
+|            |                    | - aac                                           |
+|            |                    | - usa                                           |
+|            |                    | - mid-am                                        |
+|            |                    | - mid-am east                                   |
+|            |                    | - mid-am west                                   |
+|            |                    | - mt west                                       |
+|            |                    | - pac12                                         |
+|            |                    | - sec                                           |
+|            |                    | - sec west                                      |
+|            |                    | - sec east                                      |
+|            |                    | - sun belt                                      |
+| provider   | <code>string</code> | Betting provider. Options:                      |
+|            |                    | - DraftKings                                    |
+|            |                    | - SugarHouse                                    |
+|            |                    | - Caesars Sportsbook (New Jersey)               |
+|            |                    | - PointsBet                                     |
+|            |                    | - Caesars Sportsbook (Colorado)                 |
+|            |                    | - Holland Casino                                |
+|            |                    | - Caesars Sportsbook (Tennessee)                |
+|            |                    | - FanDuel                                       |
+|            |                    | - Unibet                                        |
+|            |                    | - Bet365                                        |
+
+```python
+from pyespn.cfb import get_year_conference_champ_futures
+
+season = 2023
+conference = 'south'
+provider = 'DraftKings'
+
+futures_record = get_year_conference_champ_futures(season=season,
+                                                  conference=conference,
+                                                  provider=provider)
+
+print(futures_record)
+```
+
+
+## Men's College Basketball | MCBB
+next up ...
+
 
 ## MLB
 coming ...

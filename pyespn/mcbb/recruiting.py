@@ -1,16 +1,14 @@
+# todo add recruiting rankings
+#  to get stars its more complicated. i had to wait until the dom loaded
+#  the rating-#_stars.png file so i could get the # for the stars
+
+# https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/recruiting/${year}/athletes?page=${page}
 import requests
 import json
 
 
 def get_recruiting_rankings(season, max_pages=None):
-    """
-    NOTE-> stars not available to get this you need to wait for players page to load and wait for
-        the rating-#_stars.png file so i could get the #  of stars
-    :param season:
-    :param max_pages:
-    :return:
-    """
-    url = f'https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/recruiting/{season}/athletes'
+    url = f'https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/recruiting/{season}/athletes'
     response = requests.get(url)
     content = json.loads(response.content)
     if not max_pages:

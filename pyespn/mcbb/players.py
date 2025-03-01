@@ -9,14 +9,14 @@ import requests
 import json
 
 
-def get_cfb_player_ids():
+def get_mcbb_player_ids():
     all_players = []
-    cfb_ath_url = 'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes?lang=en&region=us'
-    response = requests.get(cfb_ath_url)
+    mcbb_ath_url = 'http://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes?lang=en&region=us'
+    response = requests.get(mcbb_ath_url)
     num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
     for i in range(1, num_pages + 1):
-        page_url = cfb_ath_url + f'&page={i}'
+        page_url = mcbb_ath_url + f'&page={i}'
         page_response = requests.get(page_url)
         content = json.loads(page_response.content)
 
@@ -39,7 +39,7 @@ def get_player_stat_urls(player_id):
     """
     stat_urls = []
     try:
-        stat_log_url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes/{player_id}/statisticslog?lang=en&region=us'
+        stat_log_url = f'http://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{player_id}/statisticslog?lang=en&region=us'
         log_response = requests.get(stat_log_url)
     except Exception as e:
         raise Exception(e)
@@ -69,8 +69,8 @@ def extract_stats_from_url(url):
                 'category': category_name,
                 'season': year,
                 'player_id': player_id,
-                'stat_value': stat.get('value'),
-                'stat_type_abbreviation': stat.get('abbreviation'),
+                'stat_value': stat['value'],
+                'stat_type_abbreviation': stat['abbreviation'],
                 'league': 'nfl'
             }
             all_stats.append(this_stat)
@@ -79,8 +79,7 @@ def extract_stats_from_url(url):
 
 
 def get_player_info(player_id):
-    url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/college-football/athletes/{player_id}'
+    url = f'http://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/athletes/{player_id}'
     response = requests.get(url)
     content = json.loads(response.content)
     return content
-
