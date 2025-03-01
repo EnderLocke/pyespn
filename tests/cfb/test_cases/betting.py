@@ -20,6 +20,16 @@ conference_test_cases = [
         'team_name': 'Buckeyes',
         'team_city': 'Ohio State',
         'id': '194'
+    },
+    {
+        'provider': 'Betradar',
+        'conference': 'big12',
+        'season': 2023,
+        'index': 0,
+        'line': '-110',
+        'team_name': 'Longhorns',
+        'team_city': 'Texas',
+        'id': '251'
     }
 ]
 
