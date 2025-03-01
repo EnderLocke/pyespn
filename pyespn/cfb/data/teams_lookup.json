@@ -4697,6 +4697,78 @@
             "team_city": "Ohio State",
             "team_id": 194,
             "team_abbv": "OSU"
+        },
+        {
+            "team_name": "Wolverines",
+            "team_city": "Michigan",
+            "team_id": 130,
+            "team_abbv": "MICH"
+        },
+        {
+            "team_name": "Nittany Lions",
+            "team_city": "Penn State",
+            "team_id": 213,
+            "team_abbv": "PSU"
+        },
+        {
+            "team_name": "Badgers",
+            "team_city": "Wisconsin",
+            "team_id": 275,
+            "team_abbv": "WIS"
+        },
+        {
+            "team_name": "Hawkeyes",
+            "team_city": "Iowa",
+            "team_id": 2294,
+            "team_abbv": "IOWA"
+        },
+        {
+            "team_name": "Golden Gophers",
+            "team_city": "Minnesota",
+            "team_id": 135,
+            "team_abbv": "MINN"
+        },
+        {
+            "team_name": "Cornhuskers",
+            "team_city": "Nebraska",
+            "team_id": 158,
+            "team_abbv": "NEB"
+        },
+        {
+            "team_name": "Terrapins",
+            "team_city": "Maryland",
+            "team_id": 120,
+            "team_abbv": "MD"
+        },
+        {
+            "team_name": "Boilermakers",
+            "team_city": "Purdue",
+            "team_id": 2509,
+            "team_abbv": "PUR"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Michigan State",
+            "team_id": 127,
+            "team_abbv": "MSU"
+        },
+        {
+            "team_name": "Scarlet Knights",
+            "team_city": "Rutgers",
+            "team_id": 164,
+            "team_abbv": "RUT"
+        },
+        {
+            "team_name": "Hoosiers",
+            "team_city": "Indiana",
+            "team_id": 84,
+            "team_abbv": "IU"
+        },
+        {
+            "team_name": "Wildcats",
+            "team_city": "Northwestern",
+            "team_id": 77,
+            "team_abbv": "NU"
         }
     ]
 }

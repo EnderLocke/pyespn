@@ -27,7 +27,9 @@ def get_year_cfb_champions_futures(season, provider="DraftKings"):
         item_dict = {
             'team_name': result['team_name'],
             'team_city': result['team_city'],
-            'champion_future': item['value']
+            'champion_future': item['value'],
+            'team_ref': item['team']['$ref'],
+            'team_id': team_id
         }
         futures_list.append(item_dict)
 
@@ -57,7 +59,9 @@ def get_year_conference_champ_futures(season, conference, provider="DraftKings")
         item_dict = {
             'team_name': result['team_name'],
             'team_city': result['team_city'],
-            'champion_future': item['value']
+            'champion_future': item['value'],
+            'team_ref': item['team']['$ref'],
+            'team_id': team_id
         }
         futures_list.append(item_dict)
 
