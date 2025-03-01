@@ -10,7 +10,7 @@ def get_recruiting_rankings(season, max_pages=None):
     :param max_pages:
     :return:
     """
-    url = f'https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/recruiting/{season}/athletes'
+    url = f'https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/recruiting/{season}/athletes'
     response = requests.get(url)
     content = json.loads(response.content)
     if not max_pages:
