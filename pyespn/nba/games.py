@@ -1,8 +1,6 @@
-from pyespn.events import get_event_info
+from pyespn.core import get_game_info_core
 
 
 def get_game_info(event_id):
-    data = get_event_info(sport='basketball',
-                          league='nba',
-                          event_id=event_id)
-    return data
+    return get_game_info_core(event_id=event_id,
+                              league_abbv='nba')

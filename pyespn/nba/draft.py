@@ -1,9 +1,8 @@
-import requests
-import json
+from pyespn.core import get_draft_pick_data_core
 
 
 def get_draft_pick_data(pick_round, pick, season):
-    url = f'http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/{season}/draft/rounds/{pick_round}/picks/{pick}'
-    response = requests.get(url)
-    content = json.loads(response.content)
-    return content
+    return get_draft_pick_data_core(pick_round=pick_round,
+                                    pick=pick,
+                                    season=season,
+                                    league_abbv='nba')
