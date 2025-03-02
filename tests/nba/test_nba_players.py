@@ -1,4 +1,4 @@
-from pyespn.nba import get_player_info
+from pyespn import PYESPN
 import pytest
 
 test_players = [
@@ -14,7 +14,8 @@ test_players = [
 
 @pytest.mark.parametrize("test_case", test_players)
 def test_nfl_events(test_case):
-    content = get_player_info(test_case['id'])
+    espn = PYESPN(sport_league='nba')
+    content = espn.get_player_info(test_case['id'])
     assert content['fullName'] == test_case['full_name']
     assert content['dateOfBirth'] == test_case['dob']
     assert content['type'] == test_case['type']
