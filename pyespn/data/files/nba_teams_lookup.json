@@ -1,0 +1,196 @@
+{
+  "teams": [
+    {
+      "team_id": 1,
+      "team_name": "Hawks",
+      "team_city": "Atlanta",
+      "team_abbv": "ATL"
+    },
+    {
+      "team_id": 2,
+      "team_name": "Celtics",
+      "team_city": "Boston",
+      "team_abbv": "BOS"
+    },
+    {
+      "team_id": 3,
+      "team_name": "Pelicans",
+      "team_city": "New Orleans",
+      "team_abbv": "NO"
+    },
+    {
+      "team_id": 4,
+      "team_name": "Bulls",
+      "team_city": "Chicago",
+      "team_abbv": "CHI"
+    },
+    {
+      "team_id": 5,
+      "team_name": "Cavaliers",
+      "team_city": "Cleveland",
+      "team_abbv": "CLE"
+    },
+    {
+      "team_id": 6,
+      "team_name": "Mavericks",
+      "team_city": "Dallas",
+      "team_abbv": "DAL"
+    },
+    {
+      "team_id": 7,
+      "team_name": "Nuggets",
+      "team_city": "Denver",
+      "team_abbv": "DEN"
+    },
+    {
+      "team_id": 8,
+      "team_name": "Pistons",
+      "team_city": "Detroit",
+      "team_abbv": "DET"
+    },
+    {
+      "team_id": 9,
+      "team_name": "Warriors",
+      "team_city": "Golden State",
+      "team_abbv": "GS"
+    },
+    {
+      "team_id": 10,
+      "team_name": "Rockets",
+      "team_city": "Houston",
+      "team_abbv": "HOU"
+    },
+    {
+      "team_id": 11,
+      "team_name": "Pacers",
+      "team_city": "Indiana",
+      "team_abbv": "IND"
+    },
+    {
+      "team_id": 12,
+      "team_name": "Clippers",
+      "team_city": "Los Angeles",
+      "team_abbv": "LAC"
+    },
+    {
+      "team_id": 13,
+      "team_name": "Lakers",
+      "team_city": "Los Angeles",
+      "team_abbv": "LAL"
+    },
+    {
+      "team_id": 14,
+      "team_name": "Heat",
+      "team_city": "Miami",
+      "team_abbv": "MIA"
+    },
+    {
+      "team_id": 15,
+      "team_name": "Bucks",
+      "team_city": "Milwaukee",
+      "team_abbv": "MIL"
+    },
+    {
+      "team_id": 16,
+      "team_name": "Timberwolves",
+      "team_city": "Minnesota",
+      "team_abbv": "MIN"
+    },
+    {
+      "team_id": 17,
+      "team_name": "Nets",
+      "team_city": "Brooklyn",
+      "team_abbv": "BKN"
+    },
+    {
+      "team_id": 18,
+      "team_name": "Knicks",
+      "team_city": "New York",
+      "team_abbv": "NY"
+    },
+    {
+      "team_id": 19,
+      "team_name": "Magic",
+      "team_city": "Orlando",
+      "team_abbv": "ORL"
+    },
+    {
+      "team_id": 20,
+      "team_name": "76ers",
+      "team_city": "Philadelphia",
+      "team_abbv": "PHI"
+    },
+    {
+      "team_id": 21,
+      "team_name": "Suns",
+      "team_city": "Phoenix",
+      "team_abbv": "PHX"
+    },
+    {
+      "team_id": 22,
+      "team_name": "Trail Blazers",
+      "team_city": "Portland",
+      "team_abbv": "POR"
+    },
+    {
+      "team_id": 23,
+      "team_name": "Sacramento",
+      "team_city": "Kings",
+      "team_abbv": "SAC"
+    },
+    {
+      "team_id": 24,
+      "team_name": "Spurs",
+      "team_city": "San Antonio",
+      "team_abbv": "SA"
+    },
+    {
+      "team_id": 25,
+      "team_name": "Thunder",
+      "team_city": "Oklahoma City",
+      "team_abbv": "OKC"
+    },
+    {
+      "team_id": 26,
+      "team_name": "Jazz",
+      "team_city": "Utah",
+      "team_abbv": "UTAH"
+    },
+    {
+      "team_id": 27,
+      "team_name": "Wizards",
+      "team_city": "Washington",
+      "team_abbv": "WAS"
+    },
+    {
+      "team_id": 28,
+      "team_name": "Raptors",
+      "team_city": "Toronto",
+      "team_abbv": "TOR"
+    },
+    {
+      "team_id": 29,
+      "team_name": "Grizzlies",
+      "team_city": "Memphis",
+      "team_abbv": "MEM"
+    },
+    {
+      "team_id": 30,
+      "team_name": "Hornets",
+      "team_city": "Charlotte",
+      "team_abbv": "CHA"
+    },
+    {
+      "team_id": 31,
+      "team_name": "All-Stars",
+      "team_city": "Eastern Conf",
+      "team_abbv": "EAST"
+    },
+    {
+      "team_id": 32,
+      "team_name": "All-Stars",
+      "team_city": "Western Conf",
+      "team_abbv": "WEST"
+    }
+  ]
+}

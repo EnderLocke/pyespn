@@ -1,0 +1,208 @@
+{
+  "teams": [
+    {
+      "team_id": 1,
+      "team_name": "Falcons",
+      "team_city": "Atlanta",
+      "team_abbv": "ATL"
+    },
+    {
+      "team_id": 2,
+      "team_name": "Bills",
+      "team_city": "Buffalo",
+      "team_abbv": "BUF"
+    },
+    {
+      "team_id": 3,
+      "team_name": "Bears",
+      "team_city": "Chicago",
+      "team_abbv": "CHI"
+    },
+    {
+      "team_id": 4,
+      "team_name": "Bengals",
+      "team_city": "Cincinnati",
+      "team_abbv": "CIN"
+    },
+    {
+      "team_id": 5,
+      "team_name": "Browns",
+      "team_city": "Cleveland",
+      "team_abbv": "CLE"
+    },
+    {
+      "team_id": 6,
+      "team_name": "Cowboys",
+      "team_city": "Dallas",
+      "team_abbv": "DAL"
+    },
+    {
+      "team_id": 7,
+      "team_name": "Broncos",
+      "team_city": "Denver",
+      "team_abbv": "DEN"
+    },
+    {
+      "team_id": 8,
+      "team_name": "Lions",
+      "team_city": "Detroit",
+      "team_abbv": "DET"
+    },
+    {
+      "team_id": 9,
+      "team_name": "Packers",
+      "team_city": "Green Bay",
+      "team_abbv": "GB"
+    },
+    {
+      "team_id": 10,
+      "team_name": "Titans",
+      "team_city": "Tennessee",
+      "team_abbv": "TEN"
+    },
+    {
+      "team_id": 11,
+      "team_name": "Colts",
+      "team_city": "Indianapolis",
+      "team_abbv": "IND"
+    },
+    {
+      "team_id": 12,
+      "team_name": "Chiefs",
+      "team_city": "Kansas City",
+      "team_abbv": "KC"
+    },
+    {
+      "team_id": 13,
+      "team_name": "Raiders",
+      "team_city": "Las Vegas",
+      "team_abbv": "LV"
+    },
+    {
+      "team_id": 14,
+      "team_name": "Rams",
+      "team_city": "Los Angeles",
+      "team_abbv": "LAR"
+    },
+    {
+      "team_id": 15,
+      "team_name": "Dolphins",
+      "team_city": "Miami",
+      "team_abbv": "MIA"
+    },
+    {
+      "team_id": 16,
+      "team_name": "Vikings",
+      "team_city": "Minnesota",
+      "team_abbv": "MIN"
+    },
+    {
+      "team_id": 17,
+      "team_name": "Patriots",
+      "team_city": "New England",
+      "team_abbv": "NE"
+    },
+    {
+      "team_id": 18,
+      "team_name": "Saints",
+      "team_city": "New Orleans",
+      "team_abbv": "NO"
+    },
+    {
+      "team_id": 19,
+      "team_name": "Giants",
+      "team_city": "New York",
+      "team_abbv": "NYG"
+    },
+    {
+      "team_id": 20,
+      "team_name": "Jets",
+      "team_city": "New York",
+      "team_abbv": "NJY"
+    },
+    {
+      "team_id": 21,
+      "team_name": "Eagles",
+      "team_city": "Philadelphia",
+      "team_abbv": "PHI"
+    },
+    {
+      "team_id": 22,
+      "team_name": "Cardinals",
+      "team_city": "Arizona",
+      "team_abbv": "ARI"
+    },
+    {
+      "team_id": 23,
+      "team_name": "Steelers",
+      "team_city": "Pittsburgh",
+      "team_abbv": "PIT"
+    },
+    {
+      "team_id": 24,
+      "team_name": "Chargers",
+      "team_city": "Los Angeles",
+      "team_abbv": "LAC"
+    },
+    {
+      "team_id": 25,
+      "team_name": "49ers",
+      "team_city": "San Francisco",
+      "team_abbv": "SF"
+    },
+    {
+      "team_id": 26,
+      "team_name": "Seahawks",
+      "team_city": "Seattle",
+      "team_abbv": "SEA"
+    },
+    {
+      "team_id": 27,
+      "team_name": "Buccaneers",
+      "team_city": "Tampa Bay",
+      "team_abbv": "TB"
+    },
+    {
+      "team_id": 28,
+      "team_name": "Commanders",
+      "team_city": "Washington",
+      "team_abbv": "WAS"
+    },
+    {
+      "team_id": 29,
+      "team_name": "Panthers",
+      "team_city": "Carolina",
+      "team_abbv": "CAR"
+    },
+    {
+      "team_id": 30,
+      "team_name": "Jaguars",
+      "team_city": "Jacksonville",
+      "team_abbv": "JAX"
+    },
+    {
+      "team_id": 31,
+      "team_name": "AFC",
+      "team_city": "AFC",
+      "team_abbv": "AFC"
+    },
+    {
+      "team_id": 32,
+      "team_name": "NFC",
+      "team_city": "NFC",
+      "team_abbv": "NFC"
+    },
+    {
+      "team_id": 33,
+      "team_name": "Ravens",
+      "team_city": "Baltimore",
+      "team_abbv": "BAL"
+    },
+    {
+      "team_id": 34,
+      "team_name": "Texans",
+      "team_city": "Houston",
+      "team_abbv": "HOU"
+    }
+  ]
+}
