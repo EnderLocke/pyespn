@@ -47,5 +47,11 @@ class PYESPN():
         return get_players_historical_stats_core(player_id=player_id,
                                                  league_abbv=self.league_abbv)
 
+    def get_futures_year(self, season):
+        return get_futures_year_core(year=season,
+                                     league_abbv=self.league_abbv)
 
-
+    def get_team_year_ats(self, team_id, season):
+        return get_team_year_ats_core(team_id=team_id,
+                                      season=season,
+                                      league_abbv=self.league_abbv)
