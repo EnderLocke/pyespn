@@ -1,5 +1,4 @@
 from pyespn import PYESPN
-from pyespn.nfl import get_game_info
 import pytest
 
 test_event_ids = [
