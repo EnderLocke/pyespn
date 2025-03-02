@@ -1,5 +1,5 @@
 from pyespn.utilities import lookup_league_api_info, get_team_id, get_type_futures, get_type_ats
-from pyespn.data.betting import LEAGUE_CHAMPION_FUTURES_MAP
+from pyespn.data.betting import LEAGUE_CHAMPION_FUTURES_MAP, LEAGUE_DIVISION_FUTURES_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 import requests
 import json
@@ -46,4 +46,38 @@ def get_year_league_champions_futures_core(season, league_abbv, provider="DraftK
 
     return futures_list
 
+# todo zach you're working to paramaterize this here
+
+
+def get_division_champ_futures_core(season, division, league_abbv, provider="DraftKings"):
+    """
+
+    :param season:
+    :param division: must be one of east, west, south, north or conf
+    :param provider:
+    :return:
+    """
+    content = _get_futures_year(season,
+                                league_abbv=league_abbv)
+
+    league_futures = get_type_futures(data=content,
+                                      futures_type=LEAGUE_CHAMPION_FUTURES_MAP[league_abbv][division])
+
+    provider_futures = next(future for future in league_futures['futures'] if future['provider']['name'] == provider)
+
+    futures_list = []
+    for item in provider_futures['books']:
+        team_id = get_team_id(item['team']['$ref'])
+        result = next(team for team in LEAGUE_TEAMS_MAPPING[league_abbv] if team['team_id'] == team_id)
+
+        item_dict = {
+            'team_name': result['team_name'],
+            'team_city': result['team_city'],
+            'champion_future': item['value'],
+            'team_ref': item['team']['$ref'],
+            'team_id': team_id
+        }
+        futures_list.append(item_dict)
+
+    return futures_list
 
