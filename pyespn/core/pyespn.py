@@ -1,5 +1,5 @@
 from pyespn.core import *
-from pyespn.data import LEAGUE_API_MAPPING
+from pyespn.data.leagues import LEAGUE_API_MAPPING
 
 
 class PYESPN():
