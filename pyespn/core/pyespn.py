@@ -20,9 +20,10 @@ class PYESPN():
     def get_player_ids(self):
         return get_player_ids_core(league_abbv=self.league_abbv)
 
-    def get_recruiting_rankings(self, season):
+    def get_recruiting_rankings(self, season, max_pages=None):
         return get_recruiting_rankings_core(season=season,
-                                            league_abbv=self.league_abbv)
+                                            league_abbv=self.league_abbv,
+                                            max_pages=max_pages)
 
     def get_game_info(self, event_id):
         return get_game_info_core(event_id=event_id,
