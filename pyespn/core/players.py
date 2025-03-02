@@ -49,7 +49,7 @@ def get_player_stat_urls_core(player_id, league_abbv):
     return stat_urls
 
 
-def extract_stats_from_url(url):
+def extract_stats_from_url_core(url):
     response = requests.get(url)
     url_parts = url.split('/')
     all_stats = []
