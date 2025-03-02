@@ -1,12 +1,13 @@
-from pyespn.mcbb import get_recruiting_rankings
+from pyespn import PYESPN
 from tests.mcbb.test_cases.recruiting import recruiting_test_cases
 import pytest
 
 
 @pytest.mark.parametrize('test_case', recruiting_test_cases)
 def test_recruit_rankings(test_case):
-    content = get_recruiting_rankings(season=test_case['season'],
-                                      max_pages=test_case['max_pages'])
+    espn = PYESPN(sport_league='mcbb')
+    content = espn.get_recruiting_rankings(season=test_case['season'],
+                                           max_pages=test_case['max_pages'])
 
     test_match = content[test_case['index']]
 
