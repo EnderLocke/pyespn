@@ -1,8 +1,6 @@
+from pyespn import PYESPN
 from pyespn.nfl import get_game_info
 import pytest
-
-import requests
-import json
 
 test_event_ids = [
     {
@@ -14,14 +12,10 @@ test_event_ids = [
 ]
 
 
-def get_nfl_event_info(id):
-    content = get_game_info(id)
-    return content
-
-
 @pytest.mark.parametrize("test_case", test_event_ids)
 def test_nfl_events(test_case):
-    content = get_nfl_event_info(test_case['id'])
+    espn = PYESPN(sport_league='nfl')
+    content = espn.get_game_info(test_case['id'])
     assert content['shortName'] == test_case['short_name']
     assert content['name'] == test_case['name']
     assert content['date'] == test_case['date']
