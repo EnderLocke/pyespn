@@ -1,5 +1,4 @@
 from pyespn.core import *
-from pyespn.utilities import lookup_league_api_info
 from pyespn.data import LEAGUE_API_MAPPING
 
 
