@@ -3,13 +3,13 @@ from pyespn.data import LEAGUE_API_MAPPING
 
 
 class PYESPN():
+    LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
+    valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING}
 
     def __init__(self, sport_league='nfl'):
-        valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING}
-
         # Validate sport_league
-        if sport_league not in valid_leagues:
-            raise ValueError(f"Invalid sport league: '{sport_league}'. Must be one of {valid_leagues}")
+        if sport_league not in self.valid_leagues:
+            raise ValueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
 
         self.league_abbv = sport_league
 
