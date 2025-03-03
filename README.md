@@ -19,7 +19,7 @@ i am working on adding in exceptions but you could get odd errors if say you try
 includes information on apis available for the nfl
 
 ### Init Class
-create an init veresion of the class and feed it the league you want
+create an init version of the class and feed it the league you want
 
 | Param   | Type               | Description            |
 |---------|--------------------|------------------------|
