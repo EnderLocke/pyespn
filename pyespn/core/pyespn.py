@@ -1,5 +1,6 @@
 from pyespn.core import *
 from pyespn.data.leagues import LEAGUE_API_MAPPING
+from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 
 
 class PYESPN():
@@ -12,6 +13,7 @@ class PYESPN():
             raise ValueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
 
         self.league_abbv = sport_league
+        self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING[self.league_abbv]
 
     def get_player_info(self, player_id):
         return get_player_info_core(player_id=player_id,
