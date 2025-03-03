@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+* forgot init py
+
+
 ## 0.1.4
 * refactored to class
 * new documentation -> old readme is saved as old_readme.md
