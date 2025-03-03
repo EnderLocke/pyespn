@@ -30,7 +30,22 @@ LEAGUE_DIVISION_FUTURES_MAPPING = {
         'west': 'NBA - Western Conference - Winner'
     },
     'cfb': {
-
+        'big12': 'NCAA(F) - Big 12 Conference',
+        'big10': 'NCAA(F) - Big Ten Conference',
+        'big10 east': 'NCAA(F) - Big Ten Conference - East Division - Winner (reg. season)',
+        'big10 west': 'NCAA(F) - Big Ten Conference - West Division - Winner (reg. season)',
+        'acc': 'NCAA(F) - Atlantic Coast Conference',
+        'aac': 'NCAA(F) - American Athletic Conference',
+        'usa': 'NCAA(F) - Conference USA',
+        'mid-am': 'NCAA(F) - Mid-American Conference',
+        'mid-am east': 'NCAA(F) - Conference - Mid-American - Division East',
+        'mid-am west': 'NCAA(F) - Conference - Mid-American - Division West',
+        'mt west': 'NCAA(F) - Mountain West Conference',
+        'pac12': 'NCAA(F) - Pacific-12 Conference',
+        'sec': 'NCAA(F) - Southeastern Conference',
+        'sec west': 'NCAA(F) - Southeastern Conference - West Division - Winner (reg. season)',
+        'sec east': 'NCAA(F) - Southeastern Conference - East Division - Winner (reg. season)',
+        'sun belt': 'Sun Belt Conference Champion',
     }
 }
 
@@ -38,4 +53,5 @@ LEAGUE_CHAMPION_FUTURES_MAP = {
     'nfl': 'NFL - Super Bowl Winner',
     'nba': 'NBA - Winner',
     'cfb': 'NCAA(F) - Championship',
+    'mcbb': 'NCAA(B) - Winner'
 }

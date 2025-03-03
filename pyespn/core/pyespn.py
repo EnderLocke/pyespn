@@ -51,3 +51,9 @@ class PYESPN():
         return get_year_league_champions_futures_core(season=season,
                                                       league_abbv=self.league_abbv,
                                                       provider=provider)
+
+    def get_league_year_division_champs_futures(self, season, division, provider='DraftKings'):
+        return get_division_champ_futures_core(season=season,
+                                               division=division,
+                                               league_abbv=self.league_abbv,
+                                               provider=provider)
