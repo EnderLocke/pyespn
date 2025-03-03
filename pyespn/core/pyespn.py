@@ -57,3 +57,44 @@ class PYESPN():
                                                division=division,
                                                league_abbv=self.league_abbv,
                                                provider=provider)
+
+    def get_team_year_ats_away(self, team_id, season):
+        return get_team_year_ats_away_core(team_id=team_id,
+                                           season=season,
+                                           league_abbv=self.league_abbv)
+
+    def get_team_year_ats_home_favorite(self, team_id, season):
+        return get_team_year_ats_home_favorite_core(team_id=team_id,
+                                                    season=season,
+                                                    league_abbv=self.league_abbv)
+
+    def get_team_year_ats_away_underdog(self, team_id, season):
+        return get_team_year_ats_away_underdog_core(team_id=team_id,
+                                                    season=season,
+                                                    league_abbv=self.league_abbv)
+
+    def get_team_year_ats_favorite(self, team_id, season):
+        return get_team_year_ats_favorite_core(team_id=team_id,
+                                               season=season,
+                                               league_abbv=self.league_abbv)
+
+    def get_team_year_ats_home(self, team_id, season):
+        return get_team_year_ats_home_core(team_id=team_id,
+                                           season=season,
+                                           league_abbv=self.league_abbv)
+
+    def get_team_year_ats_overall(self, team_id, season):
+        return get_team_year_ats_overall_core(team_id=team_id,
+                                              season=season,
+                                              league_abbv=self.league_abbv)
+
+    def get_team_year_ats_underdog(self, team_id, season):
+        return get_team_year_ats_underdog_core(team_id=team_id,
+                                               season=season,
+                                               league_abbv=self.league_abbv)
+
+    def get_team_year_ats_home_underdog(self, team_id, season):
+        return get_team_year_ats_home_underdog_core(team_id=team_id,
+                                                    season=season,
+                                                    league_abbv=self.league_abbv)
+
