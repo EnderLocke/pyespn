@@ -29,7 +29,9 @@ classifiers = [
     #"Topic :: Sports :: Football",
     #"Topic :: Sports :: Basketball"
 ]
-dependencies = []
+dependencies = [
+    'click',
+]
 dynamic = ["version"]
 [project.urls]
 Repository = "https://gitlab.com/zachstocker/espn-api"
