@@ -9,25 +9,22 @@ super_bowl_test_cases = [
     }
 ]
 
-nfc_test_cases = [
+div_test_cases = [
     {
         'season': 2023,
         'provider': 'PointsBet',
         'team_name': 'Lions',
         'team_city': 'Detroit',
-        'division': 'north',
+        'division': 'nfc north',
         'line': '-1000',
         'index': 0
-    }
-]
-
-afc_test_cases = [
+    },
     {
         'season': 2023,
         'provider': 'Caesars Sportsbook (New Jersey)',
         'team_name': 'Texans',
         'team_city': 'Houston',
-        'division': 'south',
+        'division': 'afc south',
         'line': '+170',
         'index': 0
     }

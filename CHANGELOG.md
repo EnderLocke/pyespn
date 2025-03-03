@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+* refactored to class
+* new documentation -> old readme is saved as old_readme.md
+* 
+
 ## 0.1.3
 * adding in mcbb functions
 * 

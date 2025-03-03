@@ -1,4 +1,4 @@
-from pyespn.data import LEAGUE_API_MAPPING
+from pyespn.data.leagues import LEAGUE_API_MAPPING
 
 
 def lookup_league_api_info(league_abbv):
