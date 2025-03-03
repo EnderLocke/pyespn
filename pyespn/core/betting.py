@@ -81,3 +81,67 @@ def get_division_champ_futures_core(season, division, league_abbv, provider="Dra
 
     return futures_list
 
+
+def _get_team_ats(team_id, season, ats_type, league_abbv):
+    content = _get_team_year_ats(team_id=team_id,
+                                 season=season,
+                                 league_abbv=league_abbv)
+    ats = get_type_ats(data=content,
+                       ats_type=ats_type)
+    return ats
+
+
+def get_team_year_ats_overall(team_id, season, league_abbv):
+    return _get_team_ats(team_id=team_id,
+                         season=season,
+                         ats_type='atsOverall',
+                         league_abbv=league_abbv)
+
+
+def get_team_year_ats_favorite(team_id, season, league_abbv):
+    return _get_team_ats(team_id=team_id,
+                         season=season,
+                         ats_type='atsFavorite',
+                         league_abbv=league_abbv)
+
+
+def get_team_year_ats_underdog(team_id, season, league_abbv):
+    return _get_team_ats(team_id=team_id,
+                         season=season,
+                         ats_type='atsUnderdog',
+                         league_abbv=league_abbv)
+
+
+def get_team_year_ats_away(team_id, season, league_abbv):
+    return _get_team_ats(team_id=team_id,
+                         season=season,
+                         ats_type='atsAway',
+                         league_abbv=league_abbv)
+
+
+def get_team_year_ats_home(team_id, season, league_abbv):
+    return _get_team_ats(team_id=team_id,
+                         season=season,
+                         ats_type='atsHome',
+                         league_abbv=league_abbv)
+
+
+def get_team_year_ats_home_favorite(team_id, season, league_abbv):
+    return _get_team_ats(team_id=team_id,
+                         season=season,
+                         ats_type='atsHomeFavorite',
+                         league_abbv=league_abbv)
+
+
+def get_team_year_ats_away_underdog(team_id, season, league_abbv):
+    return _get_team_ats(team_id=team_id,
+                         season=season,
+                         ats_type='atsAwayUnderdog',
+                         league_abbv=league_abbv)
+
+
+def get_team_year_ats_home_underdog(team_id, season, league_abbv):
+    return _get_team_ats(team_id=team_id,
+                         season=season,
+                         ats_type='atsHomeUnderdog',
+                         league_abbv=league_abbv)
