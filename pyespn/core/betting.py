@@ -55,8 +55,6 @@ def get_year_league_champions_futures_core(season, league_abbv, provider="DraftK
 
     return futures_list
 
-# todo zach you're working to paramaterize this here
-
 
 def get_division_champ_futures_core(season, division, league_abbv, provider="DraftKings"):
     """
@@ -70,7 +68,7 @@ def get_division_champ_futures_core(season, division, league_abbv, provider="Dra
                                 league_abbv=league_abbv)
 
     league_futures = get_type_futures(data=content,
-                                      futures_type=LEAGUE_CHAMPION_FUTURES_MAP[league_abbv][division])
+                                      futures_type=LEAGUE_DIVISION_FUTURES_MAPPING[league_abbv][division])
 
     provider_futures = next(future for future in league_futures['futures'] if future['provider']['name'] == provider)
 
