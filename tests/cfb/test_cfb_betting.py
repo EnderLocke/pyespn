@@ -1,5 +1,3 @@
-from pyespn.cfb import (get_year_cfb_champions_futures,
-                        get_year_conference_champ_futures)
 from pyespn import PYESPN
 from tests.cfb.test_cases.betting import *
 import pytest
