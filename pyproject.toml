@@ -42,4 +42,4 @@ include = ["pyespn*"]
 sports-api-urls = "espn.bin:get_all_sports_apis"
 [tool.uv]
 [tool.setuptools.package-data]
-your_package_name = ["**/*.json"]
+pyespn = ["**/*.json"]
