@@ -13,6 +13,7 @@ i am working on adding in exceptions but you could get odd errors if say you try
   - [Game/Event Data](#gameevent-data)
   - [Recruiting Data](#recruiting-data)
   - [Draft Data](#draft-data)
+  - [Betting Data](#betting-data)
 
 
 ## PYESPN
