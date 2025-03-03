@@ -30,7 +30,6 @@ create an init version of the class and feed it the league you want
 |         |                    | - cfb                 |
 
 **example**
-
 ```python
 from pyespn import PYESPN
 
@@ -43,7 +42,6 @@ This is a list of ids/teams in json format that relate to the api and are used i
 
 
 **example**
-
 ```python
 from pyespn import PYESPN
 
