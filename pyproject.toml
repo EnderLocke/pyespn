@@ -5,7 +5,10 @@ readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Zach Stocker", email = "zacharystocker@gmail.com" }]
 license = { text = "MIT" }
-dependencies = []
+dependencies = [
+    "click>=8.1.8",
+    "requests>=2.32.3",
+]
 classifiers = [
     # Should be one of:
     # "Development Status :: 3 - Alpha"
