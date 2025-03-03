@@ -1,8 +1,4 @@
 from pyespn import PYESPN
-from pyespn.nfl import (get_team_year_ats_overall, get_team_year_ml,
-                        get_year_nfc_division_champ_futures,
-                        get_year_afc_division_champ_futures,
-                        get_year_nfl_super_bowl_futures)
 from tests.nfl.test_cases.betting import *
 import pytest
 
@@ -21,8 +17,8 @@ ats_overall_test_cases = [
 
 @pytest.mark.parametrize("test_case", ats_overall_test_cases)
 def test_ats_overall(test_case):
-    content = get_team_year_ats_overall(team_id=test_case['team_id'],
-                                        season=test_case['season'])
+    content = nfl_espn.get_team_year_ats_overall(team_id=test_case['team_id'],
+                                                 season=test_case['season'])
 
     assert content['wins'] == test_case['wins']
     assert content['losses'] == test_case['losses']

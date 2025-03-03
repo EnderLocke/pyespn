@@ -1,12 +1,11 @@
 from pyespn import PYESPN
-from pyespn.nba.data import nba_teams_data
 import random
 
 
 def get_random_nba_team_data():
     espn = PYESPN(sport_league='nba')
-    random_id = random.randint(1, len(nba_teams_data) - 2)
-    selected_team = next((team for team in nba_teams_data if team["team_id"] == random_id), None)
+    random_id = random.randint(1, len(espn.TEAM_ID_MAPPING) - 2)
+    selected_team = next((team for team in espn.TEAM_ID_MAPPING if team["team_id"] == random_id), None)
     content = espn.get_team_info(random_id)
 
     return selected_team, content
