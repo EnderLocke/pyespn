@@ -1,18 +1,18 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "pyespn"
-authors = [{ name = "Zach Stocker", email = "zacharystocker@gmail.com" }]
-license = { text = "MIT" }
-requires-python = ">=3.11"
 description = "Wrapper for hidden ESPN API"
 readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Zach Stocker", email = "zacharystocker@gmail.com" }]
+license = { text = "MIT" }
+dependencies = [
+    "click>=8.1.8",
+    "requests>=2.32.3",
+]
 classifiers = [
     # Should be one of:
     # "Development Status :: 3 - Alpha"
-     "Development Status :: 4 - Beta",
+    "Development Status :: 4 - Beta",
     # "Development Status :: 5 - Production/Stable"
     #"Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -29,7 +29,6 @@ classifiers = [
     #"Topic :: Sports :: Football",
     #"Topic :: Sports :: Basketball"
 ]
-dependencies = []
 dynamic = ["version"]
 [project.urls]
 Repository = "https://gitlab.com/zachstocker/espn-api"
@@ -40,7 +39,5 @@ version = { attr = "pyespn.api.version.__version__" }
 # benchmarks, etc.
 include = ["pyespn*"]
 [project.scripts]
-nfl-player-stats = "espn.bin:get_nfl_players_historical_stats"
-nfl-player-info = "espn.bin:get_player_metadata"
-nfl-team-season-stats = "espn.bin:get_team_season_stats"
 sports-api-urls = "espn.bin:get_all_sports_apis"
+[tool.uv]

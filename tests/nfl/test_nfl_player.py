@@ -3,20 +3,20 @@ import pytest
 
 test_players = [
     {
-        'id': 4397002,
-        'full_name': 'Ayo Dosunmu',
-        "dob": "2000-01-17T08:00Z",
-        "type": "basketball",
-        "draft_year": 2021,
+        'id': 278,
+        'full_name': 'Jimmy Smith',
+        "dob": "1969-02-09T08:00Z",
+        "type": "football",
+        "debut_year": 1992,
     }
 ]
 
 
 @pytest.mark.parametrize("test_case", test_players)
 def test_nfl_events(test_case):
-    espn = PYESPN(sport_league='nba')
-    content = espn.get_player_info(test_case['id'])
+    nfl_pyespn = PYESPN(sport_league='nfl')
+    content = nfl_pyespn.get_player_info(test_case['id'])
     assert content['fullName'] == test_case['full_name']
     assert content['dateOfBirth'] == test_case['dob']
     assert content['type'] == test_case['type']
-    assert content['draft']['year'] == test_case['draft_year']
+    assert content['debutYear'] == test_case['debut_year']

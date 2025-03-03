@@ -1,12 +1,13 @@
-from pyespn.nfl.data import nfl_teams_data
-from pyespn.nfl import get_team_info
+from pyespn import PYESPN
+
 import random
 
 
 def get_random_nfl_team_data():
-    random_id = random.randint(1, len(nfl_teams_data) - 2)
-    selected_team = next((team for team in nfl_teams_data if team["team_id"] == random_id), None)
-    content = get_team_info(random_id)
+    espn = PYESPN(sport_league='nfl')
+    random_id = random.randint(1, len(espn.TEAM_ID_MAPPING) - 2)
+    selected_team = next((team for team in espn.TEAM_ID_MAPPING if team["team_id"] == random_id), None)
+    content = espn.get_team_info(random_id)
 
     return selected_team, content
 
