@@ -158,3 +158,5 @@ draft_pick_info = nfl_espn.get_draft_pick_data(pick_round=pick_round,
 print(draft_pick_info)
 ```
 
+
+### Betting Data
