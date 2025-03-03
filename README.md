@@ -9,6 +9,10 @@ i am working on adding in exceptions but you could get odd errors if say you try
   - [Init Class](#init-class)
   - [Data Files](#data-files)
   - [Team Data](#team-data)
+  - [Player Data](#player-data)
+  - [Game/Event Data](#gameevent-data)
+  - [Recruiting Data](#recruiting-data)
+  - [Draft Data](#draft-data)
 
 
 ## PYESPN
