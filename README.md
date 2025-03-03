@@ -160,3 +160,22 @@ print(draft_pick_info)
 
 
 ### Betting Data
+
+#### Betting Providers
+there are many betting providers across the espn api and they dont appear to be consistant in my profiling. the ones that i have found can be accessed via
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+
+print(nfl_espn.BETTING_PROVIDERS)
+```
+
+
+#### Against the Spread
+
+
+
+#### Futures
