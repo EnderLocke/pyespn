@@ -19,11 +19,11 @@ LEAGUE_DIVISION_FUTURES_MAPPING = {
         'afc south': 'Pro Football (A) South Division - Winner',
         'afc east': 'Pro Football (A) East  Division - Winner',
         'afc': 'Pro Football (A) Conference Winner',
-        'nfc west': 'Pro Football (A) West Division - Winner',
-        'nfc north': 'Pro Football (A) North Division - Winner',
-        'nfc south': 'Pro Football (A) South Division - Winner',
-        'nfc east': 'Pro Football (A) East  Division - Winner',
-        'nfc conf': 'Pro Football (A) Conference Winner'
+        'nfc west': 'Pro Football (N) West Division - Winner',
+        'nfc north': 'Pro Football (N) North Division - Winner',
+        'nfc south': 'Pro Football (N) South Division - Winner',
+        'nfc east': 'Pro Football (N) East  Division - Winner',
+        'nfc conf': 'Pro Football (N) Conference Winner'
     },
     'nba': {
         'east': 'NBA - Eastern Conference - Winner',
