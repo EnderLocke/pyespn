@@ -27,7 +27,7 @@ please note the readme is a work in progress and there could be more api calls w
 
 
 ## PYESPN
-includes information on apis available for the nfl
+includes information on apis available for the espn api
 
 ### Create Class
 create an init version of the class and feed it the league you want
