@@ -21,6 +21,8 @@ please note the readme is a work in progress and there could be more api calls w
   - [Betting Data](#betting-data)
   - [Award Data](#awards-data)
   - [Standings Data](#standings-data)
+- [Team Class](#team-class)
+  - []
 
 
 ## PYESPN
@@ -66,6 +68,8 @@ nba_espn = PYESPN(sport_league='nba')
 print(nfl_espn.TEAM_ID_MAPPING) #nfl team map
 print(nba_espn.TEAM_ID_MAPPING) #nba team map
 ```
+
+this example uses the [teams class](#team-class)
 
 ```python
 # this example uses the teams class
