@@ -52,6 +52,12 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'nascar',
         'sport': 'racing',
         'league': 'nascar-premier'
+    },
+    {
+        'id': 10,
+        'league_abbv': 'indy',
+        'sport': 'racing',
+        'league': 'irl'
     }
 ]
 
