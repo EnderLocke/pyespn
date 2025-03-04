@@ -63,5 +63,10 @@ LEAGUE_CHAMPION_FUTURES_MAP = {
     'nfl': 'NFL - Super Bowl Winner',
     'nba': 'NBA - Winner',
     'cfb': 'NCAA(F) - Championship',
-    'mcbb': 'NCAA(B) - Winner'
+    'mcbb': 'NCAA(B) - Winner',
+    'wnba': 'WNBA - Winner'
 }
+
+BETTING_AVAILABLE = [
+    'nfl', 'nba', 'wnba', 'mcbb', 'cfb'
+]
