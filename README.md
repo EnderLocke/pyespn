@@ -197,6 +197,8 @@ print(draft_pick_info)
 #### Betting Providers
 there are many betting providers across the espn api and they dont appear to be consistant in my profiling. the ones that i have found can be accessed via
 
+there is a mapping for default betting providers for a given sport, it is not guaranteed to return data for every year though
+
 **example**
 ```python
 from pyespn import PYESPN
@@ -212,6 +214,14 @@ print(nfl_espn.BETTING_PROVIDERS)
 
 
 #### Futures
+
+##### get_year_league_champions_futures(season, league_abbv, provider)
+
+
+| Param     | Type | Description   |
+|-----------| --- |------------------|
+| season | <code>number</code> | season for rankings |
+
 
 
 ### Awards Data
