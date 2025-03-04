@@ -4,6 +4,7 @@ from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP
 from .decorators import (requires_betting_available, requires_pro_league,
                          requires_college_league, validate_league)
+from .classes import Team
 
 
 @validate_league
@@ -18,6 +19,18 @@ class PYESPN:
         self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING[self.league_abbv]
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP[self.league_abbv]
+        self.teams = {}
+        self.load_teams()
+
+    def load_teams(self):
+        for team in self.TEAM_ID_MAPPING:
+            self.teams[team['team_id']] = Team(
+                espn_instance=self,
+                team_id=team['team_id'],
+                name=team['team_name'],
+                location=team['team_city'],
+                abbreviation=team['team_abbv']
+            )
 
     def get_player_info(self, player_id):
         return get_player_info_core(player_id=player_id,
