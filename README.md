@@ -19,6 +19,8 @@ please note the readme is a work in progress and there could be more api calls w
   - [Recruiting Data](#recruiting-data)
   - [Draft Data](#draft-data)
   - [Betting Data](#betting-data)
+  - [Award Data](#awards-data)
+  - [Standings Data](#standings-data)
 
 
 ## PYESPN
