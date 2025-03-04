@@ -167,6 +167,7 @@ super_bowl = nfl_espn.get_game_info(event_id=event_id)
 print(super_bowl)
 ```
 
+
 ### Recruiting Data
 this pulls recruiting data and is currently only works for mcbb and cfb
 
@@ -236,7 +237,27 @@ print(nfl_espn.BETTING_PROVIDERS)
 #### Against the Spread
 this appears only available for nfl
 
-#### 
+#### get_team_year_ats_away(team_id, season)
+gets a teams record against the spread while away for a seaeon
+
+| Param   | Type | Description         |
+|---------| --- |---------------------|
+| team_id | <code>number</code> | id for team         |
+| season  | <code>number</code> | season for rankings |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+season = 2024
+team_id = 30 # JAX 
+
+jax_ats = nfl_espn.get_team_year_ats_away(team_id=team_id,
+                                          season=season)
+
+print(jax_ats)
+```
 
 
 #### Futures
