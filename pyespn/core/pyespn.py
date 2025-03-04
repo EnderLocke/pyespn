@@ -58,16 +58,18 @@ class PYESPN():
 
     @requires_betting_available
     def get_league_year_champion_futures(self, season, provider=None):
+        this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
         return get_year_league_champions_futures_core(season=season,
                                                       league_abbv=self.league_abbv,
-                                                      provider=provider if provider else self.DEFAULT_BETTING_PROVIDER)
+                                                      provider=this_provider)
 
     @requires_betting_available
-    def get_league_year_division_champs_futures(self, season, division, provider='Betradar'):
+    def get_league_year_division_champs_futures(self, season, division, provider=None):
+        this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
         return get_division_champ_futures_core(season=season,
                                                division=division,
                                                league_abbv=self.league_abbv,
-                                               provider=provider)
+                                               provider=this_provider)
 
     @requires_betting_available
     def get_team_year_ats_away(self, team_id, season):
