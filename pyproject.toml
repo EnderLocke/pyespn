@@ -7,6 +7,8 @@ authors = [{ name = "Zach Stocker", email = "zacharystocker@gmail.com" }]
 license = { text = "MIT" }
 dependencies = [
     "click>=8.1.8",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.7",
     "requests>=2.32.3",
 ]
 classifiers = [
