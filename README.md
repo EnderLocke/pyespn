@@ -34,7 +34,7 @@ create an init version of the class and feed it the league you want
 
 | Param   | Type               | Description               |
 |---------|--------------------|---------------------------|
-| league  | <code>string</code> | League. Options:          |
+| league  | <code>string</code> | Options:                  |
 |         |                    | - nfl                     |
 |         |                    | - nba                     |
 |         |                    | - wnba                    |
