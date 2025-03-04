@@ -33,3 +33,14 @@ def get_team_logo_img(team_id, league_abbv):
 
     return logo
 
+
+def get_team_colors(team_id, league_abbv):
+    team_content = get_team_info_core(team_id=team_id,
+                                      league_abbv=league_abbv)
+    primary_color = team_content.get('color')
+    alt_color = team_content.get('alternateColor')
+
+    return {
+        'primary_color': primary_color,
+        'alt_color': alt_color
+    }

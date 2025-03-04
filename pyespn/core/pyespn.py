@@ -152,3 +152,7 @@ class PYESPN:
     def get_logo_img(self, team_id):
         return get_team_logo_img(team_id=team_id,
                                  league_abbv=self.league_abbv)
+
+    def get_team_colors(self, team_id):
+        return get_team_colors(team_id=team_id,
+                               league_abbv=self.league_abbv)
