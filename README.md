@@ -237,7 +237,8 @@ for future in nba_futures:
     print(future)
 ```
 
-##### get_division_champ_futures(season, division, provider)
+
+##### get_league_year_division_champs_futures(season, division, provider)
 gets the lines for the specified division/conf from a provider
 
 | Param    | Type                | Description                                                                                                                  |
@@ -247,6 +248,20 @@ gets the lines for the specified division/conf from a provider
 | provider | <code>string</code> | Betting provider<br/> Options can be found in `PYESPN.BETTING_PROVIDERS`<br/> Defaults based on league if not provided.      |
 
 
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nba')
+season = 2024
+division = 'afc'
+
+nfl_futures = nfl_espn.get_league_year_division_champs_futures(season=season,
+                                                               division=division)
+
+for future in nfl_futures:
+    print(future)
+```
 
 
 ### Awards Data
