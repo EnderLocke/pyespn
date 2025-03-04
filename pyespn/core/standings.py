@@ -19,7 +19,7 @@ def get_standings_core(season, standings_type, league_abbv):
         driver_stats = {
             'athlete_id': athlete_content.get('id'),
             'name': athlete_content.get('fullName'),
-            'country': athlete_content.get('flag').get('alt')
+            'country': athlete_content.get('flag', {'alt': 'Not Known'}).get('alt')
         }
         vehicles = []
         for vehicle in athlete_content.get('vehicles', []):
