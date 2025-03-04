@@ -1,4 +1,19 @@
-from pyespn.utilities import open_json
+import os
+import json
+
+
+def open_json(file_path):
+    current_dir = os.path.dirname(os.path.abspath(__file__))  # Get directory path
+
+    file_path = os.path.join(current_dir, file_path)  # Get full path
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        teams_data_load = json.load(file)
+
+    teams_data = teams_data_load['teams']
+
+    return teams_data
+
 
 team_lookup_file = 'files/college_teams_lookup.json'
 college_teams_data = open_json(team_lookup_file)
