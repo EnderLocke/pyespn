@@ -43,4 +43,22 @@ def get_team_colors(team_id, league_abbv):
     return {
         'primary_color': primary_color,
         'alt_color': alt_color
+        }
+
+
+def get_home_venue(team_id, league_abbv):
+    team_content = get_team_info_core(team_id=team_id,
+                                      league_abbv=league_abbv)
+
+    venue_info = team_content.get('venue')
+
+    venue = {
+        'id': venue_info['id'],
+        'name': venue_info['fullName'],
+        'address': venue_info['address'],
+        'grass': venue_info['grass'],
+        'indoor': venue_info['indoor'],
+        'img_url': venue_info.get('images', [{'href': None}])[0].get('href')
     }
+
+    return venue
