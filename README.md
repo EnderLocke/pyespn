@@ -193,6 +193,8 @@ print(nfl_espn.BETTING_PROVIDERS)
 #### Futures
 
 
+### Awards Data
+
 
 ### Standings Data
 this appears only available to racing leagues 
