@@ -1,10 +1,9 @@
 from pyespn.core import *
 from pyespn.data.leagues import LEAGUE_API_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
-from pyespn.data.betting import BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP
-from .decorators import (requires_betting_available, requires_pro_league,
-                         requires_college_league, validate_league,
-                         requires_standings_available)
+from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
+                                 LEAGUE_DIVISION_FUTURES_MAPPING)
+from .decorators import *
 from .classes import Team
 
 
@@ -14,11 +13,10 @@ class PYESPN:
     valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING}
 
     def __init__(self, sport_league='nfl'):
-        # Validate sport_league
-
         self.league_abbv = sport_league.lower()
         self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING.get(self.league_abbv)
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
+        self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv)]
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.teams = {}
         self.load_teams()
