@@ -143,3 +143,6 @@ def get_team_year_ats_home_underdog_core(team_id, season, league_abbv):
                          season=season,
                          ats_type='atsHomeUnderdog',
                          league_abbv=league_abbv)
+
+# todo need to look at this new api i just found
+#  http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2024/types/0/teams/30/odds-records?lang=en&region=us
