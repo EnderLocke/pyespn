@@ -192,6 +192,8 @@ print(nfl_espn.BETTING_PROVIDERS)
 
 #### Futures
 
+
+
 ### Standings Data
 this appears only available to racing leagues 
 
