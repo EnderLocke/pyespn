@@ -2,6 +2,7 @@
 
 ## 0.2.1
 * readme updates
+* added indy car
 * 
 
 ## 0.2.0
