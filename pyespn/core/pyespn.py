@@ -3,17 +3,16 @@ from pyespn.data.leagues import LEAGUE_API_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP
 from .decorators import (requires_betting_available, requires_pro_league,
-                         requires_college_league)
+                         requires_college_league, validate_league)
 
 
-class PYESPN():
+@validate_league
+class PYESPN:
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
     valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING}
 
     def __init__(self, sport_league='nfl'):
         # Validate sport_league
-        if sport_league not in self.valid_leagues:
-            raise ValueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
 
         self.league_abbv = sport_league.lower()
         self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING[self.league_abbv]

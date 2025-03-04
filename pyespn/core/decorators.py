@@ -46,3 +46,18 @@ def requires_pro_league(check):
             return func(self, *args, **kwargs)
         return wrapper
     return decorator
+
+
+def validate_league(cls):
+    """Class decorator to validate sport_league on instantiation."""
+    original_init = cls.__init__
+
+    def new_init(self, sport_league='nfl', *args, **kwargs):
+        sport_league = sport_league.lower()
+        if sport_league not in self.valid_leagues:
+            raise ValueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
+        original_init(self, sport_league, *args, **kwargs)
+
+    cls.__init__ = new_init
+    return cls
+
