@@ -16,7 +16,7 @@ class PYESPN:
         self.league_abbv = sport_league.lower()
         self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING.get(self.league_abbv)
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
-        self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv)]
+        self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.teams = {}
         self.load_teams()
