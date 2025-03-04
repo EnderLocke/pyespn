@@ -1,0 +1,1 @@
+from .leagues import LeagueNotSupportedError
