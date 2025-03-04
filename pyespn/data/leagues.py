@@ -22,13 +22,25 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'nba',
         'sport': 'basketball',
         'league': 'nba'
+    },
+    {
+        'id': 5,
+        'league_abbv': 'cbb',
+        'sport': 'baseball',
+        'league': 'college-baseball'
+    },
+    {
+        'id': 5,
+        'league_abbv': 'csb',
+        'sport': 'baseball',
+        'league': 'college-softball'
     }
 ]
 
 PRO_LEAGUES = [
-    'nfl', 'nba', 'nhl', 'mlb'
+    'nfl', 'nba', 'nhl', 'mlb', 'wnba'
 ]
 
 COLLEGE_LEAGUES = [
-    'cfb', 'mcbb', 'wcbb'
+    'cfb', 'mcbb', 'wcbb', 'cbb', 'csb'
 ]
