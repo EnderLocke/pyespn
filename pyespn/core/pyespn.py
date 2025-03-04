@@ -21,6 +21,15 @@ class PYESPN:
         self.teams = {}
         self.load_teams()
 
+    def __repr__(self):
+        """
+        Returns a string representation of the PYESPN instance.
+
+        Returns:
+            str: A formatted string with class details
+        """
+        return f"<League {self.league_abbv}>"
+
     def load_teams(self):
         for team in self.TEAM_ID_MAPPING:
             self.teams[team['team_id']] = Team(
