@@ -10,6 +10,7 @@
 * added mlb
 * added f1
 * added team class to make easier use of data in the future
+* added awards api call
 * 
 
 ## 0.1.5
