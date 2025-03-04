@@ -5,6 +5,7 @@
 * added indy car
 * added team colors func
 * added team logo func
+* moneyline todo
 * 
 
 ## 0.2.0
