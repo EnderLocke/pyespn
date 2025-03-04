@@ -1,0 +1,1666 @@
+{
+    "teams": [
+        {
+            "team_name": "Orioles",
+            "team_city": "Baltimore",
+            "team_id": 1,
+            "team_abbv": "BAL"
+        },
+        {
+            "team_name": "Red Sox",
+            "team_city": "Boston",
+            "team_id": 2,
+            "team_abbv": "BOS"
+        },
+        {
+            "team_name": "Angels",
+            "team_city": "Los Angeles",
+            "team_id": 3,
+            "team_abbv": "LAA"
+        },
+        {
+            "team_name": "White Sox",
+            "team_city": "Chicago",
+            "team_id": 4,
+            "team_abbv": "CHW"
+        },
+        {
+            "team_name": "Guardians",
+            "team_city": "Cleveland",
+            "team_id": 5,
+            "team_abbv": "CLE"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Detroit",
+            "team_id": 6,
+            "team_abbv": "DET"
+        },
+        {
+            "team_name": "Royals",
+            "team_city": "Kansas City",
+            "team_id": 7,
+            "team_abbv": "KC"
+        },
+        {
+            "team_name": "Brewers",
+            "team_city": "Milwaukee",
+            "team_id": 8,
+            "team_abbv": "MIL"
+        },
+        {
+            "team_name": "Twins",
+            "team_city": "Minnesota",
+            "team_id": 9,
+            "team_abbv": "MIN"
+        },
+        {
+            "team_name": "Yankees",
+            "team_city": "New York",
+            "team_id": 10,
+            "team_abbv": "NYY"
+        },
+        {
+            "team_name": "Athletics",
+            "team_city": "Athletics",
+            "team_id": 11,
+            "team_abbv": "ATH"
+        },
+        {
+            "team_name": "Mariners",
+            "team_city": "Seattle",
+            "team_id": 12,
+            "team_abbv": "SEA"
+        },
+        {
+            "team_name": "Rangers",
+            "team_city": "Texas",
+            "team_id": 13,
+            "team_abbv": "TEX"
+        },
+        {
+            "team_name": "Blue Jays",
+            "team_city": "Toronto",
+            "team_id": 14,
+            "team_abbv": "TOR"
+        },
+        {
+            "team_name": "Braves",
+            "team_city": "Atlanta",
+            "team_id": 15,
+            "team_abbv": "ATL"
+        },
+        {
+            "team_name": "Cubs",
+            "team_city": "Chicago",
+            "team_id": 16,
+            "team_abbv": "CHC"
+        },
+        {
+            "team_name": "Reds",
+            "team_city": "Cincinnati",
+            "team_id": 17,
+            "team_abbv": "CIN"
+        },
+        {
+            "team_name": "Astros",
+            "team_city": "Houston",
+            "team_id": 18,
+            "team_abbv": "HOU"
+        },
+        {
+            "team_name": "Dodgers",
+            "team_city": "Los Angeles",
+            "team_id": 19,
+            "team_abbv": "LAD"
+        },
+        {
+            "team_name": "Nationals",
+            "team_city": "Washington",
+            "team_id": 20,
+            "team_abbv": "WSH"
+        },
+        {
+            "team_name": "Mets",
+            "team_city": "New York",
+            "team_id": 21,
+            "team_abbv": "NYM"
+        },
+        {
+            "team_name": "Phillies",
+            "team_city": "Philadelphia",
+            "team_id": 22,
+            "team_abbv": "PHI"
+        },
+        {
+            "team_name": "Pirates",
+            "team_city": "Pittsburgh",
+            "team_id": 23,
+            "team_abbv": "PIT"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "St. Louis",
+            "team_id": 24,
+            "team_abbv": "STL"
+        },
+        {
+            "team_name": "Padres",
+            "team_city": "San Diego",
+            "team_id": 25,
+            "team_abbv": "SD"
+        },
+        {
+            "team_name": "Giants",
+            "team_city": "San Francisco",
+            "team_id": 26,
+            "team_abbv": "SF"
+        },
+        {
+            "team_name": "Rockies",
+            "team_city": "Colorado",
+            "team_id": 27,
+            "team_abbv": "COL"
+        },
+        {
+            "team_name": "Marlins",
+            "team_city": "Miami",
+            "team_id": 28,
+            "team_abbv": "MIA"
+        },
+        {
+            "team_name": "Diamondbacks",
+            "team_city": "Arizona",
+            "team_id": 29,
+            "team_abbv": "ARI"
+        },
+        {
+            "team_name": "Rays",
+            "team_city": "Tampa Bay",
+            "team_id": 30,
+            "team_abbv": "TB"
+        },
+        {
+            "team_name": "All-Stars",
+            "team_city": "American",
+            "team_id": 31,
+            "team_abbv": "AL"
+        },
+        {
+            "team_name": "All-Stars",
+            "team_city": "National",
+            "team_id": 32,
+            "team_abbv": "NL"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Boston College",
+            "team_id": 40,
+            "team_abbv": "BC"
+        },
+        {
+            "team_name": null,
+            "team_city": "Erie",
+            "team_id": 41,
+            "team_abbv": "ERI"
+        },
+        {
+            "team_name": null,
+            "team_city": "Fla. Southern",
+            "team_id": 42,
+            "team_abbv": "FSO"
+        },
+        {
+            "team_name": null,
+            "team_city": "Florida State",
+            "team_id": 43,
+            "team_abbv": "FSU"
+        },
+        {
+            "team_name": null,
+            "team_city": "Georgia Tech",
+            "team_id": 44,
+            "team_abbv": "GTC"
+        },
+        {
+            "team_name": null,
+            "team_city": "Notre Dame",
+            "team_id": 45,
+            "team_abbv": "NOT"
+        },
+        {
+            "team_name": null,
+            "team_city": "Round Rock",
+            "team_id": 46,
+            "team_abbv": "ROU"
+        },
+        {
+            "team_name": null,
+            "team_city": "Univ of Houston",
+            "team_id": 47,
+            "team_abbv": "UHC"
+        },
+        {
+            "team_name": null,
+            "team_city": "Cubs Minor Lg.",
+            "team_id": 48,
+            "team_abbv": "CHM"
+        },
+        {
+            "team_name": null,
+            "team_city": "Cubs Farm Clubs",
+            "team_id": 49,
+            "team_abbv": "CUB"
+        },
+        {
+            "team_name": null,
+            "team_city": "Lake Elsinore",
+            "team_id": 51,
+            "team_abbv": "LAK"
+        },
+        {
+            "team_name": "River Cats",
+            "team_city": "Sacramento",
+            "team_id": 52,
+            "team_abbv": "SAC"
+        },
+        {
+            "team_name": null,
+            "team_city": "West Tennessee",
+            "team_id": 53,
+            "team_abbv": "WTN"
+        },
+        {
+            "team_name": null,
+            "team_city": "Univ of Georgia",
+            "team_id": 54,
+            "team_abbv": "UGA"
+        },
+        {
+            "team_name": null,
+            "team_city": "St. Leo's",
+            "team_id": 55,
+            "team_abbv": "SLU"
+        },
+        {
+            "team_name": "Spartans",
+            "team_city": "Univ of Tampa",
+            "team_id": 56,
+            "team_abbv": "UTA"
+        },
+        {
+            "team_name": "Sun Devils",
+            "team_city": "Univ of Arizona",
+            "team_id": 57,
+            "team_abbv": "UA"
+        },
+        {
+            "team_name": null,
+            "team_city": "SCF",
+            "team_id": 58,
+            "team_abbv": "SCF"
+        },
+        {
+            "team_name": null,
+            "team_city": "Univ of Miami",
+            "team_id": 59,
+            "team_abbv": "UM"
+        },
+        {
+            "team_name": "Wonders             ",
+            "team_city": "Brooklyn            ",
+            "team_id": 101,
+            "team_abbv": "BRO"
+        },
+        {
+            "team_name": "Giants              ",
+            "team_city": "New York            ",
+            "team_id": 102,
+            "team_abbv": "NY "
+        },
+        {
+            "team_name": "Pirates             ",
+            "team_city": "Chicago             ",
+            "team_id": 103,
+            "team_abbv": "CHI"
+        },
+        {
+            "team_name": "Athletics           ",
+            "team_city": "Philadelphia        ",
+            "team_id": 104,
+            "team_abbv": "PHI"
+        },
+        {
+            "team_name": "Burghers            ",
+            "team_city": "Pittsburgh          ",
+            "team_id": 105,
+            "team_abbv": "PIT"
+        },
+        {
+            "team_name": "Infants             ",
+            "team_city": "Cleveland           ",
+            "team_id": 106,
+            "team_abbv": "CLE"
+        },
+        {
+            "team_name": "Bisons              ",
+            "team_city": "Buffalo             ",
+            "team_id": 107,
+            "team_abbv": "BUF"
+        },
+        {
+            "team_name": "Cream Citys         ",
+            "team_city": "Milwaukee           ",
+            "team_id": 111,
+            "team_abbv": "MIL"
+        },
+        {
+            "team_name": "Outlaw Reds         ",
+            "team_city": "Cincinnati          ",
+            "team_id": 112,
+            "team_abbv": "CIN"
+        },
+        {
+            "team_name": "Monumentals         ",
+            "team_city": "Baltimore           ",
+            "team_id": 113,
+            "team_abbv": "BAL"
+        },
+        {
+            "team_name": "Reds                ",
+            "team_city": "Boston              ",
+            "team_id": 114,
+            "team_abbv": "BOS"
+        },
+        {
+            "team_name": "Browns              ",
+            "team_city": "Chicago             ",
+            "team_id": 116,
+            "team_abbv": "CHI"
+        },
+        {
+            "team_name": "Nationals           ",
+            "team_city": "Washington          ",
+            "team_id": 117,
+            "team_abbv": "WAS"
+        },
+        {
+            "team_name": "Keystones           ",
+            "team_city": "Philadelphia        ",
+            "team_id": 118,
+            "team_abbv": "PHI"
+        },
+        {
+            "team_name": "Saints              ",
+            "team_city": "St. Paul            ",
+            "team_id": 119,
+            "team_abbv": "STP"
+        },
+        {
+            "team_name": "Mountain Citys      ",
+            "team_city": "Altoona             ",
+            "team_id": 120,
+            "team_abbv": "ALT"
+        },
+        {
+            "team_name": "Unions              ",
+            "team_city": "Kansas City         ",
+            "team_id": 121,
+            "team_abbv": "KC "
+        },
+        {
+            "team_name": "Quicksteps          ",
+            "team_city": "Wilmington          ",
+            "team_id": 122,
+            "team_abbv": "WIL"
+        },
+        {
+            "team_name": "Nationals           ",
+            "team_city": "Washington          ",
+            "team_id": 123,
+            "team_abbv": "WAD"
+        },
+        {
+            "team_name": "Maumees             ",
+            "team_city": "Toledo              ",
+            "team_id": 124,
+            "team_abbv": "TOL"
+        },
+        {
+            "team_name": "Buckeyes            ",
+            "team_city": "Columbus            ",
+            "team_id": 125,
+            "team_abbv": "COC"
+        },
+        {
+            "team_name": "Statesmen           ",
+            "team_city": "Washington          ",
+            "team_id": 126,
+            "team_abbv": "WAN"
+        },
+        {
+            "team_name": "Grays               ",
+            "team_city": "Louisville          ",
+            "team_id": 127,
+            "team_abbv": "LOU"
+        },
+        {
+            "team_name": "Orioles             ",
+            "team_city": "Baltimore           ",
+            "team_id": 128,
+            "team_abbv": "BAL"
+        },
+        {
+            "team_name": "Spiders             ",
+            "team_city": "Cleveland           ",
+            "team_id": 129,
+            "team_abbv": "CLE"
+        },
+        {
+            "team_name": "Colonels            ",
+            "team_city": "Louisville          ",
+            "team_id": 130,
+            "team_abbv": "LOU"
+        },
+        {
+            "team_name": "Senators            ",
+            "team_city": "Washington          ",
+            "team_id": 131,
+            "team_abbv": "WAS"
+        },
+        {
+            "team_name": "Hoosiers            ",
+            "team_city": "Indianapolis        ",
+            "team_id": 132,
+            "team_abbv": "IND"
+        },
+        {
+            "team_name": "Wolverines          ",
+            "team_city": "Detroit             ",
+            "team_id": 133,
+            "team_abbv": "DET"
+        },
+        {
+            "team_name": "Cowboys             ",
+            "team_city": "Kansas City         ",
+            "team_id": 134,
+            "team_abbv": "KCN"
+        },
+        {
+            "team_name": "Grays               ",
+            "team_city": "Providence          ",
+            "team_id": 135,
+            "team_abbv": "PRV"
+        },
+        {
+            "team_name": "Bisons              ",
+            "team_city": "Buffalo             ",
+            "team_id": 136,
+            "team_abbv": "BUF"
+        },
+        {
+            "team_name": "Trojans             ",
+            "team_city": "Troy                ",
+            "team_id": 137,
+            "team_abbv": "TRY"
+        },
+        {
+            "team_name": "Ruby Legs           ",
+            "team_city": "Worcester           ",
+            "team_id": 138,
+            "team_abbv": "WOR"
+        },
+        {
+            "team_name": "Stars               ",
+            "team_city": "Syracuse            ",
+            "team_id": 139,
+            "team_abbv": "SYR"
+        },
+        {
+            "team_name": "Cream Citys         ",
+            "team_city": "Milwaukee           ",
+            "team_id": 140,
+            "team_abbv": "MIL"
+        },
+        {
+            "team_name": "Dark Blues          ",
+            "team_city": "Hartford            ",
+            "team_id": 141,
+            "team_abbv": "HAR"
+        },
+        {
+            "team_name": "Athletics           ",
+            "team_city": "Philadelphia        ",
+            "team_id": 142,
+            "team_abbv": "PHN"
+        },
+        {
+            "team_name": "Brown Stockings     ",
+            "team_city": "St. Louis           ",
+            "team_id": 143,
+            "team_abbv": "STL"
+        },
+        {
+            "team_name": "Maroons             ",
+            "team_city": "St. Louis           ",
+            "team_id": 144,
+            "team_abbv": "STL"
+        },
+        {
+            "team_name": "Mutuals             ",
+            "team_city": "New York            ",
+            "team_id": 145,
+            "team_abbv": "NYM"
+        },
+        {
+            "team_name": "Hoosiers            ",
+            "team_city": "Indianapolis        ",
+            "team_id": 146,
+            "team_abbv": "IND"
+        },
+        {
+            "team_name": "Blues               ",
+            "team_city": "Cleveland           ",
+            "team_id": 147,
+            "team_abbv": "CLE"
+        },
+        {
+            "team_name": "Reds                ",
+            "team_city": "Boston              ",
+            "team_id": 148,
+            "team_abbv": "BOS"
+        },
+        {
+            "team_name": "Athletics           ",
+            "team_city": "Philadelphia        ",
+            "team_id": 149,
+            "team_abbv": "PHI"
+        },
+        {
+            "team_name": "Brewers             ",
+            "team_city": "Milwaukee           ",
+            "team_id": 150,
+            "team_abbv": "MIL"
+        },
+        {
+            "team_name": "Buckeyes            ",
+            "team_city": "Columbus            ",
+            "team_id": 151,
+            "team_abbv": "COL"
+        },
+        {
+            "team_name": "Blue Stockings      ",
+            "team_city": "Toledo              ",
+            "team_id": 152,
+            "team_abbv": "TOL"
+        },
+        {
+            "team_name": "Broncos             ",
+            "team_city": "Rochester           ",
+            "team_id": 153,
+            "team_abbv": "ROC"
+        },
+        {
+            "team_name": "Stars               ",
+            "team_city": "Syracuse            ",
+            "team_id": 154,
+            "team_abbv": "SYR"
+        },
+        {
+            "team_name": "Cowboys             ",
+            "team_city": "Kansas City         ",
+            "team_id": 155,
+            "team_abbv": "KC "
+        },
+        {
+            "team_name": "Metropolitans       ",
+            "team_city": "New York            ",
+            "team_id": 156,
+            "team_abbv": "NY "
+        },
+        {
+            "team_name": "Virginians          ",
+            "team_city": "Richmond            ",
+            "team_id": 157,
+            "team_abbv": "RIC"
+        },
+        {
+            "team_name": "Hoosiers            ",
+            "team_city": "Indianapolis        ",
+            "team_id": 158,
+            "team_abbv": "IND"
+        },
+        {
+            "team_name": "Gladiators          ",
+            "team_city": "Brooklyn            ",
+            "team_id": 159,
+            "team_abbv": "BRK"
+        },
+        {
+            "team_name": "Kellys              ",
+            "team_city": "Cincinnati          ",
+            "team_id": 160,
+            "team_abbv": "CIN"
+        },
+        {
+            "team_name": "Terrapins           ",
+            "team_city": "Baltimore           ",
+            "team_id": 161,
+            "team_abbv": "BAL"
+        },
+        {
+            "team_name": "Tip-Tops            ",
+            "team_city": "Brooklyn            ",
+            "team_id": 162,
+            "team_abbv": "BRO"
+        },
+        {
+            "team_name": "Blues               ",
+            "team_city": "Buffalo             ",
+            "team_id": 163,
+            "team_abbv": "BUF"
+        },
+        {
+            "team_name": "Whales              ",
+            "team_city": "Chicago             ",
+            "team_id": 164,
+            "team_abbv": "CHI"
+        },
+        {
+            "team_name": "Packers             ",
+            "team_city": "Kansas City         ",
+            "team_id": 165,
+            "team_abbv": "KC "
+        },
+        {
+            "team_name": "Peppers             ",
+            "team_city": "Newark              ",
+            "team_id": 166,
+            "team_abbv": "NEW"
+        },
+        {
+            "team_name": "Rebels              ",
+            "team_city": "Pittsburgh          ",
+            "team_id": 167,
+            "team_abbv": "PIT"
+        },
+        {
+            "team_name": "Terriers            ",
+            "team_city": "St. Louis           ",
+            "team_id": 168,
+            "team_abbv": "STL"
+        },
+        {
+            "team_name": "Reds                ",
+            "team_city": "Cincinnati          ",
+            "team_id": 169,
+            "team_abbv": "CIN"
+        },
+        {
+            "team_name": "Stogies             ",
+            "team_city": "Pittsburgh          ",
+            "team_id": 170,
+            "team_abbv": "PIT"
+        },
+        {
+            "team_name": null,
+            "team_city": "Florida Atlantic",
+            "team_id": 171,
+            "team_abbv": "FAU"
+        },
+        {
+            "team_name": null,
+            "team_city": "Miami Florida",
+            "team_id": 175,
+            "team_abbv": "UM"
+        },
+        {
+            "team_name": null,
+            "team_city": "Navy",
+            "team_id": 176,
+            "team_abbv": "NAV"
+        },
+        {
+            "team_name": null,
+            "team_city": "Bethune Cookman",
+            "team_id": 177,
+            "team_abbv": "BET"
+        },
+        {
+            "team_name": "Huskies",
+            "team_city": "Northeastern",
+            "team_id": 178,
+            "team_abbv": "NE"
+        },
+        {
+            "team_name": null,
+            "team_city": "San Diego State",
+            "team_id": 179,
+            "team_abbv": "SDU"
+        },
+        {
+            "team_name": "Express",
+            "team_city": "Round Rock",
+            "team_id": 180,
+            "team_abbv": "ROC"
+        },
+        {
+            "team_name": "Sky Sox",
+            "team_city": "Colorado Springs",
+            "team_id": 181,
+            "team_abbv": "CSP"
+        },
+        {
+            "team_name": "Storm",
+            "team_city": "Lake Elsinore",
+            "team_id": 182,
+            "team_abbv": "LAK"
+        },
+        {
+            "team_name": "Cardinals",
+            "team_city": "Springfield",
+            "team_id": 183,
+            "team_abbv": "SPR"
+        },
+        {
+            "team_name": "Grasshoppers",
+            "team_city": "Greensboro",
+            "team_id": 184,
+            "team_abbv": "GBO"
+        },
+        {
+            "team_name": "All-Stars",
+            "team_city": "Minor League Future",
+            "team_id": 185,
+            "team_abbv": "FAS"
+        },
+        {
+            "team_name": null,
+            "team_city": "Birmingham",
+            "team_id": 186,
+            "team_abbv": "BIR"
+        },
+        {
+            "team_name": null,
+            "team_city": "Memphis",
+            "team_id": 187,
+            "team_abbv": "MEM"
+        },
+        {
+            "team_name": null,
+            "team_city": "Florida State",
+            "team_id": 188,
+            "team_abbv": "FSU"
+        },
+        {
+            "team_name": null,
+            "team_city": "Michigan",
+            "team_id": 189,
+            "team_abbv": "MCH"
+        },
+        {
+            "team_name": "Billikens",
+            "team_city": "Saint Louis",
+            "team_id": 190,
+            "team_abbv": "SLB"
+        },
+        {
+            "team_name": null,
+            "team_city": "U of South Florida",
+            "team_id": 191,
+            "team_abbv": "UFL"
+        },
+        {
+            "team_name": "Diablos Rojos",
+            "team_city": "Diablos Rojos",
+            "team_id": 192,
+            "team_abbv": "MEX"
+        },
+        {
+            "team_name": null,
+            "team_city": "Virginia Tech",
+            "team_id": 193,
+            "team_abbv": "VAT"
+        },
+        {
+            "team_name": "Grizzlies",
+            "team_city": "Fresno",
+            "team_id": 194,
+            "team_abbv": "FRE"
+        },
+        {
+            "team_name": "Roughriders",
+            "team_city": "Frisco",
+            "team_id": 195,
+            "team_abbv": "FRI"
+        },
+        {
+            "team_name": null,
+            "team_city": "Georgetown",
+            "team_id": 196,
+            "team_abbv": "GTN"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Hanshin",
+            "team_id": 197,
+            "team_abbv": "HAN"
+        },
+        {
+            "team_name": "Giants",
+            "team_city": "Yomiuri",
+            "team_id": 198,
+            "team_abbv": "YOM"
+        },
+        {
+            "team_name": "Sultanes",
+            "team_city": "Monterrey",
+            "team_id": 199,
+            "team_abbv": "MTY"
+        },
+        {
+            "team_name": "Ironpigs",
+            "team_city": "Lehigh Valley",
+            "team_id": 200,
+            "team_abbv": "LEI"
+        },
+        {
+            "team_name": "Reds Futures",
+            "team_city": "Cincinnati (F)",
+            "team_id": 201,
+            "team_abbv": "CRF"
+        },
+        {
+            "team_name": "Hooks",
+            "team_city": "Corpus Christi",
+            "team_id": 202,
+            "team_abbv": "CCH"
+        },
+        {
+            "team_name": null,
+            "team_city": "South Africa",
+            "team_id": 203,
+            "team_abbv": "SOA"
+        },
+        {
+            "team_name": null,
+            "team_city": "Mexico",
+            "team_id": 204,
+            "team_abbv": "MEX"
+        },
+        {
+            "team_name": null,
+            "team_city": "Australia",
+            "team_id": 205,
+            "team_abbv": "AUS"
+        },
+        {
+            "team_name": null,
+            "team_city": "United States",
+            "team_id": 206,
+            "team_abbv": "USA"
+        },
+        {
+            "team_name": null,
+            "team_city": "Puerto Rico",
+            "team_id": 207,
+            "team_abbv": "PR"
+        },
+        {
+            "team_name": null,
+            "team_city": "Panama",
+            "team_id": 208,
+            "team_abbv": "PAN"
+        },
+        {
+            "team_name": null,
+            "team_city": "Venezuela",
+            "team_id": 209,
+            "team_abbv": "VEN"
+        },
+        {
+            "team_name": null,
+            "team_city": "Canada",
+            "team_id": 210,
+            "team_abbv": "CAN"
+        },
+        {
+            "team_name": null,
+            "team_city": "Italy",
+            "team_id": 211,
+            "team_abbv": "ITA"
+        },
+        {
+            "team_name": null,
+            "team_city": "Dominican Republic",
+            "team_id": 212,
+            "team_abbv": "DR"
+        },
+        {
+            "team_name": null,
+            "team_city": "Netherlands",
+            "team_id": 213,
+            "team_abbv": "NET"
+        },
+        {
+            "team_name": "Missions",
+            "team_city": "San Antonio",
+            "team_id": 214,
+            "team_abbv": "SAN"
+        },
+        {
+            "team_name": "Mudcats",
+            "team_city": "Carolina",
+            "team_id": 215,
+            "team_abbv": "CAR"
+        },
+        {
+            "team_name": null,
+            "team_city": "Japan",
+            "team_id": 216,
+            "team_abbv": "JPN"
+        },
+        {
+            "team_name": null,
+            "team_city": "Korea",
+            "team_id": 217,
+            "team_abbv": "KOR"
+        },
+        {
+            "team_name": "Knights",
+            "team_city": "Charlotte",
+            "team_id": 218,
+            "team_abbv": "CHA"
+        },
+        {
+            "team_name": "Suns",
+            "team_city": "Jacksonville",
+            "team_id": 219,
+            "team_abbv": "JAX"
+        },
+        {
+            "team_name": "Bulls",
+            "team_city": "Durham",
+            "team_id": 220,
+            "team_abbv": "DUR"
+        },
+        {
+            "team_name": "Yankees Futures",
+            "team_city": "New York (F)",
+            "team_id": 221,
+            "team_abbv": "NYF"
+        },
+        {
+            "team_name": null,
+            "team_city": "Coastal Carolina",
+            "team_id": 222,
+            "team_abbv": "CCU"
+        },
+        {
+            "team_name": "Clippers",
+            "team_city": "Columbus",
+            "team_id": 223,
+            "team_abbv": "COL"
+        },
+        {
+            "team_name": "Dash",
+            "team_city": "Winston-Salem",
+            "team_id": 224,
+            "team_abbv": "WIN"
+        },
+        {
+            "team_name": "Tigres",
+            "team_city": "Quintana Roo",
+            "team_id": 225,
+            "team_abbv": "QUI"
+        },
+        {
+            "team_name": null,
+            "team_city": "Oklahoma",
+            "team_id": 226,
+            "team_abbv": "OKL"
+        },
+        {
+            "team_name": null,
+            "team_city": "Tulsa",
+            "team_id": 227,
+            "team_abbv": "TUL"
+        },
+        {
+            "team_name": "Braves Futures",
+            "team_city": "Atlanta (F)",
+            "team_id": 228,
+            "team_abbv": "ABF"
+        },
+        {
+            "team_name": "Mud Hens",
+            "team_city": "Toledo",
+            "team_id": 229,
+            "team_abbv": "TMH"
+        },
+        {
+            "team_name": "Miracle",
+            "team_city": "Fort Myers",
+            "team_id": 230,
+            "team_abbv": "FMM"
+        },
+        {
+            "team_name": null,
+            "team_city": "Florida Intl",
+            "team_id": 231,
+            "team_abbv": "FLI"
+        },
+        {
+            "team_name": "Futures",
+            "team_city": "Tampa Bay (F)",
+            "team_id": 232,
+            "team_abbv": "TBF"
+        },
+        {
+            "team_name": "Tide",
+            "team_city": "Norfolk",
+            "team_id": 233,
+            "team_abbv": "NFT"
+        },
+        {
+            "team_name": null,
+            "team_city": "Spain",
+            "team_id": 234,
+            "team_abbv": "ESP"
+        },
+        {
+            "team_name": null,
+            "team_city": "Brazil",
+            "team_id": 235,
+            "team_abbv": "BRA"
+        },
+        {
+            "team_name": "Curve",
+            "team_city": "Altoona",
+            "team_id": 236,
+            "team_abbv": "ATC"
+        },
+        {
+            "team_name": "Braves",
+            "team_city": "Mississippi",
+            "team_id": 237,
+            "team_abbv": "MSB"
+        },
+        {
+            "team_name": null,
+            "team_city": "Chinese Taipei",
+            "team_id": 238,
+            "team_abbv": "CHT"
+        },
+        {
+            "team_name": "Cuba",
+            "team_city": "Cuba",
+            "team_id": 239,
+            "team_abbv": "CBA"
+        },
+        {
+            "team_name": null,
+            "team_city": "Army",
+            "team_id": 240,
+            "team_abbv": "ARM"
+        },
+        {
+            "team_name": "WhiteCaps",
+            "team_city": "West Michigan",
+            "team_id": 241,
+            "team_abbv": "WMW"
+        },
+        {
+            "team_name": "Quakes",
+            "team_city": "Rancho Cucamonga",
+            "team_id": 242,
+            "team_abbv": "RCQ"
+        },
+        {
+            "team_name": "Zephyrs",
+            "team_city": "New Orleans",
+            "team_id": 243,
+            "team_abbv": "NOZ"
+        },
+        {
+            "team_name": null,
+            "team_city": "Florida Gulf Coast",
+            "team_id": 244,
+            "team_abbv": "FGC"
+        },
+        {
+            "team_name": null,
+            "team_city": "Canada Jr National",
+            "team_id": 245,
+            "team_abbv": "CJR"
+        },
+        {
+            "team_name": "Rojos",
+            "team_city": "Aguila De Veracruz",
+            "team_id": 246,
+            "team_abbv": "RAV"
+        },
+        {
+            "team_name": "Futures",
+            "team_city": "San Francisco (F)",
+            "team_id": 247,
+            "team_abbv": "SFF"
+        },
+        {
+            "team_name": "Bats",
+            "team_city": "Louisville",
+            "team_id": 248,
+            "team_abbv": "LOB"
+        },
+        {
+            "team_name": "Biscuits",
+            "team_city": "Montgomery",
+            "team_id": 249,
+            "team_abbv": "MTB"
+        },
+        {
+            "team_name": "Blue Wahoos",
+            "team_city": "Pensacola",
+            "team_id": 250,
+            "team_abbv": "PBW"
+        },
+        {
+            "team_name": "Gophers",
+            "team_city": "U of Minnesota",
+            "team_id": 251,
+            "team_abbv": "UMN"
+        },
+        {
+            "team_name": null,
+            "team_city": "U of Milwaukee",
+            "team_id": 252,
+            "team_abbv": "UML"
+        },
+        {
+            "team_name": null,
+            "team_city": "Arizona State",
+            "team_id": 253,
+            "team_abbv": "ASD"
+        },
+        {
+            "team_name": "Bees",
+            "team_city": "Salt Lake",
+            "team_id": 254,
+            "team_abbv": "SL"
+        },
+        {
+            "team_name": "Chihuahuas",
+            "team_city": "El Paso",
+            "team_id": 255,
+            "team_abbv": "ELP"
+        },
+        {
+            "team_name": "Shuckers",
+            "team_city": "Biloxi",
+            "team_id": 256,
+            "team_abbv": "BIL"
+        },
+        {
+            "team_name": "Fightin Phils",
+            "team_city": "Reading",
+            "team_id": 257,
+            "team_abbv": "RFP"
+        },
+        {
+            "team_name": "Grand Canyon",
+            "team_city": "Grand Canyon",
+            "team_id": 258,
+            "team_abbv": "GCU"
+        },
+        {
+            "team_name": "South Florida",
+            "team_city": "Lakeland",
+            "team_id": 259,
+            "team_abbv": "FSC"
+        },
+        {
+            "team_name": "COLOMBIA",
+            "team_city": "Colombia",
+            "team_id": 260,
+            "team_abbv": "CLM"
+        },
+        {
+            "team_name": "PUERTO RICO",
+            "team_city": "Puerto Rico",
+            "team_id": 261,
+            "team_abbv": "PR"
+        },
+        {
+            "team_name": "RED WINGS",
+            "team_city": "Rochester",
+            "team_id": 262,
+            "team_abbv": "RRW"
+        },
+        {
+            "team_name": " LAS VEGAS 51S ",
+            "team_city": "LAS VEGAS",
+            "team_id": 263,
+            "team_abbv": "LV5"
+        },
+        {
+            "team_name": "Storm Chasers",
+            "team_city": "Omaha",
+            "team_id": 264,
+            "team_abbv": "OMA"
+        },
+        {
+            "team_name": "Fire",
+            "team_city": "Southeastern",
+            "team_id": 265,
+            "team_abbv": "SEU"
+        },
+        {
+            "team_name": "Tigers Futures",
+            "team_city": "Detroit",
+            "team_id": 266,
+            "team_abbv": "DTF"
+        },
+        {
+            "team_name": "Fighters",
+            "team_city": "Nippon",
+            "team_id": 267,
+            "team_abbv": "NF"
+        },
+        {
+            "team_name": "Sounds",
+            "team_city": "Nashville",
+            "team_id": 268,
+            "team_abbv": "NS"
+        },
+        {
+            "team_name": null,
+            "team_city": "Albuquerque",
+            "team_id": 269,
+            "team_abbv": "ALB"
+        },
+        {
+            "team_name": "Grays",
+            "team_city": "Akron",
+            "team_id": 270,
+            "team_abbv": "AKR"
+        },
+        {
+            "team_name": "Black Crackers",
+            "team_city": "Atlanta",
+            "team_id": 271,
+            "team_abbv": "ATL"
+        },
+        {
+            "team_name": "Bacharach Giants",
+            "team_city": "Atlantic City",
+            "team_id": 272,
+            "team_abbv": "BG"
+        },
+        {
+            "team_name": "Black Sox",
+            "team_city": "Baltimore",
+            "team_id": 273,
+            "team_abbv": "BBS"
+        },
+        {
+            "team_name": "Elite Giants",
+            "team_city": "Baltimore",
+            "team_id": 274,
+            "team_abbv": "BEG"
+        },
+        {
+            "team_name": "Black Barons",
+            "team_city": "Birmingham",
+            "team_id": 275,
+            "team_abbv": "BBB"
+        },
+        {
+            "team_name": "Royal Giants",
+            "team_city": "Brooklyn",
+            "team_id": 276,
+            "team_abbv": "BRG"
+        },
+        {
+            "team_name": "American Giants",
+            "team_city": "Chicago",
+            "team_id": 277,
+            "team_abbv": "CAG"
+        },
+        {
+            "team_name": "Giants",
+            "team_city": "Chicago",
+            "team_id": 278,
+            "team_abbv": "CHG"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Cincinnati",
+            "team_id": 279,
+            "team_abbv": "CIN"
+        },
+        {
+            "team_name": "Browns",
+            "team_city": "Cleveland",
+            "team_id": 280,
+            "team_abbv": "CLB"
+        },
+        {
+            "team_name": "Buckeyes",
+            "team_city": "Cleveland",
+            "team_id": 281,
+            "team_abbv": "CLB"
+        },
+        {
+            "team_name": "Cubs",
+            "team_city": "Cleveland",
+            "team_id": 282,
+            "team_abbv": "CCU"
+        },
+        {
+            "team_name": "Elites",
+            "team_city": "Cleveland",
+            "team_id": 283,
+            "team_abbv": "CLE"
+        },
+        {
+            "team_name": "Giants",
+            "team_city": "Cleveland",
+            "team_id": 284,
+            "team_abbv": "CLG"
+        },
+        {
+            "team_name": "Hornets",
+            "team_city": "Cleveland",
+            "team_id": 285,
+            "team_abbv": "CLH"
+        },
+        {
+            "team_name": "Red Sox",
+            "team_city": "Cleveland",
+            "team_id": 286,
+            "team_abbv": "CRS"
+        },
+        {
+            "team_name": "Stars",
+            "team_city": "Cleveland",
+            "team_id": 287,
+            "team_abbv": "CLS"
+        },
+        {
+            "team_name": "Tate Stars",
+            "team_city": "Cleveland",
+            "team_id": 288,
+            "team_abbv": "CTS"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Cleveland",
+            "team_id": 289,
+            "team_abbv": "CTG"
+        },
+        {
+            "team_name": "Blue Birds",
+            "team_city": "Columbus",
+            "team_id": 290,
+            "team_abbv": "CBB"
+        },
+        {
+            "team_name": "Buckeyes",
+            "team_city": "Columbus",
+            "team_id": 291,
+            "team_abbv": "COL"
+        },
+        {
+            "team_name": "Turf Club",
+            "team_city": "Columbus",
+            "team_id": 292,
+            "team_abbv": "COT"
+        },
+        {
+            "team_name": "Stars East",
+            "team_city": "Cuban",
+            "team_id": 293,
+            "team_abbv": "CSE"
+        },
+        {
+            "team_name": "Stars West",
+            "team_city": "Cuban",
+            "team_id": 294,
+            "team_abbv": "CUB"
+        },
+        {
+            "team_name": "Marcos",
+            "team_city": "Dayton",
+            "team_id": 295,
+            "team_abbv": "DAY"
+        },
+        {
+            "team_name": "Stars",
+            "team_city": "Detroit",
+            "team_id": 296,
+            "team_abbv": "DTS"
+        },
+        {
+            "team_name": "Stars",
+            "team_city": "Detroit",
+            "team_id": 297,
+            "team_abbv": "DTS"
+        },
+        {
+            "team_name": "Wolves",
+            "team_city": "Detroit",
+            "team_id": 298,
+            "team_abbv": "DTW"
+        },
+        {
+            "team_name": "Giants",
+            "team_city": "Harrisburg",
+            "team_id": 299,
+            "team_abbv": "HBG"
+        },
+        {
+            "team_name": "Stars",
+            "team_city": "Harrisburgh-St. Loui",
+            "team_id": 300,
+            "team_abbv": "HSL"
+        },
+        {
+            "team_name": "Daisies",
+            "team_city": "Hilldale",
+            "team_id": 301,
+            "team_abbv": "HIL"
+        },
+        {
+            "team_name": "Grays",
+            "team_city": "Homestead",
+            "team_id": 302,
+            "team_abbv": "HOM"
+        },
+        {
+            "team_name": "ABCs",
+            "team_city": "Indianapolis",
+            "team_id": 303,
+            "team_abbv": "IND"
+        },
+        {
+            "team_name": "ABC's",
+            "team_city": "Indianapolis",
+            "team_id": 304,
+            "team_abbv": "ABC"
+        },
+        {
+            "team_name": "Athletics",
+            "team_city": "Indianapolis",
+            "team_id": 305,
+            "team_abbv": "ATH"
+        },
+        {
+            "team_name": "Clowns",
+            "team_city": "Indianapolis",
+            "team_id": 306,
+            "team_abbv": "IC"
+        },
+        {
+            "team_name": "Red Caps",
+            "team_city": "Jacksonville",
+            "team_id": 307,
+            "team_abbv": "JRC"
+        },
+        {
+            "team_name": "Monarchs",
+            "team_city": "Kansas City",
+            "team_id": 308,
+            "team_abbv": "KCM"
+        },
+        {
+            "team_name": "Grays",
+            "team_city": "Little Rock",
+            "team_id": 309,
+            "team_abbv": "LRG"
+        },
+        {
+            "team_name": "Black Caps",
+            "team_city": "Louisville",
+            "team_id": 310,
+            "team_abbv": "LBC"
+        },
+        {
+            "team_name": "Red Sox",
+            "team_city": "Memphis",
+            "team_id": 311,
+            "team_abbv": "MEM"
+        },
+        {
+            "team_name": "Bears",
+            "team_city": "Milwaukee",
+            "team_id": 312,
+            "team_abbv": "MIL"
+        },
+        {
+            "team_name": "Monarchs",
+            "team_city": "Monroe",
+            "team_id": 313,
+            "team_abbv": "MON"
+        },
+        {
+            "team_name": "Grey Sox",
+            "team_city": "Montgomery",
+            "team_id": 314,
+            "team_abbv": "MNT"
+        },
+        {
+            "team_name": "Black Yankees",
+            "team_city": "New York",
+            "team_id": 315,
+            "team_abbv": "NBY"
+        },
+        {
+            "team_name": "Cubans",
+            "team_city": "New York",
+            "team_id": 316,
+            "team_abbv": "NYC"
+        },
+        {
+            "team_name": "Lincoln Giants",
+            "team_city": "New York",
+            "team_id": 317,
+            "team_abbv": "NYL"
+        },
+        {
+            "team_name": "Browns",
+            "team_city": "Newark",
+            "team_id": 318,
+            "team_abbv": "NEW"
+        },
+        {
+            "team_name": "Dodgers",
+            "team_city": "Newark",
+            "team_id": 319,
+            "team_abbv": "ND"
+        },
+        {
+            "team_name": "Eagles",
+            "team_city": "Newark",
+            "team_id": 320,
+            "team_abbv": "NE"
+        },
+        {
+            "team_name": "Stars",
+            "team_city": "Newark",
+            "team_id": 321,
+            "team_abbv": "NS"
+        },
+        {
+            "team_name": "Stars",
+            "team_city": "Philadelphia",
+            "team_id": 322,
+            "team_abbv": "PHS"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Philadelphia",
+            "team_id": 323,
+            "team_abbv": "PTG"
+        },
+        {
+            "team_name": "Keystones",
+            "team_city": "Pittsburgh",
+            "team_id": 324,
+            "team_abbv": "PTK"
+        },
+        {
+            "team_name": "Cuban Stars",
+            "team_city": "Pollock's",
+            "team_id": 325,
+            "team_abbv": "CUP"
+        },
+        {
+            "team_name": "Stars",
+            "team_city": "St. Louis",
+            "team_id": 326,
+            "team_abbv": "SLS"
+        },
+        {
+            "team_name": "Stars",
+            "team_city": "St. Louis",
+            "team_id": 327,
+            "team_abbv": "SLS"
+        },
+        {
+            "team_name": "Tigers",
+            "team_city": "Toledo",
+            "team_id": 328,
+            "team_abbv": "TOL"
+        },
+        {
+            "team_name": "Crawfords",
+            "team_city": "Toledo",
+            "team_id": 329,
+            "team_abbv": "TOL"
+        },
+        {
+            "team_name": "Crawfords",
+            "team_city": "Toledo-Indianapolis",
+            "team_id": 330,
+            "team_abbv": "TIC"
+        },
+        {
+            "team_name": "Black Senators",
+            "team_city": "Washington",
+            "team_id": 331,
+            "team_abbv": "WBS"
+        },
+        {
+            "team_name": "Pilots",
+            "team_city": "Washington",
+            "team_id": 332,
+            "team_abbv": "WPI"
+        },
+        {
+            "team_name": "Potomacs",
+            "team_city": "Wilmington",
+            "team_id": 333,
+            "team_abbv": "WP"
+        }
+    ]
+}

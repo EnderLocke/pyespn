@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.8
+* started adding exceptions when apis aren't available
+  * don't expect this to be fully fleshed out until 1.0
+* adding standings for racing leagues (f1/nascar right now)
+* added nascar
+* added wnba
+* added college baseball & softball
+* added mlb
+* added f1
+* added team class to make easier use of data in the future
+* added awards api call
+* 
+
 ## 0.1.5
 * forgot init py
 

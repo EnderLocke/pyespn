@@ -1,0 +1,4 @@
+/.venv/
+/pyespn.egg-info/
+/.pytest_cache/
+uv.lock

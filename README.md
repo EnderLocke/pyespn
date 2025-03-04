@@ -1,8 +1,13 @@
 # espn-api
 work in progress for hitting hidden espn api, right now there is nfl and nba functions, stay tuned for more
+
 i am not affiliated with espn
+
 not all api end points are available for all leagues,
+
 i am working on adding in exceptions but you could get odd errors if say you try recruiting rankings for the nfl
+
+please note the readme is a work in progress and there could be more api calls within the source code if you're willing to look
 
 # Table of Contents
 - [PYESPN](#pyespn)
@@ -14,6 +19,8 @@ i am working on adding in exceptions but you could get odd errors if say you try
   - [Recruiting Data](#recruiting-data)
   - [Draft Data](#draft-data)
   - [Betting Data](#betting-data)
+  - [Award Data](#awards-data)
+  - [Standings Data](#standings-data)
 
 
 ## PYESPN
@@ -22,13 +29,19 @@ includes information on apis available for the nfl
 ### Init Class
 create an init version of the class and feed it the league you want
 
-| Param   | Type               | Description            |
-|---------|--------------------|------------------------|
-| league  | <code>string</code> | League. Options:      |
-|         |                    | - nfl                 |
-|         |                    | - nba                 |
-|         |                    | - mcbb                |
-|         |                    | - cfb                 |
+| Param   | Type               | Description               |
+|---------|--------------------|---------------------------|
+| league  | <code>string</code> | League. Options:          |
+|         |                    | - nfl                     |
+|         |                    | - nba                     |
+|         |                    | - wnba                    |
+|         |                    | - mcbb (mens college cbb) |
+|         |                    | - cfb (college football)  |
+|         |                    | - cbb (college baseball)  |
+|         |                    | - csb (college softball)  |
+|         |                    | - f1 (formula 1)          |
+|         |                    | - nascar                  |
+
 
 **example**
 ```python
@@ -180,3 +193,33 @@ print(nfl_espn.BETTING_PROVIDERS)
 
 
 #### Futures
+
+
+### Awards Data
+
+
+### Standings Data
+this appears only available to racing leagues 
+
+| Param          | Type               | Description                                     |
+|---------------|--------------------|-------------------------------------------------|
+| season        | <code>number</code> | Season for rankings                             |
+| standings_type | <code>string</code> | Type of standings. <br/>Defaults to `driver/overall` if not provided. <br/>Options: |
+|               |                    | **F1:** `driver`, `constructor`                |
+|               |                    | **NASCAR:** `overall`                           |
+
+**example**
+```python
+from pyespn import PYESPN
+
+f1_espn = PYESPN(sport_league='f1')
+season = 2024
+standings_type = 'driver'
+
+f1_standings = f1_espn.get_standings(season=season,
+                                     standings_type=standings_type)
+
+for driver in f1_standings:
+    print(driver)
+```
+
