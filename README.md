@@ -15,6 +15,7 @@ please note the readme is a work in progress and there could be more api calls w
   - [Data Files](#data-files)
   - [Team Data](#team-data)
   - [Player Data](#player-data)
+  - [Stats Data](#stats-data)
   - [Game/Event Data](#gameevent-data)
   - [Recruiting Data](#recruiting-data)
   - [Draft Data](#draft-data)
@@ -122,8 +123,31 @@ player_id = 278 # Jimmy Smith, Goat
 jimmy_smith = nfl_espn.get_player_info(player_id=player_id)
 
 print(jimmy_smith)
-
 ```
+
+### Stats Data
+this pulls the full stats of a given player for all years in sport
+
+#### get_players_historical_stats(player_id)
+gets the historical stats for a given player id
+
+| Param     | Type | Description   |
+|-----------| --- |---------------|
+| player_id | <code>number</code> | id for player |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+player_id = 278 # Jimmy Smith, Goat
+
+jimmy_smith_stats = nfl_espn.get_player_info(player_id=player_id)
+
+for stat in jimmy_smith_stats:
+    print(stat)
+```
+
 
 ### Game/Event Data
 gets event/game details from api. the event ids can be found on the espn site web urls
