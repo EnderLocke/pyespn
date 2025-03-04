@@ -154,5 +154,9 @@ class PYESPN:
                                  league_abbv=self.league_abbv)
 
     def get_team_colors(self, team_id):
-        return get_team_colors(team_id=team_id,
-                               league_abbv=self.league_abbv)
+        return get_team_colors_core(team_id=team_id,
+                                    league_abbv=self.league_abbv)
+
+    def get_venue_data(self, team_id):
+        return get_home_venue(team_id=team_id,
+                              league_abbv=self.league_abbv)
