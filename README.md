@@ -11,7 +11,7 @@ please note the readme is a work in progress and there could be more api calls w
 
 # Table of Contents
 - [PYESPN](#pyespn)
-  - [Init Class](#init-class)
+  - [Create Class](#init-class)
   - [Data Files](#data-files)
   - [Team Data](#team-data)
   - [Player Data](#player-data)
