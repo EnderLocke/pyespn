@@ -40,6 +40,12 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'wnba',
         'sport': 'basketball',
         'league': 'wnba'
+    },
+    {
+        'id': 8,
+        'league_abbv': 'f1',
+        'sport': 'racing',
+        'league': 'f1'
     }
 ]
 
