@@ -204,7 +204,7 @@ this appears only available to racing leagues
 | Param          | Type               | Description                                     |
 |---------------|--------------------|-------------------------------------------------|
 | season        | <code>number</code> | Season for rankings                             |
-| standings_type | <code>string</code> | Type of standings. <br/>Defaults to `driver/overall` if not provided. <br/>Options: |
+| standings_type | <code>string</code> | Type of standings <br/>Defaults to `driver/overall` if not provided <br/>Options: |
 |               |                    | **F1:** `driver`, `constructor`                |
 |               |                    | **NASCAR:** `overall`                           |
 
