@@ -30,10 +30,16 @@ LEAGUE_API_MAPPING = [
         'league': 'college-baseball'
     },
     {
-        'id': 5,
+        'id': 6,
         'league_abbv': 'csb',
         'sport': 'baseball',
         'league': 'college-softball'
+    },
+    {
+        'id': 7,
+        'league_abbv': 'wnba',
+        'sport': 'basketball',
+        'league': 'wnba'
     }
 ]
 
