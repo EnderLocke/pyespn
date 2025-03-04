@@ -397,3 +397,4 @@ lakers = Team(espn_instance, team_id=13, name="Lakers", abbreviation="LAL", loca
 
 print(lakers)  # Output: <Team Los Angeles Lakers (LAL) - nba>
 print(lakers.get_league())  # Output: nba
+```
