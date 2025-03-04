@@ -8,6 +8,6 @@ nav:
   - Discover: discover.md
   - Postman: postman.md
 
-theme: readthedocs
+theme: material
 
 copyright: Copyright &copy; 2025 Zach Stocker
