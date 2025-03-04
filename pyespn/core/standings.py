@@ -7,7 +7,7 @@ import json
 
 def get_standings_core(season, standings_type, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
-    url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/0/standings/{STANDINGS_TYPE_MAP[league_abbv][standings_type]}?lang=en&region=us'
+    url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/0/standings/{STANDINGS_TYPE_MAP[league_abbv].get(standings_type, 0)}?lang=en&region=us'
     response = requests.get(url)
     content = json.loads(response.content)
     standings = content['standings']
