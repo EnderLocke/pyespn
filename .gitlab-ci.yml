@@ -16,6 +16,7 @@ pytest:
   only:
     - preprod
     - prod
+    - dev
 
 test-build-package:
   stage: testdeploy

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.8
+## 0.2.0
 * started adding exceptions when apis aren't available
   * don't expect this to be fully fleshed out until 1.0
 * adding standings for racing leagues (f1/nascar right now)
@@ -11,7 +11,8 @@
 * added f1
 * added team class to make easier use of data in the future
 * added awards api call
-* 
+* added doc w/ readme
+* removed old readme
 
 ## 0.1.5
 * forgot init py
