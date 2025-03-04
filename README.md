@@ -196,6 +196,24 @@ print(nfl_espn.BETTING_PROVIDERS)
 
 
 ### Awards Data
+gets awards data for a given season
+
+| Param     | Type | Description   |
+|-----------| --- |------------------|
+| season | <code>number</code> | season for rankings |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nba_espn = PYESPN(sport_league='nba')
+season = 2024
+
+awards = nba_espn.get_standings(season=season)
+
+for award in awards:
+    print(award)
+```
 
 
 ### Standings Data
@@ -222,4 +240,5 @@ f1_standings = f1_espn.get_standings(season=season,
 for driver in f1_standings:
     print(driver)
 ```
+
 
