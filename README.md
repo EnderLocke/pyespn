@@ -234,7 +234,9 @@ print(nfl_espn.BETTING_PROVIDERS)
 
 
 #### Against the Spread
+this appears only available for nfl
 
+#### 
 
 
 #### Futures
