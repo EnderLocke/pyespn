@@ -392,8 +392,8 @@ Returns a string representation of the `Team` instance.
 ```python
 from pyespn import PYESPN
 
-espn_instance = PYESPN(sport_league='nba')
-lakers = Team(espn_instance, team_id=13, name="Lakers", abbreviation="LAL", location="Los Angeles")
+nba_espn = PYESPN(sport_league='nba')
+lakers = next((team for team in nba_espn.teams if team["team_id"] == 13), None)
 
 print(lakers)  # Output: <Team Los Angeles Lakers (LAL) - nba>
 print(lakers.get_league())  # Output: nba
