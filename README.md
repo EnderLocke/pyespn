@@ -214,13 +214,38 @@ print(nfl_espn.BETTING_PROVIDERS)
 
 
 #### Futures
+api calls for futures, not available for every sport
 
-##### get_year_league_champions_futures(season, league_abbv, provider)
+##### get_year_league_champions_futures(season, provider)
+gets the lines for the league champion
 
+| Param    | Type                | Description                                                   |
+|----------|---------------------|---------------------------------------------------------------|
+| season   | <code>number</code> | Season for rankings.                                         |
+| provider | <code>string</code> | Betting provider<br/> Options can be found in `PYESPN.BETTING_PROVIDERS`<br/> Defaults based on league if not provided. |
 
-| Param     | Type | Description   |
-|-----------| --- |------------------|
-| season | <code>number</code> | season for rankings |
+**example**
+```python
+from pyespn import PYESPN
+
+nba_espn = PYESPN(sport_league='nba')
+season = 2024
+
+nba_futures = nba_espn.get_league_year_champion_futures(season=season)
+
+for future in nba_futures:
+    print(future)
+```
+
+##### get_division_champ_futures(season, division, provider)
+gets the lines for the specified division/conf from a provider
+
+| Param    | Type                | Description                                                                                                                  |
+|----------|---------------------|------------------------------------------------------------------------------------------------------------------------------|
+| season   | <code>number</code> | Season for rankings                                                                                                          |
+| division | <code>string</code> | division to get futures for<br/> Options can be found in `PYESPN.LEAGUE_DIVISION_BETTING_KEYS` |
+| provider | <code>string</code> | Betting provider<br/> Options can be found in `PYESPN.BETTING_PROVIDERS`<br/> Defaults based on league if not provided.      |
+
 
 
 
