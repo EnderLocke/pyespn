@@ -1,7 +1,8 @@
 from pyespn.core import *
-from pyespn.data.leagues import LEAGUE_API_MAPPING
+from pyespn.data.leagues import LEAGUE_API_MAPPING, PRO_LEAGUES, COLLEGE_LEAGUES
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import BETTING_PROVIDERS
+from pyespn.exceptions import LeagueNotSupportedError
 
 
 class PYESPN():
@@ -13,9 +14,19 @@ class PYESPN():
         if sport_league not in self.valid_leagues:
             raise ValueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
 
-        self.league_abbv = sport_league
+        self.league_abbv = sport_league.lower()
         self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING[self.league_abbv]
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
+
+    def _pro_league_check(self, check):
+        if self.league_abbv in PRO_LEAGUES:
+            raise LeagueNotSupportedError(self.league_abbv,
+                                          f"{check} is not available for {self.league_abbv}.")
+
+    def _college_league_check(self, check):
+        if self.league_abbv in COLLEGE_LEAGUES:
+            raise LeagueNotSupportedError(self.league_abbv,
+                                          f"{check} is not available for {self.league_abbv}.")
 
     def get_player_info(self, player_id):
         return get_player_info_core(player_id=player_id,
@@ -25,6 +36,7 @@ class PYESPN():
         return get_player_ids_core(league_abbv=self.league_abbv)
 
     def get_recruiting_rankings(self, season, max_pages=None):
+        self._pro_league_check('recruiting')
         return get_recruiting_rankings_core(season=season,
                                             league_abbv=self.league_abbv,
                                             max_pages=max_pages)
@@ -42,6 +54,8 @@ class PYESPN():
                                           league_abbv=self.league_abbv)
 
     def get_draft_pick_data(self, season, pick_round, pick):
+        self._college_league_check('draft')
+
         return get_draft_pick_data_core(season=season,
                                         pick_round=pick_round,
                                         pick=pick,
@@ -51,12 +65,12 @@ class PYESPN():
         return get_players_historical_stats_core(player_id=player_id,
                                                  league_abbv=self.league_abbv)
 
-    def get_league_year_champion_futures(self, season, provider='DraftKings'):
+    def get_league_year_champion_futures(self, season, provider='Betradar'):
         return get_year_league_champions_futures_core(season=season,
                                                       league_abbv=self.league_abbv,
                                                       provider=provider)
 
-    def get_league_year_division_champs_futures(self, season, division, provider='DraftKings'):
+    def get_league_year_division_champs_futures(self, season, division, provider='Betradar'):
         return get_division_champ_futures_core(season=season,
                                                division=division,
                                                league_abbv=self.league_abbv,
@@ -102,3 +116,6 @@ class PYESPN():
                                                     season=season,
                                                     league_abbv=self.league_abbv)
 
+    def get_awards(self, season):
+        return get_awards_core(season=season,
+                               league_abbv=self.league_abbv)
