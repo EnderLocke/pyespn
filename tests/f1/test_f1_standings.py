@@ -13,4 +13,4 @@ def test_f1_standings(test_case):
 
     assert int(this_test_match['wins']['value']) == test_case['wins']
     assert int(this_test_match['behind']['value']) == test_case['behind']
-    assert this_test_match['athlete_id'] == test_case['athlete_id']
+    assert int(this_test_match['athlete_id']) == test_case['athlete_id']
