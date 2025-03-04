@@ -13,3 +13,4 @@ from .betting import (get_year_league_champions_futures_core, get_division_champ
                       get_team_year_ats_home_core, get_team_year_ats_overall_core,
                       get_team_year_ats_underdog_core,
                       get_team_year_ats_home_underdog_core)
+from .awards import get_awards_core
