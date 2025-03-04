@@ -26,3 +26,7 @@ nba_teams_data = open_json(team_lookup_file)
 
 team_lookup_file = 'files/wnba_teams_lookup.json'
 wnba_teams_data = open_json(team_lookup_file)
+
+team_lookup_file = 'files/mlb_teams_lookup.json'
+mlb_teams_data = open_json(team_lookup_file)
+
