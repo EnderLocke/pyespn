@@ -6,6 +6,7 @@ nav:
   - Class: use.md
   - API Endpoints: api_endpoints.md
   - Discover: discover.md
+  - Postman: postman.md
 
 theme:
   features:
