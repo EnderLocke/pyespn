@@ -3,7 +3,8 @@ from pyespn.data.leagues import LEAGUE_API_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP
 from .decorators import (requires_betting_available, requires_pro_league,
-                         requires_college_league, validate_league)
+                         requires_college_league, validate_league,
+                         requires_standings_available)
 from .classes import Team
 
 
@@ -134,3 +135,8 @@ class PYESPN:
     def get_awards(self, season):
         return get_awards_core(season=season,
                                league_abbv=self.league_abbv)
+
+    @requires_standings_available
+    def get_standings(self, season):
+        return get_standings_core(season=season,
+                                  league_abbv=self.league_abbv)
