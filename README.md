@@ -142,7 +142,7 @@ from pyespn import PYESPN
 nfl_espn = PYESPN(sport_league='nfl')
 player_id = 278 # Jimmy Smith, Goat
 
-jimmy_smith_stats = nfl_espn.get_player_info(player_id=player_id)
+jimmy_smith_stats = nfl_espn.get_players_historical_stats(player_id=player_id)
 
 for stat in jimmy_smith_stats:
     print(stat)
@@ -180,10 +180,10 @@ this pulls recruiting data and is currently only works for mcbb and cfb
 ```python
 from pyespn import PYESPN
 
-nfl_espn = PYESPN(sport_league='nfl')
+cfb_espn = PYESPN(sport_league='cfb')
 season = 2020
 
-recruiting_rankings = nfl_espn.get_recruiting_rankings(season=season)
+recruiting_rankings = cfb_espn.get_recruiting_rankings(season=season)
 
 for recruit in recruiting_rankings:
   print(recruit)
@@ -460,7 +460,7 @@ from pyespn import PYESPN
 nba_espn = PYESPN(sport_league='nba')
 season = 2024
 
-awards = nba_espn.get_standings(season=season)
+awards = nba_espn.get_awards(season=season)
 
 for award in awards:
     print(award)
