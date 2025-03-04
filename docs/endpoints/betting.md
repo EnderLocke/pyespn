@@ -1,7 +1,8 @@
-### Betting Data
+# Betting Endpoints
+This section contains all endpoints available for gambling data. this is not available for every league/sport
 
-#### Betting Providers
-there are many betting providers across the espn api and they dont appear to be consistant in my profiling. the ones that i have found can be accessed via
+## Betting Providers
+there are many betting providers across the espn api and they dont appear to be consistent in my profiling. the ones that i have found can be accessed via
 
 there is a mapping for default betting providers for a given sport, it is not guaranteed to return data for every year though
 
@@ -15,10 +16,11 @@ print(nfl_espn.BETTING_PROVIDERS)
 ```
 
 
-#### Against the Spread
+## Against the Spread Endpoints
+API endpoints available for teams against the spread data, 
 this appears only available for nfl
 
-#### get_team_year_ats_away(team_id, season)
+### `get_team_year_ats_away(team_id, season)`
 gets a teams record against the spread while away for a season
 
 | Param   | Type | Description         |
@@ -41,7 +43,7 @@ print(jax_ats)
 ```
 
 
-#### get_team_year_ats_home_favorite(team_id, season)
+### `get_team_year_ats_home_favorite(team_id, season)`
 gets a teams record against the spread while home favorite for a season
 
 | Param   | Type | Description         |
@@ -64,7 +66,7 @@ print(jax_ats)
 ```
 
 
-#### get_team_year_ats_away_underdog(team_id, season)
+### `get_team_year_ats_away_underdog(team_id, season)`
 gets a teams record against the spread while an away dog for a season
 
 | Param   | Type | Description         |
@@ -86,7 +88,7 @@ jax_ats = nfl_espn.get_team_year_ats_away_underdog(team_id=team_id,
 print(jax_ats)
 ```
 
-#### get_team_year_ats_home(team_id, season)
+### `get_team_year_ats_home(team_id, season)`
 gets a teams record against the spread while at home for a season
 
 | Param   | Type | Description         |
@@ -108,7 +110,7 @@ jax_ats = nfl_espn.get_team_year_ats_home(team_id=team_id,
 print(jax_ats)
 ```
 
-#### get_team_year_ats_overall(team_id, season)
+### `get_team_year_ats_overall(team_id, season)`
 gets a teams record against the spread for a season
 
 | Param   | Type | Description         |
@@ -130,7 +132,7 @@ jax_ats = nfl_espn.get_team_year_ats_overall(team_id=team_id,
 print(jax_ats)
 ```
 
-#### get_team_year_ats_underdog(team_id, season)
+### `get_team_year_ats_underdog(team_id, season)`
 gets a teams record against the spread as a dog for a season
 
 | Param   | Type | Description         |
@@ -153,7 +155,7 @@ print(jax_ats)
 ```
 
 
-#### get_team_year_ats_home_underdog(team_id, season)
+### `get_team_year_ats_home_underdog(team_id, season)`
 gets a teams record against the spread as a dog at home for a season
 
 | Param   | Type | Description         |
@@ -176,10 +178,10 @@ print(jax_ats)
 ```
 
 
-#### Futures
+## Futures Endpoints
 api calls for futures, not available for every sport
 
-##### get_year_league_champions_futures(season, provider)
+### `get_year_league_champions_futures(season, provider)`
 gets the lines for the league champion
 
 | Param    | Type                | Description                                                   |
@@ -201,7 +203,7 @@ for future in nba_futures:
 ```
 
 
-##### get_league_year_division_champs_futures(season, division, provider)
+### `get_league_year_division_champs_futures(season, division, provider)`
 gets the lines for the specified division/conf from a provider
 
 | Param    | Type                | Description                                                                                                                  |
