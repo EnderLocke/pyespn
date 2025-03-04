@@ -24,3 +24,11 @@ LEAGUE_API_MAPPING = [
         'league': 'nba'
     }
 ]
+
+PRO_LEAGUES = [
+    'nfl', 'nba', 'nhl', 'mlb'
+]
+
+COLLEGE_LEAGUES = [
+    'cfb', 'mcbb', 'wcbb'
+]

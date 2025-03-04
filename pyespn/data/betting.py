@@ -46,6 +46,16 @@ LEAGUE_DIVISION_FUTURES_MAPPING = {
         'sec west': 'NCAA(F) - Southeastern Conference - West Division - Winner (reg. season)',
         'sec east': 'NCAA(F) - Southeastern Conference - East Division - Winner (reg. season)',
         'sun belt': 'Sun Belt Conference Champion',
+    },
+    'mcbb': {
+        'mwc': 'NCAA(B) - Mountain West Conference - Winner (reg. season)',
+        'final four': 'NCAA(B) - To Make The Final 4',
+        'big12': 'NCAA(B) - Big 12 Conference - Winner (reg. season)',
+        'acc': 'NCAA(B) - Atlantic Coast Conference - Winner (reg. season)',
+        'sec': 'NCAA(B) - Southeastern Conference - Winner (reg. season)',
+        'big10': 'NCAA(B) - Big Ten Conference - Winner (reg. season)',
+        'big east': 'NCAA(B) - Big East Conference - Winner (reg. season',
+
     }
 }
 
