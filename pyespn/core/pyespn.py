@@ -17,9 +17,9 @@ class PYESPN:
         # Validate sport_league
 
         self.league_abbv = sport_league.lower()
-        self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING[self.league_abbv]
+        self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING.get(self.league_abbv)
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
-        self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP[self.league_abbv]
+        self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.teams = {}
         self.load_teams()
 
@@ -137,6 +137,7 @@ class PYESPN:
                                league_abbv=self.league_abbv)
 
     @requires_standings_available
-    def get_standings(self, season):
+    def get_standings(self, season, standings_type):
         return get_standings_core(season=season,
+                                  standings_type=standings_type,
                                   league_abbv=self.league_abbv)
