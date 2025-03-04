@@ -13,8 +13,20 @@ def get_standings_core(season, standings_type, league_abbv):
     standings = content['standings']
     all_records = []
     for record in standings:
-        athlete_id = get_athlete_id(record['athlete']['$ref'])
-        driver_stats = {'athlete_id': athlete_id}
+        athlete_url = record['athlete']['$ref']
+        athlete_response = requests.get(athlete_url)
+        athlete_content = json.loads(athlete_response.content)
+        driver_stats = {
+            'athlete_id': athlete_content.get('id'),
+            'name': athlete_content.get('fullName'),
+            'country': athlete_content.get('flag').get('alt')
+        }
+        vehicles = []
+        for vehicle in athlete_content.get('vehicles', []):
+            vehicles.append({
+                **vehicle
+            })
+        driver_stats['vehicles'] = vehicles
         for stats in record['records'][0]['stats']:
             this_stat = {
                 **stats
