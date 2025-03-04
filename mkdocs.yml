@@ -1,0 +1,15 @@
+site_name: PYESPN
+
+nav:
+  - Home: index.md
+  - Install: installing.md
+  - API Endpoints: api_endpoints.md
+  - Discover: discover.md
+
+theme:
+  features:
+    - tabs
+  static_templates:
+    - 404.html
+
+copyright: Copyright &copy; 2025 Zach Stocker
