@@ -1,0 +1,178 @@
+{
+    "teams": [
+        {
+            "team_name": "Sting",
+            "team_city": "Charlotte",
+            "team_id": 1,
+            "team_abbv": "CHA"
+        },
+        {
+            "team_name": "Rockers",
+            "team_city": "Cleveland",
+            "team_id": 2,
+            "team_abbv": "CLE"
+        },
+        {
+            "team_name": "Wings",
+            "team_city": "Dallas",
+            "team_id": 3,
+            "team_abbv": "DAL"
+        },
+        {
+            "team_name": "Comets",
+            "team_city": "Houston",
+            "team_id": 4,
+            "team_abbv": "HOU"
+        },
+        {
+            "team_name": "Fever",
+            "team_city": "Indiana",
+            "team_id": 5,
+            "team_abbv": "IND"
+        },
+        {
+            "team_name": "Sparks",
+            "team_city": "Los Angeles",
+            "team_id": 6,
+            "team_abbv": "LA"
+        },
+        {
+            "team_name": "Sol",
+            "team_city": "Miami",
+            "team_id": 7,
+            "team_abbv": "MIA"
+        },
+        {
+            "team_name": "Lynx",
+            "team_city": "Minnesota",
+            "team_id": 8,
+            "team_abbv": "MIN"
+        },
+        {
+            "team_name": "Liberty",
+            "team_city": "New York",
+            "team_id": 9,
+            "team_abbv": "NY"
+        },
+        {
+            "team_name": "Miracle",
+            "team_city": "Orlando",
+            "team_id": 10,
+            "team_abbv": "ORL"
+        },
+        {
+            "team_name": "Mercury",
+            "team_city": "Phoenix",
+            "team_id": 11,
+            "team_abbv": "PHX"
+        },
+        {
+            "team_name": "Fire",
+            "team_city": "Portland",
+            "team_id": 12,
+            "team_abbv": "POR"
+        },
+        {
+            "team_name": "Monarchs",
+            "team_city": "Sacramento",
+            "team_id": 13,
+            "team_abbv": "SAC"
+        },
+        {
+            "team_name": "Storm",
+            "team_city": "Seattle",
+            "team_id": 14,
+            "team_abbv": "SEA"
+        },
+        {
+            "team_name": "Starzz",
+            "team_city": "Utah",
+            "team_id": 15,
+            "team_abbv": "UTA"
+        },
+        {
+            "team_name": "Mystics",
+            "team_city": "Washington",
+            "team_id": 16,
+            "team_abbv": "WSH"
+        },
+        {
+            "team_name": "Aces",
+            "team_city": "Las Vegas",
+            "team_id": 17,
+            "team_abbv": "LV"
+        },
+        {
+            "team_name": "Sun",
+            "team_city": "Connecticut",
+            "team_id": 18,
+            "team_abbv": "CONN"
+        },
+        {
+            "team_name": "Sky",
+            "team_city": "Chicago",
+            "team_id": 19,
+            "team_abbv": "CHI"
+        },
+        {
+            "team_name": "Dream",
+            "team_city": "Atlanta",
+            "team_id": 20,
+            "team_abbv": "ATL"
+        },
+        {
+            "team_name": "China",
+            "team_city": "China",
+            "team_id": 21,
+            "team_abbv": "CHN"
+        },
+        {
+            "team_name": "National Team",
+            "team_city": "Poland",
+            "team_id": 22,
+            "team_abbv": "POL"
+        },
+        {
+            "team_name": "JX Sunflowers",
+            "team_city": "JX Sunflowers",
+            "team_id": 23,
+            "team_abbv": "JXS"
+        },
+        {
+            "team_name": "Great Britain",
+            "team_city": "Great Britain",
+            "team_id": 24,
+            "team_abbv": "GBT"
+        },
+        {
+            "team_name": "Japan",
+            "team_city": "Japan",
+            "team_id": 25,
+            "team_abbv": "JPN"
+        },
+        {
+            "team_name": "Team WNBA",
+            "team_city": "Team WNBA",
+            "team_id": 96,
+            "team_abbv": "WNBASTARS"
+        },
+        {
+            "team_name": "Team USA",
+            "team_city": "Team USA",
+            "team_id": 97,
+            "team_abbv": "USA"
+        },
+        {
+            "team_name": "East",
+            "team_city": "Eastern Conf",
+            "team_id": 98,
+            "team_abbv": "EAST"
+        },
+        {
+            "team_name": "West",
+            "team_city": "Western Conf",
+            "team_id": 99,
+            "team_abbv": "WEST"
+        }
+    ]
+}

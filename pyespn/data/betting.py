@@ -12,6 +12,15 @@ BETTING_PROVIDERS = [
     "Betradar"
 ]
 
+DEFAULT_BETTING_PROVIDERS_MAP = {
+    'mlb': 'Unibet',
+    'nfl': 'Betradar',
+    'nba': 'Betrader',
+    'mcbb': 'Betrader',
+    'cfb': 'Betrader',
+    'wnba': 'Betrader',
+}
+
 LEAGUE_DIVISION_FUTURES_MAPPING = {
     'nfl': {
         'afc west': 'Pro Football (A) West Division - Winner',
@@ -46,6 +55,28 @@ LEAGUE_DIVISION_FUTURES_MAPPING = {
         'sec west': 'NCAA(F) - Southeastern Conference - West Division - Winner (reg. season)',
         'sec east': 'NCAA(F) - Southeastern Conference - East Division - Winner (reg. season)',
         'sun belt': 'Sun Belt Conference Champion',
+    },
+    'mcbb': {
+        'mwc': 'NCAA(B) - Mountain West Conference - Winner (reg. season)',
+        'final four': 'NCAA(B) - To Make The Final 4',
+        'big12': 'NCAA(B) - Big 12 Conference - Winner (reg. season)',
+        'acc': 'NCAA(B) - Atlantic Coast Conference - Winner (reg. season)',
+        'sec': 'NCAA(B) - Southeastern Conference - Winner (reg. season)',
+        'big10': 'NCAA(B) - Big Ten Conference - Winner (reg. season)',
+        'big east': 'NCAA(B) - Big East Conference - Winner (reg. season',
+
+    },
+    'mlb': {
+        'nl': 'MLB - National League - Winner',
+        'al': 'MLB - American League - Winner',
+        'nl west': 'MLB - National League West',
+        'nl east': 'MLB - National League East',
+        'nl central': 'MLB - National League Central',
+        'al west': 'MLB - American League West',
+        'al east': 'MLB - American League East',
+        'al central': 'MLB - American League Central',
+        'all star': 'MLB - Winning League',
+
     }
 }
 
@@ -53,5 +84,11 @@ LEAGUE_CHAMPION_FUTURES_MAP = {
     'nfl': 'NFL - Super Bowl Winner',
     'nba': 'NBA - Winner',
     'cfb': 'NCAA(F) - Championship',
-    'mcbb': 'NCAA(B) - Winner'
+    'mcbb': 'NCAA(B) - Winner',
+    'wnba': 'WNBA - Winner',
+    'mlb': 'MLB  - World Series - Winner'
 }
+
+BETTING_AVAILABLE = [
+    'nfl', 'nba', 'wnba', 'mcbb', 'cfb', 'mlb'
+]

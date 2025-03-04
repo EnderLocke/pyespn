@@ -31,7 +31,7 @@ def _get_team_year_ats(team_id, season, league_abbv):
     return content
 
 
-def get_year_league_champions_futures_core(season, league_abbv, provider="DraftKings"):
+def get_year_league_champions_futures_core(season, league_abbv, provider="Betradar"):
 
     content = _get_futures_year(year=season,
                                 league_abbv=league_abbv)
@@ -56,7 +56,7 @@ def get_year_league_champions_futures_core(season, league_abbv, provider="DraftK
     return futures_list
 
 
-def get_division_champ_futures_core(season, division, league_abbv, provider="DraftKings"):
+def get_division_champ_futures_core(season, division, league_abbv, provider="Betradar"):
     """
 
     :param season:
