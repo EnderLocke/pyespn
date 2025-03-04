@@ -1,8 +1,13 @@
 # espn-api
 work in progress for hitting hidden espn api, right now there is nfl and nba functions, stay tuned for more
+
 i am not affiliated with espn
+
 not all api end points are available for all leagues,
+
 i am working on adding in exceptions but you could get odd errors if say you try recruiting rankings for the nfl
+
+please note the readme is a work in progress and there could be more api calls within the source code if you're willing to look
 
 # Table of Contents
 - [PYESPN](#pyespn)
