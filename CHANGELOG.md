@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+* readme updates
+* 
+
 ## 0.2.0
 * started adding exceptions when apis aren't available
   * don't expect this to be fully fleshed out until 1.0
