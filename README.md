@@ -238,7 +238,7 @@ print(nfl_espn.BETTING_PROVIDERS)
 this appears only available for nfl
 
 #### get_team_year_ats_away(team_id, season)
-gets a teams record against the spread while away for a seaeon
+gets a teams record against the spread while away for a season
 
 | Param   | Type | Description         |
 |---------| --- |---------------------|
@@ -255,6 +255,141 @@ team_id = 30 # JAX
 
 jax_ats = nfl_espn.get_team_year_ats_away(team_id=team_id,
                                           season=season)
+
+print(jax_ats)
+```
+
+
+#### get_team_year_ats_home_favorite(team_id, season)
+gets a teams record against the spread while home favorite for a season
+
+| Param   | Type | Description         |
+|---------| --- |---------------------|
+| team_id | <code>number</code> | id for team         |
+| season  | <code>number</code> | season for rankings |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+season = 2024
+team_id = 30 # JAX 
+
+jax_ats = nfl_espn.get_team_year_ats_home_favorite(team_id=team_id,
+                                                   season=season)
+
+print(jax_ats)
+```
+
+
+#### get_team_year_ats_away_underdog(team_id, season)
+gets a teams record against the spread while an away dog for a season
+
+| Param   | Type | Description         |
+|---------| --- |---------------------|
+| team_id | <code>number</code> | id for team         |
+| season  | <code>number</code> | season for rankings |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+season = 2024
+team_id = 30 # JAX 
+
+jax_ats = nfl_espn.get_team_year_ats_away_underdog(team_id=team_id,
+                                                   season=season)
+
+print(jax_ats)
+```
+
+#### get_team_year_ats_home(team_id, season)
+gets a teams record against the spread while at home for a season
+
+| Param   | Type | Description         |
+|---------| --- |---------------------|
+| team_id | <code>number</code> | id for team         |
+| season  | <code>number</code> | season for rankings |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+season = 2024
+team_id = 30 # JAX 
+
+jax_ats = nfl_espn.get_team_year_ats_home(team_id=team_id,
+                                          season=season)
+
+print(jax_ats)
+```
+
+#### get_team_year_ats_overall(team_id, season)
+gets a teams record against the spread for a season
+
+| Param   | Type | Description         |
+|---------| --- |---------------------|
+| team_id | <code>number</code> | id for team         |
+| season  | <code>number</code> | season for rankings |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+season = 2024
+team_id = 30 # JAX 
+
+jax_ats = nfl_espn.get_team_year_ats_overall(team_id=team_id,
+                                             season=season)
+
+print(jax_ats)
+```
+
+#### get_team_year_ats_underdog(team_id, season)
+gets a teams record against the spread as a dog for a season
+
+| Param   | Type | Description         |
+|---------| --- |---------------------|
+| team_id | <code>number</code> | id for team         |
+| season  | <code>number</code> | season for rankings |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+season = 2024
+team_id = 30 # JAX 
+
+jax_ats = nfl_espn.get_team_year_ats_underdog(team_id=team_id,
+                                              season=season)
+
+print(jax_ats)
+```
+
+
+#### get_team_year_ats_home_underdog(team_id, season)
+gets a teams record against the spread as a dog at home for a season
+
+| Param   | Type | Description         |
+|---------| --- |---------------------|
+| team_id | <code>number</code> | id for team         |
+| season  | <code>number</code> | season for rankings |
+
+**example**
+```python
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+season = 2024
+team_id = 30 # JAX 
+
+jax_ats = nfl_espn.get_team_year_ats_home_underdog(team_id=team_id,
+                                                   season=season)
 
 print(jax_ats)
 ```
