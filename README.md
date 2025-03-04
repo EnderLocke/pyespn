@@ -11,7 +11,7 @@ please note the readme is a work in progress and there could be more api calls w
 
 # Table of Contents
 - [PYESPN](#pyespn)
-  - [Create Class](#init-class)
+  - [Create Class](#create-class)
   - [Data Files](#data-files)
   - [Team Data](#team-data)
   - [Player Data](#player-data)
@@ -29,7 +29,7 @@ please note the readme is a work in progress and there could be more api calls w
 ## PYESPN
 includes information on apis available for the nfl
 
-### Init Class
+### Create Class
 create an init version of the class and feed it the league you want
 
 | Param   | Type               | Description               |
