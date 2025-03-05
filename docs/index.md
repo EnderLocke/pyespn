@@ -1,13 +1,17 @@
 # Welcome to PYESPN
 
-For source code visit [PYESPN](https://github.com/EnderLocke/pyespn).
+## Links
+[PYESPN Github](https://github.com/EnderLocke/pyespn)
+[pypi](https://pypi.org/project/pyespn/)
 
 ## Introduction
 The PYESPN python package hits the hidden espn api and pulls sports data
 
-## Sports Available
+check out the [sports_available](sports_available.md) and go look at the [api endpoints](api_endpoints.md)
 
-see [sports_available](sports_available.md)
+## Finding Ids on ESPN.com
+You can use the [espn frontend](discover.md) to find ids to use
 
-## Commands
-none yet, future implementations
+## Testing API Calls
+you can use postman to [test api calls](postman.md)
+
