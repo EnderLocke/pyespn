@@ -1,5 +1,5 @@
 # PYESPN
-[![pipeline status](https://gitlab.com/zachstocker/espn-api/badges/prod/pipeline.svg)](https://gitlab.com/user/userproject/commits/prod)
+[![documentation](https://img.shields.io/badge/docs-pyespn-blue.svg?style=flat)](https://enderlocke.github.io/pyespn/)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pyespn)
 ![PyPI - Version](https://img.shields.io/pypi/v/pyespn)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyespn)
