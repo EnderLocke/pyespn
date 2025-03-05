@@ -1,171 +1,289 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <script>
-      // Hack for scrolling window when linking to anchor tag with fixed nav header
-      var shiftWindow = function() { scrollBy(0, -75) };
-      window.addEventListener("hashchange", shiftWindow);
-      function load() { if (window.location.hash) shiftWindow(); }
-    </script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    
-    
-    <link rel="shortcut icon" href="../../img/favicon.ico">
-    
-    <title>Betting - PYESPN</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css" rel="stylesheet">
-    <link href="../../css/code-styles.css" rel="stylesheet">
-    <link href="../../css/mega-menu.css" rel="stylesheet">
-    <link href="../../css/code-tabs.css" rel="stylesheet">
-    <link href="../../css/admonition.css" rel="stylesheet">
-    <link href="../../css/base.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="../../fonts.js"></script> 
-  </head>
-  
-  <body class="" data-spy="scroll" data-target="#toc">
-    <nav id="mainnav" class="navbar navbar-default navbar-expand-md navbar-light sticky-top" role="navigation">
-    <a class="navbar-brand" href="../..">
-      PYESPN
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainnav-navbar-collapse" aria-controls="mainnav-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="mainnav-navbar-collapse" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav mr-auto mx-auto">
-        <li class="main-item">
-          <a class="nav-link" href="#">Link 1</a>
-        </li>
-        <li class="main-item">
-          <a class="nav-link" href="#">Link 2</a>
-        </li>
-        <li class="main-item">
-          <a class="nav-link" href="#">Link 3</a>
-        </li>
-      </ul>
-      
-      <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-	    <i class="fa fa-search"></i> Search
-          </a>
-        </li>
-      </ul>
+
+<head>
+        <title>Betting - PYESPN</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+        
+        
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../assets/css/darcula-highlight.min.css">
+
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../assets/css/dracula-ui.min.css">
+        <link rel="stylesheet" href="../../assets/css/mkdocs.min.css">
+
+        
+            <link  rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+                <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+<body class="drac-bg-black-secondary drac-text-grey-ternary drac-text drac-scrollbar-purple">
+
+    <main class="d-flex">
+
+        <!-- block sidebar -->
+            <nav id="sidebar" class="sidebar drac-bg-black">
+    <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Menu</span>
+        </button>
+    </div>
+
+    <div class="p-4">
+        
+
+        <div class="drac-text-center">
+            
+                <span class="drac-text drac-line-height drac-text-white">PYESPN</span>
+            
+        </div>
+
+        <div class="drac-box flex-column">
+            <ul class="dot-ul">
+                <li><div class="dot-li drac-bg-cyan"></div></li>
+                <li><div class="dot-li drac-bg-green"></div></li>
+                <li><div class="dot-li drac-bg-orange"></div></li>
+                <li><div class="dot-li drac-bg-pink"></div></li>
+                <li><div class="dot-li drac-bg-purple"></div></li>
+                <li><div class="dot-li drac-bg-red"></div></li>
+                <li><div class="dot-li drac-bg-yellow"></div></li>
+            </ul>
+        </div>
+
+        <hr class="drac-divider" />
+
+        <!-- block menu -->
+        <ul class="mb-5 drac-list drac-list-none">
+            
+            <li class="drac-box">
+                <a href="../.."
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Home
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../../installing/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Install
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../../use/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Class
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../.."
+                    class=" active 
+                    drac-anchor btn-toggle d-inline-flex align-items-center border-0 drac-text-purple--hover collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#api-endpoints-collapse" aria-expanded="false">
+                    API Endpoints
+                </a>
+                <div class="collapse" id="api-endpoints-collapse">
+                    <ul class="mb-5 drac-list drac-list-none">
+                            
+    <li class="drac-box-ternary">
+        <a href="../../api_endpoints/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Overview
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="../teams/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Teams
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="../players/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Players
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="../stats/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Stats
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="../events/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Events/Games
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="../draft/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Draft
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="../recruiting/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Recruiting
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="../awards/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Awards
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="./"
+            class=" active 
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Betting
+        </a>
+    </li>
+                            
+    <li class="drac-box-ternary">
+        <a href="../standings/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            Standings
+        </a>
+    </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="drac-box">
+                <a href="../../discover/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Discover
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../../postman/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Postman
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../.."
+                    class="
+                    drac-anchor btn-toggle d-inline-flex align-items-center border-0 drac-text-purple--hover collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#about-collapse" aria-expanded="false">
+                    About
+                </a>
+                <div class="collapse" id="about-collapse">
+                    <ul class="mb-5 drac-list drac-list-none">
+                            
+    <li class="drac-box-ternary">
+        <a href="../../LICENSE/"
+            class="
+            drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+            License
+        </a>
+    </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <!-- endblock -->
     </div>
 </nav>
-    <div id="content"class="container-fluid">
-      
-    <div class="row">
-      <div id="sidebar-nav" class="sidebar col-md-3"><nav id="sidenav" class="navbar navbar-default navbar-expand-md navbar-dark" role="navigation">
-  <a class="navbar-brand d-block d-md-none d-xl-none" href="#"><i class="fa fa-home fa-fw"></i> Table of Contents</a>
-  <button class="navbar-toggler ml-auto hidden-sm-up float-xs-right" type="button" data-toggle="collapse" data-target="#sidebar-navbar-collapse" aria-controls="sidebar-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="sidebar-navbar-collapse">
-    <!-- Main navigation -->
-    <ul class="nav navbar-nav flex-column">
-      <li >
-        <a class="nav-link" href="../..">Home</a>
-      </li>
-      <li >
-        <a class="nav-link" href="../../installing/">Install</a>
-      </li>
-      <li >
-        <a class="nav-link" href="../../use/">Class</a>
-      </li>
-      <li class="toplevel nav-item active" data-toggle="collapse" data-target="#api-endpoints">
-        <!--<a href="#" class="nav-link">API Endpoints <b class="caret"></b></a>-->
-        <span class="section-title">API Endpoints</span>
-        <ul id="api-endpoints" class="collapse">
-          
-<li>
-    <a href="../../api_endpoints/" class="">Overview</a>
-</li>
-          
-<li>
-    <a href="../teams/" class="">Teams</a>
-</li>
-          
-<li>
-    <a href="../players/" class="">Players</a>
-</li>
-          
-<li>
-    <a href="../stats/" class="">Stats</a>
-</li>
-          
-<li>
-    <a href="../events/" class="">Events/Games</a>
-</li>
-          
-<li>
-    <a href="../draft/" class="">Draft</a>
-</li>
-          
-<li>
-    <a href="../recruiting/" class="">Recruiting</a>
-</li>
-          
-<li>
-    <a href="../awards/" class="">Awards</a>
-</li>
-          
-<li>
-    <a href="./" class=" active">Betting</a>
-</li>
-          
-<li>
-    <a href="../standings/" class="">Standings</a>
-</li>
-        </ul>
-      </li>
-      <li >
-        <a class="nav-link" href="../../discover/">Discover</a>
-      </li>
-      <li >
-        <a class="nav-link" href="../../postman/">Postman</a>
-      </li>
-      <li class="toplevel nav-item" data-toggle="collapse" data-target="#about">
-        <!--<a href="#" class="nav-link">About <b class="caret"></b></a>-->
-        <span class="section-title">About</span>
-        <ul id="about" class="collapse">
-          
-<li>
-    <a href="../../LICENSE/" class="">License</a>
-</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</nav>
+        <!-- endblock -->
+
+        <nav class="divider drac-bg-purple-cyan"></nav>
+
+        <div class="content">
+            <!-- block header -->
+                <header>
+    <nav class="navbar navbar-expand-xl drac-bg-purple">
+        <div class="container-fluid">
+            
+            <button class="navbar-toggler w-100 text-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+                aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+                <ul class="navbar-nav text-md-center">
+
+                    <!-- block preview -->
+                    <li class="nav-item">
+                            
+        <div class="container">
+            <div class="row row-preview">
+                <div class="col">
+                    <a href="../awards/"
+                        class="btn-preview drac-btn drac-btn-outline drac-text-white drac-text-cyan-green--hover">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="../standings/"
+                        class="btn-preview drac-btn drac-btn-outline drac-text-white drac-text-cyan-green--hover" style="padding-left: 3%;">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+                    </li>
+                    <!--  endblock -->
+
+                    <!-- block search -->
+                    <li class="nav-item"><div role="search" class="search-box">
+	<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+		<input type="text" name="q" class="drac-input drac-input-search drac-input-white drac-text-white drac-bg-black-secondary"
+		placeholder="Search docs" title="Type search term here" />
+	</form>
 </div>
-      <div id="main" class="col" role="main">
+                    </li>
+                    <!--  endblock -->
 
+                    <!-- block source -->
+                    <li class="nav-item">
+                        
+                    </li>
+                    <!--  endblock -->
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    
-    
-    <li class="breadcrumb-item">API Endpoints</li>
-    
-    
-    <li class="breadcrumb-item active" aria-current="page">Betting</li>
-  </ol>
-</nav>
+                </ul>
+            </div>
 
+        </div>
+    </nav>
+</header>
+            <!-- endblock -->
 
-<h1 id="betting-endpoints">Betting Endpoints</h1>
+            <!-- block content -->
+                <section class="p-md-5 section-content">
+    <article>
+        <p><h1 id="betting-endpoints">Betting Endpoints</h1>
 <p>This section contains all endpoints available for gambling data. this is not available for every league/sport</p>
 <h2 id="betting-providers">Betting Providers</h2>
 <p>there are many betting providers across the espn api and they dont appear to be consistent in my profiling. the ones that i have found can be accessed via</p>
@@ -501,127 +619,31 @@ nfl_futures = nfl_espn.get_league_year_division_champs_futures(season=season,
 
 for future in nfl_futures:
     print(future)
-</code></pre>
+</code></pre></p>
+    </article>
+</section>
+            <!-- endblock -->
 
-<ul class="metadata page-metadata" data-bi-name="page info" lang="en-us" dir="ltr">
-  <li class="last-updated-holder displayDate loading">
-    <span class="last-updated-text">Last updated:</span>
-    <time role="presentation" datetime="2018-10-25T00:00:00.000Z" data-article-date-source="ms.date"></time>
-  </li>
-<!--
-  <li class="readingTime">
-    2 minutes to read
-  </li>
--->
-  <li class="contributors-holder">
-    <span class="contributors-text">Contributors</span>
-    <ul class="contributors" data-bi-name="contributors"></ul>
-  </li>
-</ul>
-</div>
-      <div id="sidebar-toc" class="sidebar col-md-2">
-	<nav id="toc" data-toggle="toc" class="sticky-top sticky-offset"></nav>
-      </div>
+            <!-- block footer -->
+                <footer>
+    <div class="d-flex flex-sm-row justify-content-between py-2 border-top drac-text-black drac-bg-cyan-green">
+        <a href="https://github.com/dracula/mkdocs" target="_blank" style="padding-left: 1%;"
+            class="footer-text drac-anchor drac-text-black drac-text-purple--hover">
+            Made with Dracula Theme for MkDocs
+        </a>
     </div>
-    </div><footer class="col-md-12">
-  <nav class="container">
-    <div class="row">
-      <div class="col-12">
-	<ul class="nav flex-row ml-md-auto d-none d-md-flex pull-right">
-	  <li class="nav-item"><a class="nav-link" href="#">License</a></li>
-	  <li class="nav-item"><a class="nav-link" href="#">GitHub Home</a></li>
-	</ul>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-	<p>&copy;Copyright &copy; 2025 Zach Stocker</p>
-      </div>
-      <div class="col-6">
-	<ul class="nav flex-row ml-md-auto d-none d-md-flex pull-right">
-	  <li><a class="nav-link footer-image-link footer-image-link-facebook" href="#">
-	      <i class="fa fa-facebook"></i></a></li>
-	  <li><a class="nav-link footer-image-link footer-image-link-twitter" href="#">
-	      <i class="fa fa-twitter"></i></a></li>
-	  <li><a class="nav-link footer-image-link footer-image-link-linkedin" href="#">
-	      <i class="fa fa-linkedin"></i></a></li>
-	  <li><a class="nav-link footer-image-link footer-image-link-youtube" href="#">
-	      <i class="fa fa-youtube"></i></a></li>
-	</ul>
-      </div>
-  </nav>
 </footer>
-    <script>
-      var base_url = "../..",
-          shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" defer></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" defer></script>
-    <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js" defer></script>
-    <script src="../../js/base.js" defer></script>
-    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" data-toc-skip>Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
+            <!-- endblock -->
         </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p class="h4 modal-title">Keyboard Shortcuts</p>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-    
-  </body>
+
+    </main>
+
+        <script>var base_url = '../..';</script>
+        <script src="../../assets/js/jquery-3.3.1.slim.min.js"></script>
+        <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+        <script src="../../assets/js/mkdocs.js"></script>
+			<script src="../../search/main.js" defer></script>
+
+</body>
+
 </html>
