@@ -433,6 +433,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="get_team_info(team_id)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Return
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -767,6 +791,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="get_team_info(team_id)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Return
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -808,7 +856,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>example</strong></p>
+<h3 id="example-usage">Example Usage</h3>
 <pre><code class="language-python">from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -818,6 +866,42 @@ jags_team_info = nfl_espn.get_team_info(team_id=team_id)
 
 print(jags_team_info)
 
+</code></pre>
+<h3 id="example-return">Example Return</h3>
+<pre><code>{
+    &quot;$ref&quot;: &quot;http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2024/teams/30?lang=en&amp;region=us&quot;,
+    &quot;id&quot;: &quot;30&quot;,
+    &quot;guid&quot;: &quot;ca6fb778-cbf6-d9a3-3e93-01230335fcab&quot;,
+    &quot;uid&quot;: &quot;s:20~l:28~t:30&quot;,
+    &quot;alternateIds&quot;: {
+        &quot;sdr&quot;: &quot;8814&quot;
+    },
+    &quot;slug&quot;: &quot;jacksonville-jaguars&quot;,
+    &quot;location&quot;: &quot;Jacksonville&quot;,
+    &quot;name&quot;: &quot;Jaguars&quot;,
+    &quot;nickname&quot;: &quot;Jaguars&quot;,
+    &quot;abbreviation&quot;: &quot;JAX&quot;,
+    &quot;displayName&quot;: &quot;Jacksonville Jaguars&quot;,
+    &quot;shortDisplayName&quot;: &quot;Jaguars&quot;,
+    &quot;color&quot;: &quot;007487&quot;,
+    &quot;alternateColor&quot;: &quot;d7a22a&quot;,
+    &quot;isActive&quot;: true,
+    &quot;isAllStar&quot;: false,
+    &quot;logos&quot;: [
+        {
+            &quot;href&quot;: &quot;https://a.espncdn.com/i/teamlogos/nfl/500/jax.png&quot;,
+            &quot;width&quot;: 500,
+            &quot;height&quot;: 500,
+            &quot;alt&quot;: &quot;&quot;,
+            &quot;rel&quot;: [
+                &quot;full&quot;,
+                &quot;default&quot;
+            ],
+            &quot;lastUpdated&quot;: &quot;2024-06-25T18:50Z&quot;
+        },
+    ],
+    ...
+}
 </code></pre>
 
 

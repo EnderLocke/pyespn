@@ -499,6 +499,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="get_game_info(event_id)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Return
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -767,6 +782,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="get_game_info(event_id)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Return
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -811,11 +841,32 @@
 <pre><code class="language-python">from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
-event_id = 401671889 # 2025 Super Bowl
+event_id = 400999172 # Myles Jack wasn't down
 
 super_bowl = nfl_espn.get_game_info(event_id=event_id)
 
 print(super_bowl)
+</code></pre>
+<h3 id="example-return">Example Return</h3>
+<pre><code>{
+    &quot;$ref&quot;: &quot;http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/400999172?lang=en&amp;region=us&quot;,
+    &quot;id&quot;: &quot;400999172&quot;,
+    &quot;uid&quot;: &quot;s:20~l:28~e:400999172&quot;,
+    &quot;date&quot;: &quot;2018-01-21T20:05Z&quot;,
+    &quot;name&quot;: &quot;Jacksonville Jaguars at New England Patriots&quot;,
+    &quot;shortName&quot;: &quot;JAX @ NE&quot;,
+    &quot;season&quot;: {
+        &quot;$ref&quot;: &quot;http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2017?lang=en&amp;region=us&quot;
+    },
+    &quot;seasonType&quot;: {
+        &quot;$ref&quot;: &quot;http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2017/types/3?lang=en&amp;region=us&quot;
+    },
+    &quot;week&quot;: {
+        &quot;$ref&quot;: &quot;http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2017/types/3/weeks/3?lang=en&amp;region=us&quot;
+    },
+    &quot;timeValid&quot;: true,
+    ...
+}
 </code></pre>
 
 
