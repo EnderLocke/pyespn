@@ -1,11 +1,17 @@
 # Changelog
 
+## 0.2.2
+* 
+
+
 ## 0.2.1
 * readme updates
 * added indy car
 * added team colors func
 * added team logo func
 * moneyline todo
+* moved to github
+* added mkdocs readme
 * 
 
 ## 0.2.0
