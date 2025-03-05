@@ -9,7 +9,9 @@ gets event/game details from api. the event ids can be found on the espn site we
 |----------| --- |--------------|
 | event_id | <code>number</code> | id for event |
 
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')

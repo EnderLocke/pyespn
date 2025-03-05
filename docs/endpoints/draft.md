@@ -10,8 +10,9 @@ Gets team info from espn api, this is available for pro leagues
 | pick       | <code>number</code> | pick number in round (not overall) |
 | season     | <code>number</code> | season of draft                    |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')

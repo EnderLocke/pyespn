@@ -10,7 +10,7 @@ Gets team info from espn api
 
 ### Example Usage
 
-```python
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')

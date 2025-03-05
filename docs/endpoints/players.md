@@ -9,7 +9,8 @@ gets player level details from api
 | player_id | <code>number</code> | id for player |
 
 ### Example Use
-```python
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')

@@ -12,7 +12,7 @@ this pulls recruiting data and is currently only works for mcbb and cfb
 
 **example**
 
-```python
+```py
 from pyespn import PYESPN
 
 cfb_espn = PYESPN(sport_league='cfb')

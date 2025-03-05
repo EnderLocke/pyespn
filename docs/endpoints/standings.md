@@ -11,8 +11,9 @@ get standings for a given season, this appears only available to racing leagues
 |               |                    | **F1:** `driver`, `constructor`                |
 |               |                    | **NASCAR:** `overall`                           |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 f1_espn = PYESPN(sport_league='f1')
