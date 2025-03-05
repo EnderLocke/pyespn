@@ -24,7 +24,7 @@ print(jags_team_info)
 
 ### Example Return
 
-```
+```json
 {
     "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2024/teams/30?lang=en&region=us",
     "id": "30",

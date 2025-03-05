@@ -48,6 +48,15 @@ theme:
 plugins:
   - search
 
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
 repo_url: https://github.com/EnderLocke/pyespn
 repo_name: PYESPN
 copyright: Copyright &copy; 2025 Zach Stocker

@@ -22,7 +22,8 @@ print(jimmy_smith)
 ```
 
 ### Example Return
-```
+
+```json
 {
     "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/278?lang=en&region=us",
     "id": "278",
