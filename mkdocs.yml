@@ -38,6 +38,14 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
+  features:
+    - search.suggest
+    - search.highlight
+    - search.share
+
+plugins:
+  - search
+
 repo_url: https://github.com/EnderLocke/pyespn
 repo_name: PYESPN
 copyright: Copyright &copy; 2025 Zach Stocker
