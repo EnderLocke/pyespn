@@ -1,4 +1,9 @@
-# espn-api
+# PYESPN
+![PyPI - Downloads](https://img.shields.io/pypi/dm/pyespn)
+![PyPI - Version](https://img.shields.io/pypi/v/pyespn)
+![PyPI - Status](https://img.shields.io/pypi/status/pyespn)
+![GitLab Top Language](https://img.shields.io/gitlab/languages/zachstocker%2Fespn-api)
+
 work in progress for hitting hidden espn api
 
 i am not affiliated with espn
