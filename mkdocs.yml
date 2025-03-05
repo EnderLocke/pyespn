@@ -42,6 +42,8 @@ theme:
     - search.suggest
     - search.highlight
     - search.share
+    - navigation.footer
+    - content.code.copy
 
 plugins:
   - search
