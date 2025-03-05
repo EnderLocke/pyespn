@@ -58,6 +58,12 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'indy',
         'sport': 'racing',
         'league': 'irl'
+    },
+    {
+        'id': 11,
+        'league_abbv': 'mlb',
+        'sport': 'baseball',
+        'league': 'mlb'
     }
 ]
 

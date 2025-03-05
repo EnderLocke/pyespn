@@ -14,10 +14,11 @@
 | nfl             | NFL              |
 
 ## ⚾ Baseball / Softball ⚾
-| League Abbreviation | League Name         |
-|-------------------|--------------------|
-| cbb             | college-baseball   |
-| csb             | college-softball   |
+| League Abbreviation | League Name      |
+|---------------------|------------------|
+| mlb                 | MLB              |
+| cbb                 | college-baseball |
+| csb                 | college-softball |
 
 ## 🏎️ Racing 🏎
 | League Abbreviation | League Name      |
