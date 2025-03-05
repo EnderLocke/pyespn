@@ -5,6 +5,8 @@
 ![PyPI - Status](https://img.shields.io/pypi/status/pyespn)
 ![GitLab Top Language](https://img.shields.io/gitlab/languages/zachstocker%2Fespn-api)
 
+detailed readme [here](https://enderlocke.github.io/pyespn/)
+
 work in progress for hitting hidden espn api
 
 i am not affiliated with espn
