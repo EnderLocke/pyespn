@@ -20,6 +20,6 @@ nav:
   - About:
     - License: LICENSE.md
 
-theme: dracula
+theme: material
 
 copyright: Copyright &copy; 2025 Zach Stocker
