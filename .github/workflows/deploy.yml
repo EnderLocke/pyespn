@@ -1,0 +1,81 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - preprod
+      - prod
+      - dev
+
+env:
+  TWINE_DISABLE_KEYRING: 1
+
+jobs:
+  pytest:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.11
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Pytest
+        run: pytest tests/
+
+  test-build-package:
+    name: Test Deploy Package
+    runs-on: ubuntu-latest
+    environment: preprod
+    container:
+      image: python:3.11
+    if: github.ref == 'refs/heads/preprod'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Test PyPI Config
+        run: echo "${{ secrets.PYPIRC }}" > /tmp/.pypirc
+
+      - name: Install Dependencies
+        run: |
+          apt-get update
+          apt-get install -y sudo
+          sudo apt-get install -y pandoc
+          pip install twine pypandoc
+
+      - name: Build Package
+        run: python setup.py bdist_wheel
+
+      - name: Upload to Test PyPI
+        run: python -m twine upload --repository testpypi dist/*.whl --config-file /tmp/.pypirc --verbose
+
+  build-package:
+    name: Deploy to PyPI
+    runs-on: ubuntu-latest
+    environment: prod
+    container:
+      image: python:3.11
+    if: github.ref == 'refs/heads/prod'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up PyPI Config
+        run: echo "${{ secrets.PYPIRC }}" > /tmp/.pypirc
+
+      - name: Install Dependencies
+        run: |
+          apt-get update
+          apt-get install -y sudo
+          sudo apt-get install -y pandoc
+          pip install twine pypandoc
+
+      - name: Build Package
+        run: python setup.py bdist_wheel
+
+      - name: Upload to PyPI
+        run: python -m twine upload --repository pypi dist/*.whl --config-file /tmp/.pypirc

@@ -148,3 +148,15 @@ class PYESPN:
         return get_standings_core(season=season,
                                   standings_type=standings_type,
                                   league_abbv=self.league_abbv)
+
+    def get_logo_img(self, team_id):
+        return get_team_logo_img(team_id=team_id,
+                                 league_abbv=self.league_abbv)
+
+    def get_team_colors(self, team_id):
+        return get_team_colors_core(team_id=team_id,
+                                    league_abbv=self.league_abbv)
+
+    def get_venue_data(self, team_id):
+        return get_home_venue(team_id=team_id,
+                              league_abbv=self.league_abbv)

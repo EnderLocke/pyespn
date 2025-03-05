@@ -1,5 +1,13 @@
-# espn-api
-work in progress for hitting hidden espn api, right now there is nfl and nba functions, stay tuned for more
+# PYESPN
+[![documentation](https://img.shields.io/badge/docs-pyespn-blue.svg?style=flat)](https://enderlocke.github.io/pyespn/)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/pyespn)
+![PyPI - Version](https://img.shields.io/pypi/v/pyespn)
+![PyPI - Status](https://img.shields.io/pypi/status/pyespn)
+![GitLab Top Language](https://img.shields.io/gitlab/languages/zachstocker%2Fespn-api)
+
+detailed readme [here](https://enderlocke.github.io/pyespn/)
+
+work in progress for hitting hidden espn api
 
 i am not affiliated with espn
 
@@ -11,7 +19,7 @@ please note the readme is a work in progress and there could be more api calls w
 
 # Table of Contents
 - [PYESPN](#pyespn)
-  - [Init Class](#init-class)
+  - [Create Class](#create-class)
   - [Data Files](#data-files)
   - [Team Data](#team-data)
   - [Player Data](#player-data)
@@ -27,14 +35,14 @@ please note the readme is a work in progress and there could be more api calls w
 
 
 ## PYESPN
-includes information on apis available for the nfl
+includes information on apis available for the espn api
 
-### Init Class
+### Create Class
 create an init version of the class and feed it the league you want
 
 | Param   | Type               | Description               |
 |---------|--------------------|---------------------------|
-| league  | <code>string</code> | League. Options:          |
+| league  | <code>string</code> | Options:                  |
 |         |                    | - nfl                     |
 |         |                    | - nba                     |
 |         |                    | - wnba                    |
@@ -142,7 +150,7 @@ from pyespn import PYESPN
 nfl_espn = PYESPN(sport_league='nfl')
 player_id = 278 # Jimmy Smith, Goat
 
-jimmy_smith_stats = nfl_espn.get_player_info(player_id=player_id)
+jimmy_smith_stats = nfl_espn.get_players_historical_stats(player_id=player_id)
 
 for stat in jimmy_smith_stats:
     print(stat)
@@ -180,10 +188,10 @@ this pulls recruiting data and is currently only works for mcbb and cfb
 ```python
 from pyespn import PYESPN
 
-nfl_espn = PYESPN(sport_league='nfl')
+cfb_espn = PYESPN(sport_league='cfb')
 season = 2020
 
-recruiting_rankings = nfl_espn.get_recruiting_rankings(season=season)
+recruiting_rankings = cfb_espn.get_recruiting_rankings(season=season)
 
 for recruit in recruiting_rankings:
   print(recruit)
@@ -460,7 +468,7 @@ from pyespn import PYESPN
 nba_espn = PYESPN(sport_league='nba')
 season = 2024
 
-awards = nba_espn.get_standings(season=season)
+awards = nba_espn.get_awards(season=season)
 
 for award in awards:
     print(award)

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1
+* readme updates
+* added indy car
+* added team colors func
+* added team logo func
+* moneyline todo
+* 
+
 ## 0.2.0
 * started adding exceptions when apis aren't available
   * don't expect this to be fully fleshed out until 1.0

@@ -7,6 +7,8 @@ authors = [{ name = "Zach Stocker", email = "zacharystocker@gmail.com" }]
 license = { text = "MIT" }
 dependencies = [
     "click>=8.1.8",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.7",
     "requests>=2.32.3",
 ]
 classifiers = [
@@ -31,7 +33,7 @@ classifiers = [
 ]
 dynamic = ["version"]
 [project.urls]
-Repository = "https://gitlab.com/zachstocker/espn-api"
+Repository = "https://github.com/EnderLocke/pyespn"
 [tool.setuptools.dynamic]
 version = { attr = "pyespn.api.version.__version__" }
 [tool.setuptools.packages.find]
