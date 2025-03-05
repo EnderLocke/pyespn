@@ -10,5 +10,6 @@ LEAGUE_TEAMS_MAPPING = {
     'wnba': wnba_teams_data,
     'mlb': mlb_teams_data,
     'f1': f1_teams_data,
-    'nascar': nascar_teams_data
+    'nascar': nascar_teams_data,
+    'indy': indy_teams_data
 }

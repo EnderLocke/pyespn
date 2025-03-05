@@ -1,5 +1,5 @@
 STANDINGS_AVAILABLE = [
-    'f1', 'nascar'
+    'f1', 'nascar', 'indy'
 ]
 
 STANDINGS_TYPE_MAP = {
@@ -8,6 +8,9 @@ STANDINGS_TYPE_MAP = {
         'constructor': 1
     },
     'nascar': {
+        'overall': 0
+    },
+    'indy': {
         'overall': 0
     }
 }
