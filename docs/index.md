@@ -1,6 +1,6 @@
 # Welcome to PYESPN
 
-For source code visit [PYESPN](https://gitlab.com/zachstocker/espn-api).
+For source code visit [PYESPN](https://github.com/EnderLocke/pyespn).
 
 ## Introduction
 The PYESPN python package hits the hidden espn api and pulls sports data
