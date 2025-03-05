@@ -20,6 +20,24 @@ nav:
   - About:
     - License: LICENSE.md
 
-theme: material
+theme:
+  name: material
+  favicon: img/favicon.ico
+  logo: img/pyespn.png
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
 
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+repo_url: https://github.com/EnderLocke/pyespn
+repo_name: PYESPN
 copyright: Copyright &copy; 2025 Zach Stocker
