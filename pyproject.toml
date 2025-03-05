@@ -33,7 +33,7 @@ classifiers = [
 ]
 dynamic = ["version"]
 [project.urls]
-Repository = "https://gitlab.com/zachstocker/espn-api"
+Repository = "https://github.com/EnderLocke/pyespn"
 [tool.setuptools.dynamic]
 version = { attr = "pyespn.api.version.__version__" }
 [tool.setuptools.packages.find]
