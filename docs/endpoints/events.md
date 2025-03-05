@@ -24,7 +24,7 @@ print(super_bowl)
 
 ### Example Return
 
-```
+```json
 {
     "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/400999172?lang=en&region=us",
     "id": "400999172",
