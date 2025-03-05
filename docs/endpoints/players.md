@@ -1,7 +1,7 @@
 # Player Endpoints
 player endpoints available
 
-## `get_player_info`
+## `get_player_info(player_id)`
 gets player level details from api
 
 | Param     | Type | Description   |

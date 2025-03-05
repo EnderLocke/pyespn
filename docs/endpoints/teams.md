@@ -1,7 +1,7 @@
 # Team Data Endpoints
 available team endpoints
 
-## `get_team_info`
+## `get_team_info(team_id)`
 Gets team info from espn api
 
 | Param   | Type | Description |

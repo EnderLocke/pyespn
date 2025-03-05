@@ -4,9 +4,21 @@ nav:
   - Home: index.md
   - Install: installing.md
   - Class: use.md
-  - API Endpoints: api_endpoints.md
+  - API Endpoints:
+    - Overview: api_endpoints.md
+    - Teams: endpoints/teams.md
+    - Players: endpoints/players.md
+    - Stats: endpoints/stats.md
+    - Events/Games: endpoints/events.md
+    - Draft: endpoints/draft.md
+    - Recruiting: endpoints/recruiting.md
+    - Awards: endpoints/awards.md
+    - Betting: endpoints/betting.md
+    - Standings: endpoints/standings.md
   - Discover: discover.md
   - Postman: postman.md
+  - About:
+    - License: LICENSE.md
 
 theme: dracula
 
