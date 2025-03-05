@@ -2,6 +2,7 @@
 
 ## Links
 [PYESPN Github](https://github.com/EnderLocke/pyespn)
+
 [pypi](https://pypi.org/project/pyespn/)
 
 ## Introduction
@@ -13,5 +14,5 @@ check out the [sports_available](sports_available.md) and go look at the [api en
 You can use the [espn frontend](discover.md) to find ids to use
 
 ## Testing API Calls
-you can use postman to [test api calls](postman.md)
+You can use postman to [test api calls](postman.md)
 
