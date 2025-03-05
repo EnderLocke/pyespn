@@ -1,11 +1,16 @@
 # PYESPN
+
 [![documentation](https://img.shields.io/badge/docs-pyespn-blue.svg?style=flat)](https://enderlocke.github.io/pyespn/)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/EnderLocke/pyespn/deploy.yml)
+
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pyespn)
 ![PyPI - Version](https://img.shields.io/pypi/v/pyespn)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyespn)
-![GitLab Top Language](https://img.shields.io/gitlab/languages/zachstocker%2Fespn-api)
+![PyPI - License](https://img.shields.io/pypi/l/pyespn)
 
-detailed readme [here](https://enderlocke.github.io/pyespn/)
+![GitHub language count](https://img.shields.io/github/languages/count/EnderLocke/pyespn)
+![GitHub top language](https://img.shields.io/github/languages/top/EnderLocke/pyespn)
+
 
 work in progress for hitting hidden espn api
 
