@@ -1,0 +1,13 @@
+site_name: PYESPN
+
+nav:
+  - Home: index.md
+  - Install: installing.md
+  - Class: use.md
+  - API Endpoints: api_endpoints.md
+  - Discover: discover.md
+  - Postman: postman.md
+
+theme: dracula
+
+copyright: Copyright &copy; 2025 Zach Stocker

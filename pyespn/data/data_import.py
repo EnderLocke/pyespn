@@ -35,3 +35,6 @@ f1_teams_data = open_json(team_lookup_file)
 
 team_lookup_file = 'files/nascar_teams_lookup.json'
 nascar_teams_data = open_json(team_lookup_file)
+
+team_lookup_file = 'files/indy_teams_lookup.json'
+indy_teams_data = open_json(team_lookup_file)
