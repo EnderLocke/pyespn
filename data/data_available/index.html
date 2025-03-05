@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+        <title>Available Class Data - PYESPN</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+        
+        
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../assets/css/darcula-highlight.min.css">
+
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../assets/css/dracula-ui.min.css">
+        <link rel="stylesheet" href="../../assets/css/mkdocs.min.css">
+
+        
+            <link  rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+                <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+<body class="drac-bg-black-secondary drac-text-grey-ternary drac-text drac-scrollbar-purple">
+
+    <main class="d-flex">
+
+        <!-- block sidebar -->
+            <nav id="sidebar" class="sidebar drac-bg-black">
+    <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Menu</span>
+        </button>
+    </div>
+
+    <div class="p-4">
+        
+
+        <div class="drac-text-center">
+            
+                <span class="drac-text drac-line-height drac-text-white">PYESPN</span>
+            
+        </div>
+
+        <div class="drac-box flex-column">
+            <ul class="dot-ul">
+                <li><div class="dot-li drac-bg-cyan"></div></li>
+                <li><div class="dot-li drac-bg-green"></div></li>
+                <li><div class="dot-li drac-bg-orange"></div></li>
+                <li><div class="dot-li drac-bg-pink"></div></li>
+                <li><div class="dot-li drac-bg-purple"></div></li>
+                <li><div class="dot-li drac-bg-red"></div></li>
+                <li><div class="dot-li drac-bg-yellow"></div></li>
+            </ul>
+        </div>
+
+        <hr class="drac-divider" />
+
+        <!-- block menu -->
+        <ul class="mb-5 drac-list drac-list-none">
+            
+            <li class="drac-box">
+                <a href="../.."
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Home
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../../installing/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Install
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../../use/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Class
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../../api_endpoints/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    API Endpoints
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../../discover/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Discover
+                </a>
+            </li>
+            <li class="drac-box">
+                <a href="../../postman/"
+                    class="
+                    drac-anchor d-inline-flex align-items-center border-0 drac-text-purple--hover">
+                    Postman
+                </a>
+            </li>
+        </ul>
+        <!-- endblock -->
+    </div>
+</nav>
+        <!-- endblock -->
+
+        <nav class="divider drac-bg-purple-cyan"></nav>
+
+        <div class="content">
+            <!-- block header -->
+                <header>
+    <nav class="navbar navbar-expand-xl drac-bg-purple">
+        <div class="container-fluid">
+            
+            <button class="navbar-toggler w-100 text-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+                aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+                <ul class="navbar-nav text-md-center">
+
+                    <!-- block preview -->
+                    <li class="nav-item">
+                            
+                    </li>
+                    <!--  endblock -->
+
+                    <!-- block search -->
+                    <li class="nav-item"><div role="search" class="search-box">
+	<form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+		<input type="text" name="q" class="drac-input drac-input-search drac-input-white drac-text-white drac-bg-black-secondary"
+		placeholder="Search docs" title="Type search term here" />
+	</form>
+</div>
+                    </li>
+                    <!--  endblock -->
+
+                    <!-- block source -->
+                    <li class="nav-item">
+                        
+                    </li>
+                    <!--  endblock -->
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+            <!-- endblock -->
+
+            <!-- block content -->
+                <section class="p-md-5 section-content">
+    <article>
+        <p><h1 id="available-class-data">Available Class Data</h1>
+<h3 id="data-files">Data Files</h3>
+<p>This is a list of ids/teams in json format that relate to the api and are used in the code.</p>
+<p><strong>examples</strong></p>
+<pre><code class="language-python"># this example prints the mapping itself
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+nba_espn = PYESPN(sport_league='nba')
+
+print(nfl_espn.TEAM_ID_MAPPING) #nfl team map
+print(nba_espn.TEAM_ID_MAPPING) #nba team map
+</code></pre>
+<p>this example uses the <a href="../../classes/teams_class/">teams_class</a></p>
+<pre><code class="language-python"># this example uses the teams class
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+nba_espn = PYESPN(sport_league='nba')
+
+for team in nfl_espn.teams:
+    print(team.name) #nfl team 
+
+for team in nba_espn.teams:
+    print(team.name) #nba team 
+</code></pre></p>
+    </article>
+</section>
+            <!-- endblock -->
+
+            <!-- block footer -->
+                <footer>
+    <div class="d-flex flex-sm-row justify-content-between py-2 border-top drac-text-black drac-bg-cyan-green">
+        <a href="https://github.com/dracula/mkdocs" target="_blank" style="padding-left: 1%;"
+            class="footer-text drac-anchor drac-text-black drac-text-purple--hover">
+            Made with Dracula Theme for MkDocs
+        </a>
+    </div>
+</footer>
+            <!-- endblock -->
+        </div>
+
+    </main>
+
+        <script>var base_url = '../..';</script>
+        <script src="../../assets/js/jquery-3.3.1.slim.min.js"></script>
+        <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+        <script src="../../assets/js/mkdocs.js"></script>
+			<script src="../../search/main.js" defer></script>
+
+</body>
+
+</html>
