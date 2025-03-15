@@ -4,8 +4,9 @@ import pytest
 
 
 @pytest.mark.parametrize('test_case', recruiting_test_cases)
+@pytest.mark.xfail(strict=True)
 def test_recruit_rankings(test_case):
-    espn = PYESPN(sport_league='cfb')
+    espn = PYESPN(sport_league='nfl')
     content = espn.get_recruiting_rankings(season=test_case['season'],
                                            max_pages=test_case['max_pages'])
 
