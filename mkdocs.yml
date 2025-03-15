@@ -15,6 +15,7 @@ nav:
     - Awards: endpoints/awards.md
     - Betting: endpoints/betting.md
     - Standings: endpoints/standings.md
+  - Exceptions: exceptions.md
   - Discover: discover.md
   - Postman: postman.md
   - About:
