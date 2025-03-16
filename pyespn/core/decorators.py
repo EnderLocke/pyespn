@@ -1,7 +1,8 @@
 from pyespn.data.betting import BETTING_AVAILABLE
 from pyespn.data.leagues import PRO_LEAGUES, COLLEGE_LEAGUES
 from pyespn.data.standings import STANDINGS_TYPE_MAP
-from pyespn.exceptions import LeagueNotSupportedError
+from pyespn.exceptions import (LeagueNotSupportedError, LeagueNotAvailableError,
+                               InvalidLeagueError)
 from functools import wraps
 import warnings
 
@@ -73,11 +74,10 @@ def validate_league(cls):
         if sport_league in self.untested_leagues:
             warnings.warn(f"This league | {sport_league} | is untested, uncaught errors may occur", UserWarning)
         if sport_league in self.all_leagues:
-            raise ValueError(f"Sport, {sport_league} is valid and within api but not currently available within PYESPN")
+            raise LeagueNotAvailableError(f"Sport, {sport_league} is valid and within api but not currently available within PYESPN")
         if sport_league not in self.valid_leagues:
-            raise ValueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
+            raise InvalidLeagueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
         original_init(self, sport_league, *args, **kwargs)
 
     cls.__init__ = new_init
     return cls
-

@@ -6,6 +6,7 @@
 * removed old readme -> now find it at the mkdocs site this is referenced in readme
 * added more league options
 * added league status, unavailable ones will error if used, you can fork the repo to try those out and pr if you'd like
+* added more detailed errors when creating class
 * 
 
 
