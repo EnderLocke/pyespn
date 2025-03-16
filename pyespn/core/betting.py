@@ -1,6 +1,7 @@
 from pyespn.utilities import lookup_league_api_info, get_team_id, get_type_futures, get_type_ats
 from pyespn.data.betting import LEAGUE_CHAMPION_FUTURES_MAP, LEAGUE_DIVISION_FUTURES_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
+from pyespn.data.version import espn_api_version as v
 import requests
 import json
 
@@ -16,7 +17,7 @@ def _get_team_ats(team_id, season, ats_type, league_abbv):
 
 def _get_futures_year(year, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
-    url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures?lang=en&region=us'
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures?lang=en&region=us'
     response = requests.get(url)
     content = json.loads(response.content)
     return content
@@ -25,7 +26,7 @@ def _get_futures_year(year, league_abbv):
 def _get_team_year_ats(team_id, season, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
-    url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{team_id}/ats?lang=en&region=us'
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{team_id}/ats?lang=en&region=us'
     response = requests.get(url)
     content = json.loads(response.content)
     return content
