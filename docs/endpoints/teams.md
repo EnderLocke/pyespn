@@ -60,3 +60,25 @@ print(jags_team_info)
     ...
 }
 ```
+
+
+## `get_team_colors(team_id)`
+gets the alternate and primary colors for the team
+
+```py
+from pyespn import PYESPN
+
+nfl_espn = PYESPN(sport_league='nfl')
+team_id = 30 #jax
+
+jags_colors = nfl_espn.get_team_colors(team_id=team_id)
+
+print(jags_colors)
+```
+
+```json
+{
+  'alt_color': 'd7a22a', 
+  'primary_color': '007487'
+}
+```
