@@ -106,9 +106,107 @@ LEAGUE_API_MAPPING = [
     },
     {
         'id': 16,
-        'league_abbv': 'cfl',
+        'league_abbv': 'ufl',
         'sport': 'football',
-        'league': 'cfl',
+        'league': 'ufl',
+        'status': 'unavailable'
+    },
+    {
+        'id': 17,
+        'league_abbv': 'xfl',
+        'sport': 'football',
+        'league': 'xfl',
+        'status': 'unavailable'
+    },
+    {
+        'id': 18,
+        'league_abbv': 'mens-olympics',
+        'sport': 'basketball',
+        'league': 'mens-olympics-basketball',
+        'status': 'unavailable'
+    },
+    {
+        'id': 19,
+        'league_abbv': 'fiba',
+        'sport': 'basketball',
+        'league': 'fiba',
+        'status': 'unavailable'
+    },
+    {
+        'id': 20,
+        'league_abbv': 'g-league',
+        'sport': 'basketball',
+        'league': 'nba-development',
+        'status': 'unavailable'
+    },
+    {
+        'id': 21,
+        'league_abbv': 'summer-gs',
+        'sport': 'basketball',
+        'league': 'nba-summer-golden-state',
+        'status': 'unavailable'
+    },
+    {
+        'id': 22,
+        'league_abbv': 'summer-lv',
+        'sport': 'basketball',
+        'league': 'nba-summer-las-vegas',
+        'status': 'unavailable'
+    },
+    {
+        'id': 23,
+        'league_abbv': 'summer-orl',
+        'sport': 'basketball',
+        'league': 'nba-summer-orlando',
+        'status': 'unavailable'
+    },
+    {
+        'id': 24,
+        'league_abbv': 'summer-sac',
+        'sport': 'basketball',
+        'league': 'nba-summer-sacramento',
+        'status': 'unavailable'
+    },
+    {
+        'id': 25,
+        'league_abbv': 'summer-utah',
+        'sport': 'basketball',
+        'league': 'nba-summer-utah',
+        'status': 'unavailable'
+    },
+    {
+        'id': 26,
+        'league_abbv': 'nbl',
+        'sport': 'basketball',
+        'league': 'nbl',
+        'status': 'unavailable'
+    },
+    {
+        'id': 27,
+        'league_abbv': 'womens-olympics',
+        'sport': 'basketball',
+        'league': 'womens-olympics-basketball',
+        'status': 'unavailable'
+    },
+    {
+        'id': 28,
+        'league_abbv': 'wcbb',
+        'sport': 'basketball',
+        'league': 'womens-college-basketball',
+        'status': 'unavailable'
+    },
+    {
+        'id': 29,
+        'league_abbv': 'atp',
+        'sport': 'tennis',
+        'league': 'atp',
+        'status': 'unavailable'
+    },
+    {
+        'id': 30,
+        'league_abbv': 'wta',
+        'sport': 'tennis',
+        'league': 'wta',
         'status': 'unavailable'
     },
 ]
