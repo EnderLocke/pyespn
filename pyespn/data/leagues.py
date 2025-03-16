@@ -120,7 +120,7 @@ LEAGUE_API_MAPPING = [
     },
     {
         'id': 18,
-        'league_abbv': 'mens-olympics',
+        'league_abbv': 'mens-olympics-basketball',
         'sport': 'basketball',
         'league': 'mens-olympics-basketball',
         'status': 'unavailable'
@@ -183,7 +183,7 @@ LEAGUE_API_MAPPING = [
     },
     {
         'id': 27,
-        'league_abbv': 'womens-olympics',
+        'league_abbv': 'womens-olympics-basketball',
         'sport': 'basketball',
         'league': 'womens-olympics-basketball',
         'status': 'unavailable'
@@ -239,7 +239,7 @@ LEAGUE_API_MAPPING = [
     },
     {
         'id': 35,
-        'league_abbv': 'mens-olympics',
+        'league_abbv': 'mens-olympics-golf',
         'sport': 'golf',
         'league': 'mens-olympics-golf',
         'status': 'unavailable'
@@ -260,7 +260,7 @@ LEAGUE_API_MAPPING = [
     },
     {
         'id': 38,
-        'league_abbv': 'womens-olympics',
+        'league_abbv': 'womens-olympics-golf',
         'sport': 'golf',
         'league': 'womens-olympics-golf',
         'status': 'unavailable'
@@ -295,7 +295,7 @@ LEAGUE_API_MAPPING = [
     },
     {
         'id': 43,
-        'league_abbv': 'olympics',
+        'league_abbv': 'olympics-baseball',
         'sport': 'baseball',
         'league': 'olympics-baseball',
         'status': 'unavailable'
@@ -319,6 +319,34 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'wbc',
         'sport': 'baseball',
         'league': 'world-baseball-classic',
+        'status': 'unavailable'
+    },
+    {
+        'id': 47,
+        'league_abbv': 'nhl',
+        'sport': 'hockey',
+        'league': 'nhl',
+        'status': 'unavailable'
+    },
+    {
+        'id': 48,
+        'league_abbv': 'mens-college-hockey',
+        'sport': 'hockey',
+        'league': 'mens-college-hockey',
+        'status': 'unavailable'
+    },
+    {
+        'id': 49,
+        'league_abbv': 'hwc',
+        'sport': 'hockey',
+        'league': 'hockey-world-cup',
+        'status': 'unavailable'
+    },
+    {
+        'id': 50,
+        'league_abbv': 'olympics-mens-hockey',
+        'sport': 'hockey',
+        'league': 'olympics-mens-hockey',
         'status': 'unavailable'
     },
 ]
