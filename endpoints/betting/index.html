@@ -591,6 +591,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#betting_providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      BETTING_PROVIDERS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BETTING_PROVIDERS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#example-usage" class="md-nav__link">
     <span class="md-ellipsis">
       Example Usage
@@ -605,6 +615,11 @@
       Example Return
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1062,6 +1077,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#betting_providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      BETTING_PROVIDERS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BETTING_PROVIDERS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#example-usage" class="md-nav__link">
     <span class="md-ellipsis">
       Example Usage
@@ -1076,6 +1101,11 @@
       Example Return
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1354,14 +1384,15 @@
 <h2 id="betting-providers">Betting Providers</h2>
 <p>there are many betting providers across the espn api and they dont appear to be consistent in my profiling. the ones that i have found can be accessed via</p>
 <p>there is a mapping for default betting providers for a given sport, it is not guaranteed to return data for every year though</p>
-<h3 id="example-usage">Example Usage</h3>
+<h3 id="betting_providers"><code>BETTING_PROVIDERS</code></h3>
+<h4 id="example-usage">Example Usage</h4>
 <div class="language-py highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyespn</span><span class="w"> </span><span class="kn">import</span> <span class="n">PYESPN</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">nfl_espn</span> <span class="o">=</span> <span class="n">PYESPN</span><span class="p">(</span><span class="n">sport_league</span><span class="o">=</span><span class="s1">&#39;nfl&#39;</span><span class="p">)</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">nfl_espn</span><span class="o">.</span><span class="n">BETTING_PROVIDERS</span><span class="p">)</span>
 </span></code></pre></div>
-<h3 id="example-return">Example Return</h3>
+<h4 id="example-return">Example Return</h4>
 <div class="language-py highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">[</span><span class="s1">&#39;DraftKings&#39;</span><span class="p">,</span> <span class="s1">&#39;SugarHouse&#39;</span><span class="p">,</span> <span class="s1">&#39;Caesars Sportsbook (New Jersey)&#39;</span><span class="p">,</span> <span class="s1">&#39;PointsBet&#39;</span><span class="p">,</span> <span class="s1">&#39;Caesars Sportsbook (Colorado)&#39;</span><span class="p">,</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> <span class="s1">&#39;Holland Casino&#39;</span><span class="p">,</span> <span class="s1">&#39;Caesars Sportsbook (Tennessee)&#39;</span><span class="p">,</span> <span class="s1">&#39;FanDuel&#39;</span><span class="p">,</span> <span class="s1">&#39;Unibet&#39;</span><span class="p">,</span> <span class="s1">&#39;Bet365&#39;</span><span class="p">,</span> <span class="s1">&#39;Betradar&#39;</span><span class="p">]</span>
 </span></code></pre></div>
