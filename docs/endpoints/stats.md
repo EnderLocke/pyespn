@@ -22,6 +22,8 @@ for stat in jimmy_smith_stats:
     print(stat)
 ```
 
+### Example Return
+
 ```py
 
 [[{'category': 'general', 'season': '1996', 'player_id': '278', 'stat_value': 1.0, 'stat_type_abbreviation': 'FUM',
