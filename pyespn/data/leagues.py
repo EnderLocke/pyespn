@@ -346,7 +346,21 @@ LEAGUE_API_MAPPING = [
         'id': 50,
         'league_abbv': 'olympics-mens-hockey',
         'sport': 'hockey',
-        'league': 'olympics-mens-hockey',
+        'league': 'olympics-mens-ice-hockey',
+        'status': 'unavailable'
+    },
+    {
+        'id': 51,
+        'league_abbv': 'olympics-womens-hockey',
+        'sport': 'hockey',
+        'league': 'olympics-womens-ice-hockey',
+        'status': 'unavailable'
+    },
+    {
+        'id': 52,
+        'league_abbv': 'mens-college-hockey',
+        'sport': 'hockey',
+        'league': 'mens-college-hockey',
         'status': 'unavailable'
     },
 ]
