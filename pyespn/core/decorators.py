@@ -1,8 +1,10 @@
-from functools import wraps
 from pyespn.data.betting import BETTING_AVAILABLE
 from pyespn.data.leagues import PRO_LEAGUES, COLLEGE_LEAGUES
 from pyespn.data.standings import STANDINGS_TYPE_MAP
-from pyespn.exceptions import LeagueNotSupportedError
+from pyespn.exceptions import (LeagueNotSupportedError, LeagueNotAvailableError,
+                               InvalidLeagueError)
+from functools import wraps
+import warnings
 
 
 def requires_standings_available(func):
@@ -34,7 +36,7 @@ def requires_betting_available(func):
 
 
 def requires_college_league(check):
-    """Decorator to ensure a method is not used for professional leagues."""
+    """Decorator to ensure a method is not used for college leagues."""
     def decorator(func):
         @wraps(func)
         def wrapper(self, *args, **kwargs):
@@ -69,10 +71,13 @@ def validate_league(cls):
 
     def new_init(self, sport_league='nfl', *args, **kwargs):
         sport_league = sport_league.lower()
+        if sport_league in self.untested_leagues:
+            warnings.warn(f"This league | {sport_league} | is untested, uncaught errors may occur", UserWarning)
+        if sport_league in self.all_leagues:
+            raise LeagueNotAvailableError(f"Sport, {sport_league} is valid and within api but not currently available within PYESPN")
         if sport_league not in self.valid_leagues:
-            raise ValueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
+            raise InvalidLeagueError(f"Invalid sport league: '{sport_league}'. Must be one of {self.valid_leagues}")
         original_init(self, sport_league, *args, **kwargs)
 
     cls.__init__ = new_init
     return cls
-
