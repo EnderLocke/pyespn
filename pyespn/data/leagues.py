@@ -1,3 +1,8 @@
+# todo - sports not added yet
+#  cricket, field-hockey, lacrosse,
+#  mma, rugby-league, australian-football,
+#  soccer, water-polo, volleyball, rugby
+
 LEAGUE_API_MAPPING = [
     {
         'id': 1,
