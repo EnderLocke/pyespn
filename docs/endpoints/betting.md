@@ -35,7 +35,7 @@ gets a teams record against the spread while away for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -59,7 +59,7 @@ gets a teams record against the spread while home favorite for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -83,7 +83,7 @@ gets a teams record against the spread while an away dog for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -106,7 +106,7 @@ gets a teams record against the spread while at home for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -129,7 +129,7 @@ gets a teams record against the spread for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -152,7 +152,7 @@ gets a teams record against the spread as a dog for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -177,7 +177,7 @@ gets a teams record against the spread as a dog at home for a season
 | season  | <code>number</code> | season for rankings |
 
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -205,7 +205,7 @@ gets the lines for the league champion
 | provider | <code>string</code> | Betting provider<br/> Options can be found in `PYESPN.BETTING_PROVIDERS`<br/> Defaults based on league if not provided. |
 
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -230,7 +230,7 @@ gets the lines for the specified division/conf from a provider
 | provider | <code>string</code> | Betting provider<br/> Options can be found in `PYESPN.BETTING_PROVIDERS`<br/> Defaults based on league if not provided.      |
 
 
-### Example Usage
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
