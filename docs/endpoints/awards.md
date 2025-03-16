@@ -8,8 +8,9 @@ gets awards data for a given season
 |-----------| --- |------------------|
 | season | <code>number</code> | season for rankings |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nba_espn = PYESPN(sport_league='nba')

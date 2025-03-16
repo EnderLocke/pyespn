@@ -1,4 +1,5 @@
 from pyespn.utilities import lookup_league_api_info
+from pyespn.data.version import espn_api_version as v
 import requests
 import json
 
@@ -14,7 +15,7 @@ def get_recruiting_rankings_core(season, league_abbv, max_pages=None):
     :return:
     """
     api_info = lookup_league_api_info(league_abbv=league_abbv)
-    url = f'https://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/recruiting/{season}/athletes'
+    url = f'https://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/recruiting/{season}/athletes'
     response = requests.get(url)
     content = json.loads(response.content)
     if not max_pages:

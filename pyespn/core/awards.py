@@ -1,12 +1,13 @@
 from pyespn.utilities import lookup_league_api_info, get_athlete_id
 from pyespn.core.players import get_player_info_core
+from pyespn.data.version import espn_api_version as v
 import requests
 import json
 
 
 def get_awards_core(season, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
-    url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/awards?lang=en&region=us'
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/awards?lang=en&region=us'
     response = requests.get(url)
     content = json.loads(response.content)
     awards_urls = content['items']

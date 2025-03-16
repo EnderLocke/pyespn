@@ -1,5 +1,5 @@
 # Endpoints available
-A list of all api endpoints available in PYESPN
+A list of all api endpoints available in PYESPN by grain
 
 ## [Teams](endpoints%2Fteams.md)
 Endpoints related to team data
