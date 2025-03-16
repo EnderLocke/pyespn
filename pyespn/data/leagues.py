@@ -75,7 +75,42 @@ LEAGUE_API_MAPPING = [
         'sport': 'baseball',
         'league': 'mlb',
         'status': 'available'
-    }
+    },
+    {
+        'id': 12,
+        'league_abbv': 'nascar2',
+        'sport': 'racing',
+        'league': 'nascar-secondary',
+        'status': 'unavailable'
+    },
+    {
+        'id': 13,
+        'league_abbv': 'nascar-truck',
+        'sport': 'racing',
+        'league': 'nascar-truck',
+        'status': 'unavailable'
+    },
+    {
+        'id': 14,
+        'league_abbv': 'nhra',
+        'sport': 'racing',
+        'league': 'nhra',
+        'status': 'unavailable'
+    },
+    {
+        'id': 15,
+        'league_abbv': 'cfl',
+        'sport': 'football',
+        'league': 'cfl',
+        'status': 'unavailable'
+    },
+    {
+        'id': 16,
+        'league_abbv': 'cfl',
+        'sport': 'football',
+        'league': 'cfl',
+        'status': 'unavailable'
+    },
 ]
 
 PRO_LEAGUES = [
