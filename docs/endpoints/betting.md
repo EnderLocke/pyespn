@@ -6,7 +6,9 @@ there are many betting providers across the espn api and they dont appear to be 
 
 there is a mapping for default betting providers for a given sport, it is not guaranteed to return data for every year though
 
-### Example Usage
+### `BETTING_PROVIDERS`
+
+#### Example Usage
 
 ```py
 from pyespn import PYESPN
@@ -16,7 +18,7 @@ nfl_espn = PYESPN(sport_league='nfl')
 print(nfl_espn.BETTING_PROVIDERS)
 ```
 
-### Example Return
+#### Example Return
 
 ```py
 ['DraftKings', 'SugarHouse', 'Caesars Sportsbook (New Jersey)', 'PointsBet', 'Caesars Sportsbook (Colorado)',
