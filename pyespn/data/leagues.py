@@ -3,67 +3,78 @@ LEAGUE_API_MAPPING = [
         'id': 1,
         'league_abbv': 'mcbb',
         'sport': 'basketball',
-        'league': 'mens-college-basketball'
+        'league': 'mens-college-basketball',
+        'status': 'available' # can be available untested or unavailable
     },
     {
         'id': 2,
         'league_abbv': 'cfb',
         'sport': 'football',
-        'league': 'college-football'
+        'league': 'college-football',
+        'status': 'available'
     },
     {
         'id': 3,
         'league_abbv': 'nfl',
         'sport': 'football',
-        'league': 'nfl'
+        'league': 'nfl',
+        'status': 'available'
     },
     {
         'id': 4,
         'league_abbv': 'nba',
         'sport': 'basketball',
-        'league': 'nba'
+        'league': 'nba',
+        'status': 'available'
     },
     {
         'id': 5,
         'league_abbv': 'cbb',
         'sport': 'baseball',
-        'league': 'college-baseball'
+        'league': 'college-baseball',
+        'status': 'available'
     },
     {
         'id': 6,
         'league_abbv': 'csb',
         'sport': 'baseball',
-        'league': 'college-softball'
+        'league': 'college-softball',
+        'status': 'available'
     },
     {
         'id': 7,
         'league_abbv': 'wnba',
         'sport': 'basketball',
-        'league': 'wnba'
+        'league': 'wnba',
+        'status': 'available'
     },
     {
         'id': 8,
         'league_abbv': 'f1',
         'sport': 'racing',
-        'league': 'f1'
+        'league': 'f1',
+        'status': 'available'
     },
     {
         'id': 9,
         'league_abbv': 'nascar',
         'sport': 'racing',
-        'league': 'nascar-premier'
+        'league': 'nascar-premier',
+        'status': 'available'
     },
     {
         'id': 10,
         'league_abbv': 'indy',
         'sport': 'racing',
-        'league': 'irl'
+        'league': 'irl',
+        'status': 'available'
     },
     {
         'id': 11,
         'league_abbv': 'mlb',
         'sport': 'baseball',
-        'league': 'mlb'
+        'league': 'mlb',
+        'status': 'available'
     }
 ]
 

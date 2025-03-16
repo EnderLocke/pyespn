@@ -10,7 +10,8 @@ from .classes import Team
 @validate_league
 class PYESPN:
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
-    valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING}
+    valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'available'}
+    untested_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'untested'}
 
     def __init__(self, sport_league='nfl'):
         self.league_abbv = sport_league.lower()
