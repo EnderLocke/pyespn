@@ -209,6 +209,62 @@ LEAGUE_API_MAPPING = [
         'league': 'wta',
         'status': 'unavailable'
     },
+    {
+        'id': 31,
+        'league_abbv': 'champions-tour',
+        'sport': 'golf',
+        'league': 'champions-tour',
+        'status': 'unavailable'
+    },
+    {
+        'id': 32,
+        'league_abbv': 'eur',
+        'sport': 'golf',
+        'league': 'eur',
+        'status': 'unavailable'
+    },
+    {
+        'id': 33,
+        'league_abbv': 'liv',
+        'sport': 'golf',
+        'league': 'liv',
+        'status': 'unavailable'
+    },
+    {
+        'id': 34,
+        'league_abbv': 'lpga',
+        'sport': 'golf',
+        'league': 'lpga',
+        'status': 'unavailable'
+    },
+    {
+        'id': 35,
+        'league_abbv': 'mens-olympics',
+        'sport': 'golf',
+        'league': 'mens-olympics-golf',
+        'status': 'unavailable'
+    },
+    {
+        'id': 36,
+        'league_abbv': 'ntw',
+        'sport': 'golf',
+        'league': 'ntw',
+        'status': 'unavailable'
+    },
+    {
+        'id': 37,
+        'league_abbv': 'pga',
+        'sport': 'golf',
+        'league': 'pga',
+        'status': 'unavailable'
+    },
+    {
+        'id': 38,
+        'league_abbv': 'womens-olympics',
+        'sport': 'golf',
+        'league': 'womens-olympics-golf',
+        'status': 'unavailable'
+    },
 ]
 
 PRO_LEAGUES = [
