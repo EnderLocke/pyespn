@@ -13,3 +13,9 @@ LEAGUE_TEAMS_MAPPING = {
     'nascar': nascar_teams_data,
     'indy': indy_teams_data
 }
+
+team_files_path = './files/'
+
+
+def build_team_files():
+    pass
