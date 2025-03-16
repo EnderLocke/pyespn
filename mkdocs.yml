@@ -15,11 +15,49 @@ nav:
     - Awards: endpoints/awards.md
     - Betting: endpoints/betting.md
     - Standings: endpoints/standings.md
+  - Exceptions: exceptions.md
   - Discover: discover.md
   - Postman: postman.md
   - About:
     - License: LICENSE.md
 
-theme: dracula
+theme:
+  name: material
+  favicon: img/favicon.ico
+  logo: img/pyespn.png
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
 
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+    - search.suggest
+    - search.highlight
+    - search.share
+    - navigation.footer
+    - content.code.copy
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+repo_url: https://github.com/EnderLocke/pyespn
+repo_name: PYESPN
 copyright: Copyright &copy; 2025 Zach Stocker

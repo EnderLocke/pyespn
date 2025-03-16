@@ -8,8 +8,9 @@ gets the historical stats for a given player id
 |-----------| --- |---------------|
 | player_id | <code>number</code> | id for player |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')

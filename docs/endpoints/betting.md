@@ -6,8 +6,9 @@ there are many betting providers across the espn api and they dont appear to be 
 
 there is a mapping for default betting providers for a given sport, it is not guaranteed to return data for every year though
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -28,8 +29,9 @@ gets a teams record against the spread while away for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -51,8 +53,9 @@ gets a teams record against the spread while home favorite for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -74,8 +77,9 @@ gets a teams record against the spread while an away dog for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -96,8 +100,9 @@ gets a teams record against the spread while at home for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -118,8 +123,9 @@ gets a teams record against the spread for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -140,8 +146,9 @@ gets a teams record against the spread as a dog for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -163,8 +170,10 @@ gets a teams record against the spread as a dog at home for a season
 | team_id | <code>number</code> | id for team         |
 | season  | <code>number</code> | season for rankings |
 
-**example**
-```python
+
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nfl')
@@ -189,8 +198,10 @@ gets the lines for the league champion
 | season   | <code>number</code> | Season for rankings.                                         |
 | provider | <code>string</code> | Betting provider<br/> Options can be found in `PYESPN.BETTING_PROVIDERS`<br/> Defaults based on league if not provided. |
 
-**example**
-```python
+
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nba_espn = PYESPN(sport_league='nba')
@@ -213,8 +224,9 @@ gets the lines for the specified division/conf from a provider
 | provider | <code>string</code> | Betting provider<br/> Options can be found in `PYESPN.BETTING_PROVIDERS`<br/> Defaults based on league if not provided.      |
 
 
-**example**
-```python
+### Example Usage
+
+```py
 from pyespn import PYESPN
 
 nfl_espn = PYESPN(sport_league='nba')

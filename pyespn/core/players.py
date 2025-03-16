@@ -1,4 +1,5 @@
 from pyespn.utilities import lookup_league_api_info
+from pyespn.data.version import espn_api_version as v
 import requests
 import json
 
@@ -6,7 +7,7 @@ import json
 def get_player_ids_core(league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     all_players = []
-    cfb_ath_url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes?lang=en&region=us'
+    cfb_ath_url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes?lang=en&region=us'
     response = requests.get(cfb_ath_url)
     num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
 
@@ -36,7 +37,7 @@ def get_player_stat_urls_core(player_id, league_abbv):
 
     stat_urls = []
     try:
-        stat_log_url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}/statisticslog?lang=en&region=us'
+        stat_log_url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}/statisticslog?lang=en&region=us'
         log_response = requests.get(stat_log_url)
     except Exception as e:
         raise Exception(e)
@@ -78,7 +79,7 @@ def extract_stats_from_url_core(url):
 def get_player_info_core(player_id, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
-    url = f'http://sports.core.api.espn.com/v2/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}'
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}'
     response = requests.get(url)
     content = json.loads(response.content)
     return content
