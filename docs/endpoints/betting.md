@@ -16,6 +16,12 @@ nfl_espn = PYESPN(sport_league='nfl')
 print(nfl_espn.BETTING_PROVIDERS)
 ```
 
+### Example Return
+
+```py
+['DraftKings', 'SugarHouse', 'Caesars Sportsbook (New Jersey)', 'PointsBet', 'Caesars Sportsbook (Colorado)',
+ 'Holland Casino', 'Caesars Sportsbook (Tennessee)', 'FanDuel', 'Unibet', 'Bet365', 'Betradar']
+```
 
 ## Against the Spread Endpoints
 API endpoints available for teams against the spread data, 
