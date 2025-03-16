@@ -265,6 +265,62 @@ LEAGUE_API_MAPPING = [
         'league': 'womens-olympics-golf',
         'status': 'unavailable'
     },
+    {
+        'id': 39,
+        'league_abbv': 'winter-dominican',
+        'sport': 'baseball',
+        'league': 'dominican-winter-league',
+        'status': 'unavailable'
+    },
+    {
+        'id': 40,
+        'league_abbv': 'llb',
+        'sport': 'baseball',
+        'league': 'llb',
+        'status': 'unavailable'
+    },
+    {
+        'id': 41,
+        'league_abbv': 'winter-mexican',
+        'sport': 'baseball',
+        'league': 'mexican-winter-league',
+        'status': 'unavailable'
+    },
+    {
+        'id': 42,
+        'league_abbv': 'caribbean',
+        'sport': 'baseball',
+        'league': 'caribbean-series',
+        'status': 'unavailable'
+    },
+    {
+        'id': 43,
+        'league_abbv': 'olympics',
+        'sport': 'baseball',
+        'league': 'olympics-baseball',
+        'status': 'unavailable'
+    },
+    {
+        'id': 44,
+        'league_abbv': 'winter-pr',
+        'sport': 'baseball',
+        'league': 'puerto-rican-winter-league',
+        'status': 'unavailable'
+    },
+    {
+        'id': 45,
+        'league_abbv': 'winter-ven',
+        'sport': 'baseball',
+        'league': 'venezuelan-winter-league',
+        'status': 'unavailable'
+    },
+    {
+        'id': 46,
+        'league_abbv': 'wbc',
+        'sport': 'baseball',
+        'league': 'world-baseball-classic',
+        'status': 'unavailable'
+    },
 ]
 
 PRO_LEAGUES = [
