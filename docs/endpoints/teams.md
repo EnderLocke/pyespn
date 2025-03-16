@@ -65,6 +65,12 @@ print(jags_team_info)
 ## `get_team_colors(team_id)`
 gets the alternate and primary colors for the team
 
+
+| Param   | Type | Description |
+|---------| --- |-------------|
+| team_id | <code>number</code> | id for team |
+
+
 ```py
 from pyespn import PYESPN
 
