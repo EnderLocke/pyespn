@@ -1,4 +1,5 @@
 # http://sports.core.api.espn.com/v2/sports/racing/leagues/f1/seasons/2025/types/2/standings?lang=en&region=us
+# todo golf standings are different
 from pyespn.utilities import lookup_league_api_info, get_athlete_id
 from pyespn.data.standings import STANDINGS_TYPE_MAP
 import requests
