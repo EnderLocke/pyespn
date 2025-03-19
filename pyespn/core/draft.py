@@ -1,4 +1,4 @@
-from pyespn.utilities import lookup_league_api_info
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 
 
