@@ -1,7 +1,5 @@
 from pyespn.utilities import lookup_league_api_info
 from pyespn.data.version import espn_api_version as v
-import requests
-import json
 
 
 def get_draft_pick_data_core(pick_round, pick, season, league_abbv):
