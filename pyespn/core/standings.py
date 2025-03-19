@@ -1,6 +1,6 @@
 # http://sports.core.api.espn.com/v2/sports/racing/leagues/f1/seasons/2025/types/2/standings?lang=en&region=us
 # todo golf standings are different
-from pyespn.utilities import lookup_league_api_info, get_athlete_id
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.data.standings import STANDINGS_TYPE_MAP
 import requests
@@ -10,8 +10,8 @@ import json
 def get_standings_core(season, standings_type, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/0/standings/{STANDINGS_TYPE_MAP[league_abbv].get(standings_type, 0)}?lang=en&region=us'
-    response = requests.get(url)
-    content = json.loads(response.content)
+    content = fetch_espn_data(url)
+
     standings = content['standings']
     all_records = []
     for record in standings:

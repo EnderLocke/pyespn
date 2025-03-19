@@ -1,4 +1,4 @@
-from pyespn.utilities import lookup_league_api_info
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 import requests
 import json
@@ -16,8 +16,8 @@ def get_recruiting_rankings_core(season, league_abbv, max_pages=None):
     """
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'https://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/recruiting/{season}/athletes'
-    response = requests.get(url)
-    content = json.loads(response.content)
+    content = fetch_espn_data(url)
+
     if not max_pages:
         num_of_pages = content['pageCount']
     else:
