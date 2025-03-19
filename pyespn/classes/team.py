@@ -34,19 +34,19 @@ class Team:
         if team_json:
             self.team_json = team_json
         else:
-            self.team_json = None
-
-        if self.team_json:
-            self._load_team_data()
+            self.team_json = {}
 
     def _load_team_data(self):
-        self.id = self.team_json.get("id")
+        if not self.team_id:
+            self.team_id = self.team_json.get("id")
         self.guid = self.team_json.get("guid")
         self.uid = self.team_json.get("uid")
         self.location = self.team_json.get("location")
-        self.name = self.team_json.get("name")
+        if not self.name:
+            self.name = self.team_json.get("name")
         self.nickname = self.team_json.get("nickname")
-        self.abbreviation = self.team_json.get("abbreviation")
+        if not self.abbreviation:
+            self.abbreviation = self.team_json.get("abbreviation")
         self.display_name = self.team_json.get("displayName")
         self.short_display_name = self.team_json.get("shortDisplayName")
         self.primary_color = self.team_json.get("color")
