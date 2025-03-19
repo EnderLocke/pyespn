@@ -2,6 +2,7 @@
 #  what else is out there/ add a teams logo call (its within team info data)
 from pyespn.utilities import lookup_league_api_info
 from pyespn.data.version import espn_api_version as v
+from pyespn.classes import Team
 import requests
 import json
 
@@ -20,7 +21,8 @@ def get_team_info_core(team_id, league_abbv):
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/teams/{team_id}?lang=en&region=us'
     response = requests.get(url)
     content = json.loads(response.content)
-    return content
+    curren_team = Team(content)
+    return content, curren_team
 
 
 def get_team_logo_img(team_id, league_abbv):
