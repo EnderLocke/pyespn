@@ -1,6 +1,6 @@
 # todo there is venue info could add a lookup for that specirfcally
 #  what else is out there/ add a teams logo call (its within team info data)
-from pyespn.utilities import lookup_league_api_info
+from pyespn.utilities import lookup_league_api_info, check_response_code
 from pyespn.data.version import espn_api_version as v
 from pyespn.classes import Team
 import requests
@@ -21,6 +21,8 @@ def get_team_info_core(team_id, league_abbv, espn_instance):
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/teams/{team_id}?lang=en&region=us'
     response = requests.get(url)
     content = json.loads(response.content)
+    check_response_code(content)
+
     current_team = Team(espn_instance, content)
     return content, current_team
 
