@@ -62,7 +62,8 @@ class PYESPN:
 
     def get_team_info(self, team_id):
         return get_team_info_core(team_id=team_id,
-                                  league_abbv=self.league_abbv)
+                                  league_abbv=self.league_abbv,
+                                  espn_instance=self)
 
     def get_season_team_stats(self, season):
         return get_season_team_stats_core(season=season,
