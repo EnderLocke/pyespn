@@ -64,6 +64,9 @@ class Team:
 
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
 
+    def get_logo_img(self):
+        return self.venue_imgs
+
     def get_team_colors(self):
         return {
             'primary_color': self.primary_color,
