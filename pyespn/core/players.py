@@ -1,5 +1,6 @@
 from pyespn.utilities import lookup_league_api_info
 from pyespn.data.version import espn_api_version as v
+from pyespn.classes import Player
 import requests
 import json
 
@@ -82,5 +83,5 @@ def get_player_info_core(player_id, league_abbv):
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}'
     response = requests.get(url)
     content = json.loads(response.content)
-    return content
-
+    current_player = Player(content)
+    return content, current_player
