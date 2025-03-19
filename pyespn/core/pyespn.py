@@ -7,7 +7,6 @@ from pyespn.classes import Team
 from .decorators import *
 
 
-
 @validate_league
 class PYESPN:
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
