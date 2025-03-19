@@ -31,7 +31,7 @@ class PYESPN:
         Returns:
             str: A formatted string with class details
         """
-        return f"<League {self.league_abbv}>"
+        return f"<PYESN | League {self.league_abbv}>"
 
     def load_teams(self):
         for team in self.TEAM_ID_MAPPING:
