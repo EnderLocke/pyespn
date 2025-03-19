@@ -17,4 +17,3 @@ from .betting import (get_year_league_champions_futures_core, get_division_champ
                       get_team_year_ats_home_underdog_core)
 from .awards import get_awards_core
 from .standings import get_standings_core
-from .api import fetch_espn_data
