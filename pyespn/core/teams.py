@@ -15,14 +15,14 @@ def get_season_team_stats_core(season, team, league_abbv):
     return content
 
 
-def get_team_info_core(team_id, league_abbv):
+def get_team_info_core(team_id, league_abbv, espn_instance):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/teams/{team_id}?lang=en&region=us'
     response = requests.get(url)
     content = json.loads(response.content)
-    curren_team = Team(content)
-    return content, curren_team
+    current_team = Team(espn_instance, content)
+    return content, current_team
 
 
 def get_team_logo_img(team_id, league_abbv):
