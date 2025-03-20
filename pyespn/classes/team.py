@@ -1,4 +1,4 @@
-from pyespn.classes import Venue
+from pyespn.classes.venue import Venue
 
 
 class Team:
