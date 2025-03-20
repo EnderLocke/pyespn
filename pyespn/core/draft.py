@@ -8,4 +8,3 @@ def get_draft_pick_data_core(pick_round, pick, season, league_abbv):
     content = fetch_espn_data(url)
 
     return content
-
