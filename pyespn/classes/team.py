@@ -37,6 +37,7 @@ class Team:
             self.team_json = team_json
         else:
             self.team_json = {}
+        self._load_team_data()
         self.home_venue = Venue(venue_json=self.venue_json)
 
     def _load_team_data(self):
