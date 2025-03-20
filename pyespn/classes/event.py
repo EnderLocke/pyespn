@@ -1,5 +1,6 @@
 
 
+
 class Event:
 
     def __init__(self, event_json):
@@ -10,5 +11,6 @@ class Event:
         self.event_name = self.event_json.get('name')
         self.short_name = self.event_json.get('shortName')
         self.competition_type = self.event_json.get('competitions', {}).get('type', {}).get('type')
+        self.venue_json = self.event_json.get('competitions', {}).get('venue')
 
 

@@ -1,3 +1,5 @@
+from pyespn.classes import Venue
+
 
 class Team:
     """
@@ -35,6 +37,7 @@ class Team:
             self.team_json = team_json
         else:
             self.team_json = {}
+        self.home_venue = Venue(venue_json=self.venue_json)
 
     def _load_team_data(self):
         if not self.team_id:
@@ -55,17 +58,12 @@ class Team:
         self.is_all_star = self.team_json.get("isAllStar")
 
         self.logos = [logo.get("href") for logo in self.team_json.get("logos", [])]
-        self.venue_name = self.team_json.get("venue", {}).get("fullName", "Unknown Venue")
-        self.venue_city = self.team_json.get("venue", {}).get("address", {}).get("city", "Unknown")
-        self.venue_state = self.team_json.get("venue", {}).get("address", {}).get("state", "Unknown")
-        self.venue_grass = self.team_json.get("venue", {}).get("grass", "Unknown")
-        self.venue_indoors = self.team_json.get("venue", {}).get("indoor", "Unknown")
-        self.venue_imgs = self.team_json.get("venue", {}).get("images", [])
+        self.venue_json = self.team_json.get("venue")
 
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
 
     def get_logo_img(self):
-        return self.venue_imgs
+        return self.home_venue.images
 
     def get_team_colors(self):
         return {
@@ -75,14 +73,7 @@ class Team:
 
     def get_home_venue(self):
 
-        return {
-            'name': self.venue_name,
-            'state': self.venue_state,
-            'city': self.venue_city,
-            'grass': self.venue_grass,
-            'indoor': self.venue_indoors,
-            'img_url': self.venue_imgs
-        }
+        return self.home_venue
 
     def get_league(self):
         """
