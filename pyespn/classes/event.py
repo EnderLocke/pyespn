@@ -11,7 +11,7 @@ class Event:
         self.event_name = self.event_json.get('name')
         self.short_name = self.event_json.get('shortName')
         self.competition_type = self.event_json.get('competitions', {}).get('type', {}).get('type')
-        self.venue_json = self.event_json.get('competitions', {}).get('venue')
+        self.venue_json = self.event_json.get('competitions', {}).get('venue', {})
         self.event_venue = Venue(venue_json=self.venue_json)
         self.event_notes = self.event_json.get('competitions', {}).get('notes', [])
 
