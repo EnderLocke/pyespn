@@ -59,7 +59,7 @@ class Team:
         self.is_all_star = self.team_json.get("isAllStar")
 
         self.logos = [logo.get("href") for logo in self.team_json.get("logos", [])]
-        self.venue_json = self.team_json.get("venue")
+        self.venue_json = self.team_json.get("venue", {})
 
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
 
