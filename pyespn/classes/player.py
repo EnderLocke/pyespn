@@ -11,7 +11,7 @@ class Player:
         Returns a string representation of the Player instance.
 
         Returns:
-            str: A formatted string with the team's location, name, abbreviation, and league.
+            str: A formatted string with the players's name, debut year and jersey.
         """
         return f"<Player {self.full_name}, {self.debut_year} ({self.jersey})>"
 
@@ -71,3 +71,6 @@ class Player:
         self.status_abbreviation = status.get('abbreviation')
 
         self.statistics_log_ref = self.player_json.get('statisticslog', {}).get('$ref')
+
+    def to_dict(self):
+        return self.player_json

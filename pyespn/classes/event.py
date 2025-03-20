@@ -15,3 +15,14 @@ class Event:
         self.event_venue = Venue(venue_json=self.venue_json)
         self.event_notes = self.event_json.get('competitions', {}).get('notes', [])
 
+    def __repr__(self):
+        """
+        Returns a string representation of the Team instance.
+
+        Returns:
+            str: A formatted string with the events data.
+        """
+        return f"<Event {self.short_name} {self.date}>"
+
+    def to_dict(self):
+        return self.event_json

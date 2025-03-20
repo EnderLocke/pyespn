@@ -93,3 +93,6 @@ class Team:
             str: A formatted string with the team's location, name, abbreviation, and league.
         """
         return f"<Team {self.location} {self.name} ({self.abbreviation}) - {self.get_league()}>"
+
+    def to_dict(self):
+        return self.team_json

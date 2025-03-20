@@ -10,3 +10,15 @@ class Venue:
         self.grass = self.venue_json.get('grass')
         self.indoor = self.venue_json.get('indoor')
         self.images = self.venue_json.get('images', [])
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Team instance.
+
+        Returns:
+            str: A formatted string with the venues name.
+        """
+        return f"<Venue {self.name}>"
+
+    def to_dict(self):
+        return self.venue_json
