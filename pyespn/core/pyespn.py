@@ -21,8 +21,7 @@ class PYESPN:
         self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.teams = {}
-        if self.TEAM_ID_MAPPING:
-            self.load_teams()
+
 
     def __repr__(self):
         """
@@ -32,16 +31,6 @@ class PYESPN:
             str: A formatted string with class details
         """
         return f"<PYESN | League {self.league_abbv}>"
-
-    def load_teams(self):
-        for team in self.TEAM_ID_MAPPING:
-            self.teams[team['team_id']] = Team(
-                espn_instance=self,
-                team_id=team['team_id'],
-                name=team['team_name'],
-                location=team['team_city'],
-                abbreviation=team['team_abbv']
-            )
 
     def get_player_info(self, player_id):
         return get_player_info_core(player_id=player_id,
