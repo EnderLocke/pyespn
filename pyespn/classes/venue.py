@@ -1,5 +1,7 @@
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("venue_json")
 class Venue:
 
     def __init__(self, venue_json):

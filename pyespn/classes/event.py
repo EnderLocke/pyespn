@@ -1,6 +1,8 @@
 from pyespn.classes.venue import Venue
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("event_json")
 class Event:
 
     def __init__(self, event_json):
