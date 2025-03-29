@@ -2,8 +2,10 @@ from pyespn.classes.player import Player
 from pyespn.classes.team import Team
 from pyespn.utilities import fetch_espn_data
 from pyespn.exceptions import API400Error
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("betting_json")
 class Betting:
 
     def __init__(self, espn_instance, betting_json):
@@ -22,6 +24,7 @@ class Betting:
                                            line_json=provider))
 
 
+@validate_json("line_json")
 class Provider:
 
     def __init__(self, espn_instance, line_json):
@@ -40,6 +43,7 @@ class Provider:
                                        book_json=future_line))
 
 
+@validate_json("book_json")
 class Line:
 
     def __init__(self, espn_instance, book_json):
