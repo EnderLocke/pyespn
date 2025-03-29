@@ -1,11 +1,13 @@
 from pyespn.classes.player import Player
 from pyespn.classes.team import Team
+from pyespn.utilities import fetch_espn_data
 
 
 class Betting:
 
-    def __init__(self, betting_json):
+    def __init__(self, espn_instance, betting_json):
         self.betting_json = betting_json
+        self.espn_instance = espn_instance
         self.providers = []
         self._set_betting_data()
 
@@ -20,8 +22,9 @@ class Betting:
 
 class Provider:
 
-    def __init__(self, line_json):
+    def __init__(self, espn_instance, line_json):
         self.line_json = line_json
+        self.espn_instance = espn_instance
         self._set_betting_provider_data()
 
     def _set_betting_provider_data(self):
@@ -36,7 +39,8 @@ class Provider:
 
 class Line:
 
-    def __init__(self, book_json):
+    def __init__(self, espn_instance, book_json):
+        self.espn_instance = espn_instance
         self.book_json = book_json
         self.athlete = None
         self.team = None
@@ -44,11 +48,17 @@ class Line:
 
     def _set_line_data(self):
         if 'athlete' in self.book_json:
-            self.athlete = None
-            pass
+            content = fetch_espn_data(self.book_json.get('athlete').get('$ref'))
+
+            self.athlete = Player(espn_instance=self.espn_instance,
+                                  player_json=content)
+
         if 'team' in self.book_json:
-            self.team = None
-            pass
+            content = fetch_espn_data(self.book_json.get('team').get('$ref'))
+
+            self.team = Team(espn_instance=self.espn_instance,
+                             team_json=content)
+
         self.value = self.book_json.get('value')
 
 

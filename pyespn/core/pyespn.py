@@ -45,7 +45,8 @@ class PYESPN:
 
     def get_player_info(self, player_id):
         return get_player_info_core(player_id=player_id,
-                                    league_abbv=self.league_abbv)
+                                    league_abbv=self.league_abbv,
+                                    espn_instance=self)
 
     def get_player_ids(self):
         return get_player_ids_core(league_abbv=self.league_abbv)
@@ -146,7 +147,8 @@ class PYESPN:
     @requires_betting_available
     def get_all_seasons_futures(self, season):
         return get_season_futures_core(season=season,
-                                       league_abbv=self.league_abbv)
+                                       league_abbv=self.league_abbv,
+                                       espn_instance=self)
 
     def get_awards(self, season):
         return get_awards_core(season=season,

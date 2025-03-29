@@ -2,8 +2,9 @@
 
 class Player:
 
-    def __init__(self, player_json):
+    def __init__(self, espn_instance, player_json):
         self.player_json = player_json
+        self.espn_instance = espn_instance
         self._set_player_data()
 
     def __repr__(self):

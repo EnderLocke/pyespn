@@ -46,13 +46,16 @@ def _get_team_year_ats(team_id, season, league_abbv):
     return content
 
 
-def get_season_futures_core(season, league_abbv):
+def get_season_futures_core(season, league_abbv, espn_instance):
     content = _get_futures_year_v2(year=season,
                                    league_abbv=league_abbv)
+    league_futures = []
     for item in content:
         for json in item:
-            league_futures = Betting(betting_json=json)
+            league_futures.append(Betting(espn_instance=espn_instance,
+                                          betting_json=json))
 
+    return league_futures
 
 
 def get_year_league_champions_futures_core(season, league_abbv, provider="Betradar"):
