@@ -3,7 +3,7 @@ from pyespn.utilities import (lookup_league_api_info, get_team_id, get_type_futu
 from pyespn.data.betting import LEAGUE_CHAMPION_FUTURES_MAP, LEAGUE_DIVISION_FUTURES_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.version import espn_api_version as v
-from pyespn.classes.betting import Betting, Line
+from pyespn.classes.betting import Betting
 
 
 def _get_team_ats(team_id, season, ats_type, league_abbv):
