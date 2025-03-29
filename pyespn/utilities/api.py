@@ -36,7 +36,10 @@ def fetch_espn_data(url):
         content = response.json()  # Automatically parses JSON
 
         check_response_code(content)
-        if len(content.get('items')) == 0:
+
+        items_count = content.get('items', '').__len__
+        content_count = content.__len__
+        if items_count == 0 and content_count != 5:
             raise NoDataReturnedError(code=content.get('status', {}).get('code'))
 
         return content
