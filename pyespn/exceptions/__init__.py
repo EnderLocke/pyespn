@@ -1,2 +1,2 @@
 from .leagues import LeagueNotSupportedError, LeagueNotAvailableError, InvalidLeagueError
-from .api import API400Error
+from .api import API400Error, NoDataReturnedError
