@@ -33,9 +33,8 @@ class PYESPN:
     def load_league_data(self):
         self.league = self.get_league_info()
 
-
     def load_seasons_futures(self, season):
-        self.get_all_seasons_futures(season=season)
+        self.betting_futures = {season: self.get_all_seasons_futures(season=season)}
 
     def __repr__(self):
         """
