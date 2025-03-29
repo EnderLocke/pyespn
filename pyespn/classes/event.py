@@ -24,7 +24,7 @@ class Event:
         Returns:
             str: A formatted string with the events data.
         """
-        return f"<Event {self.short_name} {self.date}>"
+        return f"<Event | {self.short_name} {self.date}>"
 
     def to_dict(self):
         return self.event_json

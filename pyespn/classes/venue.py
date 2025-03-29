@@ -20,7 +20,7 @@ class Venue:
         Returns:
             str: A formatted string with the venues name.
         """
-        return f"<Venue {self.name}>"
+        return f"<Venue | {self.name}>"
 
     def to_dict(self):
         return self.venue_json

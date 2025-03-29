@@ -17,7 +17,7 @@ class League:
         Returns:
             str: A formatted string with the Providers information .
         """
-        return f"<League {self.display_name}>"
+        return f"<League | {self.display_name}>"
 
     def _set_league_json(self):
         self.ref = self.league_json.get("$ref")

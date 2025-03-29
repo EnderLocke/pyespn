@@ -21,7 +21,7 @@ class Betting:
         Returns:
             str: A formatted string with the bettings information .
         """
-        return f"<Betting {self.display_name} - {self.espn_instance.league_abbv}>"
+        return f"<Betting | {self.display_name} - {self.espn_instance.league_abbv}>"
 
     def _set_betting_data(self):
         self.id = self.betting_json.get('id')
@@ -48,7 +48,7 @@ class Provider:
         Returns:
             str: A formatted string with the Providers information .
         """
-        return f"<Provider {self.provider_name} - {self.espn_instance.league_abbv}>"
+        return f"<Provider | {self.provider_name} - {self.espn_instance.league_abbv}>"
 
     def _set_betting_provider_data(self):
         self.provider_name = self.line_json.get('provider', {}).get('name')
