@@ -12,10 +12,6 @@ class Team:
 
     Attributes:
         espn_instance (PYESPN): Reference to the parent `PYESPN` instance.
-        team_id (int): Unique identifier for the team.
-        name (str): Full name of the team.
-        abbreviation (str): Team abbreviation (e.g., "LAL" for Los Angeles Lakers).
-        location (str): Geographic location of the team (e.g., "Los Angeles").
     """
 
     def __init__(self, espn_instance, team_json):
