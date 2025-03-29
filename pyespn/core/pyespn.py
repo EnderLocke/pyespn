@@ -20,6 +20,7 @@ class PYESPN:
         self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.teams = []
+        self.betting_futures = {}
         self.league = None
         self.load_teams_data()
         self.load_league_data()
@@ -31,6 +32,10 @@ class PYESPN:
 
     def load_league_data(self):
         self.league = self.get_league_info()
+
+
+    def load_seasons_futures(self, season):
+        self.get_all_seasons_futures(season=season)
 
     def __repr__(self):
         """
