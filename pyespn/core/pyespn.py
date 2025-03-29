@@ -143,6 +143,11 @@ class PYESPN:
                                                     season=season,
                                                     league_abbv=self.league_abbv)
 
+    @requires_betting_available
+    def get_all_seasons_futures(self, season):
+        return get_season_futures_core(season=season,
+                                       league_abbv=self.league_abbv)
+
     def get_awards(self, season):
         return get_awards_core(season=season,
                                league_abbv=self.league_abbv)
