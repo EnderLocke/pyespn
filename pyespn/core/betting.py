@@ -25,13 +25,13 @@ def _get_futures_year(year, league_abbv):
 
 def _get_futures_year_v2(year, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
-    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures?lang=en&region=us'
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures'
     content = fetch_espn_data(url)
     all_futures = []
     pages = content.get('pageCount')
 
     for page in range(1, pages + 1):
-        url += f'&page={page}'
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures?page={page}'
         page_content = fetch_espn_data(url)
         all_futures.append(page_content.get('items'))
 
