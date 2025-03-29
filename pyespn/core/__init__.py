@@ -18,3 +18,4 @@ from .betting import (get_year_league_champions_futures_core, get_division_champ
                       get_season_futures_core)
 from .awards import get_awards_core
 from .standings import get_standings_core
+from .leagues import get_league_info_core
