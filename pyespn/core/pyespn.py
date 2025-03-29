@@ -13,7 +13,7 @@ class PYESPN:
     untested_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'untested'}
     all_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'unavailable'}
 
-    def __init__(self, sport_league='nfl'):
+    def __init__(self, sport_league='nfl', load_teams=True):
         self.league_abbv = sport_league.lower()
         self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING.get(self.league_abbv)
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
@@ -23,8 +23,9 @@ class PYESPN:
         self.betting_futures = {}
         self.schedules = {}
         self.league = None
-        self._load_teams_data()
         self._load_league_data()
+        if load_teams:
+            self._load_teams_data()
 
     def _load_teams_data(self):
         for team in self.TEAM_ID_MAPPING:
