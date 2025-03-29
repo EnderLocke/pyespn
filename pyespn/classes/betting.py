@@ -17,7 +17,8 @@ class Betting:
         self.name = self.betting_json.get('name')
         self.display_name = self.betting_json.get('displayName')
         for provider in self.betting_json.get('futures'):
-            self.providers.append(Provider(provider))
+            self.providers.append(Provider(espn_instance=self.espn_instance,
+                                           line_json=provider))
 
 
 class Provider:
