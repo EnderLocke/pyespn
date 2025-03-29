@@ -35,7 +35,8 @@ class Provider:
         self.active = self.line_json.get('provider', {}).get('active')
         self.all_lines = []
         for future_line in self.line_json.get('books', []):
-            self.all_lines.append(Line(future_line))
+            self.all_lines.append(Line(espn_instance=self.espn_instance,
+                                       book_json=future_line))
 
 
 class Line:
