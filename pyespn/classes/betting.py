@@ -14,6 +14,15 @@ class Betting:
         self.providers = []
         self._set_betting_data()
 
+    def __repr__(self):
+        """
+        Returns a string representation of the Betting instance.
+
+        Returns:
+            str: A formatted string with the bettings information .
+        """
+        return f"<Betting {self.display_name} - {self.espn_instance.league_abbv}>"
+
     def _set_betting_data(self):
         self.id = self.betting_json.get('id')
         self.ref = self.betting_json.get('$ref')
@@ -32,6 +41,15 @@ class Provider:
         self.espn_instance = espn_instance
         self._set_betting_provider_data()
 
+    def __repr__(self):
+        """
+        Returns a string representation of the betting Provider instance.
+
+        Returns:
+            str: A formatted string with the Providers information .
+        """
+        return f"<Provider {self.provider_name} - {self.espn_instance.league_abbv}>"
+
     def _set_betting_provider_data(self):
         self.provider_name = self.line_json.get('provider', {}).get('name')
         self.id = self.line_json.get('provider', {}).get('id')
@@ -40,19 +58,39 @@ class Provider:
         self.all_lines = []
         for future_line in self.line_json.get('books', []):
             self.all_lines.append(Line(espn_instance=self.espn_instance,
+                                       provider_instance=self,
                                        book_json=future_line))
 
 
 @validate_json("book_json")
 class Line:
 
-    def __init__(self, espn_instance, book_json):
+    def __init__(self, espn_instance, provider_instance, book_json):
         self.espn_instance = espn_instance
+        self.provider_instance = provider_instance
         self.book_json = book_json
         self.athlete = None
         self.team = None
         self.ref = None
         self._set_line_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Betting Line instance.
+
+        Returns:
+            str: A formatted string with the bettings line information .
+        """
+
+        msg = ''
+
+        if self.team:
+            msg += f'{self.team.name} | {self.value}'
+
+        if self.athlete:
+            msg += f'{self.athlete.name} | {self.value}'
+
+        return f"<Betting Line: {msg}>"
 
     def _set_line_data(self):
         try:
