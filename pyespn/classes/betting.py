@@ -1,6 +1,7 @@
 from pyespn.classes.player import Player
 from pyespn.classes.team import Team
 from pyespn.utilities import fetch_espn_data
+from pyespn.exceptions import API400Error
 
 
 class Betting:
@@ -46,21 +47,26 @@ class Line:
         self.book_json = book_json
         self.athlete = None
         self.team = None
+        self.ref = None
         self._set_line_data()
 
     def _set_line_data(self):
-        if 'athlete' in self.book_json:
-            content = fetch_espn_data(self.book_json.get('athlete').get('$ref'))
+        try:
+            if 'athlete' in self.book_json:
+                self.ref = self.book_json.get('athlete').get('$ref')
+                content = fetch_espn_data(self.ref)
 
-            self.athlete = Player(espn_instance=self.espn_instance,
-                                  player_json=content)
+                self.athlete = Player(espn_instance=self.espn_instance,
+                                      player_json=content)
 
-        if 'team' in self.book_json:
-            content = fetch_espn_data(self.book_json.get('team').get('$ref'))
+            if 'team' in self.book_json:
+                self.ref = self.book_json.get('team').get('$ref')
+                content = fetch_espn_data(self.ref)
 
-            self.team = Team(espn_instance=self.espn_instance,
-                             team_json=content)
+                self.team = Team(espn_instance=self.espn_instance,
+                                 team_json=content)
 
-        self.value = self.book_json.get('value')
-
+            self.value = self.book_json.get('value')
+        except API400Error as e:
+            pass
 
