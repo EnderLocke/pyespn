@@ -1,7 +1,7 @@
 from pyespn.classes.player import Player
 from pyespn.classes.team import Team
 from pyespn.utilities import fetch_espn_data
-from pyespn.exceptions import API400Error
+from pyespn.exceptions import API400Error, JSONNotProvidedError
 from pyespn.core.decorators import validate_json
 
 
@@ -109,6 +109,6 @@ class Line:
                                  team_json=content)
 
             self.value = self.book_json.get('value')
-        except API400Error as e:
+        except (API400Error, JSONNotProvidedError) as e:
             pass
 
