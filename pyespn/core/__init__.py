@@ -14,6 +14,9 @@ from .betting import (get_year_league_champions_futures_core, get_division_champ
                       get_team_year_ats_away_underdog_core, get_team_year_ats_favorite_core,
                       get_team_year_ats_home_core, get_team_year_ats_overall_core,
                       get_team_year_ats_underdog_core,
-                      get_team_year_ats_home_underdog_core)
+                      get_team_year_ats_home_underdog_core,
+                      get_season_futures_core)
 from .awards import get_awards_core
 from .standings import get_standings_core
+from .leagues import get_league_info_core
+from .schedule import get_weekly_schedule_core, get_regular_season_schedule_core

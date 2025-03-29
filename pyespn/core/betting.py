@@ -1,9 +1,9 @@
-from pyespn.utilities import lookup_league_api_info, get_team_id, get_type_futures, get_type_ats
+from pyespn.utilities import (lookup_league_api_info, get_team_id, get_type_futures,
+                              get_type_ats, fetch_espn_data)
 from pyespn.data.betting import LEAGUE_CHAMPION_FUTURES_MAP, LEAGUE_DIVISION_FUTURES_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.version import espn_api_version as v
-import requests
-import json
+from pyespn.classes.betting import Betting
 
 
 def _get_team_ats(team_id, season, ats_type, league_abbv):
@@ -18,18 +18,45 @@ def _get_team_ats(team_id, season, ats_type, league_abbv):
 def _get_futures_year(year, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures?lang=en&region=us'
-    response = requests.get(url)
-    content = json.loads(response.content)
+    content = fetch_espn_data(url)
+
     return content
+
+
+def _get_futures_year_v2(year, league_abbv):
+    api_info = lookup_league_api_info(league_abbv=league_abbv)
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures'
+    content = fetch_espn_data(url)
+    all_futures = []
+    pages = content.get('pageCount')
+
+    for page in range(1, pages + 1):
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures?page={page}'
+        page_content = fetch_espn_data(url)
+        all_futures.append(page_content.get('items'))
+
+    return all_futures
 
 
 def _get_team_year_ats(team_id, season, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{team_id}/ats?lang=en&region=us'
-    response = requests.get(url)
-    content = json.loads(response.content)
+    content = fetch_espn_data(url)
+
     return content
+
+
+def get_season_futures_core(season, league_abbv, espn_instance):
+    content = _get_futures_year_v2(year=season,
+                                   league_abbv=league_abbv)
+    league_futures = []
+    for item in content:
+        for json in item:
+            league_futures.append(Betting(espn_instance=espn_instance,
+                                          betting_json=json))
+
+    return league_futures
 
 
 def get_year_league_champions_futures_core(season, league_abbv, provider="Betradar"):

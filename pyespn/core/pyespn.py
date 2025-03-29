@@ -3,9 +3,7 @@ from pyespn.data.leagues import LEAGUE_API_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
-from pyespn.classes import Team
 from .decorators import *
-
 
 
 @validate_league
@@ -21,9 +19,26 @@ class PYESPN:
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
         self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
-        self.teams = {}
-        if self.TEAM_ID_MAPPING:
-            self.load_teams()
+        self.teams = []
+        self.betting_futures = {}
+        self.schedules = {}
+        self.league = None
+        self._load_teams_data()
+        self._load_league_data()
+
+    def _load_teams_data(self):
+        for team in self.TEAM_ID_MAPPING:
+            data, team_cls = self.get_team_info(team_id=team['team_id'])
+            self.teams.append(team_cls)
+
+    def _load_league_data(self):
+        self.league = self.get_league_info()
+
+    def load_seasons_futures(self, season):
+        self.betting_futures = {season: self.get_all_seasons_futures(season=season)}
+
+    def load_regular_season_schedule(self, season):
+        self.schedules = {season: self.get_regular_seasons_schedule(season=season)}
 
     def __repr__(self):
         """
@@ -32,21 +47,12 @@ class PYESPN:
         Returns:
             str: A formatted string with class details
         """
-        return f"<League {self.league_abbv}>"
-
-    def load_teams(self):
-        for team in self.TEAM_ID_MAPPING:
-            self.teams[team['team_id']] = Team(
-                espn_instance=self,
-                team_id=team['team_id'],
-                name=team['team_name'],
-                location=team['team_city'],
-                abbreviation=team['team_abbv']
-            )
+        return f"<PyESPN | League {self.league_abbv}>"
 
     def get_player_info(self, player_id):
         return get_player_info_core(player_id=player_id,
-                                    league_abbv=self.league_abbv)
+                                    league_abbv=self.league_abbv,
+                                    espn_instance=self)
 
     def get_player_ids(self):
         return get_player_ids_core(league_abbv=self.league_abbv)
@@ -59,11 +65,13 @@ class PYESPN:
 
     def get_game_info(self, event_id):
         return get_game_info_core(event_id=event_id,
-                                  league_abbv=self.league_abbv)
+                                  league_abbv=self.league_abbv,
+                                  espn_instnace=self)
 
     def get_team_info(self, team_id):
         return get_team_info_core(team_id=team_id,
-                                  league_abbv=self.league_abbv)
+                                  league_abbv=self.league_abbv,
+                                  espn_instance=self)
 
     def get_season_team_stats(self, season):
         return get_season_team_stats_core(season=season,
@@ -143,6 +151,12 @@ class PYESPN:
                                                     season=season,
                                                     league_abbv=self.league_abbv)
 
+    @requires_betting_available
+    def get_all_seasons_futures(self, season):
+        return get_season_futures_core(season=season,
+                                       league_abbv=self.league_abbv,
+                                       espn_instance=self)
+
     def get_awards(self, season):
         return get_awards_core(season=season,
                                league_abbv=self.league_abbv)
@@ -164,3 +178,18 @@ class PYESPN:
     def get_venue_data(self, team_id):
         return get_home_venue(team_id=team_id,
                               league_abbv=self.league_abbv)
+
+    def get_league_info(self):
+        return get_league_info_core(league_abbv=self.league_abbv,
+                                    espn_instance=self)
+
+    def get_weekly_schedule(self, season, week):
+        return get_weekly_schedule_core(league_abbv=self.league_abbv,
+                                        espn_instance=self,
+                                        season=season,
+                                        week=week)
+
+    def get_regular_seasons_schedule(self, season):
+        return get_regular_season_schedule_core(league_abbv=self.league_abbv,
+                                                espn_instance=self,
+                                                season=season)

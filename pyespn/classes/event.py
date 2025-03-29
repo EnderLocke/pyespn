@@ -1,0 +1,43 @@
+from pyespn.classes.venue import Venue
+from pyespn.classes.team import Team
+from pyespn.utilities import fetch_espn_data
+from pyespn.core.decorators import validate_json
+
+
+@validate_json("event_json")
+class Event:
+
+    def __init__(self, event_json, espn_instance):
+        self.event_json = event_json
+        self.espn_instance = espn_instance
+        self.url_ref = self.event_json.get('$ref')
+        self.event_id = self.event_json.get('id')
+        self.date = self.event_json.get('date')
+        self.event_name = self.event_json.get('name')
+        self.short_name = self.event_json.get('shortName')
+        self.competition_type = self.event_json.get('competitions', {}).get('type', {}).get('type')
+        self.venue_json = self.event_json.get('competitions', {}).get('venue', {})
+        self.event_venue = Venue(venue_json=self.venue_json)
+        self.event_notes = self.event_json.get('competitions', {}).get('notes', [])
+        self.team1 = None
+        self.team2 = None
+
+    def load_teams(self):
+        self.team1 = Team(espn_instance=self.espn_instance,
+                          team_json=fetch_espn_data(self.event_json.get('competitions', {}).get('competitors')[0].get('$ref')))
+
+        self.team2 = Team(espn_instance=self.espn_instance,
+                          team_json=fetch_espn_data(self.event_json.get('competitions', {}).get('competitors')[1].get('$ref')))
+
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Team instance.
+
+        Returns:
+            str: A formatted string with the events data.
+        """
+        return f"<Event | {self.short_name} {self.date}>"
+
+    def to_dict(self):
+        return self.event_json

@@ -1,5 +1,6 @@
-from pyespn.utilities import lookup_league_api_info
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
+from pyespn.classes import Player
 import requests
 import json
 
@@ -8,8 +9,9 @@ def get_player_ids_core(league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     all_players = []
     cfb_ath_url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes?lang=en&region=us'
-    response = requests.get(cfb_ath_url)
-    num_pages = json.loads(response.content.decode('utf-8')).get('pageCount')
+    content = fetch_espn_data(cfb_ath_url)
+
+    num_pages = content.get('pageCount')
 
     for i in range(1, num_pages + 1):
         page_url = cfb_ath_url + f'&page={i}'
@@ -76,11 +78,12 @@ def extract_stats_from_url_core(url):
     return all_stats
 
 
-def get_player_info_core(player_id, league_abbv):
+def get_player_info_core(player_id, league_abbv, espn_instance):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}'
     response = requests.get(url)
     content = json.loads(response.content)
-    return content
-
+    current_player = Player(player_json=content,
+                            espn_instance=espn_instance)
+    return content, current_player
