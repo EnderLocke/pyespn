@@ -3,7 +3,7 @@ site_name: PyESPN
 nav:
   - Home: index.md
   - Install: installing.md
-  - Class: use.md
+  - PyESPN: use.md
   - API Endpoints:
     - Overview: api_endpoints.md
     - Teams: endpoints/teams.md
