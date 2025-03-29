@@ -8,8 +8,8 @@ pick_round = 2
 if __name__ == '__main__':
     #data = get_nfl_players_historical_stats(278)
     nfl_espn = PYESPN('nfl')
-    nba_espn = PYESPN('nba')
-    nfl_espn.load_seasons_futures(season=season)
+    #nba_espn = PYESPN('nba')
+    nfl_espn.load_regular_season_schedule(season=season)
     #awards = espn.get_awards(season=season)
     #colors = espn.get_team_colors(team_id=30)
     pass

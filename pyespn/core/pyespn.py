@@ -37,7 +37,7 @@ class PYESPN:
     def load_seasons_futures(self, season):
         self.betting_futures = {season: self.get_all_seasons_futures(season=season)}
 
-    def load_season_schedule(self, season):
+    def load_regular_season_schedule(self, season):
         self.schedules = {season: self.get_regular_seasons_schedule(season=season)}
 
     def __repr__(self):
@@ -65,7 +65,8 @@ class PYESPN:
 
     def get_game_info(self, event_id):
         return get_game_info_core(event_id=event_id,
-                                  league_abbv=self.league_abbv)
+                                  league_abbv=self.league_abbv,
+                                  espn_instnace=self)
 
     def get_team_info(self, team_id):
         return get_team_info_core(team_id=team_id,
