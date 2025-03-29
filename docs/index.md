@@ -1,4 +1,4 @@
-# Welcome to PYESPN
+# Welcome to PyESPN
 
 ## Links
 [PYESPN Github](https://github.com/EnderLocke/pyespn)
