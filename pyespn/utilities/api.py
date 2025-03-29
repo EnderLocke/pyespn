@@ -1,5 +1,5 @@
 from pyespn.data.leagues import LEAGUE_API_MAPPING
-from pyespn.exceptions import API400Error
+from pyespn.exceptions import API400Error, NoDataReturnedError
 import requests
 
 
@@ -36,6 +36,8 @@ def fetch_espn_data(url):
         content = response.json()  # Automatically parses JSON
 
         check_response_code(content)
+        if len(content.get('items')) == 0:
+            raise NoDataReturnedError(code=content.get('status', {}).get('code'))
 
         return content
     except requests.exceptions.RequestException as e:
