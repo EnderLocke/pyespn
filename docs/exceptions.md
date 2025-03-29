@@ -15,4 +15,5 @@ The league you have used is not a valid league abbreviation within pyespn
 This error is given when the espn api gives a 400 error, this could be many different things but it 
 could just mean the endpoint is not available for the current league
 
-
+## NoDataReturnedError
+This error is returned if there is nothing returned from the api but there was no error received
