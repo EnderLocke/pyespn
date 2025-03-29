@@ -1,3 +1,4 @@
+from pyespn.utilities import check_json
 
 
 class Player:
@@ -5,6 +6,7 @@ class Player:
     def __init__(self, espn_instance, player_json):
         self.player_json = player_json
         self.espn_instance = espn_instance
+        check_json(self.player_json)
         self._set_player_data()
 
     def __repr__(self):
