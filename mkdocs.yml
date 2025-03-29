@@ -16,6 +16,13 @@ nav:
     - Betting: endpoints/betting.md
     - Standings: endpoints/standings.md
   - Exceptions: exceptions.md
+  - Classes:
+    - League: classes/league_class.md
+    - Team: classes/teams_class.md
+    - Player: classes/player_class.md
+    - Betting: classes/betting_class.md
+    - Event: classes/event_class.md
+    - Venue: classes/venue_class.md
   - Discover: discover.md
   - Postman: postman.md
   - About:
