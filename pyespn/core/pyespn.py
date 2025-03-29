@@ -3,7 +3,6 @@ from pyespn.data.leagues import LEAGUE_API_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
-from pyespn.classes import Team
 from .decorators import *
 
 
@@ -21,12 +20,17 @@ class PYESPN:
         self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.teams = []
+        self.league = None
+        self.load_teams_data()
+        self.load_league_data()
 
-    def load_teams(self):
+    def load_teams_data(self):
         for team in self.TEAM_ID_MAPPING:
             data, team_cls = self.get_team_info(team_id=team['team_id'])
             self.teams.append(team_cls)
 
+    def load_league_data(self):
+        self.league = self.get_league_info()
 
     def __repr__(self):
         """
@@ -165,3 +169,7 @@ class PYESPN:
     def get_venue_data(self, team_id):
         return get_home_venue(team_id=team_id,
                               league_abbv=self.league_abbv)
+
+    def get_league_info(self):
+        return get_league_info_core(league_abbv=self.league_abbv,
+                                    espn_instance=self)
