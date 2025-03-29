@@ -21,6 +21,7 @@ class PYESPN:
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.teams = []
         self.betting_futures = {}
+        self.schedules = {}
         self.league = None
         self._load_teams_data()
         self._load_league_data()
@@ -35,6 +36,9 @@ class PYESPN:
 
     def load_seasons_futures(self, season):
         self.betting_futures = {season: self.get_all_seasons_futures(season=season)}
+
+    def load_season_schedule(self, season):
+        self.schedules = {season: self.get_regular_seasons_schedule(season=season)}
 
     def __repr__(self):
         """
@@ -183,3 +187,8 @@ class PYESPN:
                                         espn_instance=self,
                                         season=season,
                                         week=week)
+
+    def get_regular_seasons_schedule(self, season):
+        return get_regular_season_schedule_core(league_abbv=self.league_abbv,
+                                                espn_instance=self,
+                                                season=season)

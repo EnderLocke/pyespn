@@ -9,3 +9,7 @@ class Schedule:
         self.espn_instance = espn_instance
         self.schedule_json = schedule_json
 
+
+    def _set_schedule_data(self):
+        pass
+

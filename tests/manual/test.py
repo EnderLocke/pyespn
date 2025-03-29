@@ -9,8 +9,7 @@ if __name__ == '__main__':
     #data = get_nfl_players_historical_stats(278)
     nfl_espn = PYESPN('nfl')
     nba_espn = PYESPN('nba')
-    data = nfl_espn.get_all_seasons_futures(season=season)
+    nfl_espn.load_seasons_futures(season=season)
     #awards = espn.get_awards(season=season)
     #colors = espn.get_team_colors(team_id=30)
-    print(data)
     pass
