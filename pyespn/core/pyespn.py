@@ -177,3 +177,9 @@ class PYESPN:
     def get_league_info(self):
         return get_league_info_core(league_abbv=self.league_abbv,
                                     espn_instance=self)
+
+    def get_weekly_schedule(self, season, week):
+        return get_weekly_schedule_core(league_abbv=self.league_abbv,
+                                        espn_instance=self,
+                                        season=season,
+                                        week=week)
