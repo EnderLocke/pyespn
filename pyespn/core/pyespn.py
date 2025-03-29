@@ -39,7 +39,7 @@ class PYESPN:
         Returns:
             str: A formatted string with class details
         """
-        return f"<PYESN | League {self.league_abbv}>"
+        return f"<PyESPN | League {self.league_abbv}>"
 
     def get_player_info(self, player_id):
         return get_player_info_core(player_id=player_id,
