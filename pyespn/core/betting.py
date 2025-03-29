@@ -37,6 +37,7 @@ def _get_futures_year_v2(year, league_abbv):
 
     return all_futures
 
+
 def _get_team_year_ats(team_id, season, league_abbv):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
