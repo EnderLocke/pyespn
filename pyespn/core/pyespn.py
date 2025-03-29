@@ -22,15 +22,15 @@ class PYESPN:
         self.teams = []
         self.betting_futures = {}
         self.league = None
-        self.load_teams_data()
-        self.load_league_data()
+        self._load_teams_data()
+        self._load_league_data()
 
-    def load_teams_data(self):
+    def _load_teams_data(self):
         for team in self.TEAM_ID_MAPPING:
             data, team_cls = self.get_team_info(team_id=team['team_id'])
             self.teams.append(team_cls)
 
-    def load_league_data(self):
+    def _load_league_data(self):
         self.league = self.get_league_info()
 
     def load_seasons_futures(self, season):
