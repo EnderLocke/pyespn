@@ -8,12 +8,37 @@ from .decorators import *
 
 @validate_league
 class PYESPN:
+    """
+    A class to interact with ESPN's API to retrieve and manipulate data related to sports leagues, teams, players, betting, and more.
+
+    Attributes:
+        LEAGUE_API_MAPPING (dict): Mapping of league abbreviations to league data.
+        valid_leagues (set): Set of available league abbreviations.
+        untested_leagues (set): Set of untested league abbreviations.
+        all_leagues (set): Set of unavailable league abbreviations.
+        league_abbv (str): Abbreviation of the current sport league.
+        TEAM_ID_MAPPING (dict): Mapping of team IDs to team data for the current league.
+        BETTING_PROVIDERS (dict): Mapping of available betting providers.
+        LEAGUE_DIVISION_BETTING_KEYS (list): List of league division betting keys for the current league.
+        DEFAULT_BETTING_PROVIDER (dict): Default betting provider for the current league.
+        teams (list): List of teams in the current league.
+        betting_futures (dict): Mapping of betting futures for the current season.
+        schedules (dict): Mapping of regular season schedules for the current season.
+        league (dict): Data for the current league.
+    """
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
     valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'available'}
     untested_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'untested'}
     all_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'unavailable'}
 
     def __init__(self, sport_league='nfl', load_teams=True):
+        """
+        Initializes the PYESPN instance for a specified sport league.
+
+        Args:
+            sport_league (str): The abbreviation of the league to interact with (default is 'nfl').
+            load_teams (bool): Whether to load team data (default is True).
+        """
         self.league_abbv = sport_league.lower()
         self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING.get(self.league_abbv)
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
@@ -28,20 +53,39 @@ class PYESPN:
             self._load_teams_data()
 
     def _load_teams_data(self):
+        """
+        Loads data for all teams in the current league and stores them in the `teams` attribute.
+        """
         for team in self.TEAM_ID_MAPPING:
             data, team_cls = self.get_team_info(team_id=team['team_id'])
             self.teams.append(team_cls)
 
     def _load_league_data(self):
+        """
+        Loads data for the current league and stores it in the `league` attribute.
+        """
         self.league = self.get_league_info()
 
     def load_seasons_futures(self, season):
+        """
+        Loads betting futures for a given season and stores them in the `betting_futures` attribute.
+
+        Args:
+            season (str): The season for which to load betting futures.
+        """
         self.betting_futures = {season: self.get_all_seasons_futures(season=season)}
 
     def load_regular_season_schedule(self, season):
+        """
+        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+
+        Args:
+            season (str): The season for which to load the schedule.
+        """
+
         self.schedules = {season: self.get_regular_seasons_schedule(season=season)}
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the PYESPN instance.
 
@@ -50,47 +94,129 @@ class PYESPN:
         """
         return f"<PyESPN | League {self.league_abbv}>"
 
-    def get_player_info(self, player_id):
+    def get_player_info(self, player_id) -> dict:
+        """
+        Retrieves detailed information about a player.
+
+        Args:
+            player_id (str): The ID of the player.
+
+        Returns:
+            dict: The player's information.
+        """
         return get_player_info_core(player_id=player_id,
                                     league_abbv=self.league_abbv,
                                     espn_instance=self)
 
-    def get_player_ids(self):
+    def get_player_ids(self) -> list:
+        """
+        Retrieves the IDs of all players in the league.
+
+        Returns:
+            list: A list of player IDs.
+        """
         return get_player_ids_core(league_abbv=self.league_abbv)
 
     @requires_college_league('recruiting')
-    def get_recruiting_rankings(self, season, max_pages=None):
+    def get_recruiting_rankings(self, season, max_pages=None) -> dict:
+        """
+        Retrieves the recruiting rankings for a given season.
+
+        Args:
+            season (str): The season for which to retrieve rankings.
+            max_pages (int, optional): The maximum number of pages of data to retrieve.
+
+        Returns:
+            dict: The recruiting rankings.
+        """
         return get_recruiting_rankings_core(season=season,
                                             league_abbv=self.league_abbv,
                                             max_pages=max_pages)
 
-    def get_game_info(self, event_id):
+    def get_game_info(self, event_id) -> dict:
+        """
+        Retrieves detailed information about a specific game.
+
+        Args:
+            event_id (str): The ID of the game.
+
+        Returns:
+            dict: The game's information.
+        """
         return get_game_info_core(event_id=event_id,
                                   league_abbv=self.league_abbv,
                                   espn_instnace=self)
 
-    def get_team_info(self, team_id):
+    def get_team_info(self, team_id) -> dict:
+        """
+        Retrieves detailed information about a team.
+
+        Args:
+            team_id (str): The ID of the team.
+
+        Returns:
+            dict: The team's information.
+        """
         return get_team_info_core(team_id=team_id,
                                   league_abbv=self.league_abbv,
                                   espn_instance=self)
 
     def get_season_team_stats(self, season):
+        """
+        Retrieves statistics for teams during a specific season.
+
+        Args:
+            season (str): The season for which to retrieve stats.
+
+        Returns:
+            dict: The season's team statistics.
+        """
         return get_season_team_stats_core(season=season,
                                           league_abbv=self.league_abbv)
 
     @requires_pro_league('draft')
     def get_draft_pick_data(self, season, pick_round, pick):
+        """
+        Retrieves data about a specific draft pick.
+
+        Args:
+            season (str): The season of the draft.
+            pick_round (int): The round of the pick.
+            pick (int): The specific pick number.
+
+        Returns:
+            dict: The draft pick's data.
+        """
         return get_draft_pick_data_core(season=season,
                                         pick_round=pick_round,
                                         pick=pick,
                                         league_abbv=self.league_abbv)
 
     def get_players_historical_stats(self, player_id):
+        """
+        Retrieves historical statistics for a player.
+
+        Args:
+            player_id (str): The ID of the player.
+
+        Returns:
+            dict: The player's historical stats.
+        """
         return get_players_historical_stats_core(player_id=player_id,
                                                  league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_league_year_champion_futures(self, season, provider=None):
+        """
+        Retrieves betting odds for the league champion for a given season.
+
+        Args:
+            season (str): The season for which to retrieve the champion futures.
+            provider (str, optional): The betting provider to use.
+
+        Returns:
+            dict: The league champion futures for the specified season.
+        """
         this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
         return get_year_league_champions_futures_core(season=season,
                                                       league_abbv=self.league_abbv,
@@ -98,6 +224,17 @@ class PYESPN:
 
     @requires_betting_available
     def get_league_year_division_champs_futures(self, season, division, provider=None):
+        """
+        Retrieves betting odds for division champions for a given season and division.
+
+        Args:
+            season (str): The season for which to retrieve division champion futures.
+            division (str): The division for which to retrieve betting odds.
+            provider (str, optional): The betting provider to use.
+
+        Returns:
+            dict: The division champion futures for the specified season and division.
+        """
         this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
         return get_division_champ_futures_core(season=season,
                                                division=division,
@@ -106,91 +243,212 @@ class PYESPN:
 
     @requires_betting_available
     def get_team_year_ats_away(self, team_id, season):
+        """
+        Retrieves the team's against the spread (ATS) performance for away games in a given season.
+
+        Args:
+            team_id (str): The ID of the team.
+            season (str): The season for which to retrieve ATS data.
+
+        Returns:
+            dict: The team's ATS performance for away games.
+        """
         return get_team_year_ats_away_core(team_id=team_id,
                                            season=season,
                                            league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_team_year_ats_home_favorite(self, team_id, season):
+        """
+        Retrieves the team's ATS performance for home games as a favorite in a given season.
+
+        Args:
+            team_id (str): The ID of the team.
+            season (str): The season for which to retrieve ATS data.
+
+        Returns:
+            dict: The team's ATS performance for home games as a favorite.
+        """
         return get_team_year_ats_home_favorite_core(team_id=team_id,
                                                     season=season,
                                                     league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_team_year_ats_away_underdog(self, team_id, season):
+        """
+        Retrieves the team's ATS performance for away games as an underdog in a given season.
+
+        Args:
+            team_id (str): The ID of the team.
+            season (str): The season for which to retrieve ATS data.
+
+        Returns:
+            dict: The team's ATS performance for away games as an underdog.
+        """
         return get_team_year_ats_away_underdog_core(team_id=team_id,
                                                     season=season,
                                                     league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_team_year_ats_favorite(self, team_id, season):
+        """
+        Retrieves the team's ATS performance as a favorite in a given season.
+
+        Args:
+            team_id (str): The ID of the team.
+            season (str): The season for which to retrieve ATS data.
+
+        Returns:
+            dict: The team's ATS performance as a favorite.
+        """
         return get_team_year_ats_favorite_core(team_id=team_id,
                                                season=season,
                                                league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_team_year_ats_home(self, team_id, season):
+        """
+        Retrieves the team's ATS performance for home games in a given season.
+
+        Args:
+            team_id (str): The ID of the team.
+            season (str): The season for which to retrieve ATS data.
+
+        Returns:
+            dict: The team's ATS performance for home games.
+        """
         return get_team_year_ats_home_core(team_id=team_id,
                                            season=season,
                                            league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_team_year_ats_overall(self, team_id, season):
+        """
+        Retrieves the team's overall ATS performance for a given season.
+
+        Args:
+            team_id (str): The ID of the team.
+            season (str): The season for which to retrieve ATS data.
+
+        Returns:
+            dict: The team's overall ATS performance.
+        """
         return get_team_year_ats_overall_core(team_id=team_id,
                                               season=season,
                                               league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_team_year_ats_underdog(self, team_id, season):
+        """
+        Retrieves the team's ATS performance as an underdog in a given season.
+
+        Args:
+            team_id (str): The ID of the team.
+            season (str): The season for which to retrieve ATS data.
+
+        Returns:
+            dict: The team's ATS performance as an underdog.
+        """
         return get_team_year_ats_underdog_core(team_id=team_id,
                                                season=season,
                                                league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_team_year_ats_home_underdog(self, team_id, season):
+        """
+        Retrieves the team's ATS performance for home games as an underdog in a given season.
+
+        Args:
+            team_id (str): The ID of the team.
+            season (str): The season for which to retrieve ATS data.
+
+        Returns:
+            dict: The team's ATS performance for home games as an underdog.
+        """
         return get_team_year_ats_home_underdog_core(team_id=team_id,
                                                     season=season,
                                                     league_abbv=self.league_abbv)
 
     @requires_betting_available
     def get_all_seasons_futures(self, season):
+        """
+        Retrieves all betting futures for a given season.
+
+        Args:
+            season (str): The season for which to retrieve betting futures.
+
+        Returns:
+            dict: All betting futures for the specified season.
+        """
         return get_season_futures_core(season=season,
                                        league_abbv=self.league_abbv,
                                        espn_instance=self)
 
     def get_awards(self, season):
+        """
+        Retrieves awards for a given season.
+
+        Args:
+            season (str): The season for which to retrieve awards.
+
+        Returns:
+            dict: The awards for the specified season.
+        """
         return get_awards_core(season=season,
                                league_abbv=self.league_abbv)
 
     @requires_standings_available
     def get_standings(self, season, standings_type):
+        """
+        Retrieves standings for a given season and type.
+
+        Args:
+            season (str): The season for which to retrieve standings.
+            standings_type (str): The type of standings (e.g., 'division', 'conference').
+
+        Returns:
+            dict: The standings for the specified season and type.
+        """
         return get_standings_core(season=season,
                                   standings_type=standings_type,
                                   league_abbv=self.league_abbv)
 
-    def get_logo_img(self, team_id):
-        return get_team_logo_img(team_id=team_id,
-                                 league_abbv=self.league_abbv)
+    def get_league_info(self) -> dict:
+        """
+        Retrieves information about the league.
 
-    def get_team_colors(self, team_id):
-        return get_team_colors_core(team_id=team_id,
-                                    league_abbv=self.league_abbv)
-
-    def get_venue_data(self, team_id):
-        return get_home_venue(team_id=team_id,
-                              league_abbv=self.league_abbv)
-
-    def get_league_info(self):
+        Returns:
+            dict: The league's information.
+        """
         return get_league_info_core(league_abbv=self.league_abbv,
                                     espn_instance=self)
 
     def get_weekly_schedule(self, season, week):
+        """
+        Retrieves the weekly schedule for a given season and week.
+
+        Args:
+            season (str): The season for which to retrieve the schedule.
+            week (int): The week for which to retrieve the schedule.
+
+        Returns:
+            dict: The weekly schedule for the specified season and week.
+        """
         return get_weekly_schedule_core(league_abbv=self.league_abbv,
                                         espn_instance=self,
                                         season=season,
                                         week=week)
 
     def get_regular_seasons_schedule(self, season):
+        """
+        Retrieves the regular season schedule for a given season.
+
+        Args:
+            season (str): The season for which to retrieve the schedule.
+
+        Returns:
+            dict: The regular season schedule for the specified season.
+        """
         return get_regular_season_schedule_core(league_abbv=self.league_abbv,
                                                 espn_instance=self,
                                                 season=season)
