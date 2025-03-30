@@ -68,6 +68,7 @@ class Event:
         """
         team1 = self.event_json.get('competitions', [])[0].get('competitors')[0].get('team', {})
         team2 = self.event_json.get('competitions', [])[0].get('competitors')[1].get('team', {})
+
         if team1.get('homeAway') == 'home':
             self.home_team = Team(espn_instance=self.espn_instance,
                                   team_json=fetch_espn_data(team1.get('$ref')))
