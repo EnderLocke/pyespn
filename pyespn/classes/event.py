@@ -24,8 +24,8 @@ class Event:
         venue_json (dict): The raw JSON data representing the event venue.
         event_venue (Venue): A `Venue` instance representing the event's location.
         event_notes (list): Additional notes about the event.
-        team1 (Team or None): The first competing team, initialized after `_load_teams()` runs.
-        team2 (Team or None): The second competing team, initialized after `_load_teams()` runs.
+        home_team (Team or None): The first competing team, initialized after `_load_teams()` runs.
+        away_team (Team or None): The second competing team, initialized after `_load_teams()` runs.
 
     Methods:
         _load_teams():
@@ -55,8 +55,8 @@ class Event:
         self.venue_json = self.event_json.get('competitions', [])[0].get('venue', {})
         self.event_venue = Venue(venue_json=self.venue_json)
         self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
-        self.team1 = None
-        self.team2 = None
+        self.home_team = None
+        self.away_team = None
         self._load_teams()
 
     def _load_teams(self):
@@ -66,12 +66,20 @@ class Event:
         This method retrieves the teams' JSON data using their API references and
         initializes `Team` instances for `team1` and `team2`.
         """
-        self.team1 = Team(espn_instance=self.espn_instance,
-                          team_json=fetch_espn_data(self.event_json.get('competitions', [])[0].get('competitors')[0].get('team', {}).get('$ref')))
+        team1 = self.event_json.get('competitions', [])[0].get('competitors')[0].get('team', {})
+        team2 = self.event_json.get('competitions', [])[0].get('competitors')[1].get('team', {})
+        if team1.get('homeAway') == 'home':
+            self.home_team = Team(espn_instance=self.espn_instance,
+                                  team_json=fetch_espn_data(team1.get('$ref')))
 
-        self.team2 = Team(espn_instance=self.espn_instance,
-                          team_json=fetch_espn_data(self.event_json.get('competitions', [])[0].get('competitors')[1].get('team', {}).get('$ref')))
+            self.away_team = Team(espn_instance=self.espn_instance,
+                                  team_json=fetch_espn_data(team2.get('$ref')))
+        else:
+            self.home_team = Team(espn_instance=self.espn_instance,
+                                  team_json=fetch_espn_data(team2.get('$ref')))
 
+            self.away_team = Team(espn_instance=self.espn_instance,
+                                  team_json=fetch_espn_data(team1.get('$ref')))
     def __repr__(self) -> str:
         """
         Returns a string representation of the Team instance.
