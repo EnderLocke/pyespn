@@ -5,7 +5,7 @@ import requests
 import json
 
 
-def get_player_ids_core(league_abbv):
+def get_player_ids_core(league_abbv: str) -> list:
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     all_players = []
     cfb_ath_url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes?lang=en&region=us'

@@ -1,15 +1,139 @@
 from pyespn.core.decorators import validate_json
+from pyespn.utilities import fetch_espn_data, get_schedule_type, get_an_id
 from pyespn.classes import Event
 
 
-@validate_json("schedule_json")
 class Schedule:
+    """
+        Represents a sports league schedule.
 
-    def __init__(self, espn_instance, schedule_json):
+        Attributes:
+            espn_instance (PyESPN): The ESPN API instance.
+            schedule_list (list[str]): A list of schedule URLs.
+            schedule_type (str): The type of schedule (e.g., 'regular', 'postseason').
+            season (int): The season year.
+            weeks (list[Week]): A list of Week instances containing events.
+
+        Methods:
+            get_events(week: int) -> list[Event]:
+                Retrieves the list of Event instances for the given week.
+        """
+    def __init__(self, espn_instance, schedule_list: list):
+        self.schedule_list = schedule_list
         self.espn_instance = espn_instance
-        self.schedule_json = schedule_json
+        self.season = get_an_id(self.schedule_list[0], 'seasons')
+        self.schedule_type = None
+        self.weeks = []
 
+        schedule_type_id = get_schedule_type(self.schedule_list[0])
+
+        if schedule_type_id == 1:
+            self.schedule_type = 'pre'
+        elif schedule_type_id == 2:
+            self.schedule_type = 'regular'
+        elif schedule_type_id == 3:
+            self.schedule_type = 'post'
+
+        self._set_schedule_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the schedule instance.
+
+        Returns:
+            str: A formatted string with the schedule.
+        """
+        return f"<Schedule | {self.season} {self.schedule_type} season>"
 
     def _set_schedule_data(self):
-        pass
 
+        for week_url in self.schedule_list:
+            api_url = week_url.split('?')[0] + f'/events'
+            week_content = fetch_espn_data(api_url)
+            # todo here i need to capture the data
+            week_pages = week_content.get('pageCount')
+            week_number = get_an_id(url=api_url,
+                                    slug='weeks')
+            for week_page in range(1, week_pages + 1):
+                weekly_url = api_url + f'?page={week_page}'
+                this_week_content = fetch_espn_data(weekly_url)
+                event_urls = []
+                for event in this_week_content.get('items', []):
+                    event_urls.append(event.get('$ref'))
+
+                self.weeks.append(Week(espn_instance=self.espn_instance,
+                                       week_list=event_urls,
+                                       week_number=week_number))
+
+    def get_events(self, week: int) -> list["Event"]:
+        """
+        Retrieves the list of events for the specified week.
+
+        Args:
+            week (int): The week number to retrieve events for.
+
+        Returns:
+            list[Event]: A list of Event instances representing the scheduled games.
+        """
+        return self.weeks[week + 1].events
+
+
+class Week:
+    """
+    Represents a week's worth of games for a league schedule.
+
+    Attributes:
+        espn_instance (PyESPN): The ESPN API instance.
+        week_list (list[str]): A list of event URLs or event data references.
+        week_number (int): The numerical representation of the week.
+        events (list[Event]): A list of Event instances for this week.
+
+    Methods:
+        get_events() -> list[Event]:
+            Retrieves the list of Event instances for this week.
+    """
+    def __init__(self, espn_instance, week_list: list, week_number: int):
+        """
+        Initializes a Week instance.
+
+        Args:
+            espn_instance (PyESPN): The ESPN API instance.
+            week_list (list[str]): A list of event URLs or event data references.
+            week_number (int): The numerical representation of the week.
+        """
+
+        self.espn_instance = espn_instance
+        self.week_list = week_list
+        self.events = []
+        self.week_number = None
+
+        self.week_number = week_number
+
+        self._set_week_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the week instance.
+
+        Returns:
+            str: A formatted string with the week.
+        """
+        return f"<Week | {self.week_number}>"
+
+    def _set_week_data(self):
+        """
+        Populates the events list by fetching event data for the given week.
+        """
+        for event in self.week_list:
+            event_content = fetch_espn_data(event)
+            self.events.append(Event(event_json=event_content,
+                                     espn_instance=self.espn_instance))
+
+    def get_events(self) -> list["Event"]:
+        """
+        Retrieves the list of Event instances for this week.
+
+        Returns:
+            list[Event]: A list of Event instances for the week.
+        """
+        return self.events

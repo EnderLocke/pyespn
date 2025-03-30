@@ -8,7 +8,21 @@ def lookup_league_api_info(league_abbv):
     return info
 
 
-def check_response_code(content):
+def check_response_code(content: dict):
+    """
+    Checks the response content for an error code and raises an API400Error
+    if the error code starts with '4'.
+
+    Args:
+        content (dict): The response content from an API request.
+
+    Raises:
+        API400Error: If the response contains an error code in the 400 range.
+
+    Example:
+        >>> response = {"error": {"code": 404, "message": "Not Found"}}
+        >>> check_response_code(response)  # Raises API400Error
+    """
     if content.get('error'):
         error_code = content.get('error').get('code')
         if str(error_code)[0] == '4':
@@ -16,7 +30,7 @@ def check_response_code(content):
                               error_message=content.get('error').get('message'))
 
 
-def fetch_espn_data(url):
+def fetch_espn_data(url: str) -> dict:
     """
     Fetches data from the ESPN API and checks for errors.
 

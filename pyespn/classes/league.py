@@ -1,16 +1,15 @@
-# todo create a league version of the api that can pull a certain amount of data
 from pyespn.core.decorators import validate_json
 
 
 @validate_json("league_json")
 class League:
 
-    def __init__(self, espn_instance, league_json):
+    def __init__(self, espn_instance, league_json: dict):
         self.league_json = league_json
         self.espn_instance = espn_instance
         self._set_league_json()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the betting Provider instance.
 
