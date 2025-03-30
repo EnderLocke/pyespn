@@ -5,7 +5,7 @@ from pyespn.core.decorators import validate_json
 @validate_json("league_json")
 class League:
 
-    def __init__(self, espn_instance, league_json):
+    def __init__(self, espn_instance, league_json: dict):
         self.league_json = league_json
         self.espn_instance = espn_instance
         self._set_league_json()
