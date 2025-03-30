@@ -15,19 +15,20 @@ class Event:
         self.date = self.event_json.get('date')
         self.event_name = self.event_json.get('name')
         self.short_name = self.event_json.get('shortName')
-        self.competition_type = self.event_json.get('competitions', {}).get('type', {}).get('type')
-        self.venue_json = self.event_json.get('competitions', {}).get('venue', {})
+        self.competition_type = self.event_json.get('competitions', [])[0].get('type', {}).get('type')
+        self.venue_json = self.event_json.get('competitions', [])[0].get('venue', {})
         self.event_venue = Venue(venue_json=self.venue_json)
-        self.event_notes = self.event_json.get('competitions', {}).get('notes', [])
+        self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
         self.team1 = None
         self.team2 = None
+        self._load_teams()
 
-    def load_teams(self):
+    def _load_teams(self):
         self.team1 = Team(espn_instance=self.espn_instance,
-                          team_json=fetch_espn_data(self.event_json.get('competitions', {}).get('competitors')[0].get('$ref')))
+                          team_json=fetch_espn_data(self.event_json.get('competitions', [])[0].get('competitors')[0].get('team', {}).get('$ref')))
 
         self.team2 = Team(espn_instance=self.espn_instance,
-                          team_json=fetch_espn_data(self.event_json.get('competitions', {}).get('competitors')[1].get('$ref')))
+                          team_json=fetch_espn_data(self.event_json.get('competitions', [])[0].get('competitors')[1].get('team', {}).get('$ref')))
 
 
     def __repr__(self):
