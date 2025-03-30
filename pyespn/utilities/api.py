@@ -8,7 +8,7 @@ def lookup_league_api_info(league_abbv):
     return info
 
 
-def check_response_code(content):
+def check_response_code(content: dict):
     if content.get('error'):
         error_code = content.get('error').get('code')
         if str(error_code)[0] == '4':
@@ -16,7 +16,7 @@ def check_response_code(content):
                               error_message=content.get('error').get('message'))
 
 
-def fetch_espn_data(url):
+def fetch_espn_data(url: str) -> dict:
     """
     Fetches data from the ESPN API and checks for errors.
 
