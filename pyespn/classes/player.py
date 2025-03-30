@@ -72,7 +72,7 @@ class Player:
         self.espn_instance = espn_instance
         self._set_player_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Player instance.
 
@@ -82,6 +82,9 @@ class Player:
         return f"<Player | {self.full_name}, {self.debut_year} ({self.jersey})>"
 
     def _set_player_data(self):
+        """
+        Extracts and sets player data from the provided JSON.
+        """
         self.api_ref = self.player_json.get('$ref')
         self.id = self.player_json.get('id')
         self.uid = self.player_json.get('uid')
@@ -138,5 +141,11 @@ class Player:
 
         self.statistics_log_ref = self.player_json.get('statisticslog', {}).get('$ref')
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
+        """
+        Returns the raw player JSON data as a dictionary.
+
+        Returns:
+            dict: The original player data retrieved from the ESPN API.
+        """
         return self.player_json

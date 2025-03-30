@@ -10,7 +10,7 @@ class League:
         self.espn_instance = espn_instance
         self._set_league_json()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the betting Provider instance.
 
