@@ -4,7 +4,20 @@ from pyespn.classes import Event
 
 
 class Schedule:
+    """
+        Represents a sports league schedule.
 
+        Attributes:
+            espn_instance (PyESPN): The ESPN API instance.
+            schedule_list (list[str]): A list of schedule URLs.
+            schedule_type (str): The type of schedule (e.g., 'regular', 'postseason').
+            season (int): The season year.
+            weeks (list[Week]): A list of Week instances containing events.
+
+        Methods:
+            get_events(week: int) -> list[Event]:
+                Retrieves the list of Event instances for the given week.
+        """
     def __init__(self, espn_instance, schedule_list):
         self.schedule_list = schedule_list
         self.espn_instance = espn_instance
@@ -52,10 +65,43 @@ class Schedule:
                                        week_list=event_urls,
                                        week_number=week_number))
 
+    def get_events(self, week: int) -> list["Event"]:
+        """
+        Retrieves the list of events for the specified week.
+
+        Args:
+            week (int): The week number to retrieve events for.
+
+        Returns:
+            list[Event]: A list of Event instances representing the scheduled games.
+        """
+        return self.weeks[week + 1].events
+
 
 class Week:
+    """
+    Represents a week's worth of games for a league schedule.
 
+    Attributes:
+        espn_instance (PyESPN): The ESPN API instance.
+        week_list (list[str]): A list of event URLs or event data references.
+        week_number (int): The numerical representation of the week.
+        events (list[Event]): A list of Event instances for this week.
+
+    Methods:
+        get_events() -> list[Event]:
+            Retrieves the list of Event instances for this week.
+    """
     def __init__(self, espn_instance, week_list, week_number):
+        """
+        Initializes a Week instance.
+
+        Args:
+            espn_instance (PyESPN): The ESPN API instance.
+            week_list (list[str]): A list of event URLs or event data references.
+            week_number (int): The numerical representation of the week.
+        """
+
         self.espn_instance = espn_instance
         self.week_list = week_list
         self.events = []
@@ -75,8 +121,19 @@ class Week:
         return f"<Week | {self.week_number}>"
 
     def _set_week_data(self):
+        """
+        Populates the events list by fetching event data for the given week.
+        """
         for event in self.week_list:
             event_content = fetch_espn_data(event)
             self.events.append(Event(event_json=event_content,
                                      espn_instance=self.espn_instance))
 
+    def get_events(self) -> list["Event"]:
+        """
+        Retrieves the list of Event instances for this week.
+
+        Returns:
+            list[Event]: A list of Event instances for the week.
+        """
+        return self.events
