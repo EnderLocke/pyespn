@@ -6,8 +6,44 @@ from pyespn.core.decorators import validate_json
 
 @validate_json("event_json")
 class Event:
+    """
+    Represents a sports event within the ESPN API framework.
 
-    def __init__(self, event_json, espn_instance):
+    This class encapsulates event details such as the event's name, date, venue,
+    and the competing teams.
+
+    Attributes:
+        event_json (dict): The raw JSON data representing the event.
+        espn_instance (PYESPN): The ESPN API instance for fetching additional data.
+        url_ref (str): The API reference URL for the event.
+        event_id (int): The unique identifier of the event.
+        date (str): The date of the event.
+        event_name (str): The full name of the event.
+        short_name (str): The short name or abbreviation of the event.
+        competition_type (str): The type of competition (e.g., "regular", "playoff").
+        venue_json (dict): The raw JSON data representing the event venue.
+        event_venue (Venue): A `Venue` instance representing the event's location.
+        event_notes (list): Additional notes about the event.
+        team1 (Team or None): The first competing team, initialized after `_load_teams()` runs.
+        team2 (Team or None): The second competing team, initialized after `_load_teams()` runs.
+
+    Methods:
+        _load_teams():
+            Fetches and assigns the competing teams using API references.
+
+        to_dict() -> dict:
+            Returns the raw JSON representation of the event.
+
+    """
+
+    def __init__(self, event_json: dict, espn_instance):
+        """
+        Initializes an Event instance with the provided JSON data.
+
+        Args:
+            event_json (dict): The JSON data containing event details.
+            espn_instance (PYESPN): The parent `PYESPN` instance for API interaction.
+        """
         self.event_json = event_json
         self.espn_instance = espn_instance
         self.url_ref = self.event_json.get('$ref')
@@ -24,14 +60,19 @@ class Event:
         self._load_teams()
 
     def _load_teams(self):
+        """
+        Private method to fetch and assign the competing teams for the event.
+
+        This method retrieves the teams' JSON data using their API references and
+        initializes `Team` instances for `team1` and `team2`.
+        """
         self.team1 = Team(espn_instance=self.espn_instance,
                           team_json=fetch_espn_data(self.event_json.get('competitions', [])[0].get('competitors')[0].get('team', {}).get('$ref')))
 
         self.team2 = Team(espn_instance=self.espn_instance,
                           team_json=fetch_espn_data(self.event_json.get('competitions', [])[0].get('competitors')[1].get('team', {}).get('$ref')))
 
-
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Team instance.
 
@@ -40,5 +81,11 @@ class Event:
         """
         return f"<Event | {self.short_name} {self.date}>"
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
+        """
+        Converts the Event instance to its original JSON dictionary.
+
+        Returns:
+            dict: The event's raw JSON data.
+        """
         return self.event_json
