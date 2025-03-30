@@ -1,4 +1,3 @@
-# todo create a league version of the api that can pull a certain amount of data
 from pyespn.core.decorators import validate_json
 
 
