@@ -18,7 +18,7 @@ class Schedule:
             get_events(week: int) -> list[Event]:
                 Retrieves the list of Event instances for the given week.
         """
-    def __init__(self, espn_instance, schedule_list):
+    def __init__(self, espn_instance, schedule_list: list):
         self.schedule_list = schedule_list
         self.espn_instance = espn_instance
         self.season = get_an_id(self.schedule_list[0], 'seasons')
@@ -92,7 +92,7 @@ class Week:
         get_events() -> list[Event]:
             Retrieves the list of Event instances for this week.
     """
-    def __init__(self, espn_instance, week_list, week_number):
+    def __init__(self, espn_instance, week_list: list, week_number: int):
         """
         Initializes a Week instance.
 
