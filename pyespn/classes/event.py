@@ -80,6 +80,7 @@ class Event:
 
             self.away_team = Team(espn_instance=self.espn_instance,
                                   team_json=fetch_espn_data(team1.get('$ref')))
+
     def __repr__(self) -> str:
         """
         Returns a string representation of the Team instance.
