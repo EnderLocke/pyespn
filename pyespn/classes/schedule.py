@@ -5,20 +5,26 @@ from pyespn.classes import Event
 
 class Schedule:
     """
-        Represents a sports league schedule.
+    Represents a sports league schedule.
 
-        Attributes:
-            espn_instance (PyESPN): The ESPN API instance.
-            schedule_list (list[str]): A list of schedule URLs.
-            schedule_type (str): The type of schedule (e.g., 'regular', 'postseason').
-            season (int): The season year.
-            weeks (list[Week]): A list of Week instances containing events.
+    Attributes:
+        espn_instance (PyESPN): The ESPN API instance.
+        schedule_list (list[str]): A list of schedule URLs.
+        schedule_type (str): The type of schedule (e.g., 'regular', 'postseason').
+        season (int): The season year.
+        weeks (list[Week]): A list of Week instances containing events.
 
-        Methods:
-            get_events(week: int) -> list[Event]:
-                Retrieves the list of Event instances for the given week.
-        """
+    Methods:
+        get_events(week: int) -> list[Event]:
+            Retrieves the list of Event instances for the given week.
+    """
     def __init__(self, espn_instance, schedule_list: list):
+        """
+        Inits the sports schedule class
+
+        :param espn_instance:
+        :param schedule_list:
+        """
         self.schedule_list = schedule_list
         self.espn_instance = espn_instance
         self.season = get_an_id(self.schedule_list[0], 'seasons')
