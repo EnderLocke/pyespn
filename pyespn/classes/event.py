@@ -66,21 +66,21 @@ class Event:
         This method retrieves the teams' JSON data using their API references and
         initializes `Team` instances for `team1` and `team2`.
         """
-        team1 = self.event_json.get('competitions', [])[0].get('competitors')[0].get('team', {})
-        team2 = self.event_json.get('competitions', [])[0].get('competitors')[1].get('team', {})
+        team1 = self.event_json.get('competitions', [])[0].get('competitors')[0]
+        team2 = self.event_json.get('competitions', [])[0].get('competitors')[1]
 
         if team1.get('homeAway') == 'home':
             self.home_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team1.get('$ref')))
+                                  team_json=fetch_espn_data(team1.get('team', {}).get('$ref')))
 
             self.away_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team2.get('$ref')))
+                                  team_json=fetch_espn_data(team2.get('team', {}).get('$ref')))
         else:
             self.home_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team2.get('$ref')))
+                                  team_json=fetch_espn_data(team2.get('team', {}).get('$ref')))
 
             self.away_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team1.get('$ref')))
+                                  team_json=fetch_espn_data(team1.get('team', {}).get('$ref')))
 
     def __repr__(self) -> str:
         """
