@@ -64,10 +64,8 @@ class Schedule:
             week_content = fetch_espn_data(api_url)
             start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d")
             end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
-            #week_date_list = [(start_date + timedelta(days=i)).strftime("%Y%m%d") for i in range((end_date - start_date).days + 1)]
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
-            #date_params = "&".join([f"dates={date}" for date in week_date_list])
             week_events_url = f'http://sports.core.api.espn.com/{v}/sports/{self.league_api.get("sport")}/leagues/{self.league_api.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
             week_content = fetch_espn_data(week_events_url)
             week_pages = week_content.get('pageCount')
