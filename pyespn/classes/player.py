@@ -154,14 +154,26 @@ class Player:
 @validate_json("recruit_json")
 class Recruit:
 
-    def __init__(self, recruit_json: dict):
+    def __init__(self, recruit_json: dict, espn_instance):
         self.recruit_json = recruit_json
+        self.espn_instance = espn_instance
+        self._set_recruit_data()
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Recruit instance.
+
+        Returns:
+            str: A formatted string with the recruits's name, debut year and jersey.
+        """
+        return f"<Recruit | {self.full_name}, {self.position_abbreviation} ({self.recruiting_class})>"
 
     def _set_recruit_data(self):
         """
         Extracts and sets player data from the provided JSON.
         """
         self.api_ref = self.recruit_json.get('$ref')
+        self.athlete = self.recruit_json.get('athlete')
         self.id = self.recruit_json.get('id')
         self.uid = self.recruit_json.get('uid')
         self.guid = self.recruit_json.get('guid')
@@ -178,6 +190,7 @@ class Recruit:
         self.display_height = self.recruit_json.get('displayHeight')
         self.age = self.recruit_json.get('age')
         self.date_of_birth = self.recruit_json.get('dateOfBirth')
+        self.recruiting_class = self.recruit_json.get("recruitingClass")
 
         self.links = self.recruit_json.get('links', [])
 
