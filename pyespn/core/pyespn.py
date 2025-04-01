@@ -463,4 +463,4 @@ class PYESPN:
         Returns:
             Team: The matching Team object, or None if not found.
         """
-        return next((team for team in self.teams if team.id == team_id), None)
+        return next((team for team in self.teams if team.team_id == team_id), None)
