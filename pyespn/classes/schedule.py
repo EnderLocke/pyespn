@@ -1,6 +1,7 @@
 from pyespn.data.version import espn_api_version as v
 from pyespn.utilities import (fetch_espn_data, get_schedule_type,
                               get_an_id, lookup_league_api_info)
+from pyespn.exceptions import ScheduleTypeUnknownError
 from pyespn.classes import Event
 from datetime import datetime
 
@@ -47,6 +48,8 @@ class Schedule:
             self._set_schedule_weekly_data()
         elif self.league_api.get('schedule') == 'daily':
             self._set_schedule_daily_data()
+        else:
+            raise ScheduleTypeUnknownError(league_abbv=self.espn_instance.league_abbv)
 
     def __repr__(self):
         """
