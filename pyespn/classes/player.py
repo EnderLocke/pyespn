@@ -149,3 +149,59 @@ class Player:
             dict: The original player data retrieved from the ESPN API.
         """
         return self.player_json
+
+
+@validate_json("recruit_json")
+class Recruit:
+
+    def __init__(self, recruit_json: dict):
+        self.recruit_json = recruit_json
+
+    def _set_recruit_data(self):
+        """
+        Extracts and sets player data from the provided JSON.
+        """
+        self.api_ref = self.recruit_json.get('$ref')
+        self.id = self.recruit_json.get('id')
+        self.uid = self.recruit_json.get('uid')
+        self.guid = self.recruit_json.get('guid')
+        self.type = self.recruit_json.get('type')
+        self.alternate_ids = self.recruit_json.get('alternateIds', {}).get('sdr')
+        self.first_name = self.recruit_json.get('firstName')
+        self.last_name = self.recruit_json.get('lastName')
+        self.full_name = self.recruit_json.get('fullName')
+        self.display_name = self.recruit_json.get('displayName')
+        self.short_name = self.recruit_json.get('shortName')
+        self.weight = self.recruit_json.get('weight')
+        self.display_weight = self.recruit_json.get('displayWeight')
+        self.height = self.recruit_json.get('height')
+        self.display_height = self.recruit_json.get('displayHeight')
+        self.age = self.recruit_json.get('age')
+        self.date_of_birth = self.recruit_json.get('dateOfBirth')
+
+        self.links = self.recruit_json.get('links', [])
+
+        birth_place = self.recruit_json.get('birthPlace', {})
+        self.birth_city = birth_place.get('city')
+        self.birth_state = birth_place.get('state')
+
+        self.slug = self.recruit_json.get('slug')
+
+        position = self.recruit_json.get('position', {})
+        self.position_ref = position.get('$ref')
+        self.position_id = position.get('id')
+        self.position_name = position.get('name')
+        self.position_display_name = position.get('displayName')
+        self.position_abbreviation = position.get('abbreviation')
+        self.position_leaf = position.get('leaf')
+        self.position_parent_ref = position.get('parent', {}).get('$ref')
+
+        self.linked = self.recruit_json.get('linked')
+        self.schools = self.recruit_json.get('schools')
+
+        status = self.recruit_json.get('status', {})
+        self.status_id = status.get('id')
+        self.status_name = status.get('description')
+
+        self.rank = next((attr for attr in self.recruit_json.get('attributes', []) if attr.get("name", '').lower() == "rank"), None)
+
