@@ -452,3 +452,15 @@ class PYESPN:
         return get_regular_season_schedule_core(league_abbv=self.league_abbv,
                                                 espn_instance=self,
                                                 season=season)
+
+    def get_team_by_id(self, team_id):
+        """
+        Finds and returns the Team object that matches the given team_id.
+
+        Args:
+            team_id (int or str): The ID of the team to find.
+
+        Returns:
+            Team: The matching Team object, or None if not found.
+        """
+        return next((team for team in self.teams if team.id == team_id), None)
