@@ -1,6 +1,9 @@
 from pyespn.core.decorators import validate_json
-from pyespn.utilities import fetch_espn_data, get_schedule_type, get_an_id
+from pyespn.data import version as v
+from pyespn.utilities import (fetch_espn_data, get_schedule_type,
+                              get_an_id, lookup_league_api_info)
 from pyespn.classes import Event
+from datetime import datetime, timedelta
 
 
 class Schedule:
@@ -27,6 +30,7 @@ class Schedule:
         """
         self.schedule_list = schedule_list
         self.espn_instance = espn_instance
+        self.league_api = lookup_league_api_info(self.espn_instance.league_abbv)
         self.season = get_an_id(self.schedule_list[0], 'seasons')
         self.schedule_type = None
         self.weeks = []
@@ -40,7 +44,10 @@ class Schedule:
         elif schedule_type_id == 3:
             self.schedule_type = 'post'
 
-        self._set_schedule_data()
+        if self.league_api.get('schedule') == 'weekly':
+            self._set_schedule_weekly_data()
+        elif self.league_api.get('schedule') == 'daily':
+            self._set_schedule_daily_data()
 
     def __repr__(self):
         """
@@ -51,7 +58,19 @@ class Schedule:
         """
         return f"<Schedule | {self.season} {self.schedule_type} season>"
 
-    def _set_schedule_data(self):
+    def _set_schedule_daily_data(self):
+        for week_url in self.schedule_list:
+            api_url = week_url
+            week_content = fetch_espn_data(api_url)
+            start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d")
+            end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
+            week_date_list = [(start_date + timedelta(days=i)).strftime("%Y%m%d") for i in range((end_date - start_date).days + 1)]
+            date_params = "&".join([f"dates={date}" for date in week_date_list])
+            week_events_url = f'http://sports.core.api.espn.com/{v}/sports/{self.league_api.get("sport")}/leagues/{self.league_api.get("league")}/events' + date_params
+            content = fetch_espn_data(week_events_url)
+            pass
+
+    def _set_schedule_weekly_data(self):
 
         for week_url in self.schedule_list:
             api_url = week_url.split('?')[0] + f'/events'
@@ -71,17 +90,17 @@ class Schedule:
                                        week_list=event_urls,
                                        week_number=week_number))
 
-    def get_events(self, week: int) -> list["Event"]:
-        """
-        Retrieves the list of events for the specified week.
+def get_events(self, week: int) -> list["Event"]:
+    """
+    Retrieves the list of events for the specified week.
 
-        Args:
-            week (int): The week number to retrieve events for.
+    Args:
+        week (int): The week number to retrieve events for.
 
-        Returns:
-            list[Event]: A list of Event instances representing the scheduled games.
-        """
-        return self.weeks[week + 1].events
+    Returns:
+        list[Event]: A list of Event instances representing the scheduled games.
+    """
+    return self.weeks[week + 1].events
 
 
 class Week:
