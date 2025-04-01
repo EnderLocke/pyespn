@@ -80,7 +80,7 @@ class PYESPN:
         Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
 
         Args:
-            season (str): The season for which to load the schedule.
+            season (int): The season for which to load the schedule.
         """
 
         self.schedules = {season: self.get_regular_seasons_schedule(season=season)}
