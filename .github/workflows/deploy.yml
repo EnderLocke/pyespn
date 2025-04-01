@@ -74,7 +74,7 @@ jobs:
           apt-get update
           apt-get install -y sudo
           sudo apt-get install -y pandoc
-          pip install twine pypandoc
+          pip install twine pypandoc mkdocs mkdocs-material
 
       - name: Build Package
         run: python setup.py bdist_wheel
