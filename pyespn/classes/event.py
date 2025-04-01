@@ -68,19 +68,17 @@ class Event:
         """
         team1 = self.event_json.get('competitions', [])[0].get('competitors')[0]
         team2 = self.event_json.get('competitions', [])[0].get('competitors')[1]
+        team1_id = team1.get('id')
+        team2_id = team2.get('id')
 
         if team1.get('homeAway') == 'home':
-            self.home_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team1.get('team', {}).get('$ref')))
+            self.home_team = self.espn_instance.get_team_by_id(team1_id)
 
-            self.away_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team2.get('team', {}).get('$ref')))
+            self.away_team = self.espn_instance.get_team_by_id(team2_id)
         else:
-            self.home_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team2.get('team', {}).get('$ref')))
+            self.home_team = self.espn_instance.get_team_by_id(team2_id)
 
-            self.away_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team1.get('team', {}).get('$ref')))
+            self.away_team = self.espn_instance.get_team_by_id(team1_id)
 
     def __repr__(self) -> str:
         """
