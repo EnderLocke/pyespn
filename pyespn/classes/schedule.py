@@ -1,5 +1,5 @@
 from pyespn.core.decorators import validate_json
-from pyespn.data import version as v
+from pyespn.data.version import espn_api_version as v
 from pyespn.utilities import (fetch_espn_data, get_schedule_type,
                               get_an_id, lookup_league_api_info)
 from pyespn.classes import Event
@@ -65,9 +65,26 @@ class Schedule:
             start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d")
             end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
             week_date_list = [(start_date + timedelta(days=i)).strftime("%Y%m%d") for i in range((end_date - start_date).days + 1)]
+            week_number = get_an_id(url=api_url,
+                                    slug='weeks')
             date_params = "&".join([f"dates={date}" for date in week_date_list])
-            week_events_url = f'http://sports.core.api.espn.com/{v}/sports/{self.league_api.get("sport")}/leagues/{self.league_api.get("league")}/events' + date_params
-            content = fetch_espn_data(week_events_url)
+            week_events_url = f'http://sports.core.api.espn.com/{v}/sports/{self.league_api.get("sport")}/leagues/{self.league_api.get("league")}/events?' + date_params
+            week_content = fetch_espn_data(week_events_url)
+            week_pages = week_content.get('pageCount')
+            week_events = []
+            for week in range(1, week_pages + 1):
+                week_page_url = week_events_url + f"&page={week}"
+                week_page_content = fetch_espn_data(week_page_url)
+
+                for event in week_page_content.get('items', []):
+                    week_events.append(event.get('$ref'))
+                    pass
+
+            self.weeks.append(Week(espn_instance=self.espn_instance,
+                                   week_list=week_events,
+                                   week_number=week_number,
+                                   start_date=start_date,
+                                   end_date=end_date))
             pass
 
     def _set_schedule_weekly_data(self):
@@ -75,7 +92,8 @@ class Schedule:
         for week_url in self.schedule_list:
             api_url = week_url.split('?')[0] + f'/events'
             week_content = fetch_espn_data(api_url)
-            # todo here i need to capture the data
+            start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d")
+            end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
             week_pages = week_content.get('pageCount')
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
@@ -88,19 +106,21 @@ class Schedule:
 
                 self.weeks.append(Week(espn_instance=self.espn_instance,
                                        week_list=event_urls,
-                                       week_number=week_number))
+                                       week_number=week_number,
+                                       start_date=start_date,
+                                       end_date=end_date))
 
-def get_events(self, week: int) -> list["Event"]:
-    """
-    Retrieves the list of events for the specified week.
+    def get_events(self, week: int) -> list["Event"]:
+        """
+        Retrieves the list of events for the specified week.
 
-    Args:
-        week (int): The week number to retrieve events for.
+        Args:
+            week (int): The week number to retrieve events for.
 
-    Returns:
-        list[Event]: A list of Event instances representing the scheduled games.
-    """
-    return self.weeks[week + 1].events
+        Returns:
+            list[Event]: A list of Event instances representing the scheduled games.
+        """
+        return self.weeks[week + 1].events
 
 
 class Week:
@@ -117,7 +137,8 @@ class Week:
         get_events() -> list[Event]:
             Retrieves the list of Event instances for this week.
     """
-    def __init__(self, espn_instance, week_list: list, week_number: int):
+    def __init__(self, espn_instance, week_list: list,
+                 week_number: int, start_date, end_date):
         """
         Initializes a Week instance.
 
@@ -126,12 +147,12 @@ class Week:
             week_list (list[str]): A list of event URLs or event data references.
             week_number (int): The numerical representation of the week.
         """
-
         self.espn_instance = espn_instance
         self.week_list = week_list
         self.events = []
         self.week_number = None
-
+        self.start_date = start_date
+        self.end_date = end_date
         self.week_number = week_number
 
         self._set_week_data()
