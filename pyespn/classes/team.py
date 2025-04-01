@@ -69,7 +69,7 @@ class Team:
         """
         Extracts and sets team data from the provided JSON.
         """
-
+        #self.ref = self.team_json.get('$ref')
         self.team_id = self.team_json.get("id")
         self.guid = self.team_json.get("guid")
         self.uid = self.team_json.get("uid")
