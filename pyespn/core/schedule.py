@@ -12,7 +12,8 @@ def get_weekly_schedule_core(league_abbv, espn_instance, season, week):
     for event_url in content.get('items', []):
         event_content = fetch_espn_data(event_url['$ref'])
         weekly_schedule = Schedule(schedule_json=event_content,
-                                   espn_instance=espn_instance)
+                                   espn_instance=espn_instance,
+                                   season=season)
     return weekly_schedule
 
 
