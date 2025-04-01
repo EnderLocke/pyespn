@@ -1,9 +1,8 @@
-from pyespn.core.decorators import validate_json
 from pyespn.data.version import espn_api_version as v
 from pyespn.utilities import (fetch_espn_data, get_schedule_type,
                               get_an_id, lookup_league_api_info)
 from pyespn.classes import Event
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class Schedule:
