@@ -49,6 +49,7 @@ class PYESPN:
         self.teams = []
         self.betting_futures = {}
         self.schedules = {}
+        self.recruit_rankings = {}
         self.league = None
         self._load_league_data()
         if load_teams:
@@ -90,7 +91,6 @@ class PYESPN:
             return team_cls
         except API400Error:
             return None  # Skip teams that don't exist in the data
-
 
     def _load_league_data(self):
         """
@@ -155,7 +155,7 @@ class PYESPN:
         Retrieves the recruiting rankings for a given season.
 
         Args:
-            season (str): The season for which to retrieve rankings.
+            season (int): The season for which to retrieve rankings.
             max_pages (int, optional): The maximum number of pages of data to retrieve.
 
         Returns:
@@ -163,7 +163,18 @@ class PYESPN:
         """
         return get_recruiting_rankings_core(season=season,
                                             league_abbv=self.league_abbv,
+                                            espn_instance=self,
                                             max_pages=max_pages)
+
+    def load_year_recruiting_rankings(self, year: int):
+        """
+        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+
+        Args:
+            year (int): The season for which to load the schedule.
+        """
+
+        self.recruit_rankings = {year: self.get_recruiting_rankings(season=year)}
 
     def get_game_info(self, event_id) -> dict:
         """
