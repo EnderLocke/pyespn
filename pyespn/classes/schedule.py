@@ -64,11 +64,11 @@ class Schedule:
             week_content = fetch_espn_data(api_url)
             start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d")
             end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
-            week_date_list = [(start_date + timedelta(days=i)).strftime("%Y%m%d") for i in range((end_date - start_date).days + 1)]
+            #week_date_list = [(start_date + timedelta(days=i)).strftime("%Y%m%d") for i in range((end_date - start_date).days + 1)]
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
-            date_params = "&".join([f"dates={date}" for date in week_date_list])
-            week_events_url = f'http://sports.core.api.espn.com/{v}/sports/{self.league_api.get("sport")}/leagues/{self.league_api.get("league")}/events?' + date_params
+            #date_params = "&".join([f"dates={date}" for date in week_date_list])
+            week_events_url = f'http://sports.core.api.espn.com/{v}/sports/{self.league_api.get("sport")}/leagues/{self.league_api.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
             week_content = fetch_espn_data(week_events_url)
             week_pages = week_content.get('pageCount')
             week_events = []
@@ -90,10 +90,11 @@ class Schedule:
     def _set_schedule_weekly_data(self):
 
         for week_url in self.schedule_list:
+            weekly_content = fetch_espn_data(url=week_url)
+            start_date = datetime.strptime(weekly_content.get('startDate')[:10], "%Y-%m-%d")
+            end_date = datetime.strptime(weekly_content.get('endDate')[:10], "%Y-%m-%d")
             api_url = week_url.split('?')[0] + f'/events'
             week_content = fetch_espn_data(api_url)
-            start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d")
-            end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
             week_pages = week_content.get('pageCount')
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
@@ -104,11 +105,11 @@ class Schedule:
                 for event in this_week_content.get('items', []):
                     event_urls.append(event.get('$ref'))
 
-                self.weeks.append(Week(espn_instance=self.espn_instance,
-                                       week_list=event_urls,
-                                       week_number=week_number,
-                                       start_date=start_date,
-                                       end_date=end_date))
+            self.weeks.append(Week(espn_instance=self.espn_instance,
+                                   week_list=event_urls,
+                                   week_number=week_number,
+                                   start_date=start_date,
+                                   end_date=end_date))
 
     def get_events(self, week: int) -> list["Event"]:
         """
