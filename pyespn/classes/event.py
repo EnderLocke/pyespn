@@ -1,6 +1,5 @@
 from pyespn.classes.venue import Venue
 from pyespn.classes.team import Team
-from pyespn.utilities import fetch_espn_data
 from pyespn.core.decorators import validate_json
 
 
@@ -66,20 +65,19 @@ class Event:
         This method retrieves the teams' JSON data using their API references and
         initializes `Team` instances for `team1` and `team2`.
         """
-        team1 = self.event_json.get('competitions', [])[0].get('competitors')[0].get('team', {})
-        team2 = self.event_json.get('competitions', [])[0].get('competitors')[1].get('team', {})
+        team1 = self.event_json.get('competitions', [])[0].get('competitors')[0]
+        team2 = self.event_json.get('competitions', [])[0].get('competitors')[1]
+        team1_id = team1.get('id')
+        team2_id = team2.get('id')
+
         if team1.get('homeAway') == 'home':
-            self.home_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team1.get('$ref')))
+            self.home_team = self.espn_instance.get_team_by_id(team1_id)
 
-            self.away_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team2.get('$ref')))
+            self.away_team = self.espn_instance.get_team_by_id(team2_id)
         else:
-            self.home_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team2.get('$ref')))
+            self.home_team = self.espn_instance.get_team_by_id(team2_id)
 
-            self.away_team = Team(espn_instance=self.espn_instance,
-                                  team_json=fetch_espn_data(team1.get('$ref')))
+            self.away_team = self.espn_instance.get_team_by_id(team1_id)
 
     def __repr__(self) -> str:
         """

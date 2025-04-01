@@ -3,6 +3,7 @@ from pyespn.data.leagues import LEAGUE_API_MAPPING
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
+from pyespn.exceptions import API400Error
 from .decorators import *
 
 
@@ -57,8 +58,13 @@ class PYESPN:
         Loads data for all teams in the current league and stores them in the `teams` attribute.
         """
         for team in self.TEAM_ID_MAPPING:
-            data, team_cls = self.get_team_info(team_id=team['team_id'])
-            self.teams.append(team_cls)
+            try:
+                data, team_cls = self.get_team_info(team_id=team['team_id'])
+                self.teams.append(team_cls)
+            except API400Error as e:
+                # right now i am assuming if it doesn't exist here its not in the data
+                pass
+
 
     def _load_league_data(self):
         """
@@ -75,12 +81,12 @@ class PYESPN:
         """
         self.betting_futures = {season: self.get_all_seasons_futures(season=season)}
 
-    def load_regular_season_schedule(self, season):
+    def load_regular_season_schedule(self, season: int):
         """
         Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
 
         Args:
-            season (str): The season for which to load the schedule.
+            season (int): The season for which to load the schedule.
         """
 
         self.schedules = {season: self.get_regular_seasons_schedule(season=season)}
@@ -439,12 +445,12 @@ class PYESPN:
                                         season=season,
                                         week=week)
 
-    def get_regular_seasons_schedule(self, season):
+    def get_regular_seasons_schedule(self, season:int):
         """
         Retrieves the regular season schedule for a given season.
 
         Args:
-            season (str): The season for which to retrieve the schedule.
+            season (int): The season for which to retrieve the schedule.
 
         Returns:
             dict: The regular season schedule for the specified season.
@@ -452,3 +458,15 @@ class PYESPN:
         return get_regular_season_schedule_core(league_abbv=self.league_abbv,
                                                 espn_instance=self,
                                                 season=season)
+
+    def get_team_by_id(self, team_id):
+        """
+        Finds and returns the Team object that matches the given team_id.
+
+        Args:
+            team_id (int or str): The ID of the team to find.
+
+        Returns:
+            Team: The matching Team object, or None if not found.
+        """
+        return next((team for team in self.teams if team.team_id == team_id), None)
