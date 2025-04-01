@@ -4,6 +4,7 @@ from pyespn.utilities import (fetch_espn_data, get_schedule_type,
 from pyespn.exceptions import ScheduleTypeUnknownError
 from pyespn.classes import Event
 from datetime import datetime
+import concurrent.futures
 
 
 class Schedule:
@@ -156,7 +157,7 @@ class Week:
         self.end_date = end_date
         self.week_number = week_number
 
-        self._set_week_data()
+        self._set_week_datav2()
 
     def __repr__(self):
         """
@@ -167,7 +168,7 @@ class Week:
         """
         return f"<Week | {self.week_number}>"
 
-    def _set_week_data(self):
+    def _set_week_data(self) -> None:
         """
         Populates the events list by fetching event data for the given week.
         """
@@ -175,6 +176,35 @@ class Week:
             event_content = fetch_espn_data(event)
             self.events.append(Event(event_json=event_content,
                                      espn_instance=self.espn_instance))
+
+    def _set_week_datav2(self) -> None:
+        """
+        Populates the events list by fetching event data concurrently.
+
+        Returns:
+            None
+        """
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = {executor.submit(self._fetch_event, event): event for event in self.week_list}
+
+            for future in concurrent.futures.as_completed(futures):
+                try:
+                    self.events.append(future.result())  # Append event when future is done
+                except Exception as e:
+                    print(f"Error fetching event: {e}")  # Handle failed API calls gracefully
+
+    def _fetch_event(self, event_url):
+        """
+        Fetches event data from the given URL.
+
+        Args:
+            event_url (str): The event URL.
+
+        Returns:
+            Event: An Event instance.
+        """
+        event_content = fetch_espn_data(event_url)
+        return Event(event_json=event_content, espn_instance=self.espn_instance)
 
     def get_events(self) -> list["Event"]:
         """
