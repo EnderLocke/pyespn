@@ -45,7 +45,6 @@ def fetch_espn_data(url: str) -> dict:
     """
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Raises HTTPError for bad responses (4xx and 5xx)
 
         content = response.json()  # Automatically parses JSON
 
