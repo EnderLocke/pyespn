@@ -1,6 +1,5 @@
 from pyespn.classes.venue import Venue
 from pyespn.classes.team import Team
-from pyespn.utilities import fetch_espn_data
 from pyespn.core.decorators import validate_json
 
 
