@@ -11,28 +11,28 @@ import concurrent.futures
 @validate_league
 class PYESPN:
     """
-    A class to interact with ESPN's API to retrieve and manipulate data related to sports leagues, teams, players, betting, and more.
+    A class to interact with ESPN's API for retrieving and manipulating sports data related to leagues, teams, players, betting, schedules, drafts, and more.
 
     Attributes:
-        LEAGUE_API_MAPPING (dict): Mapping of league abbreviations to league data.
-        valid_leagues (set): Set of available league abbreviations.
-        untested_leagues (set): Set of untested league abbreviations.
-        all_leagues (set): Set of unavailable league abbreviations.
-        league_abbv (str): Abbreviation of the current sport league.
-        TEAM_ID_MAPPING (dict): Mapping of team IDs to team data for the current league.
-        BETTING_PROVIDERS (dict): Mapping of available betting providers.
-        LEAGUE_DIVISION_BETTING_KEYS (list): List of league division betting keys for the current league.
-        DEFAULT_BETTING_PROVIDER (dict): Default betting provider for the current league.
-        teams (list): List of teams in the current league.
-        betting_futures (dict): Mapping of betting futures for the current season.
-        schedules (dict): Mapping of regular season schedules for the current season.
-        league (dict): Data for the current league.
+        LEAGUE_API_MAPPING (dict): A mapping of league abbreviations to corresponding league data.
+        valid_leagues (set): A set of available league abbreviations.
+        untested_leagues (set): A set of untested league abbreviations.
+        all_leagues (set): A set of unavailable league abbreviations.
+        league_abbv (str): The abbreviation of the currently selected sport league.
+        TEAM_ID_MAPPING (dict): A mapping of team IDs to corresponding team data for the current league.
+        BETTING_PROVIDERS (dict): A mapping of available betting providers for the current league.
+        LEAGUE_DIVISION_BETTING_KEYS (list): A list of league division betting keys for the current league.
+        DEFAULT_BETTING_PROVIDER (dict): The default betting provider for the current league.
+        teams (list): A list of teams in the current league.
+        betting_futures (dict): A mapping of betting futures for the current season.
+        schedules (dict): A mapping of regular season schedules for the current season.
+        league (dict): A dictionary containing data for the current league.
 
     Examples:
         >>> from pyespn import PYESPN
         >>> nfl_espn = PYESPN(sport_league='nfl')
-
     """
+
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
     valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'available'}
     untested_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'untested'}
@@ -55,10 +55,20 @@ class PYESPN:
         self.betting_futures = {}
         self.schedules = {}
         self.recruit_rankings = {}
+        self.drafts = {}
         self.league = None
         self._load_league_data()
         if load_teams:
             self._load_teams_datav2()
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the PYESPN instance.
+
+        Returns:
+            str: A formatted string with class details
+        """
+        return f"<PyESPN | League {self.league_abbv}>"
 
     def _load_teams_data(self):
         """
@@ -66,13 +76,17 @@ class PYESPN:
         """
         for team in self.TEAM_ID_MAPPING:
             try:
-                data, team_cls = self.get_team_info(team_id=team['team_id'])
+                team_cls = self.get_team_info(team_id=team['team_id'])
                 self.teams.append(team_cls)
             except API400Error as e:
                 # right now i am assuming if it doesn't exist here its not in the data
                 pass
 
     def _load_teams_datav2(self):
+        """
+        Loads data for all teams in the current league using concurrency and stores them in the `teams` attribute.
+        """
+
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = {executor.submit(self.fetch_team_data, team): team for team in self.TEAM_ID_MAPPING}
 
@@ -92,7 +106,7 @@ class PYESPN:
             team_cls (Team or None): The team instance if found, otherwise None.
         """
         try:
-            data, team_cls = self.get_team_info(team_id=team['team_id'])
+            team_cls = self.get_team_info(team_id=team['team_id'])
             return team_cls
         except API400Error:
             return None  # Skip teams that don't exist in the data
@@ -110,7 +124,7 @@ class PYESPN:
         Args:
             season (str): The season for which to load betting futures.
         """
-        self.betting_futures = {season: self.get_all_seasons_futures(season=season)}
+        self.betting_futures[season] = self.get_all_seasons_futures(season=season)
 
     def load_regular_season_schedule(self, season: int):
         """
@@ -120,16 +134,12 @@ class PYESPN:
             season (int): The season for which to load the schedule.
         """
 
-        self.schedules = {season: self.get_regular_seasons_schedule(season=season)}
+        self.schedules[season] = self.get_regular_seasons_schedule(season=season)
 
-    def __repr__(self) -> str:
-        """
-        Returns a string representation of the PYESPN instance.
-
-        Returns:
-            str: A formatted string with class details
-        """
-        return f"<PyESPN | League {self.league_abbv}>"
+    def load_year_draft(self, season: int):
+        self.drafts[season] = load_draft_data_core(season=season,
+                                                   league_abbv=self.league_abbv,
+                                                   espn_instance=self)
 
     def get_player_info(self, player_id) -> dict:
         """
@@ -228,7 +238,7 @@ class PYESPN:
         Retrieves data about a specific draft pick.
 
         Args:
-            season (str): The season of the draft.
+            season (int): The season of the draft.
             pick_round (int): The round of the pick.
             pick (int): The specific pick number.
 
@@ -471,22 +481,6 @@ class PYESPN:
         return get_league_info_core(league_abbv=self.league_abbv,
                                     espn_instance=self)
 
-    def get_weekly_schedule(self, season, week):
-        """
-        Retrieves the weekly schedule for a given season and week.
-
-        Args:
-            season (str): The season for which to retrieve the schedule.
-            week (int): The week for which to retrieve the schedule.
-
-        Returns:
-            dict: The weekly schedule for the specified season and week.
-        """
-        return get_weekly_schedule_core(league_abbv=self.league_abbv,
-                                        espn_instance=self,
-                                        season=season,
-                                        week=week)
-
     def get_regular_seasons_schedule(self, season:int):
         """
         Retrieves the regular season schedule for a given season.
@@ -511,4 +505,4 @@ class PYESPN:
         Returns:
             Team: The matching Team object, or None if not found.
         """
-        return next((team for team in self.teams if team.team_id == team_id), None)
+        return next((team for team in self.teams if str(team.team_id) == str(team_id)), None)

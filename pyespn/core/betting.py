@@ -6,7 +6,19 @@ from pyespn.data.version import espn_api_version as v
 from pyespn.classes.betting import Betting
 
 
-def _get_team_ats(team_id, season, ats_type, league_abbv):
+def _get_team_ats(team_id, season, ats_type, league_abbv) -> dict:
+    """
+    Retrieves a team's Against The Spread (ATS) data for a given season and ATS type.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        ats_type (str): The type of ATS data (e.g., 'atsOverall', 'atsHome').
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for the specified team and season.
+    """
     content = _get_team_year_ats(team_id=team_id,
                                  season=season,
                                  league_abbv=league_abbv)
@@ -16,6 +28,17 @@ def _get_team_ats(team_id, season, ats_type, league_abbv):
 
 
 def _get_futures_year(year, league_abbv):
+    """
+    Fetches futures betting data for a given year and league.
+
+    Args:
+        year (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The futures betting data.
+    """
+
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures?lang=en&region=us'
     content = fetch_espn_data(url)
@@ -24,6 +47,17 @@ def _get_futures_year(year, league_abbv):
 
 
 def _get_futures_year_v2(year, league_abbv):
+    """
+    Fetches futures betting data for a given year and league, with pagination support.
+
+    Args:
+        year (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        list: A list of futures betting items.
+    """
+
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{year}/futures'
     content = fetch_espn_data(url)
@@ -39,6 +73,18 @@ def _get_futures_year_v2(year, league_abbv):
 
 
 def _get_team_year_ats(team_id, season, league_abbv):
+    """
+    Retrieves a team's Against The Spread (ATS) data for a given season.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for the specified team and season.
+    """
+
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{team_id}/ats?lang=en&region=us'
@@ -48,6 +94,17 @@ def _get_team_year_ats(team_id, season, league_abbv):
 
 
 def get_season_futures_core(season, league_abbv, espn_instance):
+    """
+    Retrieves all futures bets for a given season and league.
+
+    Args:
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+        espn_instance (object): The ESPN instance for processing.
+
+    Returns:
+        list: A list of Betting objects.
+    """
     content = _get_futures_year_v2(year=season,
                                    league_abbv=league_abbv)
     league_futures = []
@@ -60,7 +117,17 @@ def get_season_futures_core(season, league_abbv, espn_instance):
 
 
 def get_year_league_champions_futures_core(season, league_abbv, provider="Betradar"):
+    """
+    Retrieves league championship futures for a given season.
 
+    Args:
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+        provider (str, optional): The betting provider. Defaults to "Betradar".
+
+    Returns:
+        list: A list of dictionaries containing team name, city, and championship odds.
+    """
     content = _get_futures_year(year=season,
                                 league_abbv=league_abbv)
 
@@ -86,11 +153,16 @@ def get_year_league_champions_futures_core(season, league_abbv, provider="Betrad
 
 def get_division_champ_futures_core(season, division, league_abbv, provider="Betradar"):
     """
+    Retrieves division championship futures for a given season.
 
-    :param season:
-    :param division: must be one of east, west, south, north or conf
-    :param provider:
-    :return:
+    Args:
+        season (int): The season year.
+        division (str): The division name ('east', 'west', 'south', 'north', or 'conf').
+        league_abbv (str): The league abbreviation.
+        provider (str, optional): The betting provider. Defaults to "Betradar".
+
+    Returns:
+        list: A list of dictionaries containing division championship futures.
     """
     content = _get_futures_year(season,
                                 league_abbv=league_abbv)
@@ -118,6 +190,17 @@ def get_division_champ_futures_core(season, division, league_abbv, provider="Bet
 
 
 def get_team_year_ats_overall_core(team_id, season, league_abbv):
+    """
+    Retrieves a team's overall ATS data for a given season.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The overall ATS data.
+    """
     return _get_team_ats(team_id=team_id,
                          season=season,
                          ats_type='atsOverall',
@@ -125,6 +208,18 @@ def get_team_year_ats_overall_core(team_id, season, league_abbv):
 
 
 def get_team_year_ats_favorite_core(team_id, season, league_abbv):
+    """
+    Retrieves a team's ATS data when playing as a favorite.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for favorite games.
+    """
+
     return _get_team_ats(team_id=team_id,
                          season=season,
                          ats_type='atsFavorite',
@@ -132,6 +227,18 @@ def get_team_year_ats_favorite_core(team_id, season, league_abbv):
 
 
 def get_team_year_ats_underdog_core(team_id, season, league_abbv):
+    """
+    Retrieves a team's ATS data when playing as an underdog.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for underdog games.
+    """
+
     return _get_team_ats(team_id=team_id,
                          season=season,
                          ats_type='atsUnderdog',
@@ -139,6 +246,18 @@ def get_team_year_ats_underdog_core(team_id, season, league_abbv):
 
 
 def get_team_year_ats_away_core(team_id, season, league_abbv):
+    """
+    Retrieves a team's ATS data when playing away.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for away games.
+    """
+
     return _get_team_ats(team_id=team_id,
                          season=season,
                          ats_type='atsAway',
@@ -146,6 +265,18 @@ def get_team_year_ats_away_core(team_id, season, league_abbv):
 
 
 def get_team_year_ats_home_core(team_id, season, league_abbv):
+    """
+    Retrieves a team's ATS data when playing at home.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for home games.
+    """
+
     return _get_team_ats(team_id=team_id,
                          season=season,
                          ats_type='atsHome',
@@ -153,6 +284,17 @@ def get_team_year_ats_home_core(team_id, season, league_abbv):
 
 
 def get_team_year_ats_home_favorite_core(team_id, season, league_abbv):
+    """
+    Retrieves a team's home favorite ATS data for a given season.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for home favorite games.
+    """
     return _get_team_ats(team_id=team_id,
                          season=season,
                          ats_type='atsHomeFavorite',
@@ -160,6 +302,18 @@ def get_team_year_ats_home_favorite_core(team_id, season, league_abbv):
 
 
 def get_team_year_ats_away_underdog_core(team_id, season, league_abbv):
+    """
+    Retrieves a team's ATS data when playing as an away underdog.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for away underdog games.
+    """
+
     return _get_team_ats(team_id=team_id,
                          season=season,
                          ats_type='atsAwayUnderdog',
@@ -167,6 +321,18 @@ def get_team_year_ats_away_underdog_core(team_id, season, league_abbv):
 
 
 def get_team_year_ats_home_underdog_core(team_id, season, league_abbv):
+    """
+    Retrieves a team's ATS data when playing as a home underdog.
+
+    Args:
+        team_id (int): The ID of the team.
+        season (int): The season year.
+        league_abbv (str): The league abbreviation.
+
+    Returns:
+        dict: The ATS data for home underdog games.
+    """
+
     return _get_team_ats(team_id=team_id,
                          season=season,
                          ats_type='atsHomeUnderdog',

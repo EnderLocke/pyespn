@@ -4,24 +4,15 @@ nav:
   - Home: index.md
   - Install: installing.md
   - PyESPN: use.md
-  - API Endpoints:
-    - Overview: api_endpoints.md
-    - Teams: endpoints/teams.md
-    - Players: endpoints/players.md
-    - Stats: endpoints/stats.md
-    - Events/Games: endpoints/events.md
-    - Draft: endpoints/draft.md
-    - Recruiting: endpoints/recruiting.md
-    - Awards: endpoints/awards.md
-    - Betting: endpoints/betting.md
-    - Standings: endpoints/standings.md
+  - Client: pyespn.md
   - Exceptions: exceptions.md
   - Classes:
     - League: classes/league_class.md
     - Team: classes/teams_class.md
     - Player: classes/player_class.md
-    - Recruit: classes/recruit_clss.md
+    - Recruit: classes/recruit_class.md
     - Betting: classes/betting_class.md
+    - Draft: classes/draft_class.md
     - Event: classes/event_class.md
     - Venue: classes/venue_class.md
   - Discover: discover.md

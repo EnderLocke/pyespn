@@ -9,7 +9,7 @@ class API400Error(Exception):
 
 
 class NoDataReturnedError(Exception):
-    """Exception raised when no data is returened rom the espn api but not an error"""
+    """Exception raised when no data is returned from the espn api but not an error"""
     def __init__(self, code, message="espn api returned no data"):
         self.code = code
         self.message = f"{message} | status code {self.code}"

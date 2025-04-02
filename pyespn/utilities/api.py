@@ -3,7 +3,19 @@ from pyespn.exceptions import API400Error, NoDataReturnedError
 import requests
 
 
-def lookup_league_api_info(league_abbv):
+def lookup_league_api_info(league_abbv) -> dict:
+    """
+    Retrieves information about a league from the LEAGUE_API_MAPPING based on its abbreviation.
+
+    Args:
+        league_abbv (str): The abbreviation of the league (e.g., 'nfl', 'nba').
+
+    Returns:
+        dict: A dictionary containing the league's information.
+
+    Raises:
+        StopIteration: If no league with the provided abbreviation is found in the LEAGUE_API_MAPPING.
+    """
     info = next(league for league in LEAGUE_API_MAPPING if league['league_abbv'] == league_abbv)
     return info
 
@@ -32,17 +44,24 @@ def check_response_code(content: dict):
 
 def fetch_espn_data(url: str) -> dict:
     """
-    Fetches data from the ESPN API and checks for errors.
+    Fetches data from the specified URL and returns it as a parsed dictionary.
 
     Args:
-        url (str): The API endpoint URL.
+        url (str): The URL from which to fetch the data.
 
     Returns:
-        dict: Parsed JSON response if successful, otherwise None.
+        dict: The parsed JSON response from the URL if successful, otherwise None.
 
     Raises:
-        Exception: If an error occurs in the response.
+        NoDataReturnedError: If the response contains no items or an unexpected response code is encountered.
+        requests.exceptions.RequestException: If there is a network or HTTP request error.
+        ValueError: If the response cannot be parsed as JSON.
+
+    Example:
+        >>> url = "https://api.espn.com/v1/sports/football"
+        >>> data = fetch_espn_data(url)
     """
+
     try:
         response = requests.get(url)
 

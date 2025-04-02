@@ -6,6 +6,16 @@ import json
 
 
 def get_player_ids_core(league_abbv: str) -> list:
+    """
+    Retrieves a list of player IDs and names for a given league.
+
+    Args:
+        league_abbv (str): The abbreviation of the league (e.g., "nfl", "nba").
+
+    Returns:
+        list: A list of dictionaries containing player IDs and names.
+    """
+
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     all_players = []
     cfb_ath_url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes?lang=en&region=us'
@@ -29,11 +39,16 @@ def get_player_ids_core(league_abbv: str) -> list:
     return all_players
 
 
-def get_player_stat_urls_core(player_id, league_abbv):
-    """ this function gets all the espn urls for a given player id
+def get_player_stat_urls_core(player_id, league_abbv) -> list:
+    """
+    Retrieves all the ESPN URLs for a given player ID.
 
-    :param player_id:
-    :return:
+    Args:
+        player_id (str): The unique identifier of the player.
+        league_abbv (str): The abbreviation of the league.
+
+    Returns:
+        list: A list of URLs pointing to the player's statistics.
     """
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
@@ -52,7 +67,17 @@ def get_player_stat_urls_core(player_id, league_abbv):
     return stat_urls
 
 
-def extract_stats_from_url_core(url):
+def extract_stats_from_url_core(url) -> list:
+    """
+    Extracts player statistics from a given URL.
+
+    Args:
+        url (str): The URL pointing to the player's statistics.
+
+    Returns:
+        list: A list of dictionaries containing the player's statistics.
+    """
+
     response = requests.get(url)
     url_parts = url.split('/')
     all_stats = []
@@ -78,7 +103,19 @@ def extract_stats_from_url_core(url):
     return all_stats
 
 
-def get_player_info_core(player_id, league_abbv, espn_instance):
+def get_player_info_core(player_id, league_abbv, espn_instance) -> Player:
+    """
+    Retrieves detailed player information for a given player ID from the ESPN API.
+
+    Args:
+        player_id (str): The unique identifier of the player whose information is being retrieved.
+        league_abbv (str): The abbreviation of the league the player is part of (e.g., 'nfl', 'nba').
+        espn_instance (object): An instance of the ESPN class used to manage and interact with ESPN data.
+
+    Returns:
+        Player: A Player object containing the detailed information of the player retrieved from the API.
+    """
+
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}'
@@ -86,4 +123,4 @@ def get_player_info_core(player_id, league_abbv, espn_instance):
     content = json.loads(response.content)
     current_player = Player(player_json=content,
                             espn_instance=espn_instance)
-    return content, current_player
+    return current_player
