@@ -18,7 +18,7 @@
     
     
       
-        <title>PYESPN</title>
+        <title>PyESPN</title>
       
     
     
@@ -43,6 +43,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -86,7 +88,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="PYESPN" class="md-header__button md-logo" aria-label="PYESPN" data-md-component="logo">
+    <a href="." title="PyESPN" class="md-header__button md-logo" aria-label="PyESPN" data-md-component="logo">
       
   <img src="img/pyespn.png" alt="logo">
 
@@ -99,7 +101,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            PYESPN
+            PyESPN
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -225,12 +227,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="PYESPN" class="md-nav__button md-logo" aria-label="PYESPN" data-md-component="logo">
+    <a href="." title="PyESPN" class="md-nav__button md-logo" aria-label="PyESPN" data-md-component="logo">
       
   <img src="img/pyespn.png" alt="logo">
 
     </a>
-    PYESPN
+    PyESPN
   </label>
   
     <div class="md-nav__source">
@@ -302,18 +304,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#links" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
-      Links
+      Introduction
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
+  <a href="#links" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction
+      Links
     </span>
   </a>
   
@@ -377,7 +379,49 @@
         
   
   <span class="md-ellipsis">
-    Class
+    PyESPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pyespn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exceptions
     
   </span>
   
@@ -401,14 +445,14 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   <span class="md-ellipsis">
-    API Endpoints
+    Classes
     
   </span>
   
@@ -416,10 +460,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            API Endpoints
+            Classes
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -430,11 +474,11 @@
   
   
     <li class="md-nav__item">
-      <a href="api_endpoints/" class="md-nav__link">
+      <a href="classes/league_class/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    League
     
   </span>
   
@@ -452,11 +496,11 @@
   
   
     <li class="md-nav__item">
-      <a href="endpoints/teams/" class="md-nav__link">
+      <a href="classes/teams_class/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Teams
+    Team
     
   </span>
   
@@ -474,11 +518,11 @@
   
   
     <li class="md-nav__item">
-      <a href="endpoints/players/" class="md-nav__link">
+      <a href="classes/player_class/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Players
+    Player
     
   </span>
   
@@ -496,11 +540,11 @@
   
   
     <li class="md-nav__item">
-      <a href="endpoints/stats/" class="md-nav__link">
+      <a href="classes/recruit_class/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Stats
+    Recruit
     
   </span>
   
@@ -518,95 +562,7 @@
   
   
     <li class="md-nav__item">
-      <a href="endpoints/events/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Events/Games
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="endpoints/draft/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Draft
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="endpoints/recruiting/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Recruiting
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="endpoints/awards/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Awards
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="endpoints/betting/" class="md-nav__link">
+      <a href="classes/betting_class/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -628,11 +584,55 @@
   
   
     <li class="md-nav__item">
-      <a href="endpoints/standings/" class="md-nav__link">
+      <a href="classes/draft_class/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Standings
+    Draft
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="classes/event_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Event
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="classes/venue_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Venue
     
   </span>
   
@@ -646,27 +646,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="exceptions/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Exceptions
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -727,10 +706,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -742,8 +721,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             About
           </label>
@@ -805,18 +784,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#links" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
-      Links
+      Introduction
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
+  <a href="#links" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction
+      Links
     </span>
   </a>
   
@@ -859,13 +838,16 @@
   
 
 
-<h1 id="welcome-to-pyespn">Welcome to PYESPN</h1>
+<h1 id="welcome-to-pyespn">Welcome to PyESPN</h1>
+<p>I am not affiliated with espn, please use this with respect to their infrastructure</p>
+<h2 id="introduction">Introduction</h2>
+<p>The PYESPN python package hits the hidden espn api and pulls sports data</p>
+<p>0.3.0 is the first beta version that is useable without potential errors or needing to 
+dig thru returned json as the data is now structured in classes</p>
+<p>check out the <a href="sports_available/">sports_available</a></p>
 <h2 id="links">Links</h2>
 <p><a href="https://github.com/EnderLocke/pyespn">PYESPN Github</a></p>
 <p><a href="https://pypi.org/project/pyespn/">pypi</a></p>
-<h2 id="introduction">Introduction</h2>
-<p>The PYESPN python package hits the hidden espn api and pulls sports data</p>
-<p>check out the <a href="sports_available/">sports_available</a> and go look at the <a href="api_endpoints/">api endpoints</a></p>
 <h2 id="finding-ids-on-espncom">Finding Ids on ESPN.com</h2>
 <p>You can use the <a href="discover/">espn frontend</a> to find ids to use</p>
 <h2 id="testing-api-calls">Testing API Calls</h2>

@@ -12,7 +12,7 @@
         <link rel="prev" href="../installing/">
       
       
-        <link rel="next" href="../api_endpoints/">
+        <link rel="next" href="../pyespn/">
       
       
       <link rel="icon" href="../img/favicon.ico">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Class - PYESPN</title>
+        <title>PyESPN - PyESPN</title>
       
     
     
@@ -45,6 +45,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -88,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="PYESPN" class="md-header__button md-logo" aria-label="PYESPN" data-md-component="logo">
+    <a href=".." title="PyESPN" class="md-header__button md-logo" aria-label="PyESPN" data-md-component="logo">
       
   <img src="../img/pyespn.png" alt="logo">
 
@@ -101,13 +103,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            PYESPN
+            PyESPN
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Class
+              PyESPN
             
           </span>
         </div>
@@ -227,12 +229,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="PYESPN" class="md-nav__button md-logo" aria-label="PYESPN" data-md-component="logo">
+    <a href=".." title="PyESPN" class="md-nav__button md-logo" aria-label="PyESPN" data-md-component="logo">
       
   <img src="../img/pyespn.png" alt="logo">
 
     </a>
-    PYESPN
+    PyESPN
   </label>
   
     <div class="md-nav__source">
@@ -311,7 +313,7 @@
           
   
   <span class="md-ellipsis">
-    Class
+    PyESPN
     
   </span>
   
@@ -323,7 +325,7 @@
         
   
   <span class="md-ellipsis">
-    Class
+    PyESPN
     
   </span>
   
@@ -354,6 +356,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#league-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      League Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teams-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Teams Data
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -368,259 +388,17 @@
   
   
   
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    API Endpoints
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            API Endpoints
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
-      <a href="../api_endpoints/" class="md-nav__link">
+      <a href="../pyespn/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    Client
     
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/teams/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Teams
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/players/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Players
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/stats/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Stats
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/events/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Events/Games
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/draft/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Draft
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/recruiting/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Recruiting
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/awards/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Awards
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/betting/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Betting
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../endpoints/standings/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Standings
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -642,6 +420,225 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Classes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Classes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes/league_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    League
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes/teams_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Team
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes/player_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Player
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes/recruit_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recruit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes/betting_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Betting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes/draft_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Draft
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes/event_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Event
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes/venue_class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Venue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -702,10 +699,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -717,8 +714,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             About
           </label>
@@ -788,6 +785,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#league-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      League Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teams-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Teams Data
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -809,7 +824,7 @@
 
 <h1 id="init-the-pyespn-class">Init the PYESPN class</h1>
 <h2 id="create-class">Create Class</h2>
-<p>create an init version of the class and feed it the league you want</p>
+<p>create an init version of the class and feed it the league you want more <a href="../sports_available/">here</a></p>
 <table>
 <thead>
 <tr>
@@ -876,6 +891,14 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">nfl_espn</span> <span class="o">=</span> <span class="n">PYESPN</span><span class="p">(</span><span class="n">sport_league</span><span class="o">=</span><span class="s1">&#39;nfl&#39;</span><span class="p">)</span>
 </span></code></pre></div></p>
+<h2 id="league-data">League Data</h2>
+<p>when the class is created it will try to load the league data. this will use the 
+<a href="../classes/league_class/">league class</a> and fill into PYESPN.league</p>
+<h2 id="teams-data">Teams Data</h2>
+<p>when the class is created it will try to load the teams data. this will use the
+<a href="../classes/teams_class/">team class</a> and fill into PYESPN.teams list. it will loop thru the available teams data that is
+loaded within pyespn.TEAM_ID_MAPPING and loops thru the team_ids and hits the api to pull the data. the more teams 
+(i.e. college football and basketball) will take longer than leagues with lower amount of teams (i.e. nfl, nba)</p>
 
 
 
@@ -922,13 +945,13 @@
         
         
           
-          <a href="../api_endpoints/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+          <a href="../pyespn/" class="md-footer__link md-footer__link--next" aria-label="Next: Client">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Overview
+                Client
               </div>
             </div>
             <div class="md-footer__button md-icon">
