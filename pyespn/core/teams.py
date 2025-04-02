@@ -55,4 +55,3 @@ def get_team_info_core(team_id, league_abbv, espn_instance):
 
     current_team = Team(espn_instance=espn_instance, team_json=content)
     return content, current_team
-
