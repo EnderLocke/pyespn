@@ -15,6 +15,6 @@ test_event_ids = [
 def test_nba_events(test_case):
     espn = PYESPN(sport_league='nba')
     content = espn.get_game_info(test_case['id'])
-    assert content['shortName'] == test_case['short_name']
-    assert content['name'] == test_case['name']
-    assert content['date'] == test_case['date']
+    assert content.short_name == test_case['short_name']
+    assert content.event_name == test_case['name']
+    assert content.date == test_case['date']

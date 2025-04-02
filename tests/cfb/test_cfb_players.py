@@ -7,6 +7,6 @@ import pytest
 def test_cfb_player_info(test_case):
     espn = PYESPN(sport_league='cfb')
     content = espn.get_player_info(test_case['id'])
-    assert content['fullName'] == test_case['full_name']
-    assert content['dateOfBirth'] == test_case['dob']
-    assert content['type'] == test_case['type']
+    assert content.full_name == test_case['full_name']
+    assert content.date_of_birth == test_case['dob']
+    assert content.type == test_case['type']

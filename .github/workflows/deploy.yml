@@ -54,6 +54,9 @@ jobs:
       - name: Upload to Test PyPI
         run: python -m twine upload --repository testpypi dist/*.whl --config-file /tmp/.pypirc --verbose
 
+      - name: Test MkDocs Build
+        run: mkdocs build --strict
+
   build-package:
     name: Deploy to PyPI
     needs: pytest
@@ -74,10 +77,13 @@ jobs:
           apt-get update
           apt-get install -y sudo
           sudo apt-get install -y pandoc
-          pip install twine pypandoc
+          pip install twine pypandoc mkdocs mkdocs-material
 
       - name: Build Package
         run: python setup.py bdist_wheel
 
       - name: Upload to PyPI
         run: python -m twine upload --repository pypi dist/*.whl --config-file /tmp/.pypirc
+
+      - name: Deploy Documentation to GitHub Pages
+        run: mkdocs gh-deploy --force
