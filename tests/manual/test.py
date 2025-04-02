@@ -14,7 +14,7 @@ if __name__ == '__main__':
     ayo = espn.get_draft_pick_data(season=season,
                                    pick_round=pick_round,
                                    pick=pick)
-    espn.load_year_recruiting_rankings(year=season)
+    espn.load_year_draft(season=season)
     espn.load_regular_season_schedule(season=season)
     #awards = espn.get_awards(season=season)
     #colors = espn.get_team_colors(team_id=30)

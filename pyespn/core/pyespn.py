@@ -110,7 +110,7 @@ class PYESPN:
         Args:
             season (str): The season for which to load betting futures.
         """
-        self.betting_futures = {season: self.get_all_seasons_futures(season=season)}
+        self.betting_futures[season] = self.get_all_seasons_futures(season=season)
 
     def load_regular_season_schedule(self, season: int):
         """
@@ -120,7 +120,12 @@ class PYESPN:
             season (int): The season for which to load the schedule.
         """
 
-        self.schedules = {season: self.get_regular_seasons_schedule(season=season)}
+        self.schedules[season] = self.get_regular_seasons_schedule(season=season)
+
+    def load_year_draft(self, season: int):
+        self.drafts[season] = load_draft_data_core(season=season,
+                                                   league_abbv=self.league_abbv,
+                                                   espn_instance=self)
 
     def __repr__(self) -> str:
         """

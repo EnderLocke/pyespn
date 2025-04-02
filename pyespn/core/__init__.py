@@ -7,7 +7,7 @@ from .games import get_game_info_core
 from .teams import (get_team_info_core, get_season_team_stats_core,
                     get_team_logo_img, get_team_colors_core,
                     get_home_venue)
-from .draft import get_draft_pick_data_core
+from .draft import get_draft_pick_data_core, load_draft_data_core
 from .orchestration import get_players_historical_stats_core
 from .betting import (get_year_league_champions_futures_core, get_division_champ_futures_core,
                       get_team_year_ats_away_core, get_team_year_ats_home_favorite_core,

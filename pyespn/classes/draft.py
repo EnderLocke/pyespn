@@ -14,7 +14,7 @@ class DraftPick:
     def _get_pick_data(self):
         self.round_number = self.pick_json.get('round')
         self.pick_number = self.pick_json.get('pick')
-        self.overall_number = self.pick_number.get('overall')
+        self.overall_number = self.pick_json.get('overall')
         team_id = get_team_id(self.pick_json.get('team', {}).get('$ref'))
         athlete_url = self.pick_json.get('athlete', {}).get('$ref')
         self.team = self.espn_instance.get_team_by_id(team_id=team_id)
@@ -23,3 +23,4 @@ class DraftPick:
 
         self.athlete = Player(player_json=athlete_content,
                               espn_instance=self.espn_instance)
+        pass
