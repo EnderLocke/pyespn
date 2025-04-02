@@ -228,7 +228,7 @@ class PYESPN:
         Retrieves data about a specific draft pick.
 
         Args:
-            season (str): The season of the draft.
+            season (int): The season of the draft.
             pick_round (int): The round of the pick.
             pick (int): The specific pick number.
 
