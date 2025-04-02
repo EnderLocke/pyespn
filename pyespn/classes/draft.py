@@ -3,8 +3,32 @@ from pyespn.classes import Player
 
 
 class DraftPick:
+    """
+    Represents a draft pick in a sports league draft.
+
+    Attributes:
+        pick_json (dict): The raw JSON data representing the draft pick.
+        espn_instance (PyESPN): The ESPN API instance for fetching related data.
+        athlete (Player or None): The Player instance representing the drafted athlete.
+        team (Team or None): The Team instance representing the team that made the pick.
+        round_number (int or None): The round in which the pick was made.
+        pick_number (int or None): The pick number within the round.
+        overall_number (int or None): The overall pick number in the draft.
+
+    Methods:
+        __repr__(): Returns a string representation of the DraftPick instance.
+        _get_pick_data(): Extracts and sets relevant data from the draft pick JSON.
+    """
 
     def __init__(self, espn_instance, pick_json):
+        """
+        Initializes a DraftPick instance with data from the provided JSON.
+
+        Args:
+            espn_instance (PyESPN): The ESPN API instance.
+            pick_json (dict): The raw JSON data representing the draft pick.
+        """
+
         self.pick_json = pick_json
         self.espn_instance = espn_instance
         self.athlete = None
@@ -21,6 +45,9 @@ class DraftPick:
         return f"<DraftPick | Round {self.round_number} - Pick {self.pick_number}>"
 
     def _get_pick_data(self):
+        """
+        Extracts and sets relevant data from the draft pick JSON.
+        """
         self.round_number = self.pick_json.get('round')
         self.pick_number = self.pick_json.get('pick')
         self.overall_number = self.pick_json.get('overall')
