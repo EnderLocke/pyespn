@@ -506,3 +506,7 @@ class PYESPN:
             Team: The matching Team object, or None if not found.
         """
         return next((team for team in self.teams if str(team.team_id) == str(team_id)), None)
+
+    def load_season_rosters(self, season):
+        for team in self.teams:
+            team.load_season_roster(season=season)
