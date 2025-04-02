@@ -1,10 +1,11 @@
-from pyespn.utilities import lookup_league_api_info
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
+from pyespn.classes.player import Recruit
 import requests
 import json
 
 
-def get_recruiting_rankings_core(season, league_abbv, max_pages=None):
+def get_recruiting_rankings_core(season, league_abbv, espn_instance, max_pages=None):
     """
     NOTE-> stars not available to get this you need to wait for players page to load and wait for
         the rating-#_stars.png file so i could get the #  of stars
@@ -16,8 +17,8 @@ def get_recruiting_rankings_core(season, league_abbv, max_pages=None):
     """
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'https://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/recruiting/{season}/athletes'
-    response = requests.get(url)
-    content = json.loads(response.content)
+    content = fetch_espn_data(url)
+
     if not max_pages:
         num_of_pages = content['pageCount']
     else:
@@ -30,18 +31,8 @@ def get_recruiting_rankings_core(season, league_abbv, max_pages=None):
         paged_response = requests.get(paged_url)
         paged_content = json.loads(paged_response.content)
         for recruit in paged_content['items']:
-            athlete = recruit['athlete']
-            this_recruit = {
-                'first_name': athlete.get('firstName'),
-                'last_name': athlete.get('lastName'),
-                'id': athlete.get('id'),
-                'position': athlete.get('position').get('abbreviation'),
-                'class': recruit.get('recruitingClass'),
-                'grade': recruit.get('grade'),
-                'rank': rank,
-                'stars': None
-
-            }
+            this_recruit = Recruit(recruit_json=recruit,
+                                   espn_instance=espn_instance)
             rank += 1
             recruiting_data.append(this_recruit)
 
