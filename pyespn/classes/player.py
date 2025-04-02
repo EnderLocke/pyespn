@@ -79,7 +79,7 @@ class Player:
         Returns:
             str: A formatted string with the players's name, debut year and jersey.
         """
-        return f"<Player | {self.full_name}, {self.debut_year} ({self.jersey})>"
+        return f"<Player | {self.full_name}, {self.position_abbreviation} ({self.jersey})>"
 
     def _set_player_data(self):
         """

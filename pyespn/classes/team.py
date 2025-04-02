@@ -156,10 +156,8 @@ class Team:
                 athlete_content = fetch_espn_data(athlete.get('$ref'))
                 athletes.append(Player(player_json=athlete_content,
                                        espn_instance=self.espn_instance))
-            pass
 
-
-        pass
+        self.roster[season] = athletes
 
     def to_dict(self) -> dict:
         """
