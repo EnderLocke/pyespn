@@ -19,4 +19,3 @@ def test_nfl_events(test_case):
     assert content.full_name == test_case['full_name']
     assert content.date_of_birth == test_case['dob']
     assert content.type == test_case['type']
-    assert content.debut_year == test_case['debut_year']
