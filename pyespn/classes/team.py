@@ -1,4 +1,7 @@
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.classes.venue import Venue
+from pyespn.classes.player import Player
+from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
 
 
@@ -63,8 +66,18 @@ class Team:
             self.team_json = team_json
         else:
             self.team_json = {}
+        self.roster = {}
         self._load_team_data()
         self.home_venue = Venue(venue_json=self.venue_json)
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Team instance.
+
+        Returns:
+            str: A formatted string with the team's location, name, abbreviation, and league.
+        """
+        return f"<Team | {self.location} {self.name} ({self.abbreviation}) - {self.get_league()}>"
 
     def _load_team_data(self):
         """
@@ -129,14 +142,24 @@ class Team:
         """
         return self.espn_instance.league_abbv
 
-    def __repr__(self) -> str:
-        """
-        Returns a string representation of the Team instance.
+    def load_season_roster(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
 
-        Returns:
-            str: A formatted string with the team's location, name, abbreviation, and league.
-        """
-        return f"<Team | {self.location} {self.name} ({self.abbreviation}) - {self.get_league()}>"
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info.get("sport")}/leagues/{api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
+        content = fetch_espn_data(url)
+        page_count = content.get('pageCount', 1)
+        athletes = []
+        for page in range(1, page_count + 1):
+            page_url = f'{url}?page={page}'
+            page_content = fetch_espn_data(page_url)
+            for athlete in page_content.get('items', []):
+                athlete_content = fetch_espn_data(athlete.get('$ref'))
+                athletes.append(Player(player_json=athlete_content,
+                                       espn_instance=self.espn_instance))
+            pass
+
+
+        pass
 
     def to_dict(self) -> dict:
         """
