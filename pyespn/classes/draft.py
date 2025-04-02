@@ -23,4 +23,3 @@ class DraftPick:
 
         self.athlete = Player(player_json=athlete_content,
                               espn_instance=self.espn_instance)
-        pass

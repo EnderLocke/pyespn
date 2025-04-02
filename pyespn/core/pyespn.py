@@ -55,6 +55,7 @@ class PYESPN:
         self.betting_futures = {}
         self.schedules = {}
         self.recruit_rankings = {}
+        self.drafts = {}
         self.league = None
         self._load_league_data()
         if load_teams:
