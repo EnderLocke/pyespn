@@ -76,7 +76,7 @@ class PYESPN:
         """
         for team in self.TEAM_ID_MAPPING:
             try:
-                data, team_cls = self.get_team_info(team_id=team['team_id'])
+                team_cls = self.get_team_info(team_id=team['team_id'])
                 self.teams.append(team_cls)
             except API400Error as e:
                 # right now i am assuming if it doesn't exist here its not in the data

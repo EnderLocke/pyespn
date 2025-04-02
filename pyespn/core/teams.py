@@ -30,7 +30,7 @@ def get_season_team_stats_core(season, team, league_abbv) -> dict:
     return content
 
 
-def get_team_info_core(team_id, league_abbv, espn_instance):
+def get_team_info_core(team_id, league_abbv, espn_instance) -> Team:
     """
     Fetches detailed information about a team, including name, logo, and other team data.
 
@@ -40,9 +40,7 @@ def get_team_info_core(team_id, league_abbv, espn_instance):
         espn_instance (object): An instance of the ESPN class used for interaction with the API.
 
     Returns:
-        tuple: A tuple containing:
-            - dict: A dictionary containing the team’s data.
-            - Team: An instance of the `Team` class containing the team data.
+        Team: An instance of the `Team` class containing the team data.
 
     Example:
         >>> team_info, team = get_team_info_core(30, 'nfl', espn_instance)
@@ -54,4 +52,4 @@ def get_team_info_core(team_id, league_abbv, espn_instance):
     content = fetch_espn_data(url)
 
     current_team = Team(espn_instance=espn_instance, team_json=content)
-    return content, current_team
+    return current_team
