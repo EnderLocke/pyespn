@@ -118,7 +118,7 @@
       "team_id": 20,
       "team_name": "Jets",
       "team_city": "New York",
-      "team_abbv": "NJY"
+      "team_abbv": "NYJ"
     },
     {
       "team_id": 21,
@@ -166,7 +166,7 @@
       "team_id": 28,
       "team_name": "Commanders",
       "team_city": "Washington",
-      "team_abbv": "WAS"
+      "team_abbv": "WSH"
     },
     {
       "team_id": 29,
@@ -182,13 +182,11 @@
     },
     {
       "team_id": 31,
-      "team_name": "AFC",
       "team_city": "AFC",
       "team_abbv": "AFC"
     },
     {
       "team_id": 32,
-      "team_name": "NFC",
       "team_city": "NFC",
       "team_abbv": "NFC"
     },
