@@ -219,5 +219,5 @@ class Recruit:
         self.status_id = status.get('id')
         self.status_name = status.get('description')
 
-        self.rank = next((attr for attr in self.recruit_json.get('attributes', []) if attr.get("name", '').lower() == "rank"), None)
+        self.rank = next((int(attr.get('displayValue')) for attr in self.recruit_json.get('attributes', []) if attr.get("name", '').lower() == "rank"), None)
 
