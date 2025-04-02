@@ -2,6 +2,7 @@ from pyespn.classes.venue import Venue
 from pyespn.core.decorators import validate_json
 
 
+# todo can add a load roster function etc
 @validate_json("team_json")
 class Team:
     """

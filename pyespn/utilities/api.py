@@ -3,7 +3,19 @@ from pyespn.exceptions import API400Error, NoDataReturnedError
 import requests
 
 
-def lookup_league_api_info(league_abbv):
+def lookup_league_api_info(league_abbv) -> dict:
+    """
+    Retrieves information about a league from the LEAGUE_API_MAPPING based on its abbreviation.
+
+    Args:
+        league_abbv (str): The abbreviation of the league (e.g., 'nfl', 'nba').
+
+    Returns:
+        dict: A dictionary containing the league's information.
+
+    Raises:
+        StopIteration: If no league with the provided abbreviation is found in the LEAGUE_API_MAPPING.
+    """
     info = next(league for league in LEAGUE_API_MAPPING if league['league_abbv'] == league_abbv)
     return info
 
