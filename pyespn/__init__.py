@@ -1,1 +1,1 @@
-from pyespn.core.pyespn import PYESPN
+from pyespn.core.client import PYESPN

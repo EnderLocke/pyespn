@@ -106,7 +106,7 @@ class PYESPN:
             team_cls (Team or None): The team instance if found, otherwise None.
         """
         try:
-            data, team_cls = self.get_team_info(team_id=team['team_id'])
+            team_cls = self.get_team_info(team_id=team['team_id'])
             return team_cls
         except API400Error:
             return None  # Skip teams that don't exist in the data
@@ -505,4 +505,4 @@ class PYESPN:
         Returns:
             Team: The matching Team object, or None if not found.
         """
-        return next((team for team in self.teams if team.team_id == team_id), None)
+        return next((team for team in self.teams if str(team.team_id) == str(team_id)), None)
