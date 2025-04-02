@@ -8,7 +8,7 @@ pick_round = 2
 if __name__ == '__main__':
     #data = get_nfl_players_historical_stats(278)
     #nfl_espn = PYESPN('nfl')
-    espn = PYESPN('mcbb')
+    espn = PYESPN('cfb')
     #cfb_espn = PYESPN('cfb')
     #cfb_espn.load_regular_season_schedule(season=season)
     espn.load_year_recruiting_rankings(year=season)
