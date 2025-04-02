@@ -61,6 +61,15 @@ class PYESPN:
         if load_teams:
             self._load_teams_datav2()
 
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the PYESPN instance.
+
+        Returns:
+            str: A formatted string with class details
+        """
+        return f"<PyESPN | League {self.league_abbv}>"
+
     def _load_teams_data(self):
         """
         Loads data for all teams in the current league and stores them in the `teams` attribute.
@@ -127,15 +136,6 @@ class PYESPN:
         self.drafts[season] = load_draft_data_core(season=season,
                                                    league_abbv=self.league_abbv,
                                                    espn_instance=self)
-
-    def __repr__(self) -> str:
-        """
-        Returns a string representation of the PYESPN instance.
-
-        Returns:
-            str: A formatted string with class details
-        """
-        return f"<PyESPN | League {self.league_abbv}>"
 
     def get_player_info(self, player_id) -> dict:
         """

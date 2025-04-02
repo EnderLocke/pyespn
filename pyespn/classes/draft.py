@@ -11,6 +11,15 @@ class DraftPick:
         self.team = None
         self._get_pick_data()
 
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the draftpick instance.
+
+        Returns:
+            str: A formatted string with class details
+        """
+        return f"<DraftPick | Round {self.round_number} - Pick {self.pick_number}>"
+
     def _get_pick_data(self):
         self.round_number = self.pick_json.get('round')
         self.pick_number = self.pick_json.get('pick')
