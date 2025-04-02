@@ -10,7 +10,7 @@ nav:
     - League: classes/league_class.md
     - Team: classes/teams_class.md
     - Player: classes/player_class.md
-    - Recruit: classes/recruit_clss.md
+    - Recruit: classes/recruit_class.md
     - Betting: classes/betting_class.md
     - Event: classes/event_class.md
     - Venue: classes/venue_class.md
