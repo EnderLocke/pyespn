@@ -2,20 +2,26 @@ from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.classes.player import Recruit
 import concurrent.futures
-import requests
-import json
 
 
-def get_recruiting_rankings_core(season, league_abbv, espn_instance, max_pages=None):
+def get_recruiting_rankings_core(season, league_abbv, espn_instance, max_pages=None) -> list[Recruit]:
     """
-    NOTE-> stars not available to get this you need to wait for players page to load and wait for
-        the rating-#_stars.png file so i could get the #  of stars
+    Retrieves recruiting rankings and athlete data for a specific season and league, utilizing the ESPN API.
 
-    :param season:
-    :param league_abbv:
-    :param max_pages:
-    :return:
+    NOTE: The star rating for recruits is not directly available via the API. To obtain the star rating,
+    the player's page must be loaded and the corresponding rating image (e.g., rating-#_stars.png) must be processed
+    to extract the number of stars.
+
+    Args:
+        season (int): The season year for which the recruiting rankings are to be fetched.
+        league_abbv (str): The abbreviation for the league (e.g., 'nfl', 'nba').
+        espn_instance (object): An instance of the ESPN class used for interaction with the ESPN API.
+        max_pages (int, optional): The maximum number of pages to fetch. If not provided, all available pages are fetched.
+
+    Returns:
+        list: A list of `Recruit` objects representing the recruits and their information retrieved from the API.
     """
+
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'https://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/recruiting/{season}/athletes'
     content = fetch_espn_data(url)
