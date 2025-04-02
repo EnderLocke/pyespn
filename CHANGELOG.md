@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.0
+* lots of changes
+  * doc strings across codebase
+  * new documentation
+  * classes for data returns (no more json!)
+* new data sources
+  * draft
+  * recruiting
+  * schedule
+* new client functions
+  * instead of calling different api calls now the client automatically loads:
+    * team data on creation
+    * league data on creation
+    * schedule data on function call
+    * draft data on function call
+    * recruit data on function call
+
 ## 0.2.2
 * added variable at pyespn.data.version that makes it easy to switch between versions throughout code
 * added contributing

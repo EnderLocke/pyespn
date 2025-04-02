@@ -2,8 +2,9 @@ from pyespn.data.betting import BETTING_AVAILABLE
 from pyespn.data.leagues import PRO_LEAGUES, COLLEGE_LEAGUES
 from pyespn.data.standings import STANDINGS_TYPE_MAP
 from pyespn.exceptions import (LeagueNotSupportedError, LeagueNotAvailableError,
-                               InvalidLeagueError)
+                               InvalidLeagueError, JSONNotProvidedError)
 from functools import wraps
+import json
 import warnings
 
 
@@ -81,3 +82,33 @@ def validate_league(cls):
 
     cls.__init__ = new_init
     return cls
+
+
+def validate_json(json_attr):
+    """Class decorator to validate JSON input on instantiation."""
+    def decorator(cls):
+        original_init = cls.__init__
+
+        @wraps(original_init)
+        def new_init(self, *args, **kwargs):
+            json_obj = kwargs.get(json_attr)  # Get the specific JSON argument
+
+            if not isinstance(json_obj, dict):
+                if not json_obj:
+                    raise JSONNotProvidedError(error_message=f'{json_attr} is None')
+                try:
+                    json_obj = json.loads(json_obj)
+                    if not isinstance(json_obj, dict):
+                        raise JSONNotProvidedError(error_message=f'{json_attr} is not a valid JSON object')
+                except json.JSONDecodeError as e:
+                    raise JSONNotProvidedError(error_message=f'Error decoding {json_attr}: {e.msg}')
+
+            # Assign validated JSON back to kwargs (in case it's modified from a string)
+            kwargs[json_attr] = json_obj
+
+            original_init(self, *args, **kwargs)
+
+        cls.__init__ = new_init
+        return cls
+    return decorator
+

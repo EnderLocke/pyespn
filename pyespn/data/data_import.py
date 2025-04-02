@@ -3,6 +3,23 @@ import json
 
 
 def open_json(file_path):
+    """
+    Opens and reads a JSON file, returning the 'teams' data.
+
+    Args:
+        file_path (str): The relative path to the JSON file.
+
+    Returns:
+        list: The list of teams extracted from the JSON file.
+
+    Example:
+        >>> teams = open_json("data/teams.json")
+        >>> print(teams)  # [{'team_id': 1, 'name': 'Team A'}, ...]
+
+    Raises:
+        FileNotFoundError: If the specified file does not exist.
+        JSONDecodeError: If the file is not a valid JSON format.
+    """
     current_dir = os.path.dirname(os.path.abspath(__file__))  # Get directory path
 
     file_path = os.path.join(current_dir, file_path)  # Get full path
