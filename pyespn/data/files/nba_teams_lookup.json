@@ -69,7 +69,7 @@
     {
       "team_id": 12,
       "team_name": "Clippers",
-      "team_city": "Los Angeles",
+      "team_city": "LA",
       "team_abbv": "LAC"
     },
     {
@@ -134,8 +134,8 @@
     },
     {
       "team_id": 23,
-      "team_name": "Sacramento",
-      "team_city": "Kings",
+      "team_name": "Kings",
+      "team_city": "Sacramento",
       "team_abbv": "SAC"
     },
     {
@@ -160,7 +160,7 @@
       "team_id": 27,
       "team_name": "Wizards",
       "team_city": "Washington",
-      "team_abbv": "WAS"
+      "team_abbv": "WSH"
     },
     {
       "team_id": 28,
