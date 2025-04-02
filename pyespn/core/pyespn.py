@@ -5,6 +5,7 @@ from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MA
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
 from pyespn.exceptions import API400Error
 from .decorators import *
+import concurrent.futures
 
 
 @validate_league
@@ -26,6 +27,11 @@ class PYESPN:
         betting_futures (dict): Mapping of betting futures for the current season.
         schedules (dict): Mapping of regular season schedules for the current season.
         league (dict): Data for the current league.
+
+    Examples:
+        >>> from pyespn import PYESPN
+        >>> nfl_espn = PYESPN(sport_league='nfl')
+
     """
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
     valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'available'}
@@ -48,10 +54,11 @@ class PYESPN:
         self.teams = []
         self.betting_futures = {}
         self.schedules = {}
+        self.recruit_rankings = {}
         self.league = None
         self._load_league_data()
         if load_teams:
-            self._load_teams_data()
+            self._load_teams_datav2()
 
     def _load_teams_data(self):
         """
@@ -65,6 +72,30 @@ class PYESPN:
                 # right now i am assuming if it doesn't exist here its not in the data
                 pass
 
+    def _load_teams_datav2(self):
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = {executor.submit(self.fetch_team_data, team): team for team in self.TEAM_ID_MAPPING}
+
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:  # Append only if result is not None
+                    self.teams.append(result)
+
+    def fetch_team_data(self, team):
+        """
+        Fetches team data for a given team ID.
+
+        Args:
+            team (dict): A dictionary containing the team's ID.
+
+        Returns:
+            team_cls (Team or None): The team instance if found, otherwise None.
+        """
+        try:
+            data, team_cls = self.get_team_info(team_id=team['team_id'])
+            return team_cls
+        except API400Error:
+            return None  # Skip teams that don't exist in the data
 
     def _load_league_data(self):
         """
@@ -129,7 +160,7 @@ class PYESPN:
         Retrieves the recruiting rankings for a given season.
 
         Args:
-            season (str): The season for which to retrieve rankings.
+            season (int): The season for which to retrieve rankings.
             max_pages (int, optional): The maximum number of pages of data to retrieve.
 
         Returns:
@@ -137,7 +168,18 @@ class PYESPN:
         """
         return get_recruiting_rankings_core(season=season,
                                             league_abbv=self.league_abbv,
+                                            espn_instance=self,
                                             max_pages=max_pages)
+
+    def load_year_recruiting_rankings(self, year: int):
+        """
+        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+
+        Args:
+            year (int): The season for which to load the schedule.
+        """
+
+        self.recruit_rankings = {year: self.get_recruiting_rankings(season=year)}
 
     def get_game_info(self, event_id) -> dict:
         """

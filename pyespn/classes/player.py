@@ -149,3 +149,131 @@ class Player:
             dict: The original player data retrieved from the ESPN API.
         """
         return self.player_json
+
+
+@validate_json("recruit_json")
+class Recruit:
+    """
+    Represents a recruit in the ESPN recruiting system.
+
+    Attributes:
+        recruit_json (dict): The JSON data containing recruit details.
+        espn_instance: The ESPN API instance.
+        api_ref (str): API reference URL for the recruit.
+        athlete (dict): Dictionary containing athlete details.
+        id (str): The recruit's unique identifier.
+        uid (str): The unique identifier for the recruit.
+        guid (str): The global unique identifier.
+        type (str): Type of recruit data.
+        alternate_ids (str): Alternative ID for the recruit.
+        first_name (str): First name of the recruit.
+        last_name (str): Last name of the recruit.
+        full_name (str): Full name of the recruit.
+        display_name (str): Display name of the recruit.
+        short_name (str): Shortened version of the recruit's name.
+        weight (int): The recruit's weight in pounds (if available).
+        height (int): The recruit's height in inches (if available).
+        recruiting_class (str): The recruiting class year.
+        grade (str): Grade assigned to the recruit.
+        links (list): A list of links related to the recruit.
+        birth_city (str): City where the recruit was born.
+        birth_state (str): State where the recruit was born.
+        high_school_id (str): The recruit's high school ID.
+        high_school_name (str): Name of the recruit's high school.
+        high_school_state (str): State where the recruit's high school is located.
+        slug (str): A unique slug identifier for the recruit.
+        position_ref (str): API reference for the recruit's position.
+        position_id (str): The recruit's position ID.
+        position_name (str): Name of the recruit's position.
+        position_display_name (str): Display name of the position.
+        position_abbreviation (str): Abbreviated name of the recruit's position.
+        position_leaf (bool): Whether the position is a leaf node in the hierarchy.
+        position_parent_ref (str): Reference to the parent position (if any).
+        linked (dict): Additional linked data related to the recruit.
+        schools (list): A list of schools associated with the recruit.
+        status_id (str): The ID representing the recruit's status.
+        status_name (str): Description of the recruit's status.
+        rank (int or None): The recruit's overall rank, extracted from attributes.
+
+    Methods:
+        __repr__():
+            Returns a string representation of the recruit instance.
+
+        _set_recruit_data():
+            Extracts and sets player data from the provided JSON.
+    """
+
+    def __init__(self, recruit_json: dict, espn_instance):
+        """
+        Initializes a Recruit instance.
+
+        Args:
+            recruit_json (dict): The JSON data containing recruit details.
+            espn_instance (PYESPN): The ESPN API instance.
+        """
+        self.recruit_json = recruit_json
+        self.espn_instance = espn_instance
+        self._set_recruit_data()
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Recruit instance.
+
+        Returns:
+            str: A formatted string with the recruits's name, debut year and jersey.
+        """
+        return f"<Recruit | {self.full_name}, {self.position_abbreviation} ({self.recruiting_class})>"
+
+    def _set_recruit_data(self):
+        """
+        Extracts and sets recruit data from the provided JSON.
+        """
+        self.api_ref = self.recruit_json.get('$ref')
+        self.athlete = self.recruit_json.get('athlete')
+        self.id = self.athlete.get('id')
+        self.uid = self.recruit_json.get('uid')
+        self.guid = self.recruit_json.get('guid')
+        self.type = self.recruit_json.get('type')
+        self.alternate_ids = self.athlete.get('alternateIds', {}).get('sdr')
+        self.first_name = self.athlete.get('firstName')
+        self.last_name = self.athlete.get('lastName')
+        self.full_name = self.athlete.get('fullName')
+        self.display_name = self.athlete.get('displayName')
+        self.short_name = self.athlete.get('shortName')
+        self.weight = self.athlete.get('weight')
+        self.height = self.athlete.get('height')
+        self.recruiting_class = self.recruit_json.get("recruitingClass")
+        self.grade = self.recruit_json.get('grade')
+
+        self.links = self.recruit_json.get('links', [])
+
+        birth_place = self.athlete.get('hometown', {})
+        self.birth_city = birth_place.get('city')
+        self.birth_state = birth_place.get('state')
+
+        high_school = self.athlete.get('highSchool', {})
+        self.high_school_id = high_school.get('id')
+        self.high_school_name = high_school.get('name')
+        self.high_school_state = high_school.get('address', {}).get('state')
+
+
+        self.slug = self.recruit_json.get('slug')
+
+        position = self.athlete.get('position', {})
+        self.position_ref = position.get('$ref')
+        self.position_id = position.get('id')
+        self.position_name = position.get('name')
+        self.position_display_name = position.get('displayName')
+        self.position_abbreviation = position.get('abbreviation')
+        self.position_leaf = position.get('leaf')
+        self.position_parent_ref = position.get('parent', {}).get('$ref')
+
+        self.linked = self.recruit_json.get('linked')
+        self.schools = self.recruit_json.get('schools')
+
+        status = self.recruit_json.get('status', {})
+        self.status_id = status.get('id')
+        self.status_name = status.get('description')
+
+        self.rank = next((int(attr.get('displayValue')) for attr in self.recruit_json.get('attributes', []) if attr.get("name", '').lower() == "rank"), None)
+
