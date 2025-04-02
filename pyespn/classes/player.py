@@ -209,7 +209,7 @@ class Recruit:
 
         Args:
             recruit_json (dict): The JSON data containing recruit details.
-            espn_instance: The ESPN API instance.
+            espn_instance (PYESPN): The ESPN API instance.
         """
         self.recruit_json = recruit_json
         self.espn_instance = espn_instance
