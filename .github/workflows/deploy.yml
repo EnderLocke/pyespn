@@ -54,6 +54,9 @@ jobs:
       - name: Upload to Test PyPI
         run: python -m twine upload --repository testpypi dist/*.whl --config-file /tmp/.pypirc --verbose
 
+      - name: Test MkDocs Build
+        run: mkdocs build --strict
+
   build-package:
     name: Deploy to PyPI
     needs: pytest
