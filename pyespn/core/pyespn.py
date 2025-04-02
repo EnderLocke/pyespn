@@ -27,6 +27,11 @@ class PYESPN:
         betting_futures (dict): Mapping of betting futures for the current season.
         schedules (dict): Mapping of regular season schedules for the current season.
         league (dict): Data for the current league.
+
+    Examples:
+        >>> from pyespn import PYESPN
+        >>> nfl_espn = PYESPN(sport_league='nfl')
+
     """
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
     valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'available'}

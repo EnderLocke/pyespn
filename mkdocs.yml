@@ -20,6 +20,7 @@ nav:
     - League: classes/league_class.md
     - Team: classes/teams_class.md
     - Player: classes/player_class.md
+    - Recruit: classes/recruit_clss.md
     - Betting: classes/betting_class.md
     - Event: classes/event_class.md
     - Venue: classes/venue_class.md
@@ -55,6 +56,8 @@ theme:
 
 plugins:
   - search
+  - mkdocstrings:
+      default_handler: python
 
 markdown_extensions:
   - pymdownx.highlight:
