@@ -12,6 +12,7 @@ nav:
     - Player: classes/player_class.md
     - Recruit: classes/recruit_class.md
     - Betting: classes/betting_class.md
+    - Draft: classes/draft_class.md
     - Event: classes/event_class.md
     - Venue: classes/venue_class.md
   - Discover: discover.md

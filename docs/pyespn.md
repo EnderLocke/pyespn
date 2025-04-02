@@ -1,3 +1,3 @@
 # PyESPN Client
 
-::: pyespn.core.pyespn.PYESPN
+::: pyespn.core.client.PYESPN
