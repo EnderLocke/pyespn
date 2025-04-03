@@ -4,6 +4,7 @@ from pyespn.classes.vehicle import Vehicle
 
 @validate_json('player_json')
 class Player:
+    from pyespn.core.orchestration import get_players_historical_stats_core
     """
     Represents a player within the ESPN API framework.
 
@@ -72,6 +73,7 @@ class Player:
         """
         self.player_json = player_json
         self.espn_instance = espn_instance
+        self.stats = {}
         self._set_player_data()
 
     def __repr__(self) -> str:
@@ -150,6 +152,13 @@ class Player:
             for vehicle in self.player_json.get('vehicles'):
                 self.vehicles.append(Vehicle(vehicle_json=vehicle,
                                              espn_instance=self.espn_instance))
+
+    def load_player_historical_stats(self):
+        self.stats = self.get_players_historical_stats_core(player_id=self.id,
+                                                       league_abbv=self.espn_instance.league_abbv,
+                                                       espn_instance=self.espn_instance)
+
+        pass
 
     def to_dict(self) -> dict:
         """

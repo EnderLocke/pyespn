@@ -1,8 +1,9 @@
-from .team import Team
+from .team import Team, Manufacturer
 from .player import Player, Recruit
 from .event import Event
-from .venue import Venue
+from .venue import Venue, Circuit
 from .league import League
 from .schedule import Schedule
 from .draft import DraftPick
 from .vehicle import Vehicle
+from .stats import Stat

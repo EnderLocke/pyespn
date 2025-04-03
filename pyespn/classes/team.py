@@ -207,3 +207,59 @@ class Team:
             dict: The original team data retrieved from the ESPN API.
         """
         return self.team_json
+
+
+class Manufacturer:
+    """
+    Represents a manufacturer in the racing league, encapsulating information about the manufacturer
+    including its name, abbreviation, color, and associated event log.
+
+    Attributes:
+        manufacturer_json (dict): The raw JSON data representing the manufacturer.
+        espn_instance (object): An instance of the ESPN API handler used for making requests.
+        api_ref (str): The API reference URL for the manufacturer.
+        id (str): The unique identifier of the manufacturer.
+        name (str): The full name of the manufacturer.
+        display_name (str): The display name of the manufacturer.
+        short_display_name (str): The short display name of the manufacturer.
+        abbreviation (str): The abbreviation of the manufacturer's name.
+        color (str): The color associated with the manufacturer.
+        event_log_ref (str): The reference to the manufacturer's event log.
+
+    Methods:
+        __repr__: Returns a string representation of the Manufacturer instance.
+    """
+
+    def __init__(self, manufacturer_json, espn_instance):
+        """
+        Initializes a Manufacturer object with the provided JSON data and ESPN instance.
+
+        Args:
+            manufacturer_json (dict): The raw JSON data for the manufacturer.
+            espn_instance (object): An instance of the ESPN API handler.
+        """
+        self.manufacturer_json = manufacturer_json
+        self.espn_instance = espn_instance
+        self._load_manufacturer_data()
+
+    def _load_manufacturer_data(self):
+        """
+        Sets each attribute from the manu_json to its own attribute.
+        """
+        self.api_ref = self.manufacturer_json.get('$ref')
+        self.id = self.manufacturer_json.get('id')
+        self.name = self.manufacturer_json.get('name')
+        self.display_name = self.manufacturer_json.get('displayName')
+        self.short_display_name = self.manufacturer_json.get('shortDisplayName')
+        self.abbreviation = self.manufacturer_json.get('abbreviation')
+        self.color = self.manufacturer_json.get('color')
+
+        # Event log reference
+        self.event_log_ref = self.manufacturer_json.get('eventLog', {}).get('$ref')
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Manufacturer instance.
+        """
+        return f"<Manufacturer | {self.name}, {self.abbreviation}>"
+

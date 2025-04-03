@@ -4,7 +4,9 @@ from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
 from pyespn.exceptions import API400Error
+from pyespn.utilities import lookup_league_api_info
 from .decorators import *
+from datetime import datetime
 from typing import TYPE_CHECKING
 import concurrent.futures
 
@@ -55,16 +57,21 @@ class PYESPN:
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
         self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
+        self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
         self.teams = []
         self.betting_futures = {}
         self.schedules = {}
         self.recruit_rankings = {}
         self.drafts = {}
+        self.manufacturers = {}
         self.athletes = {}
         self.league = None
         self._load_league_data()
         if load_teams:
-            self._load_teams_datav2()
+            if self.api_mapping['sport'] != 'racing':
+                self._load_teams_datav2()
+            else:
+                self._load_manufacturers()
 
     def __repr__(self) -> str:
         """
@@ -279,6 +286,7 @@ class PYESPN:
             dict: The player's historical stats.
         """
         return get_players_historical_stats_core(player_id=player_id,
+                                                 espn_instance=self,
                                                  league_abbv=self.league_abbv)
 
     @requires_betting_available
@@ -570,3 +578,30 @@ class PYESPN:
         self.athletes[season] = load_athletes_core(season=season,
                                                    league_abbv=self.league_abbv,
                                                    espn_instance=self)
+
+    def _load_manufacturers(self, season:str = None) -> None:
+        """
+        Loads the manufacturers data for a specific season and stores it in the
+        instance's manufacturers attribute.
+
+        This method retrieves the manufacturers data by calling the
+        `get_manufacturers_core` function and stores the result in the
+        `self.manufacturers` dictionary using the season as the key.
+
+        Args:
+            season (str, optional): The season for which the manufacturers data should be loaded.
+                                    Defaults to the current year if not provided.
+        Side Effects:
+            - Updates the `self.manufacturers` dictionary with the manufacturers data
+              for the given season.
+
+        Example:
+            # Assuming get_manufacturers_core retrieves manufacturer data for the season
+            self._load_manufacturers('2025')
+        """
+        if season is None:
+            season = str(datetime.now().year)  # Default to the current year if no season is provided
+
+        self.manufacturers[season] = get_manufacturers_core(season=season,
+                                                            espn_instance=self,
+                                                            league_abbv=self.league_abbv)
