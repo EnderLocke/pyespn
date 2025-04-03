@@ -57,13 +57,51 @@ class Venue:
 
 
 class Circuit:
+    """
+    A class to represent a Circuit.
+
+    This class takes a JSON response from an API and processes the data to create
+    a Circuit object with relevant attributes. It provides details such as the
+    circuit's name, address, type, laps, and fastest lap times, as well as any
+    related diagrams and references to other objects like the fastest lap driver
+    and track.
+
+    Attributes:
+        api_ref (str): The API reference URL for the circuit.
+        id (str): The unique identifier of the circuit.
+        full_name (str): The full name of the circuit.
+        city (str): The city where the circuit is located.
+        country (str): The country where the circuit is located.
+        type (str): The type of the circuit (e.g., street, permanent).
+        length (str): The length of the circuit.
+        distance (str): The total distance of the race at the circuit.
+        laps (int): The number of laps in the race at the circuit.
+        turns (int): The number of turns in the circuit.
+        direction (str): The racing direction (e.g., clockwise, counterclockwise).
+        established (int): The year when the circuit was established.
+        fastest_lap_driver_ref (Player): A reference to the fastest lap driver.
+        fastest_lap_time (str): The time of the fastest lap at the circuit.
+        fastest_lap_year (int): The year in which the fastest lap was recorded.
+        track_ref (str): A reference to the track.
+        diagrams (list): A list of diagrams related to the circuit.
+        diagram_urls (list): A list of URLs pointing to the circuit diagrams.
+    """
 
     def __init__(self, circuit_json, espn_isntance):
+        """
+        Initializes a Circuit instance with data from a JSON response and an ESPN instance.
+
+        Args:
+            circuit_json (dict): The JSON data containing information about the circuit.
+            espn_instance (object): The ESPN instance used for making API calls.
+
+        This method also calls _load_circuit_data to load the data into attributes.
+        """
         self.circuit_json = circuit_json
         self.espn_instance = espn_isntance
-        self._load_circut_data()
+        self._load_circuit_data()
 
-    def _load_circut_data(self):
+    def _load_circuit_data(self):
         """
         Sets each attribute from the circuit_json to its own attribute.
         """
