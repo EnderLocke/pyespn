@@ -4,6 +4,7 @@ from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
 from pyespn.exceptions import API400Error
+from pyespn.utilities import lookup_league_api_info
 from .decorators import *
 from typing import TYPE_CHECKING
 import concurrent.futures
@@ -55,16 +56,21 @@ class PYESPN:
         self.BETTING_PROVIDERS = BETTING_PROVIDERS
         self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
+        self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
         self.teams = []
         self.betting_futures = {}
         self.schedules = {}
         self.recruit_rankings = {}
         self.drafts = {}
+        self.manufacturers = {}
         self.athletes = {}
         self.league = None
         self._load_league_data()
         if load_teams:
-            self._load_teams_datav2()
+            if self.api_mapping['sport'] != 'racing':
+                self._load_teams_datav2()
+            else:
+                self._load_manufacturers()
 
     def __repr__(self) -> str:
         """
@@ -570,3 +576,8 @@ class PYESPN:
         self.athletes[season] = load_athletes_core(season=season,
                                                    league_abbv=self.league_abbv,
                                                    espn_instance=self)
+
+    def _load_manufacturers(self, season):
+        self.manufacturers[season] = get_manufacturers_core(season=season,
+                                                            espn_instance=self,
+                                                            league_abbv=self.league_abbv)

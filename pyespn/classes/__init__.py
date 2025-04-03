@@ -1,4 +1,4 @@
-from .team import Team, Manufacturers
+from .team import Team, Manufacturer
 from .player import Player, Recruit
 from .event import Event
 from .venue import Venue, Circuit

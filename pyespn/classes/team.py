@@ -209,7 +209,7 @@ class Team:
         return self.team_json
 
 
-class Manufacturers:
+class Manufacturer:
 
     def __init__(self, manufacturer_json, espn_instance):
         self.manufacturer_json = manufacturer_json

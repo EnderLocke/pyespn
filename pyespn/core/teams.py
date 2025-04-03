@@ -2,9 +2,9 @@
 #  what else is out there/ add a teams logo call (its within team info data)
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
-from pyespn.classes import Team
-import requests
-import json
+from pyespn.classes import Team, Manufacturer
+from tqdm import tqdm
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def get_season_team_stats_core(season, team, league_abbv) -> dict:
@@ -45,7 +45,6 @@ def get_team_info_core(team_id, league_abbv, espn_instance) -> Team:
     Example:
         >>> team_info, team = get_team_info_core(30, 'nfl', espn_instance)
     """
-
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/teams/{team_id}?lang=en&region=us'
@@ -53,3 +52,31 @@ def get_team_info_core(team_id, league_abbv, espn_instance) -> Team:
 
     current_team = Team(espn_instance=espn_instance, team_json=content)
     return current_team
+
+
+def get_manufacturers_core(season, espn_instance, league_abbv):
+    api_info = lookup_league_api_info(league_abbv=league_abbv)
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/manufacturers'
+    page_content = fetch_espn_data(url)
+    page_count = page_content.get('pageCount', 1)
+
+    manufacturers = []
+    manufacturer_urls = []
+
+    for page in range(1, page_count + 1):
+        page_url = f'{url}?page={page}'
+        page_content = fetch_espn_data(page_url)
+        for manufacturer in page_content.get('items', []):
+            manufacturer_urls.append(manufacturer.get('$ref'))
+
+    with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust workers as needed
+        future_to_url = {executor.submit(fetch_espn_data, url): url for url in manufacturer_urls}
+
+        for future in tqdm(as_completed(future_to_url), total=len(manufacturer_urls), desc="Fetching manufacturers"):
+            try:
+                athlete_content = future.result()
+                manufacturers.append(Manufacturer(manufacturer_json=athlete_content, espn_instance=espn_instance))
+            except Exception as e:
+                print(f"Failed to fetch athlete data: {e}")
+
+    return manufacturers
