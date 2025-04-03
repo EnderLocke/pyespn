@@ -60,6 +60,7 @@ class PYESPN:
         self.schedules = {}
         self.recruit_rankings = {}
         self.drafts = {}
+        self.athletes = {}
         self.league = None
         self._load_league_data()
         if load_teams:

@@ -124,3 +124,12 @@ def get_player_info_core(player_id, league_abbv, espn_instance) -> Player:
     current_player = Player(player_json=content,
                             espn_instance=espn_instance)
     return current_player
+
+
+def load_athletes_core(season, league_abbv, espn_instanve):
+    api_info = lookup_league_api_info(league_abbv=league_abbv)
+
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes'
+
+
+
