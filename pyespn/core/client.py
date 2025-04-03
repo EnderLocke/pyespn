@@ -6,6 +6,7 @@ from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MA
 from pyespn.exceptions import API400Error
 from pyespn.utilities import lookup_league_api_info
 from .decorators import *
+from datetime import datetime
 from typing import TYPE_CHECKING
 import concurrent.futures
 
@@ -577,7 +578,7 @@ class PYESPN:
                                                    league_abbv=self.league_abbv,
                                                    espn_instance=self)
 
-    def _load_manufacturers(self, season) -> None:
+    def _load_manufacturers(self, season:str = None) -> None:
         """
         Loads the manufacturers data for a specific season and stores it in the
         instance's manufacturers attribute.
@@ -587,8 +588,8 @@ class PYESPN:
         `self.manufacturers` dictionary using the season as the key.
 
         Args:
-            season (str): The season for which the manufacturers data should be loaded.
-
+            season (str, optional): The season for which the manufacturers data should be loaded.
+                                    Defaults to the current year if not provided.
         Side Effects:
             - Updates the `self.manufacturers` dictionary with the manufacturers data
               for the given season.
@@ -597,6 +598,8 @@ class PYESPN:
             # Assuming get_manufacturers_core retrieves manufacturer data for the season
             self._load_manufacturers('2025')
         """
+        if season is None:
+            season = str(datetime.now().year)  # Default to the current year if no season is provided
 
         self.manufacturers[season] = get_manufacturers_core(season=season,
                                                             espn_instance=self,
