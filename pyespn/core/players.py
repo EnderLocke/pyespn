@@ -2,8 +2,10 @@ from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.classes import Player
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
 import requests
 import json
+import warnings
 
 
 def get_player_ids_core(league_abbv: str) -> list:
@@ -127,7 +129,7 @@ def get_player_info_core(player_id, league_abbv, espn_instance) -> Player:
     return current_player
 
 
-def load_athletes_core(season, league_abbv, espn_instance) -> list["Player"]:
+def load_athletes_core(season, league_abbv, espn_instance, verbose=True) -> list["Player"]:
     """
     Loads athlete data for a given season and league abbreviation from the ESPN API.
 
@@ -138,6 +140,7 @@ def load_athletes_core(season, league_abbv, espn_instance) -> list["Player"]:
         season (int): The season year for which athlete data is being retrieved.
         league_abbv (str): The abbreviation of the league (e.g., 'nfl', 'nba', 'mlb').
         espn_instance: An instance of the ESPN API client.
+        verbose (bool, optional): If True, prints progress updates and warnings. Defaults to True.
 
     Returns:
         list[Player]: A list of `Player` objects containing athlete data.
@@ -156,6 +159,13 @@ def load_athletes_core(season, league_abbv, espn_instance) -> list["Player"]:
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes'
     page_content = fetch_espn_data(url)
     page_count = page_content.get('pageCount', 1)
+    record_count = page_content.get('count', 0)
+
+    if verbose and record_count > 2500:
+        warnings.warn(
+            f"⚠️ Large dataset detected ({record_count} athletes). This may take some time.",
+            UserWarning
+        )
 
     athletes = []
     athlete_urls = []
@@ -169,7 +179,7 @@ def load_athletes_core(season, league_abbv, espn_instance) -> list["Player"]:
     with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust workers as needed
         future_to_url = {executor.submit(fetch_espn_data, url): url for url in athlete_urls}
 
-        for future in as_completed(future_to_url):
+        for future in tqdm(as_completed(future_to_url), total=len(athlete_urls), disable=not verbose, desc="Fetching athletes"):
             try:
                 athlete_content = future.result()
                 athletes.append(Player(player_json=athlete_content, espn_instance=espn_instance))
