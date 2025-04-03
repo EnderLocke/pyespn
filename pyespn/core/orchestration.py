@@ -1,8 +1,8 @@
-from pyespn.core import extract_stats_from_url_core, get_player_stat_urls_core
 from pyespn.utilities import get_an_id
 
 
 def get_players_historical_stats_core(player_id, league_abbv, espn_instance) -> dict:
+    from pyespn.core.players import extract_stats_from_url_core, get_player_stat_urls_core
     """
     Retrieves the historical statistics of a player.
 
