@@ -2,6 +2,7 @@
 
 ## 0.3.1
 * added function to client/team to pull a seasons roster
+* adding in tests and fixed some of the long running tests
 * 
 
 ## 0.3.0
