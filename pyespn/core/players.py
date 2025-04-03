@@ -1,4 +1,4 @@
-from pyespn.utilities import lookup_league_api_info, fetch_espn_data
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data, get_an_id, get_athlete_id
 from pyespn.data.version import espn_api_version as v
 from pyespn.classes import Player, Stat
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -56,16 +56,11 @@ def get_player_stat_urls_core(player_id, league_abbv) -> list:
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     stat_urls = []
-    try:
-        stat_log_url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}/statisticslog?lang=en&region=us'
-        log_response = requests.get(stat_log_url)
-    except Exception as e:
-        raise Exception(e)
-    finally:
-        content_str = log_response.content.decode('utf-8')
-        content_dict = json.loads(content_str)
-        for stat in content_dict.get('entries'):
-            stat_urls.append(stat['statistics'][0]['statistics']['$ref'])
+
+    stat_log_url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/athletes/{player_id}/statisticslog?lang=en&region=us'
+    content_dict = fetch_espn_data(stat_log_url)
+    for stat in content_dict.get('entries'):
+        stat_urls.append(stat['statistics'][0]['statistics']['$ref'])
 
     return stat_urls
 
@@ -81,13 +76,10 @@ def extract_stats_from_url_core(url, espn_instance) -> dict:
         dict: A dict with list of stat objects with statistics.
     """
 
-    response = requests.get(url)
-    url_parts = url.split('/')
     all_stats = []
-    year = url_parts[url_parts.index('seasons') + 1]
-    player_id = url_parts[url_parts.index('athletes') + 1]
-    content_str = response.content.decode('utf-8')
-    content_dict = json.loads(content_str)
+    year = get_an_id(url=url, slug='seasons')
+    player_id = get_athlete_id(url=url)
+    content_dict = fetch_espn_data(url)
     stats = content_dict.get('splits').get('categories')
 
     for category in stats:

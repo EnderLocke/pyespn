@@ -1,7 +1,8 @@
 from pyespn.core import extract_stats_from_url_core, get_player_stat_urls_core
+from pyespn.utilities import get_an_id
 
 
-def get_players_historical_stats_core(player_id, league_abbv, espn_instance) -> list:
+def get_players_historical_stats_core(player_id, league_abbv, espn_instance) -> dict:
     """
     Retrieves the historical statistics of a player.
 
@@ -10,13 +11,15 @@ def get_players_historical_stats_core(player_id, league_abbv, espn_instance) -> 
         league_abbv (str): The abbreviation of the league.
 
     Returns:
-        list: A list of historical player statistics extracted from various URLs.
+        dict: A dict of historical player statistics extracted from various URLs.
     """
-    historical_player_stats = []
+    historical_player_stats = {}
     urls = get_player_stat_urls_core(player_id=player_id,
                                      league_abbv=league_abbv)
     for url in urls:
-        historical_player_stats.append(extract_stats_from_url_core(url=url,
-                                                                   espn_instance=espn_instance))
+        year = get_an_id(url=url, slug='seasons')
+
+        historical_player_stats[year] = extract_stats_from_url_core(url=url,
+                                                                    espn_instance=espn_instance)
 
     return historical_player_stats
