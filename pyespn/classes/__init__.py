@@ -5,3 +5,4 @@ from .venue import Venue
 from .league import League
 from .schedule import Schedule
 from .draft import DraftPick
+from .vehicle import Vehicle
