@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+* added function to client/team to pull a seasons roster
+* 
+
 ## 0.3.0
 * lots of changes
   * doc strings across codebase
