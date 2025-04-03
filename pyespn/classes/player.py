@@ -18,7 +18,7 @@ class Player:
         uid (str | None): The ESPN UID for the player.
         flag (dict | None): a dict with players nationality/flag (mostly for racing).
         guid (str | None): The GUID associated with the player.
-        type (str | None): The type of player (e.g., "athlete").
+        type (str | None): The type of player (e.g., 'athlete').
         alternate_ids (str | None): Alternative ID for the player.
         first_name (str | None): The player's first name.
         last_name (str | None): The player's last name.
