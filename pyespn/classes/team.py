@@ -3,9 +3,9 @@ from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
 from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
-# todo can add a load roster function etc
 @validate_json("team_json")
 class Team:
     """
@@ -148,14 +148,27 @@ class Team:
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info.get("sport")}/leagues/{api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
         content = fetch_espn_data(url)
         page_count = content.get('pageCount', 1)
+
         athletes = []
+        athlete_urls = []
+
+        # Collect all athlete URLs first
         for page in range(1, page_count + 1):
             page_url = f'{url}?page={page}'
             page_content = fetch_espn_data(page_url)
             for athlete in page_content.get('items', []):
-                athlete_content = fetch_espn_data(athlete.get('$ref'))
-                athletes.append(Player(player_json=athlete_content,
-                                       espn_instance=self.espn_instance))
+                athlete_urls.append(athlete.get('$ref'))
+
+        # Fetch athlete data in parallel
+        with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust workers as needed
+            future_to_url = {executor.submit(fetch_espn_data, url): url for url in athlete_urls}
+
+            for future in as_completed(future_to_url):
+                try:
+                    athlete_content = future.result()
+                    athletes.append(Player(player_json=athlete_content, espn_instance=self.espn_instance))
+                except Exception as e:
+                    print(f"Failed to fetch athlete data: {e}")
 
         self.roster[season] = athletes
 
