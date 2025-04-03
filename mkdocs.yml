@@ -18,6 +18,7 @@ nav:
     - Vehicle: classes/vehicle_class.md
     - Circuit: classes/circuit_class.md
     - Manufacturer: classes/manufacturer_class.md
+    - Stats: classes/stat_class.md
   - Discover: discover.md
   - Postman: postman.md
   - About:
