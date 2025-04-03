@@ -19,6 +19,7 @@ class Stat:
         """
         self.stat_json = stat_json
         self.espn_instance = espn_isntance
+        self._set_stats_data()
 
     def __repr__(self):
         """
