@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 import concurrent.futures
 
 if TYPE_CHECKING:
-    from pyespn.classes import Team  # Only imports for type checking
+    from pyespn.classes import Team, Player, Recruit, Event  # Only imports for type checking
 
 
 @validate_league
@@ -158,7 +158,7 @@ class PYESPN:
                                                    league_abbv=self.league_abbv,
                                                    espn_instance=self)
 
-    def get_player_info(self, player_id) -> dict:
+    def get_player_info(self, player_id) -> "Player":
         """
         Retrieves detailed information about a player.
 
@@ -166,7 +166,7 @@ class PYESPN:
             player_id (str): The ID of the player.
 
         Returns:
-            dict: The player's information.
+            Player: The player's information in player class
         """
         return get_player_info_core(player_id=player_id,
                                     league_abbv=self.league_abbv,
@@ -182,7 +182,7 @@ class PYESPN:
         return get_player_ids_core(league_abbv=self.league_abbv)
 
     @requires_college_league('recruiting')
-    def get_recruiting_rankings(self, season, max_pages=None) -> dict:
+    def get_recruiting_rankings(self, season, max_pages=None) -> list["Recruit"]:
         """
         Retrieves the recruiting rankings for a given season.
 
@@ -191,7 +191,7 @@ class PYESPN:
             max_pages (int, optional): The maximum number of pages of data to retrieve.
 
         Returns:
-            dict: The recruiting rankings.
+            list[Recruit]: The recruiting rankings.
         """
         return get_recruiting_rankings_core(season=season,
                                             league_abbv=self.league_abbv,
@@ -208,7 +208,7 @@ class PYESPN:
 
         self.recruit_rankings = {year: self.get_recruiting_rankings(season=year)}
 
-    def get_game_info(self, event_id) -> dict:
+    def get_game_info(self, event_id) -> "Event":
         """
         Retrieves detailed information about a specific game.
 
@@ -216,13 +216,13 @@ class PYESPN:
             event_id (str): The ID of the game.
 
         Returns:
-            dict: The game's information.
+            Event: The game's information.
         """
         return get_game_info_core(event_id=event_id,
                                   league_abbv=self.league_abbv,
                                   espn_instnace=self)
 
-    def get_team_info(self, team_id) -> dict:
+    def get_team_info(self, team_id) -> "Team":
         """
         Retrieves detailed information about a team.
 
@@ -230,7 +230,7 @@ class PYESPN:
             team_id (str): The ID of the team.
 
         Returns:
-            dict: The team's information.
+            Team: The team's information.
         """
         return get_team_info_core(team_id=team_id,
                                   league_abbv=self.league_abbv,
