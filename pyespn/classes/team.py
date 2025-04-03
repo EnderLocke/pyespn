@@ -142,7 +142,34 @@ class Team:
         """
         return self.espn_instance.league_abbv
 
-    def load_season_roster(self, season):
+    def load_season_roster(self, season) -> None:
+        """
+        Loads the team roster for a given season using ESPN API data.
+
+        This function retrieves the roster for the specified season by:
+        - Fetching paginated lists of athletes.
+        - Concurrently retrieving detailed athlete data using multiple API requests.
+        - Storing the roster data in the `self.roster` dictionary.
+
+        Args:
+            season (int): The season year for which to load the roster.
+
+        Returns:
+            None: The function updates `self.roster` with the retrieved players.
+
+        Raises:
+            Exception: Logs any errors encountered when fetching player data.
+
+        Example:
+            >>> team.load_season_roster(2023)
+            >>> print(team.roster[2023])
+            [<Player | John Doe>, <Player | Jane Smith>, ...]
+
+        Note:
+            - Uses `ThreadPoolExecutor` for concurrent fetching of athlete data to improve performance.
+            - The number of worker threads (`max_workers=10`) can be adjusted based on API rate limits.
+        """
+
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
 
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info.get("sport")}/leagues/{api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
