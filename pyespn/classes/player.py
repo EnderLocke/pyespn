@@ -15,6 +15,7 @@ class Player:
         api_ref (str | None): API reference link for the player.
         id (str | None): The unique identifier for the player.
         uid (str | None): The ESPN UID for the player.
+        flag (dict | None): a dict with players nationality/flag (mostly for racing).
         guid (str | None): The GUID associated with the player.
         type (str | None): The type of player (e.g., "athlete").
         alternate_ids (str | None): Alternative ID for the player.
@@ -90,6 +91,7 @@ class Player:
         self.uid = self.player_json.get('uid')
         self.guid = self.player_json.get('guid')
         self.type = self.player_json.get('type')
+        self.flag = self.player_json.get('flag')
         self.alternate_ids = self.player_json.get('alternateIds', {}).get('sdr')
         self.first_name = self.player_json.get('firstName')
         self.last_name = self.player_json.get('lastName')
