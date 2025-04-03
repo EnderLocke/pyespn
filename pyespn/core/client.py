@@ -577,7 +577,27 @@ class PYESPN:
                                                    league_abbv=self.league_abbv,
                                                    espn_instance=self)
 
-    def _load_manufacturers(self, season):
+    def _load_manufacturers(self, season) -> None:
+        """
+        Loads the manufacturers data for a specific season and stores it in the
+        instance's manufacturers attribute.
+
+        This method retrieves the manufacturers data by calling the
+        `get_manufacturers_core` function and stores the result in the
+        `self.manufacturers` dictionary using the season as the key.
+
+        Args:
+            season (str): The season for which the manufacturers data should be loaded.
+
+        Side Effects:
+            - Updates the `self.manufacturers` dictionary with the manufacturers data
+              for the given season.
+
+        Example:
+            # Assuming get_manufacturers_core retrieves manufacturer data for the season
+            self._load_manufacturers('2025')
+        """
+
         self.manufacturers[season] = get_manufacturers_core(season=season,
                                                             espn_instance=self,
                                                             league_abbv=self.league_abbv)
