@@ -154,7 +154,7 @@ class Player:
                                              espn_instance=self.espn_instance))
 
     def load_player_historical_stats(self):
-        self.stats = get_players_historical_stats_core(player_id=self.id,
+        self.stats = self.get_players_historical_stats_core(player_id=self.id,
                                                        league_abbv=self.espn_instance.league_abbv,
                                                        espn_instance=self.espn_instance)
 
