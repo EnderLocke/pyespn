@@ -9,47 +9,47 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 @validate_json("team_json")
 class Team:
     """
-        Represents a sports team within the ESPN API framework.
+    Represents a sports team within the ESPN API framework.
 
-        This class stores team-related information and maintains a reference
-        to a `PYESPN` instance, allowing access to league-specific details.
+    This class stores team-related information and maintains a reference
+    to a `PYESPN` instance, allowing access to league-specific details.
 
-        Attributes:
-            espn_instance (PYESPN): The parent `PYESPN` instance providing access to league details.
-            team_json (dict): The raw team data retrieved from the ESPN API.
-            team_id (str | None): The unique identifier for the team.
-            guid (str | None): The GUID associated with the team.
-            uid (str | None): The UID of the team.
-            location (str | None): The geographical location or city of the team.
-            name (str | None): The official name of the team.
-            nickname (str | None): The team's nickname.
-            abbreviation (str | None): The team's short abbreviation (e.g., "NYG", "LAL").
-            display_name (str | None): The full display name of the team.
-            short_display_name (str | None): A shorter version of the display name.
-            primary_color (str | None): The team's primary color (hex code).
-            alternate_color (str | None): The team's alternate color (hex code).
-            is_active (bool | None): Indicates whether the team is currently active.
-            is_all_star (bool | None): Indicates if the team is an all-star team.
-            logos (list[str]): A list of URLs to the team’s logos.
-            venue_json (dict): The raw venue data associated with the team.
-            home_venue (Venue): The `Venue` instance representing the team's home venue.
-            links (dict): A dictionary mapping link types (e.g., "official site") to their URLs.
+    Attributes:
+        espn_instance (PYESPN): The parent `PYESPN` instance providing access to league details.
+        team_json (dict): The raw team data retrieved from the ESPN API.
+        team_id (str | None): The unique identifier for the team.
+        guid (str | None): The GUID associated with the team.
+        uid (str | None): The UID of the team.
+        location (str | None): The geographical location or city of the team.
+        name (str | None): The official name of the team.
+        nickname (str | None): The team's nickname.
+        abbreviation (str | None): The team's short abbreviation (e.g., 'NYG', 'LAL').
+        display_name (str | None): The full display name of the team.
+        short_display_name (str | None): A shorter version of the display name.
+        primary_color (str | None): The team's primary color (hex code).
+        alternate_color (str | None): The team's alternate color (hex code).
+        is_active (bool | None): Indicates whether the team is currently active.
+        is_all_star (bool | None): Indicates if the team is an all-star team.
+        logos (list[str]): A list of URLs to the team’s logos.
+        venue_json (dict): The raw venue data associated with the team.
+        home_venue (Venue): The `Venue` instance representing the team's home venue.
+        links (dict): A dictionary mapping link types (e.g., 'official site') to their URLs.
 
-        Methods:
-            get_logo_img() -> list[str]:
-                Returns the list of team logo URLs.
+    Methods:
+        get_logo_img() -> list[str]:
+            Returns the list of team logo URLs.
 
-            get_team_colors() -> dict:
-                Returns the team's primary and alternate colors.
+        get_team_colors() -> dict:
+            Returns the team's primary and alternate colors.
 
-            get_home_venue() -> Venue:
-                Retrieves the home venue of the team as a `Venue` instance.
+        get_home_venue() -> Venue:
+            Retrieves the home venue of the team as a `Venue` instance.
 
-            get_league() -> str:
-                Retrieves the league abbreviation associated with the team.
+        get_league() -> str:
+            Retrieves the league abbreviation associated with the team.
 
-            to_dict() -> dict:
-                Returns the raw team JSON data as a dictionary.
+        to_dict() -> dict:
+            Returns the raw team JSON data as a dictionary.
         """
 
     def __init__(self, espn_instance, team_json):
@@ -138,7 +138,7 @@ class Team:
         Retrieves the league abbreviation from the associated `PYESPN` instance.
 
         Returns:
-            str: The league abbreviation (e.g., "nfl", "nba", "cfb").
+            str: The league abbreviation (e.g., 'nfl', 'nba', 'cfb').
         """
         return self.espn_instance.league_abbv
 
