@@ -12,7 +12,6 @@ if TYPE_CHECKING:
     from pyespn.classes import Team  # Only imports for type checking
 
 
-
 @validate_league
 class PYESPN:
     """
@@ -141,7 +140,20 @@ class PYESPN:
 
         self.schedules[season] = self.get_regular_seasons_schedule(season=season)
 
-    def load_year_draft(self, season: int):
+    def load_year_draft(self, season: int) -> None:
+        """
+        Loads draft data for a given season and stores it in the drafts dictionary.
+
+        This method retrieves draft data for the specified season using
+        `load_draft_data_core` and associates it with the season in the `drafts` attribute.
+
+        Args:
+            season (int): The season year for which to load draft data.
+
+        Returns:
+            None
+        """
+
         self.drafts[season] = load_draft_data_core(season=season,
                                                    league_abbv=self.league_abbv,
                                                    espn_instance=self)
@@ -528,7 +540,7 @@ class PYESPN:
         Example:
             >>> espn = PYESPN('nfl')
             >>> espn.load_season_rosters(season=2023)
-            >>> for team in espn.team:
+            >>> for team in espn.teams:
             >>>     print(team.roster[2023])
             [<Player | John Doe>, <Player | Jane Smith>, ...]
 
