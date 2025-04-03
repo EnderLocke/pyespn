@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 import concurrent.futures
 
 if TYPE_CHECKING:
-    from pyespn.classes import Team, Player, Recruit, Event  # Only imports for type checking
+    from pyespn.classes import Team, Player, Recruit, Event, League  # Only imports for type checking
 
 
 @validate_league
@@ -488,12 +488,12 @@ class PYESPN:
                                   standings_type=standings_type,
                                   league_abbv=self.league_abbv)
 
-    def get_league_info(self) -> dict:
+    def get_league_info(self) -> "League":
         """
         Retrieves information about the league.
 
         Returns:
-            dict: The league's information.
+            League: The league's information.
         """
         return get_league_info_core(league_abbv=self.league_abbv,
                                     espn_instance=self)
