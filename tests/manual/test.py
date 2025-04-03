@@ -7,7 +7,8 @@ pick_round = 2
 
 if __name__ == '__main__':
 
-    espn = PYESPN('nba')
+    espn = PYESPN('f1')
+
     espn.load_season_rosters(season=season)
     espn.load_regular_season_schedule(season=season)
     #awards = espn.get_awards(season=season)
