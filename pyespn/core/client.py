@@ -5,7 +5,12 @@ from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MA
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
 from pyespn.exceptions import API400Error
 from .decorators import *
+from typing import TYPE_CHECKING
 import concurrent.futures
+
+if TYPE_CHECKING:
+    from pyespn.classes import Team  # Only imports for type checking
+
 
 
 @validate_league
@@ -495,7 +500,7 @@ class PYESPN:
                                                 espn_instance=self,
                                                 season=season)
 
-    def get_team_by_id(self, team_id):
+    def get_team_by_id(self, team_id) -> "Team":
         """
         Finds and returns the Team object that matches the given team_id.
 
@@ -508,5 +513,26 @@ class PYESPN:
         return next((team for team in self.teams if str(team.team_id) == str(team_id)), None)
 
     def load_season_rosters(self, season):
+        """
+        Loads the season roster for all teams in the league.
+
+        This method iterates through all teams and calls their `load_season_roster`
+        method to fetch and store the roster data for the specified season.
+
+        Args:
+            season (int or str): The season year for which to load rosters.
+
+        Returns:
+            None
+
+        Example:
+            >>> espn = PYESPN('nfl')
+            >>> espn.load_season_rosters(season=2023)
+            >>> for team in espn.team:
+            >>>     print(team.roster[2023])
+            [<Player | John Doe>, <Player | Jane Smith>, ...]
+
+        """
+
         for team in self.teams:
             team.load_season_roster(season=season)
