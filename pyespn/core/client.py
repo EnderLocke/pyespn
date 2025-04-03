@@ -550,7 +550,23 @@ class PYESPN:
         for team in self.teams:
             team.load_season_roster(season=season)
 
-    def load_athletes(self, season):
+    def load_athletes(self, season) -> None:
+        """
+        Loads and stores athlete data for a given season.
+
+        This function retrieves athlete data for the specified season using `load_athletes_core`
+        and stores it in the `athletes` attribute of the instance.
+
+        Args:
+            season (int): The season year for which athlete data is being loaded.
+
+        Returns:
+            None: The retrieved athlete data is stored in `self.athletes[season]`.
+
+        Notes:
+            - Uses `load_athletes_core` to fetch athlete data.
+            - Stores the result in `self.athletes` with the season as the key.
+        """
         self.athletes[season] = load_athletes_core(season=season,
                                                    league_abbv=self.league_abbv,
                                                    espn_instance=self)

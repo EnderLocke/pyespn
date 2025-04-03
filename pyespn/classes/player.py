@@ -1,5 +1,5 @@
 from pyespn.core.decorators import validate_json
-from pyespn.classes import Vehicle
+from pyespn.classes.vehicle import Vehicle
 
 
 @validate_json('player_json')

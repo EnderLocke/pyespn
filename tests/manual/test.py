@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     espn = PYESPN('f1')
 
-    espn.load_season_rosters(season=season)
+    espn.load_athletes(season=season)
     espn.load_regular_season_schedule(season=season)
     #awards = espn.get_awards(season=season)
     #colors = espn.get_team_colors(team_id=30)

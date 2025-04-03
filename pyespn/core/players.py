@@ -127,7 +127,30 @@ def get_player_info_core(player_id, league_abbv, espn_instance) -> Player:
     return current_player
 
 
-def load_athletes_core(season, league_abbv, espn_instance):
+def load_athletes_core(season, league_abbv, espn_instance) -> list["Player"]:
+    """
+    Loads athlete data for a given season and league abbreviation from the ESPN API.
+
+    This function retrieves a list of athletes from the specified league and season,
+    utilizing multi-threading to improve efficiency when fetching individual athlete data.
+
+    Args:
+        season (int): The season year for which athlete data is being retrieved.
+        league_abbv (str): The abbreviation of the league (e.g., 'nfl', 'nba', 'mlb').
+        espn_instance: An instance of the ESPN API client.
+
+    Returns:
+        list[Player]: A list of `Player` objects containing athlete data.
+
+    Raises:
+        Exception: Logs and prints any errors encountered during data retrieval.
+
+    Notes:
+        - The function first retrieves a list of athlete URLs.
+        - It then uses `ThreadPoolExecutor` to fetch athlete details in parallel.
+        - Uses up to 10 worker threads for concurrent requests.
+    """
+
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes'

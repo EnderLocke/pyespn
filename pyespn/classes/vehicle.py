@@ -29,6 +29,7 @@ class Vehicle:
         """
         self.vehicle_json = vehicle_json
         self.espn_instance = espn_instance
+        self._set_vehicle_data()
 
     def _set_vehicle_data(self):
         """
