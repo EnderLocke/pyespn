@@ -1,13 +1,15 @@
 from pyespn import PYESPN
-from tests.f1.test_cases.standings import test_standing_cases
+from tests.test_cases.f1 import *
 import pytest
+
+
+f1_espn = PYESPN(sport_league='f1')
 
 
 @pytest.mark.parametrize("test_case", test_standing_cases)
 def test_f1_standings(test_case):
-    espn = PYESPN(sport_league='f1')
-    content = espn.get_standings(season=test_case['season'],
-                                 standings_type=test_case['standings_type'])
+    content = f1_espn.get_standings(season=test_case['season'],
+                                    standings_type=test_case['standings_type'])
 
     this_test_match = content[test_case['index']]
 

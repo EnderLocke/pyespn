@@ -69,6 +69,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Set Git Safe Directory
+        run: git config --global --add safe.directory /__w/pyespn/pyespn
+
       - name: Set Up PyPI Config
         run: echo "${{ secrets.PYPIRC }}" > /tmp/.pypirc
 

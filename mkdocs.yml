@@ -15,6 +15,7 @@ nav:
     - Draft: classes/draft_class.md
     - Event: classes/event_class.md
     - Venue: classes/venue_class.md
+    - Vehicle: classes/vehicle_class.md
   - Discover: discover.md
   - Postman: postman.md
   - About:

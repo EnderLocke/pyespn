@@ -12,6 +12,7 @@ dependencies = [
     "mkdocstrings>=0.29.1",
     "mkdocstrings-python>=1.16.8",
     "requests>=2.32.3",
+    "tqdm>=4.67.1",
 ]
 classifiers = [
     # Should be one of:

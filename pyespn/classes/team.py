@@ -1,52 +1,55 @@
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.classes.venue import Venue
+from pyespn.classes.player import Player
+from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
-# todo can add a load roster function etc
 @validate_json("team_json")
 class Team:
     """
-        Represents a sports team within the ESPN API framework.
+    Represents a sports team within the ESPN API framework.
 
-        This class stores team-related information and maintains a reference
-        to a `PYESPN` instance, allowing access to league-specific details.
+    This class stores team-related information and maintains a reference
+    to a `PYESPN` instance, allowing access to league-specific details.
 
-        Attributes:
-            espn_instance (PYESPN): The parent `PYESPN` instance providing access to league details.
-            team_json (dict): The raw team data retrieved from the ESPN API.
-            team_id (str | None): The unique identifier for the team.
-            guid (str | None): The GUID associated with the team.
-            uid (str | None): The UID of the team.
-            location (str | None): The geographical location or city of the team.
-            name (str | None): The official name of the team.
-            nickname (str | None): The team's nickname.
-            abbreviation (str | None): The team's short abbreviation (e.g., "NYG", "LAL").
-            display_name (str | None): The full display name of the team.
-            short_display_name (str | None): A shorter version of the display name.
-            primary_color (str | None): The team's primary color (hex code).
-            alternate_color (str | None): The team's alternate color (hex code).
-            is_active (bool | None): Indicates whether the team is currently active.
-            is_all_star (bool | None): Indicates if the team is an all-star team.
-            logos (list[str]): A list of URLs to the team’s logos.
-            venue_json (dict): The raw venue data associated with the team.
-            home_venue (Venue): The `Venue` instance representing the team's home venue.
-            links (dict): A dictionary mapping link types (e.g., "official site") to their URLs.
+    Attributes:
+        espn_instance (PYESPN): The parent `PYESPN` instance providing access to league details.
+        team_json (dict): The raw team data retrieved from the ESPN API.
+        team_id (str | None): The unique identifier for the team.
+        guid (str | None): The GUID associated with the team.
+        uid (str | None): The UID of the team.
+        location (str | None): The geographical location or city of the team.
+        name (str | None): The official name of the team.
+        nickname (str | None): The team's nickname.
+        abbreviation (str | None): The team's short abbreviation (e.g., 'NYG', 'LAL').
+        display_name (str | None): The full display name of the team.
+        short_display_name (str | None): A shorter version of the display name.
+        primary_color (str | None): The team's primary color (hex code).
+        alternate_color (str | None): The team's alternate color (hex code).
+        is_active (bool | None): Indicates whether the team is currently active.
+        is_all_star (bool | None): Indicates if the team is an all-star team.
+        logos (list[str]): A list of URLs to the team’s logos.
+        venue_json (dict): The raw venue data associated with the team.
+        home_venue (Venue): The `Venue` instance representing the team's home venue.
+        links (dict): A dictionary mapping link types (e.g., 'official site') to their URLs.
 
-        Methods:
-            get_logo_img() -> list[str]:
-                Returns the list of team logo URLs.
+    Methods:
+        get_logo_img() -> list[str]:
+            Returns the list of team logo URLs.
 
-            get_team_colors() -> dict:
-                Returns the team's primary and alternate colors.
+        get_team_colors() -> dict:
+            Returns the team's primary and alternate colors.
 
-            get_home_venue() -> Venue:
-                Retrieves the home venue of the team as a `Venue` instance.
+        get_home_venue() -> Venue:
+            Retrieves the home venue of the team as a `Venue` instance.
 
-            get_league() -> str:
-                Retrieves the league abbreviation associated with the team.
+        get_league() -> str:
+            Retrieves the league abbreviation associated with the team.
 
-            to_dict() -> dict:
-                Returns the raw team JSON data as a dictionary.
+        to_dict() -> dict:
+            Returns the raw team JSON data as a dictionary.
         """
 
     def __init__(self, espn_instance, team_json):
@@ -63,8 +66,18 @@ class Team:
             self.team_json = team_json
         else:
             self.team_json = {}
+        self.roster = {}
         self._load_team_data()
         self.home_venue = Venue(venue_json=self.venue_json)
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Team instance.
+
+        Returns:
+            str: A formatted string with the team's location, name, abbreviation, and league.
+        """
+        return f"<Team | {self.location} {self.name} ({self.abbreviation}) - {self.get_league()}>"
 
     def _load_team_data(self):
         """
@@ -125,18 +138,66 @@ class Team:
         Retrieves the league abbreviation from the associated `PYESPN` instance.
 
         Returns:
-            str: The league abbreviation (e.g., "nfl", "nba", "cfb").
+            str: The league abbreviation (e.g., 'nfl', 'nba', 'cfb').
         """
         return self.espn_instance.league_abbv
 
-    def __repr__(self) -> str:
+    def load_season_roster(self, season) -> None:
         """
-        Returns a string representation of the Team instance.
+        Loads the team roster for a given season using ESPN API data.
+
+        This function retrieves the roster for the specified season by:
+        - Fetching paginated lists of athletes.
+        - Concurrently retrieving detailed athlete data using multiple API requests.
+        - Storing the roster data in the `self.roster` dictionary.
+
+        Args:
+            season (int): The season year for which to load the roster.
 
         Returns:
-            str: A formatted string with the team's location, name, abbreviation, and league.
+            None: The function updates `self.roster` with the retrieved players.
+
+        Raises:
+            Exception: Logs any errors encountered when fetching player data.
+
+        Example:
+            >>> team.load_season_roster(2023)
+            >>> print(team.roster[2023])
+            [<Player | John Doe>, <Player | Jane Smith>, ...]
+
+        Note:
+            - Uses `ThreadPoolExecutor` for concurrent fetching of athlete data to improve performance.
+            - The number of worker threads (`max_workers=10`) can be adjusted based on API rate limits.
         """
-        return f"<Team | {self.location} {self.name} ({self.abbreviation}) - {self.get_league()}>"
+
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info.get("sport")}/leagues/{api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
+        content = fetch_espn_data(url)
+        page_count = content.get('pageCount', 1)
+
+        athletes = []
+        athlete_urls = []
+
+        # Collect all athlete URLs first
+        for page in range(1, page_count + 1):
+            page_url = f'{url}?page={page}'
+            page_content = fetch_espn_data(page_url)
+            for athlete in page_content.get('items', []):
+                athlete_urls.append(athlete.get('$ref'))
+
+        # Fetch athlete data in parallel
+        with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust workers as needed
+            future_to_url = {executor.submit(fetch_espn_data, url): url for url in athlete_urls}
+
+            for future in as_completed(future_to_url):
+                try:
+                    athlete_content = future.result()
+                    athletes.append(Player(player_json=athlete_content, espn_instance=self.espn_instance))
+                except Exception as e:
+                    print(f"Failed to fetch athlete data: {e}")
+
+        self.roster[season] = athletes
 
     def to_dict(self) -> dict:
         """

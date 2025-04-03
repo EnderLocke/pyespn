@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1
+* added function to client/team to pull a seasons roster
+* adding in tests and fixed some of the long running tests
+* added in vehicle class to pull current vehicles for athletse with vehicles (i.e. racing leagues)
+* added in client function to pull all athletes for a season
+  * big note this is a lot of calls for both american and european football
+* 
+
 ## 0.3.0
 * lots of changes
   * doc strings across codebase

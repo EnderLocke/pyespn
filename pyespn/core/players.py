@@ -1,8 +1,11 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.classes import Player
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
 import requests
 import json
+import warnings
 
 
 def get_player_ids_core(league_abbv: str) -> list:
@@ -124,3 +127,63 @@ def get_player_info_core(player_id, league_abbv, espn_instance) -> Player:
     current_player = Player(player_json=content,
                             espn_instance=espn_instance)
     return current_player
+
+
+def load_athletes_core(season, league_abbv, espn_instance, verbose=True) -> list["Player"]:
+    """
+    Loads athlete data for a given season and league abbreviation from the ESPN API.
+
+    This function retrieves a list of athletes from the specified league and season,
+    utilizing multi-threading to improve efficiency when fetching individual athlete data.
+
+    Args:
+        season (int): The season year for which athlete data is being retrieved.
+        league_abbv (str): The abbreviation of the league (e.g., 'nfl', 'nba', 'mlb').
+        espn_instance: An instance of the ESPN API client.
+        verbose (bool, optional): If True, prints progress updates and warnings. Defaults to True.
+
+    Returns:
+        list[Player]: A list of `Player` objects containing athlete data.
+
+    Raises:
+        Exception: Logs and prints any errors encountered during data retrieval.
+
+    Notes:
+        - The function first retrieves a list of athlete URLs.
+        - It then uses `ThreadPoolExecutor` to fetch athlete details in parallel.
+        - Uses up to 10 worker threads for concurrent requests.
+    """
+
+    api_info = lookup_league_api_info(league_abbv=league_abbv)
+
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes'
+    page_content = fetch_espn_data(url)
+    page_count = page_content.get('pageCount', 1)
+    record_count = page_content.get('count', 0)
+
+    if verbose and record_count > 2500:
+        warnings.warn(
+            f"⚠️ Large dataset detected ({record_count} athletes). This may take some time.",
+            UserWarning
+        )
+
+    athletes = []
+    athlete_urls = []
+
+    for page in range(1, page_count + 1):
+        page_url = f'{url}?page={page}'
+        page_content = fetch_espn_data(page_url)
+        for athlete in page_content.get('items', []):
+            athlete_urls.append(athlete.get('$ref'))
+
+    with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust workers as needed
+        future_to_url = {executor.submit(fetch_espn_data, url): url for url in athlete_urls}
+
+        for future in tqdm(as_completed(future_to_url), total=len(athlete_urls), disable=not verbose, desc="Fetching athletes"):
+            try:
+                athlete_content = future.result()
+                athletes.append(Player(player_json=athlete_content, espn_instance=espn_instance))
+            except Exception as e:
+                print(f"Failed to fetch athlete data: {e}")
+
+    return athletes
