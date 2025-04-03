@@ -16,6 +16,8 @@ nav:
     - Event: classes/event_class.md
     - Venue: classes/venue_class.md
     - Vehicle: classes/vehicle_class.md
+    - Circuit: classes/circuit_class.md
+    - Manufacturer: classes/manufacturer_class.md
   - Discover: discover.md
   - Postman: postman.md
   - About:
