@@ -1,10 +1,10 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.vehicle import Vehicle
-from pyespn.core.orchestration import get_players_historical_stats_core
 
 
 @validate_json('player_json')
 class Player:
+    from pyespn.core.orchestration import get_players_historical_stats_core
     """
     Represents a player within the ESPN API framework.
 
