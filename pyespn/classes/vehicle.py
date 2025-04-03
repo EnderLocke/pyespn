@@ -31,6 +31,15 @@ class Vehicle:
         self.espn_instance = espn_instance
         self._set_vehicle_data()
 
+    def __repr__(self):
+        """
+        Returns a string representation of the Vehicle instance.
+
+        Returns:
+            str: A formatted string with the Vehicles name.
+        """
+        return f"<Vehicle | {self.team}, {self.manufacturer} ({self.number})>"
+
     def _set_vehicle_data(self):
         """
         Extracts and assigns vehicle details from the provided JSON data.
