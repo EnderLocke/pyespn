@@ -6,6 +6,7 @@
 * added in vehicle class to pull current vehicles for athletse with vehicles (i.e. racing leagues)
 * added in client function to pull all athletes for a season
   * big note this is a lot of calls for both american and european football
+* added in client function to pull manufactures for the current year versus teams for racing leagues
 * 
 
 ## 0.3.0
