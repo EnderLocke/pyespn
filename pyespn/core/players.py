@@ -1,6 +1,7 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.classes import Player
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
 import json
 
@@ -126,10 +127,30 @@ def get_player_info_core(player_id, league_abbv, espn_instance) -> Player:
     return current_player
 
 
-def load_athletes_core(season, league_abbv, espn_instanve):
+def load_athletes_core(season, league_abbv, espn_instance):
     api_info = lookup_league_api_info(league_abbv=league_abbv)
 
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes'
+    page_content = fetch_espn_data(url)
+    page_count = page_content.get('pageCount', 1)
 
+    athletes = []
+    athlete_urls = []
 
+    for page in range(1, page_count + 1):
+        page_url = f'{url}?page={page}'
+        page_content = fetch_espn_data(page_url)
+        for athlete in page_content.get('items', []):
+            athlete_urls.append(athlete.get('$ref'))
 
+    with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust workers as needed
+        future_to_url = {executor.submit(fetch_espn_data, url): url for url in athlete_urls}
+
+        for future in as_completed(future_to_url):
+            try:
+                athlete_content = future.result()
+                athletes.append(Player(player_json=athlete_content, espn_instance=espn_instance))
+            except Exception as e:
+                print(f"Failed to fetch athlete data: {e}")
+
+    return athletes

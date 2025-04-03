@@ -549,3 +549,8 @@ class PYESPN:
 
         for team in self.teams:
             team.load_season_roster(season=season)
+
+    def load_athletes(self, season):
+        self.athletes[season] = load_athletes_core(season=season,
+                                                   league_abbv=self.league_abbv,
+                                                   espn_instance=self)

@@ -1,4 +1,5 @@
 from pyespn.core.decorators import validate_json
+from pyespn.classes import Vehicle
 
 
 @validate_json('player_json')
@@ -143,6 +144,12 @@ class Player:
         self.status_abbreviation = status.get('abbreviation')
 
         self.statistics_log_ref = self.player_json.get('statisticslog', {}).get('$ref')
+
+        if 'vehicles' in self.player_json:
+            self.vehicles = []
+            for vehicle in self.player_json.get('vehicles'):
+                self.vehicles.append(Vehicle(vehicle_json=vehicle,
+                                             espn_instance=self.espn_instance))
 
     def to_dict(self) -> dict:
         """
