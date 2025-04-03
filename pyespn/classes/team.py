@@ -226,6 +226,7 @@ class Manufacturers:
         self.display_name = self.manufacturer_json.get('displayName')
         self.short_display_name = self.manufacturer_json.get('shortDisplayName')
         self.abbreviation = self.manufacturer_json.get('abbreviation')
+        self.color = self.manufacturer_json.get('color')
 
         # Event log reference
         self.event_log_ref = self.manufacturer_json.get('eventLog', {}).get('$ref')
