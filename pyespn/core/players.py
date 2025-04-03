@@ -103,7 +103,7 @@ def extract_stats_from_url_core(url, espn_instance) -> dict:
                 'description': stat.get('description')
             }
             all_stats.append(Stat(stat_json=this_stat,
-                                  espn_isntance=self.espn_instance))
+                                  espn_isntance=espn_instance))
 
     return {year: all_stats}
 

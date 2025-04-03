@@ -16,6 +16,7 @@ def get_players_historical_stats_core(player_id, league_abbv, espn_instance) -> 
     urls = get_player_stat_urls_core(player_id=player_id,
                                      league_abbv=league_abbv)
     for url in urls:
-        historical_player_stats.append(extract_stats_from_url_core(url=url, espn_instance=espn_instance))
+        historical_player_stats.append(extract_stats_from_url_core(url=url,
+                                                                   espn_instance=espn_instance))
 
     return historical_player_stats
