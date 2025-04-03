@@ -1,6 +1,6 @@
 from pyespn import PYESPN
 player_id = 278 # Jimmy Smith, Goat
-season = 2021
+season = 2025
 pick = 8
 pick_round = 2
 
