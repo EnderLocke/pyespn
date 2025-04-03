@@ -58,7 +58,6 @@ class Venue:
 
 class Circuit:
 
-
     def __init__(self, circuit_json, espn_isntance):
         self.circuit_json = circuit_json
         self.espn_instance = espn_isntance
