@@ -77,7 +77,7 @@ class Player:
         Returns a string representation of the Player instance.
 
         Returns:
-            str: A formatted string with the players's name, debut year and jersey.
+            str: A formatted string with the players's name, position and jersey.
         """
         return f"<Player | {self.full_name}, {self.position_abbreviation} ({self.jersey})>"
 
@@ -103,6 +103,7 @@ class Player:
         self.age = self.player_json.get('age')
         self.date_of_birth = self.player_json.get('dateOfBirth')
         self.debut_year = self.player_json.get('debutYear')
+        self.college_athlete_ref = self.player_json.get('collegeAthlete', {}).get('$ref')
 
         self.links = self.player_json.get('links', [])
 
@@ -112,7 +113,7 @@ class Player:
 
         self.college_ref = self.player_json.get('college', {}).get('$ref')
         self.slug = self.player_json.get('slug')
-        self.jersey = self.player_json.get('jersey')
+        self.jersey = self.player_json.get('jersey', '--')
 
         position = self.player_json.get('position', {})
         self.position_ref = position.get('$ref')
@@ -255,7 +256,6 @@ class Recruit:
         self.high_school_id = high_school.get('id')
         self.high_school_name = high_school.get('name')
         self.high_school_state = high_school.get('address', {}).get('state')
-
 
         self.slug = self.recruit_json.get('slug')
 
