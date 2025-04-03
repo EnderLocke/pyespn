@@ -286,6 +286,7 @@ class PYESPN:
             dict: The player's historical stats.
         """
         return get_players_historical_stats_core(player_id=player_id,
+                                                 espn_instance=self,
                                                  league_abbv=self.league_abbv)
 
     @requires_betting_available

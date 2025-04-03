@@ -6,3 +6,4 @@ from .league import League
 from .schedule import Schedule
 from .draft import DraftPick
 from .vehicle import Vehicle
+from .stats import Stat

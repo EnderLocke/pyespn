@@ -1,7 +1,7 @@
 from pyespn.core import extract_stats_from_url_core, get_player_stat_urls_core
 
 
-def get_players_historical_stats_core(player_id, league_abbv) -> list:
+def get_players_historical_stats_core(player_id, league_abbv, espn_instance) -> list:
     """
     Retrieves the historical statistics of a player.
 
@@ -16,6 +16,6 @@ def get_players_historical_stats_core(player_id, league_abbv) -> list:
     urls = get_player_stat_urls_core(player_id=player_id,
                                      league_abbv=league_abbv)
     for url in urls:
-        historical_player_stats.append(extract_stats_from_url_core(url))
+        historical_player_stats.append(extract_stats_from_url_core(url=url, espn_instance=espn_instance))
 
     return historical_player_stats

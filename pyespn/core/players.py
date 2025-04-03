@@ -1,6 +1,6 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
-from pyespn.classes import Player
+from pyespn.classes import Player, Stat
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 import requests
@@ -70,7 +70,7 @@ def get_player_stat_urls_core(player_id, league_abbv) -> list:
     return stat_urls
 
 
-def extract_stats_from_url_core(url) -> list:
+def extract_stats_from_url_core(url, espn_instance) -> dict:
     """
     Extracts player statistics from a given URL.
 
@@ -78,7 +78,7 @@ def extract_stats_from_url_core(url) -> list:
         url (str): The URL pointing to the player's statistics.
 
     Returns:
-        list: A list of dictionaries containing the player's statistics.
+        dict: A dict with list of stat objects with statistics.
     """
 
     response = requests.get(url)
@@ -99,11 +99,13 @@ def extract_stats_from_url_core(url) -> list:
                 'player_id': player_id,
                 'stat_value': stat.get('value'),
                 'stat_type_abbreviation': stat.get('abbreviation'),
-                'league': 'nfl'
+                'name': stat.get('name'),
+                'description': stat.get('description')
             }
-            all_stats.append(this_stat)
+            all_stats.append(Stat(stat_json=this_stat,
+                                  espn_isntance=self.espn_instance))
 
-    return all_stats
+    return {year: all_stats}
 
 
 def get_player_info_core(player_id, league_abbv, espn_instance) -> Player:
