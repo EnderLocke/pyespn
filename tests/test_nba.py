@@ -60,7 +60,7 @@ def test_nfl_events(test_case):
 
 def get_random_nba_team_data(team_id):
 
-    selected_team = next((team for team in espn.TEAM_ID_MAPPING if team["team_id"] == team_id), None)
+    selected_team = next((team for team in nba_espn.TEAM_ID_MAPPING if team["team_id"] == team_id), None)
     content = nba_espn.get_team_info(team_id=team_id)
 
     return selected_team, content
