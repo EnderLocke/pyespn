@@ -207,3 +207,32 @@ class Team:
             dict: The original team data retrieved from the ESPN API.
         """
         return self.team_json
+
+
+class Manufacturers:
+
+    def __init__(self, manufacturer_json, espn_instance):
+        self.manufacturer_json = manufacturer_json
+        self.espn_instance = espn_instance
+        self._load_manufacturer_data()
+
+    def _load_manufacturer_data(self):
+        """
+        Sets each attribute from the manu_json to its own attribute.
+        """
+        self.api_ref = self.manufacturer_json.get('$ref')
+        self.id = self.manufacturer_json.get('id')
+        self.name = self.manufacturer_json.get('name')
+        self.display_name = self.manufacturer_json.get('displayName')
+        self.short_display_name = self.manufacturer_json.get('shortDisplayName')
+        self.abbreviation = self.manufacturer_json.get('abbreviation')
+
+        # Event log reference
+        self.event_log_ref = self.manufacturer_json.get('eventLog', {}).get('$ref')
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Manufacturer instance.
+        """
+        return f"<Manufacturer | {self.name}, {self.abbreviation}>"
+
