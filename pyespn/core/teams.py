@@ -54,7 +54,31 @@ def get_team_info_core(team_id, league_abbv, espn_instance) -> Team:
     return current_team
 
 
-def get_manufacturers_core(season, espn_instance, league_abbv):
+def get_manufacturers_core(season, espn_instance, league_abbv) -> list[Manufacturer]:
+    """
+    Fetches a list of manufacturers for a specific season and league from the ESPN API.
+
+    This function first retrieves the base API URL for the specified league and season,
+    then iterates over multiple pages of manufacturer data, collecting the relevant
+    manufacturer URLs. It then fetches detailed data for each manufacturer concurrently
+    using a ThreadPoolExecutor, and returns a list of Manufacturer objects.
+
+    Args:
+        season (str): The season for which manufacturers data is to be fetched.
+        espn_instance (object): An instance of the ESPN API handler used for making requests.
+        league_abbv (str): The abbreviation of the league (e.g., 'f1', 'nascar').
+
+    Returns:
+        list: A list of Manufacturer objects, each representing a manufacturer with
+              detailed data fetched from the ESPN API.
+
+    Raises:
+        Exception: If there is an error fetching manufacturer data or processing it.
+
+    Example:
+        >>> manufacturers = get_manufacturers_core(season="2025", espn_instance=espn_instance, league_abbv="f1")
+    """
+
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/manufacturers'
     page_content = fetch_espn_data(url)
