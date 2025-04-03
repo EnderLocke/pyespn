@@ -38,7 +38,7 @@ class Venue:
 
     def __repr__(self):
         """
-        Returns a string representation of the Team instance.
+        Returns a string representation of the Venue instance.
 
         Returns:
             str: A formatted string with the venues name.
