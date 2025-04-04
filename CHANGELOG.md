@@ -12,6 +12,7 @@
 * pga / golf is now available
 * atp/ tennis is now available
 * added function to pull a seasons results to team class / pyespn client
+* added im image class and connected to team logos and venue images
 * 
 
 ## 0.3.0

@@ -1,4 +1,3 @@
-from pyespn.utilities import get_an_id
 
 
 class Image:
@@ -12,12 +11,11 @@ class Image:
         """
         Returns a string representation of the Manufacturer instance.
         """
-        return f"<Image | {self.name}, {self.rel}>"
+        return f"<Image | {self.name}>"
 
     def _load_image_data(self):
         self.ref = self.image_json.get('href')
-        self.name = get_an_id(url=self.ref,
-                              slug='logos')
+        self.name = ' '.join(self.image_json.get('rel', []))
         self.width = self.image_json.get('width')
         self.height = self.image_json.get('height')
         self.alt = self.image_json.get('alt')
