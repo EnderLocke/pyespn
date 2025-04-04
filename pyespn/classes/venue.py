@@ -1,5 +1,6 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.player import Player
+from pyespn.classes.image import Image
 
 
 @validate_json("venue_json")
@@ -36,7 +37,7 @@ class Venue:
         self.address_json = self.venue_json.get('address')
         self.grass = self.venue_json.get('grass')
         self.indoor = self.venue_json.get('indoor')
-        self.images = self.venue_json.get('images', [])
+        self.images = [Image(image_json=image, espn_instance=self.espn_instance) for image in self.venue_json.get('images', [])]
 
     def __repr__(self):
         """

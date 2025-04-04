@@ -1,6 +1,7 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
+from pyespn.classes.image import Image
 from pyespn.classes.stat import Record
 from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
@@ -100,19 +101,10 @@ class Team:
         self.is_active = self.team_json.get("isActive")
         self.is_all_star = self.team_json.get("isAllStar")
 
-        self.logos = [logo.get("href") for logo in self.team_json.get("logos", [])]
+        self.logos = [Image(image_json=logo, espn_instance=self.espn_instance) for logo in self.team_json.get("logos", [])]
         self.venue_json = self.team_json.get("venue", {})
 
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
-
-    def get_logo_img(self) -> list[str]:
-        """
-        Retrieves the list of logo URLs associated with the team.
-
-        Returns:
-            list[str]: A list of URLs to the team's logos.
-        """
-        return self.home_venue.images
 
     def get_team_colors(self) -> dict:
         """
