@@ -429,3 +429,7 @@ PRO_LEAGUES = [
 COLLEGE_LEAGUES = [
     'cfb', 'mcbb', 'wcbb', 'cbb', 'csb'
 ]
+
+NO_LEAGUES = [
+    'racing', 'golf'
+]

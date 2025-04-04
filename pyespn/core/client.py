@@ -1,5 +1,5 @@
 from pyespn.core import *
-from pyespn.data.leagues import LEAGUE_API_MAPPING
+from pyespn.data.leagues import LEAGUE_API_MAPPING, NO_TEAMS
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
@@ -69,7 +69,7 @@ class PYESPN:
         self.league = None
         self._load_league_data()
         if load_teams:
-            if self.api_mapping['sport'] != 'racing':
+            if self.api_mapping['sport'] not in NO_TEAMS:
                 self._load_teams_datav2()
             else:
                 self._load_manufacturers()
