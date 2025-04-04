@@ -71,7 +71,8 @@ class Team:
             self.team_json = {}
         self.roster = {}
         self._load_team_data()
-        self.home_venue = Venue(venue_json=self.venue_json)
+        self.home_venue = Venue(venue_json=self.venue_json,
+                                espn_instance=self.espn_instance)
 
     def __repr__(self) -> str:
         """
