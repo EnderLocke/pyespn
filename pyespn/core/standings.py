@@ -26,3 +26,5 @@ def get_standings_core(season, league_abbv, espn_instance):
         standing_content = fetch_espn_data(standing)
         standings.append(Standings(standings_json=standing_content,
                                    espn_instance=espn_instance))
+
+    return standings
