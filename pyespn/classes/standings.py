@@ -43,7 +43,6 @@ class Standings:
         """
         return f"<Standings | {self.standings_type_name}, Entries: {len(self.standings)}>"
 
-
     def _load_standings_data(self):
         """
         Parses the standings JSON and populates the standings attribute.
