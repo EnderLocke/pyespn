@@ -297,7 +297,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'pga',
         'sport': 'golf',
         'league': 'pga',
-        'status': 'unavailable',
+        'status': 'available',
         'schedule': 'unknown'
     },
     {
