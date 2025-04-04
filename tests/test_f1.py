@@ -8,8 +8,7 @@ f1_espn = PYESPN(sport_league='f1')
 
 @pytest.mark.parametrize("test_case", test_standing_cases)
 def test_f1_standings(test_case):
-    content = f1_espn.load_standings(season=test_case['season'],
-                                     standings_type=test_case['standings_type'])
+    content = f1_espn.load_standings(season=test_case['season'])
 
     this_test_match = content[test_case['index']]
 
