@@ -430,6 +430,6 @@ COLLEGE_LEAGUES = [
     'cfb', 'mcbb', 'wcbb', 'cbb', 'csb'
 ]
 
-NO_LEAGUES = [
+NO_TEAMS = [
     'racing', 'golf'
 ]
