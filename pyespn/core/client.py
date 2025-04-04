@@ -59,6 +59,7 @@ class PYESPN:
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
         self.teams = []
+        self.standings = {}
         self.betting_futures = {}
         self.schedules = {}
         self.recruit_rankings = {}
@@ -482,7 +483,7 @@ class PYESPN:
                                league_abbv=self.league_abbv)
 
     @requires_standings_available
-    def get_standings(self, season):
+    def load_standings(self, season):
         """
         Retrieves standings for a given season and type.
 
@@ -490,11 +491,11 @@ class PYESPN:
             season (str): The season for which to retrieve standings.
 
         Returns:
-            dict: The standings for the specified season and type.
+            None
         """
-        return get_standings_core(season=season,
-                                  league_abbv=self.league_abbv,
-                                  espn_instance=self)
+        self.standings[season] = get_standings_core(season=season,
+                                                    league_abbv=self.league_abbv,
+                                                    espn_instance=self)
 
     def get_league_info(self) -> "League":
         """

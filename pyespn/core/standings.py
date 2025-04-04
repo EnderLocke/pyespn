@@ -3,11 +3,27 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.classes.standings import Standings
-import requests
-import json
 
 
 def get_standings_core(season, league_abbv, espn_instance):
+    """
+    Fetches and returns the standings for a given season and league.
+
+    This function retrieves standings data from ESPN's API for the specified season and league.
+    It iterates through multiple pages if necessary to collect all standings.
+
+    Args:
+        season (int): The season year for which standings are to be retrieved.
+        league_abbv (str): The abbreviation of the league (e.g., "f1" for Formula 1).
+        espn_instance (object): An instance of the ESPN API client.
+
+    Returns:
+        list: A list of Standings objects containing the standings data.
+
+    Raises:
+        Exception: If fetching data from the API fails.
+
+    """
     api_info = lookup_league_api_info(league_abbv=league_abbv)
     url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/standings'
     content = fetch_espn_data(url)

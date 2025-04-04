@@ -32,6 +32,18 @@ class Standings:
         self.standings = []
         self._load_standings_data()
 
+    def __repr__(self):
+        """
+        Returns a string representation of the Standings instance.
+
+        The representation includes the standings type and the number of entries in the standings list.
+
+        Returns:
+            str: A formatted string representing the standings.
+        """
+        return f"<Standings | {self.standings_type_name}, Entries: {len(self.standings)}>"
+
+
     def _load_standings_data(self):
         """
         Parses the standings JSON and populates the standings attribute.
