@@ -110,4 +110,4 @@ class Record:
         self.name = self.record_json.get('name')
         for stat in self.record_json.get('stats'):
             self.stats.append(Stat(stat_json=stat,
-                                   espn_isntance=self.espn_instance))
+                                   espn_instance=self.espn_instance))
