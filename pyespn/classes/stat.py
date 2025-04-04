@@ -9,7 +9,7 @@ class Stat:
         espn_instance: The ESPN API instance used for retrieving additional data.
     """
 
-    def __init__(self, stat_json, espn_isntance):
+    def __init__(self, stat_json, espn_instance):
         """
         Initializes a Stat instance.
 
@@ -18,7 +18,7 @@ class Stat:
             espn_instance: An instance of the ESPN API client.
         """
         self.stat_json = stat_json
-        self.espn_instance = espn_isntance
+        self.espn_instance = espn_instance
         self._set_stats_data()
 
     def __repr__(self):
