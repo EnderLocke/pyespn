@@ -51,7 +51,7 @@ class Team:
 
         to_dict() -> dict:
             Returns the raw team JSON data as a dictionary.
-        """
+    """
 
     def __init__(self, espn_instance, team_json):
         """
