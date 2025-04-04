@@ -1,5 +1,5 @@
 STANDINGS_AVAILABLE = [
-    'f1', 'nascar', 'indy', 'pga'
+    'f1', 'nascar', 'indy', 'pga', 'atp'
 ]
 
 STANDINGS_TYPE_MAP = {
