@@ -482,20 +482,19 @@ class PYESPN:
                                league_abbv=self.league_abbv)
 
     @requires_standings_available
-    def get_standings(self, season, standings_type):
+    def get_standings(self, season):
         """
         Retrieves standings for a given season and type.
 
         Args:
             season (str): The season for which to retrieve standings.
-            standings_type (str): The type of standings (e.g., 'division', 'conference').
 
         Returns:
             dict: The standings for the specified season and type.
         """
         return get_standings_core(season=season,
-                                  standings_type=standings_type,
-                                  league_abbv=self.league_abbv)
+                                  league_abbv=self.league_abbv,
+                                  espn_instance=self)
 
     def get_league_info(self) -> "League":
         """

@@ -41,3 +41,26 @@ class Stat:
         self.stat_type_abbreviation = self.stat_json.get('stat_type_abbreviation')
         self.description = self.stat_json.get('description')
         self.name = self.stat_json.get('name')
+
+
+class Record:
+
+    def __init__(self, record_json, espn_instance):
+        self.espn_instance = espn_instance
+        self.record_json = record_json
+        self.stats = []
+        self._load_record_data()
+
+    def _load_record_data(self):
+        self.id = self.record_json.get('id')
+        self.ref = self.record_json.get('$ref')
+        self.name = self.record_json.get('name')
+        self.abbreviation = self.record_json.get('abbreviation')
+        self.display_name = self.record_json.get('displayName')
+        self.short_display_name = self.record_json.get('shortDisplayName')
+        self.description = self.record_json.get('description')
+        self.type = self.record_json.get('type')
+        self.name = self.record_json.get('name')
+        for stat in self.record_json.get('stats'):
+            self.stats.append(Stat(stat_json=stat,
+                                   espn_isntance=self.espn_instance))
