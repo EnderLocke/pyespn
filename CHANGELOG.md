@@ -10,6 +10,7 @@
 * adding in class for stats for players / teams
 * added in standings class to pull racing (Eventually tennis amd assume golf rankings)
 * pga / golf is now available
+* atp/ tennis is now available
 * 
 
 ## 0.3.0

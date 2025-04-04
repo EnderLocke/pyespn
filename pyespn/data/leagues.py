@@ -233,7 +233,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'atp',
         'sport': 'tennis',
         'league': 'atp',
-        'status': 'unavailable',
+        'status': 'available',
         'schedule': 'unknown'
     },
     {
