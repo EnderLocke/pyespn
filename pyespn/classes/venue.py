@@ -21,7 +21,7 @@ class Venue:
         to_dict(): Converts the venue data to a dictionary format.
     """
 
-    def __init__(self, venue_json):
+    def __init__(self, venue_json, espn_instance):
         """
         Initializes a Venue instance using the provided venue JSON data.
 
@@ -30,6 +30,7 @@ class Venue:
         """
 
         self.venue_json = venue_json
+        self.espn_instance = espn_instance
         self.venue_id = self.venue_json.get('id')
         self.name = self.venue_json.get('fullName')
         self.address_json = self.venue_json.get('address')
