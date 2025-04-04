@@ -8,6 +8,9 @@
   * big note this is a lot of calls for both american and european football
 * added in client function to pull manufactures for the current year versus teams for racing leagues
 * adding in class for stats for players / teams
+* added in standings class to pull racing (Eventually tennis amd assume golf rankings)
+* pga / golf is now available
+* atp/ tennis is now available
 * 
 
 ## 0.3.0

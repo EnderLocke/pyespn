@@ -2,39 +2,45 @@
 # todo golf standings are different
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
-from pyespn.data.standings import STANDINGS_TYPE_MAP
-import requests
-import json
+from pyespn.classes.standings import Standings
 
 
-def get_standings_core(season, standings_type, league_abbv):
+def get_standings_core(season, league_abbv, espn_instance):
+    """
+    Fetches and returns the standings for a given season and league.
+
+    This function retrieves standings data from ESPN's API for the specified season and league.
+    It iterates through multiple pages if necessary to collect all standings.
+
+    Args:
+        season (int): The season year for which standings are to be retrieved.
+        league_abbv (str): The abbreviation of the league (e.g., "f1" for Formula 1).
+        espn_instance (object): An instance of the ESPN API client.
+
+    Returns:
+        list: A list of Standings objects containing the standings data.
+
+    Raises:
+        Exception: If fetching data from the API fails.
+
+    """
     api_info = lookup_league_api_info(league_abbv=league_abbv)
-    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/0/standings/{STANDINGS_TYPE_MAP[league_abbv].get(standings_type, 0)}?lang=en&region=us'
+    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/standings'
     content = fetch_espn_data(url)
+    page_count = content.get('pageCount')
 
-    standings = content['standings']
-    all_records = []
-    for record in standings:
-        athlete_url = record['athlete']['$ref']
-        athlete_response = requests.get(athlete_url)
-        athlete_content = json.loads(athlete_response.content)
-        driver_stats = {
-            'athlete_id': athlete_content.get('id'),
-            'name': athlete_content.get('fullName'),
-            'country': athlete_content.get('flag', {'alt': 'Not Known'}).get('alt')
-        }
-        vehicles = []
-        for vehicle in athlete_content.get('vehicles', []):
-            vehicles.append({
-                **vehicle
-            })
-        driver_stats['vehicles'] = vehicles
-        for stats in record['records'][0]['stats']:
-            this_stat = {
-                **stats
-            }
-            driver_stats.setdefault(stats['name'], this_stat)
-        all_records.append(driver_stats)
+    standings = []
+    standings_url = []
+    for page in range(1, page_count + 1):
+        paged_url = url + f'?page={page}'
+        paged_content = fetch_espn_data(paged_url)
 
-    return all_records
+        for item in paged_content.get('items', []):
+            standings_url.append(item.get('$ref'))
 
+    for standing in standings_url:
+        standing_content = fetch_espn_data(standing)
+        standings.append(Standings(standings_json=standing_content,
+                                   espn_instance=espn_instance))
+
+    return standings

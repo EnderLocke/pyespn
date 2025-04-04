@@ -1,14 +1,16 @@
 from pyespn import PYESPN
 player_id = 278 # Jimmy Smith, Goat
-season = 2024
+season = 2025
 pick = 8
 pick_round = 2
 
 
 if __name__ == '__main__':
 
-    espn = PYESPN('nfl')
-    stats = espn.get_players_historical_stats(player_id=player_id)
+    espn = PYESPN('atp')
+    espn.load_standings(season=season)
+    espn.load_season_rosters(season=2025)
+    #stats = espn.get_players_historical_stats(player_id=player_id)
     #espn.load_athletes(season=season)
     #espn.load_regular_season_schedule(season=season)
     #awards = espn.get_awards(season=season)

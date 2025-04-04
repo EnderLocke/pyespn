@@ -95,6 +95,10 @@ class Player:
         self.guid = self.player_json.get('guid')
         self.type = self.player_json.get('type')
         self.flag = self.player_json.get('flag')
+        self.citizenship = self.player_json.get('citizenship')
+        self.experience = self.player_json.get('experience')
+        self.event_log = self.player_json.get('eventLog')
+        self.stats_log = self.player_json.get('statisticslog')
         self.alternate_ids = self.player_json.get('alternateIds', {}).get('sdr')
         self.first_name = self.player_json.get('firstName')
         self.last_name = self.player_json.get('lastName')
@@ -153,12 +157,23 @@ class Player:
                 self.vehicles.append(Vehicle(vehicle_json=vehicle,
                                              espn_instance=self.espn_instance))
 
-    def load_player_historical_stats(self):
-        self.stats = self.get_players_historical_stats_core(player_id=self.id,
-                                                       league_abbv=self.espn_instance.league_abbv,
-                                                       espn_instance=self.espn_instance)
+    def load_player_historical_stats(self) -> None:
+        """
+        Loads the historical statistics for the player.
 
-        pass
+        This method fetches and assigns the player's historical stats using the ESPN API.
+        The stats are stored in the `self.stats` attribute.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
+
+        self.stats = self.get_players_historical_stats_core(player_id=self.id,
+                                                            league_abbv=self.espn_instance.league_abbv,
+                                                            espn_instance=self.espn_instance)
 
     def to_dict(self) -> dict:
         """

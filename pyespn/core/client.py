@@ -1,5 +1,5 @@
 from pyespn.core import *
-from pyespn.data.leagues import LEAGUE_API_MAPPING
+from pyespn.data.leagues import LEAGUE_API_MAPPING, NO_TEAMS
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
@@ -59,6 +59,7 @@ class PYESPN:
         self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
         self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
         self.teams = []
+        self.standings = {}
         self.betting_futures = {}
         self.schedules = {}
         self.recruit_rankings = {}
@@ -68,7 +69,7 @@ class PYESPN:
         self.league = None
         self._load_league_data()
         if load_teams:
-            if self.api_mapping['sport'] != 'racing':
+            if self.api_mapping['sport'] not in NO_TEAMS:
                 self._load_teams_datav2()
             else:
                 self._load_manufacturers()
@@ -482,20 +483,19 @@ class PYESPN:
                                league_abbv=self.league_abbv)
 
     @requires_standings_available
-    def get_standings(self, season, standings_type):
+    def load_standings(self, season):
         """
         Retrieves standings for a given season and type.
 
         Args:
             season (str): The season for which to retrieve standings.
-            standings_type (str): The type of standings (e.g., 'division', 'conference').
 
         Returns:
-            dict: The standings for the specified season and type.
+            None
         """
-        return get_standings_core(season=season,
-                                  standings_type=standings_type,
-                                  league_abbv=self.league_abbv)
+        self.standings[season] = get_standings_core(season=season,
+                                                    league_abbv=self.league_abbv,
+                                                    espn_instance=self)
 
     def get_league_info(self) -> "League":
         """
