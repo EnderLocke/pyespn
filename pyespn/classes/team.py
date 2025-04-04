@@ -1,6 +1,7 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
+from pyespn.classes.stat import Record
 from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -62,6 +63,7 @@ class Team:
 
         """
         self.espn_instance = espn_instance
+        self.records = {}
         if team_json:
             self.team_json = team_json
         else:
@@ -83,7 +85,7 @@ class Team:
         """
         Extracts and sets team data from the provided JSON.
         """
-        #self.ref = self.team_json.get('$ref')
+        self.ref = self.team_json.get('$ref')
         self.team_id = self.team_json.get("id")
         self.guid = self.team_json.get("guid")
         self.uid = self.team_json.get("uid")
@@ -198,6 +200,16 @@ class Team:
                     print(f"Failed to fetch athlete data: {e}")
 
         self.roster[season] = athletes
+
+    def load_season_results(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
+        results_content = fetch_espn_data(url)
+        season_records = []
+        for result in results_content.get('items', []):
+            season_records.append(Record(record_json=result,
+                                         espn_instance=self.espn_instance))
+        self.records[season] = season_records
 
     def to_dict(self) -> dict:
         """

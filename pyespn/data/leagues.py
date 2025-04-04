@@ -431,5 +431,5 @@ COLLEGE_LEAGUES = [
 ]
 
 NO_TEAMS = [
-    'racing', 'golf'
+    'racing', 'golf', 'tennis'
 ]

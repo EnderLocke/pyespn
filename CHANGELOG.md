@@ -11,6 +11,7 @@
 * added in standings class to pull racing (Eventually tennis amd assume golf rankings)
 * pga / golf is now available
 * atp/ tennis is now available
+* added function to pull a seasons results to team class / pyespn client
 * 
 
 ## 0.3.0

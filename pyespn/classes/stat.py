@@ -99,6 +99,9 @@ class Record:
         self.id = self.record_json.get('id')
         self.ref = self.record_json.get('$ref')
         self.name = self.record_json.get('name')
+        self.summary = self.record_json.get('summary')
+        self.display_value = self.record_json.get('displayValue')
+        self.value = self.record_json.get('value')
         self.abbreviation = self.record_json.get('abbreviation')
         self.display_name = self.record_json.get('displayName')
         self.short_display_name = self.record_json.get('shortDisplayName')
@@ -107,4 +110,4 @@ class Record:
         self.name = self.record_json.get('name')
         for stat in self.record_json.get('stats'):
             self.stats.append(Stat(stat_json=stat,
-                                   espn_isntance=self.espn_instance))
+                                   espn_instance=self.espn_instance))
