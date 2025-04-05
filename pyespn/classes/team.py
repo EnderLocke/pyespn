@@ -226,7 +226,7 @@ class Team:
             coach_records.append(Player(player_json=coach,
                                         espn_instance=self.espn_instance))
 
-        self.coaches[season] = {coach_records}
+        self.coaches[season] = coach_records
 
     def to_dict(self) -> dict:
         """
