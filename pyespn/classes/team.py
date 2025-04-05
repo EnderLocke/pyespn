@@ -66,6 +66,7 @@ class Team:
         self.espn_instance = espn_instance
         self.records = {}
         self.stats = {}
+        self.coaches = {}
         if team_json:
             self.team_json = team_json
         else:
@@ -215,6 +216,17 @@ class Team:
             season_records.append(Record(record_json=result,
                                          espn_instance=self.espn_instance))
         self.records[season] = season_records
+
+    def load_season_coaches(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
+        coach_content = fetch_espn_data(url)
+        coach_records = []
+        for coach in coach_content.get('items', []):
+            coach_records.append(Player(player_json=coach,
+                                        espn_instance=self.espn_instance))
+
+        self.coaches[season] = {coach_records}
 
     def to_dict(self) -> dict:
         """
