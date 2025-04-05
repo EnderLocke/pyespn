@@ -25,13 +25,13 @@ class Vehicle:
 
         Args:
             vehicle_json (dict): JSON data containing vehicle details.
-            espn_instance: An instance of the ESPN API client.
+            espn_instance (PYESPN): An instance of the ESPN API client.
         """
         self.vehicle_json = vehicle_json
         self.espn_instance = espn_instance
         self._set_vehicle_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Vehicle instance.
 

@@ -15,13 +15,13 @@ class Stat:
 
         Args:
             stat_json (dict): The JSON object containing the stat data.
-            espn_instance: An instance of the ESPN API client.
+            espn_instance (PYESPN): An instance of the ESPN API client.
         """
         self.stat_json = stat_json
         self.espn_instance = espn_instance
         self._set_stats_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Stat instance.
 

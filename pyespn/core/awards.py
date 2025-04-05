@@ -5,7 +5,7 @@ import requests
 import json
 
 
-def get_awards_core(season, league_abbv):
+def get_awards_core(season, league_abbv) -> dict:
     """
     Retrieves award winners for a given season and league.
 
