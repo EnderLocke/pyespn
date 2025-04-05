@@ -208,6 +208,26 @@ class Team:
         self.roster[season] = athletes
 
     def load_season_results(self, season):
+        """
+        Retrieves and stores seasonal game records for the team.
+
+        This method constructs a URL to the ESPN API using the team’s league and sport information,
+        then fetches and parses the game results (win/loss record) for the specified season.
+        Each result is wrapped in a `Record` object, which is stored in the team's `records`
+        dictionary under the given season key.
+
+        Args:
+            season (int): The season year for which the team’s game records should be retrieved.
+
+        Side Effects:
+            Updates the `self.records` dictionary with a list of `Record` instances representing
+            seasonal game results.
+
+        Raises:
+            Any exceptions raised by `fetch_espn_data` or malformed API responses are not
+            explicitly handled here.
+        """
+
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
         results_content = fetch_espn_data(url)
@@ -218,6 +238,25 @@ class Team:
         self.records[season] = season_records
 
     def load_season_coaches(self, season):
+        """
+        Loads the coaching staff for the team in the specified season.
+
+        This method retrieves a list of coach references for the team from the ESPN API,
+        then performs follow-up requests to fetch detailed information for each coach.
+        Each coach is instantiated as a `Player` object (representing coaching personnel)
+        and added to the `coaches` dictionary under the corresponding season.
+
+        Args:
+            season (int): The season year for which coaching data should be loaded.
+
+        Side Effects:
+            Updates the `self.coaches` dictionary with a list of `Player` instances
+            representing the coaching staff.
+
+        Notes:
+            Coach data is retrieved in two stages: first a summary list with URLs,
+            then a second pass to fetch detailed info for each coach using those URLs.
+        """
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
         coach_content = fetch_espn_data(url)
