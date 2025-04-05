@@ -233,7 +233,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'atp',
         'sport': 'tennis',
         'league': 'atp',
-        'status': 'available',
+        'status': 'untested',
         'schedule': 'unknown'
     },
     {
@@ -297,7 +297,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'pga',
         'sport': 'golf',
         'league': 'pga',
-        'status': 'available',
+        'status': 'untested',
         'schedule': 'unknown'
     },
     {
@@ -419,6 +419,14 @@ LEAGUE_API_MAPPING = [
         'league': 'mens-college-hockey',
         'status': 'unavailable',
         'schedule': 'unknown'
+    },
+    {
+        'id': 53,
+        'league_abbv': 'epl',
+        'sport': 'soccer',
+        'league': 'eng.1',
+        'status': 'untested',
+        'schedule': 'daily'
     },
 ]
 
