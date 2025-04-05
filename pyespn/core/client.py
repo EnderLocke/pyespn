@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING
 import concurrent.futures
 
 if TYPE_CHECKING:
-    from pyespn.classes import Team, Player, Recruit, Event, League  # Only imports for type checking
+    from pyespn.classes import Team, Player, Recruit, Event, League, Schedule  # Only imports for type checking
 
 
 @validate_league
@@ -249,7 +249,7 @@ class PYESPN:
                                   league_abbv=self.league_abbv,
                                   espn_instance=self)
 
-    def get_season_team_stats(self, season):
+    def get_season_team_stats(self, season) -> dict:
         """
         Retrieves statistics for teams during a specific season.
 
@@ -263,7 +263,7 @@ class PYESPN:
                                           league_abbv=self.league_abbv)
 
     @requires_pro_league('draft')
-    def get_draft_pick_data(self, season, pick_round, pick):
+    def get_draft_pick_data(self, season, pick_round, pick) -> dict:
         """
         Retrieves data about a specific draft pick.
 
@@ -280,7 +280,7 @@ class PYESPN:
                                         pick=pick,
                                         league_abbv=self.league_abbv)
 
-    def get_players_historical_stats(self, player_id):
+    def get_players_historical_stats(self, player_id) -> dict:
         """
         Retrieves historical statistics for a player.
 
@@ -295,7 +295,7 @@ class PYESPN:
                                                  league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_league_year_champion_futures(self, season, provider=None):
+    def get_league_year_champion_futures(self, season, provider=None) -> list:
         """
         Retrieves betting odds for the league champion for a given season.
 
@@ -304,7 +304,7 @@ class PYESPN:
             provider (str, optional): The betting provider to use.
 
         Returns:
-            dict: The league champion futures for the specified season.
+            list: The league champion futures for the specified season.
         """
         this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
         return get_year_league_champions_futures_core(season=season,
@@ -312,7 +312,7 @@ class PYESPN:
                                                       provider=this_provider)
 
     @requires_betting_available
-    def get_league_year_division_champs_futures(self, season, division, provider=None):
+    def get_league_year_division_champs_futures(self, season, division, provider=None) -> list:
         """
         Retrieves betting odds for division champions for a given season and division.
 
@@ -322,7 +322,7 @@ class PYESPN:
             provider (str, optional): The betting provider to use.
 
         Returns:
-            dict: The division champion futures for the specified season and division.
+            list: The division champion futures for the specified season and division.
         """
         this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
         return get_division_champ_futures_core(season=season,
@@ -331,7 +331,7 @@ class PYESPN:
                                                provider=this_provider)
 
     @requires_betting_available
-    def get_team_year_ats_away(self, team_id, season):
+    def get_team_year_ats_away(self, team_id, season) -> dict:
         """
         Retrieves the team's against the spread (ATS) performance for away games in a given season.
 
@@ -347,7 +347,7 @@ class PYESPN:
                                            league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_team_year_ats_home_favorite(self, team_id, season):
+    def get_team_year_ats_home_favorite(self, team_id, season) -> dict:
         """
         Retrieves the team's ATS performance for home games as a favorite in a given season.
 
@@ -363,7 +363,7 @@ class PYESPN:
                                                     league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_team_year_ats_away_underdog(self, team_id, season):
+    def get_team_year_ats_away_underdog(self, team_id, season) -> dict:
         """
         Retrieves the team's ATS performance for away games as an underdog in a given season.
 
@@ -379,7 +379,7 @@ class PYESPN:
                                                     league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_team_year_ats_favorite(self, team_id, season):
+    def get_team_year_ats_favorite(self, team_id, season) -> dict:
         """
         Retrieves the team's ATS performance as a favorite in a given season.
 
@@ -395,7 +395,7 @@ class PYESPN:
                                                league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_team_year_ats_home(self, team_id, season):
+    def get_team_year_ats_home(self, team_id, season) -> dict:
         """
         Retrieves the team's ATS performance for home games in a given season.
 
@@ -411,7 +411,7 @@ class PYESPN:
                                            league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_team_year_ats_overall(self, team_id, season):
+    def get_team_year_ats_overall(self, team_id, season) -> dict:
         """
         Retrieves the team's overall ATS performance for a given season.
 
@@ -427,7 +427,7 @@ class PYESPN:
                                               league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_team_year_ats_underdog(self, team_id, season):
+    def get_team_year_ats_underdog(self, team_id, season) -> dict:
         """
         Retrieves the team's ATS performance as an underdog in a given season.
 
@@ -443,7 +443,7 @@ class PYESPN:
                                                league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_team_year_ats_home_underdog(self, team_id, season):
+    def get_team_year_ats_home_underdog(self, team_id, season) -> dict:
         """
         Retrieves the team's ATS performance for home games as an underdog in a given season.
 
@@ -459,7 +459,7 @@ class PYESPN:
                                                     league_abbv=self.league_abbv)
 
     @requires_betting_available
-    def get_all_seasons_futures(self, season):
+    def get_all_seasons_futures(self, season) -> list:
         """
         Retrieves all betting futures for a given season.
 
@@ -467,13 +467,13 @@ class PYESPN:
             season (str): The season for which to retrieve betting futures.
 
         Returns:
-            dict: All betting futures for the specified season.
+            list: All betting futures for the specified season.
         """
         return get_season_futures_core(season=season,
                                        league_abbv=self.league_abbv,
                                        espn_instance=self)
 
-    def get_awards(self, season):
+    def get_awards(self, season) -> list[dict]:
         """
         Retrieves awards for a given season.
 
@@ -481,13 +481,13 @@ class PYESPN:
             season (str): The season for which to retrieve awards.
 
         Returns:
-            dict: The awards for the specified season.
+            list: The awards for the specified season.
         """
         return get_awards_core(season=season,
                                league_abbv=self.league_abbv)
 
     @requires_standings_available
-    def load_standings(self, season):
+    def load_standings(self, season) -> None:
         """
         Retrieves standings for a given season and type.
 
@@ -511,7 +511,7 @@ class PYESPN:
         return get_league_info_core(league_abbv=self.league_abbv,
                                     espn_instance=self)
 
-    def get_regular_seasons_schedule(self, season:int):
+    def get_regular_seasons_schedule(self, season: int) -> list["Schedule"]:
         """
         Retrieves the regular season schedule for a given season.
 
@@ -519,7 +519,7 @@ class PYESPN:
             season (int): The season for which to retrieve the schedule.
 
         Returns:
-            dict: The regular season schedule for the specified season.
+            list[Schedule]: The regular season schedule for the specified season.
         """
         return get_regular_season_schedule_core(league_abbv=self.league_abbv,
                                                 espn_instance=self,
@@ -537,7 +537,7 @@ class PYESPN:
         """
         return next((team for team in self.teams if str(team.team_id) == str(team_id)), None)
 
-    def load_season_rosters(self, season):
+    def load_season_rosters(self, season) -> None:
         """
         Loads the season roster for all teams in the league.
 
@@ -562,7 +562,7 @@ class PYESPN:
         for team in self.teams:
             team.load_season_roster(season=season)
 
-    def load_season_team_stats(self, season):
+    def load_season_team_stats(self, season) -> None:
         """
         Loads seasonal statistical data for each team in the league.
 
@@ -576,7 +576,7 @@ class PYESPN:
         for team in self.teams:
             team.load_team_season_stats(season=season)
 
-    def load_season_teams_results(self, season):
+    def load_season_teams_results(self, season) -> None:
         """
         Loads win/loss and game result data for each team in the specified season.
 
@@ -590,7 +590,7 @@ class PYESPN:
         for team in self.teams:
             team.load_season_results(season=season)
 
-    def load_season_coaches(self, season):
+    def load_season_coaches(self, season) -> None:
         """
         Loads coaching staff information for each team for the specified season.
 

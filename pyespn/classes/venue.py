@@ -28,6 +28,7 @@ class Venue:
 
         Args:
             venue_json (dict): The raw JSON data representing the venue.
+            espn_instance (object): The ESPN instance used for making API calls.
         """
 
         self.venue_json = venue_json
@@ -89,7 +90,7 @@ class Circuit:
         diagram_urls (list): A list of URLs pointing to the circuit diagrams.
     """
 
-    def __init__(self, circuit_json, espn_isntance):
+    def __init__(self, circuit_json, espn_instance):
         """
         Initializes a Circuit instance with data from a JSON response and an ESPN instance.
 
@@ -100,7 +101,7 @@ class Circuit:
         This method also calls _load_circuit_data to load the data into attributes.
         """
         self.circuit_json = circuit_json
-        self.espn_instance = espn_isntance
+        self.espn_instance = espn_instance
         self._load_circuit_data()
 
     def _load_circuit_data(self):
