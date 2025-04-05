@@ -39,3 +39,9 @@
 | League Abbreviation | League Name |
 |---------------------|-------------|
 | pga                 | pga         |
+
+## ⚽️ Soccer ⚽️
+
+| League Abbreviation | League Name            |
+|---------------------|------------------------|
+| epl                 | english pramier league |
