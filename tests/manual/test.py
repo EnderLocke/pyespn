@@ -8,7 +8,7 @@ pick_round = 2
 if __name__ == '__main__':
 
     espn = PYESPN('nfl')
-    espn.load_season_teams_results(season=season)
+    espn.load_season_coaches(season=season)
     espn.load_season_rosters(season=2025)
     #stats = espn.get_players_historical_stats(player_id=player_id)
     #espn.load_athletes(season=season)

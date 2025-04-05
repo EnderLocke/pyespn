@@ -19,6 +19,9 @@ nav:
     - Circuit: classes/circuit_class.md
     - Manufacturer: classes/manufacturer_class.md
     - Stats: classes/stat_class.md
+    - Image: classes/image.md
+    - Record: classes/record.md
+    - Standings: classes/standings.md
   - Discover: discover.md
   - Postman: postman.md
   - About:

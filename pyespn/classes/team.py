@@ -1,7 +1,8 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
-from pyespn.classes.stat import Record
+from pyespn.classes.image import Image
+from pyespn.classes.stat import Record, Stat
 from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -51,7 +52,7 @@ class Team:
 
         to_dict() -> dict:
             Returns the raw team JSON data as a dictionary.
-        """
+    """
 
     def __init__(self, espn_instance, team_json):
         """
@@ -64,13 +65,16 @@ class Team:
         """
         self.espn_instance = espn_instance
         self.records = {}
+        self.stats = {}
+        self.coaches = {}
         if team_json:
             self.team_json = team_json
         else:
             self.team_json = {}
         self.roster = {}
         self._load_team_data()
-        self.home_venue = Venue(venue_json=self.venue_json)
+        self.home_venue = Venue(venue_json=self.venue_json,
+                                espn_instance=self.espn_instance)
 
     def __repr__(self) -> str:
         """
@@ -100,19 +104,21 @@ class Team:
         self.is_active = self.team_json.get("isActive")
         self.is_all_star = self.team_json.get("isAllStar")
 
-        self.logos = [logo.get("href") for logo in self.team_json.get("logos", [])]
+        self.logos = [Image(image_json=logo, espn_instance=self.espn_instance) for logo in self.team_json.get("logos", [])]
         self.venue_json = self.team_json.get("venue", {})
 
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
 
-    def get_logo_img(self) -> list[str]:
-        """
-        Retrieves the list of logo URLs associated with the team.
+    def load_team_season_stats(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
 
-        Returns:
-            list[str]: A list of URLs to the team's logos.
-        """
-        return self.home_venue.images
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics?lang=en&region=us'
+        stats_content = fetch_espn_data(url)
+        all_stats = []
+        for stat in stats_content.get('splits', []):
+            all_stats.append(Stat(stat_json=stat,
+                                  espn_instance=self.espn_instance))
+        self.stats[season] = {}
 
     def get_team_colors(self) -> dict:
         """
@@ -202,6 +208,26 @@ class Team:
         self.roster[season] = athletes
 
     def load_season_results(self, season):
+        """
+        Retrieves and stores seasonal game records for the team.
+
+        This method constructs a URL to the ESPN API using the team’s league and sport information,
+        then fetches and parses the game results (win/loss record) for the specified season.
+        Each result is wrapped in a `Record` object, which is stored in the team's `records`
+        dictionary under the given season key.
+
+        Args:
+            season (int): The season year for which the team’s game records should be retrieved.
+
+        Side Effects:
+            Updates the `self.records` dictionary with a list of `Record` instances representing
+            seasonal game results.
+
+        Raises:
+            Any exceptions raised by `fetch_espn_data` or malformed API responses are not
+            explicitly handled here.
+        """
+
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
         results_content = fetch_espn_data(url)
@@ -210,6 +236,41 @@ class Team:
             season_records.append(Record(record_json=result,
                                          espn_instance=self.espn_instance))
         self.records[season] = season_records
+
+    def load_season_coaches(self, season):
+        """
+        Loads the coaching staff for the team in the specified season.
+
+        This method retrieves a list of coach references for the team from the ESPN API,
+        then performs follow-up requests to fetch detailed information for each coach.
+        Each coach is instantiated as a `Player` object (representing coaching personnel)
+        and added to the `coaches` dictionary under the corresponding season.
+
+        Args:
+            season (int): The season year for which coaching data should be loaded.
+
+        Side Effects:
+            Updates the `self.coaches` dictionary with a list of `Player` instances
+            representing the coaching staff.
+
+        Notes:
+            Coach data is retrieved in two stages: first a summary list with URLs,
+            then a second pass to fetch detailed info for each coach using those URLs.
+        """
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
+        coach_content = fetch_espn_data(url)
+        coach_records = []
+        coach_urls = []
+        for coach in coach_content.get('items', []):
+            coach_urls.append(coach.get('$ref'))
+
+        for coach_url in coach_urls:
+            coach_url_response = fetch_espn_data(coach_url)
+            coach_records.append(Player(player_json=coach_url_response,
+                                        espn_instance=self.espn_instance))
+
+        self.coaches[season] = coach_records
 
     def to_dict(self) -> dict:
         """

@@ -73,5 +73,16 @@ def get_an_id(url, slug):
         >>> get_an_id(url, "teams")
         12345
     """
-    this_id = url.split('/')[url.split('/').index(slug) + 1].split('?')[0]
+    try:
+        this_id = url.split('/')[url.split('/').index(slug) + 1].split('?')[0]
+    except ValueError as e:
+        return None
     return int(this_id)
+
+
+def get_a_value(url, slug):
+    try:
+        this_id = url.split('/')[url.split('/').index(slug) + 1].split('?')[0]
+    except ValueError as e:
+        this_id = None
+    return this_id

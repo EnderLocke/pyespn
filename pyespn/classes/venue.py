@@ -1,5 +1,6 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.player import Player
+from pyespn.classes.image import Image
 
 
 @validate_json("venue_json")
@@ -21,7 +22,7 @@ class Venue:
         to_dict(): Converts the venue data to a dictionary format.
     """
 
-    def __init__(self, venue_json):
+    def __init__(self, venue_json, espn_instance):
         """
         Initializes a Venue instance using the provided venue JSON data.
 
@@ -30,12 +31,13 @@ class Venue:
         """
 
         self.venue_json = venue_json
+        self.espn_instance = espn_instance
         self.venue_id = self.venue_json.get('id')
         self.name = self.venue_json.get('fullName')
         self.address_json = self.venue_json.get('address')
         self.grass = self.venue_json.get('grass')
         self.indoor = self.venue_json.get('indoor')
-        self.images = self.venue_json.get('images', [])
+        self.images = [Image(image_json=image, espn_instance=self.espn_instance) for image in self.venue_json.get('images', [])]
 
     def __repr__(self):
         """

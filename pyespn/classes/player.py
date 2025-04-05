@@ -103,6 +103,8 @@ class Player:
         self.first_name = self.player_json.get('firstName')
         self.last_name = self.player_json.get('lastName')
         self.full_name = self.player_json.get('fullName')
+        if not self.full_name:
+            self.full_name = self.first_name + ' ' + self.last_name
         self.display_name = self.player_json.get('displayName')
         self.short_name = self.player_json.get('shortName')
         self.weight = self.player_json.get('weight')
@@ -139,7 +141,10 @@ class Player:
         self.contracts_ref = self.player_json.get('contracts', {}).get('$ref')
 
         experience = self.player_json.get('experience', {})
-        self.experience_years = experience.get('years')
+        if type(experience) == dict:
+            self.experience_years = experience.get('years')
+        elif type(experience) == int:
+            self.experience_years = experience
 
         self.active = self.player_json.get('active')
 
