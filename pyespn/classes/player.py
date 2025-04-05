@@ -1,8 +1,10 @@
 from pyespn.core.decorators import validate_json
+from pyespn.classes.vehicle import Vehicle
 
 
 @validate_json('player_json')
 class Player:
+    from pyespn.core.orchestration import get_players_historical_stats_core
     """
     Represents a player within the ESPN API framework.
 
@@ -15,8 +17,9 @@ class Player:
         api_ref (str | None): API reference link for the player.
         id (str | None): The unique identifier for the player.
         uid (str | None): The ESPN UID for the player.
+        flag (dict | None): a dict with players nationality/flag (mostly for racing).
         guid (str | None): The GUID associated with the player.
-        type (str | None): The type of player (e.g., "athlete").
+        type (str | None): The type of player (e.g., 'athlete').
         alternate_ids (str | None): Alternative ID for the player.
         first_name (str | None): The player's first name.
         last_name (str | None): The player's last name.
@@ -70,6 +73,7 @@ class Player:
         """
         self.player_json = player_json
         self.espn_instance = espn_instance
+        self.stats = {}
         self._set_player_data()
 
     def __repr__(self) -> str:
@@ -77,9 +81,9 @@ class Player:
         Returns a string representation of the Player instance.
 
         Returns:
-            str: A formatted string with the players's name, debut year and jersey.
+            str: A formatted string with the players's name, position and jersey.
         """
-        return f"<Player | {self.full_name}, {self.debut_year} ({self.jersey})>"
+        return f"<Player | {self.full_name}, {self.position_abbreviation} ({self.jersey})>"
 
     def _set_player_data(self):
         """
@@ -90,10 +94,17 @@ class Player:
         self.uid = self.player_json.get('uid')
         self.guid = self.player_json.get('guid')
         self.type = self.player_json.get('type')
+        self.flag = self.player_json.get('flag')
+        self.citizenship = self.player_json.get('citizenship')
+        self.experience = self.player_json.get('experience')
+        self.event_log = self.player_json.get('eventLog')
+        self.stats_log = self.player_json.get('statisticslog')
         self.alternate_ids = self.player_json.get('alternateIds', {}).get('sdr')
         self.first_name = self.player_json.get('firstName')
         self.last_name = self.player_json.get('lastName')
         self.full_name = self.player_json.get('fullName')
+        if not self.full_name:
+            self.full_name = self.first_name + ' ' + self.last_name
         self.display_name = self.player_json.get('displayName')
         self.short_name = self.player_json.get('shortName')
         self.weight = self.player_json.get('weight')
@@ -103,6 +114,7 @@ class Player:
         self.age = self.player_json.get('age')
         self.date_of_birth = self.player_json.get('dateOfBirth')
         self.debut_year = self.player_json.get('debutYear')
+        self.college_athlete_ref = self.player_json.get('collegeAthlete', {}).get('$ref')
 
         self.links = self.player_json.get('links', [])
 
@@ -112,7 +124,7 @@ class Player:
 
         self.college_ref = self.player_json.get('college', {}).get('$ref')
         self.slug = self.player_json.get('slug')
-        self.jersey = self.player_json.get('jersey')
+        self.jersey = self.player_json.get('jersey', '--')
 
         position = self.player_json.get('position', {})
         self.position_ref = position.get('$ref')
@@ -129,7 +141,10 @@ class Player:
         self.contracts_ref = self.player_json.get('contracts', {}).get('$ref')
 
         experience = self.player_json.get('experience', {})
-        self.experience_years = experience.get('years')
+        if type(experience) == dict:
+            self.experience_years = experience.get('years')
+        elif type(experience) == int:
+            self.experience_years = experience
 
         self.active = self.player_json.get('active')
 
@@ -140,6 +155,30 @@ class Player:
         self.status_abbreviation = status.get('abbreviation')
 
         self.statistics_log_ref = self.player_json.get('statisticslog', {}).get('$ref')
+
+        if 'vehicles' in self.player_json:
+            self.vehicles = []
+            for vehicle in self.player_json.get('vehicles'):
+                self.vehicles.append(Vehicle(vehicle_json=vehicle,
+                                             espn_instance=self.espn_instance))
+
+    def load_player_historical_stats(self) -> None:
+        """
+        Loads the historical statistics for the player.
+
+        This method fetches and assigns the player's historical stats using the ESPN API.
+        The stats are stored in the `self.stats` attribute.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
+
+        self.stats = self.get_players_historical_stats_core(player_id=self.id,
+                                                            league_abbv=self.espn_instance.league_abbv,
+                                                            espn_instance=self.espn_instance)
 
     def to_dict(self) -> dict:
         """
@@ -255,7 +294,6 @@ class Recruit:
         self.high_school_id = high_school.get('id')
         self.high_school_name = high_school.get('name')
         self.high_school_state = high_school.get('address', {}).get('state')
-
 
         self.slug = self.recruit_json.get('slug')
 
