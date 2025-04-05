@@ -222,8 +222,13 @@ class Team:
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
         coach_content = fetch_espn_data(url)
         coach_records = []
+        coach_urls = []
         for coach in coach_content.get('items', []):
-            coach_records.append(Player(player_json=coach,
+            coach_urls.append(coach.get('$ref'))
+
+        for coach_url in coach_urls:
+            coach_url_response = fetch_espn_data(coach_url)
+            coach_records.append(Player(player_json=coach_url_response,
                                         espn_instance=self.espn_instance))
 
         self.coaches[season] = coach_records

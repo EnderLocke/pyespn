@@ -566,6 +566,10 @@ class PYESPN:
         for team in self.teams:
             team.load_season_results(season=season)
 
+    def load_season_coaches(self, season):
+        for team in self.teams:
+            team.load_season_coaches(season=season)
+
     def load_athletes(self, season) -> None:
         """
         Loads and stores athlete data for a given season.
