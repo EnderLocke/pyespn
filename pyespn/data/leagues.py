@@ -233,7 +233,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'atp',
         'sport': 'tennis',
         'league': 'atp',
-        'status': 'untested',
+        'status': 'available',
         'schedule': 'unknown'
     },
     {
@@ -297,7 +297,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'pga',
         'sport': 'golf',
         'league': 'pga',
-        'status': 'untested',
+        'status': 'available',
         'schedule': 'unknown'
     },
     {
@@ -425,7 +425,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'epl',
         'sport': 'soccer',
         'league': 'eng.1',
-        'status': 'untested',
+        'status': 'available',
         'schedule': 'daily'
     },
 ]
