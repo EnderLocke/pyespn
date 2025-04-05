@@ -40,7 +40,7 @@
 |---------------------|-------------|
 | pga                 | pga         |
 
-## ⚽️ Soccer ⚽️
+## ⚽️ European Football/Soccer ⚽️
 
 | League Abbreviation | League Name            |
 |---------------------|------------------------|
