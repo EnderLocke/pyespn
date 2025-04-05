@@ -40,7 +40,7 @@ class Venue:
         self.indoor = self.venue_json.get('indoor')
         self.images = [Image(image_json=image, espn_instance=self.espn_instance) for image in self.venue_json.get('images', [])]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Venue instance.
 

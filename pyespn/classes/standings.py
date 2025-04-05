@@ -32,7 +32,7 @@ class Standings:
         self.standings = []
         self._load_standings_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Standings instance.
 
