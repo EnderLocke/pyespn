@@ -52,7 +52,8 @@ class Event:
         self.short_name = self.event_json.get('shortName')
         self.competition_type = self.event_json.get('competitions', [])[0].get('type', {}).get('type')
         self.venue_json = self.event_json.get('competitions', [])[0].get('venue', {})
-        self.event_venue = Venue(venue_json=self.venue_json)
+        self.event_venue = Venue(venue_json=self.venue_json,
+                                 espn_instance=self.espn_instance)
         self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
         self.home_team = None
         self.away_team = None
