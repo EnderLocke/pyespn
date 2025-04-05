@@ -15,6 +15,13 @@ nav:
     - Draft: classes/draft_class.md
     - Event: classes/event_class.md
     - Venue: classes/venue_class.md
+    - Vehicle: classes/vehicle_class.md
+    - Circuit: classes/circuit_class.md
+    - Manufacturer: classes/manufacturer_class.md
+    - Stats: classes/stat_class.md
+    - Image: classes/image_class.md
+    - Record: classes/record_class.md
+    - Standings: classes/standings_class.md
   - Discover: discover.md
   - Postman: postman.md
   - About:

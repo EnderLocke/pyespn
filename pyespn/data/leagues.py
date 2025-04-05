@@ -233,7 +233,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'atp',
         'sport': 'tennis',
         'league': 'atp',
-        'status': 'unavailable',
+        'status': 'available',
         'schedule': 'unknown'
     },
     {
@@ -297,7 +297,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'pga',
         'sport': 'golf',
         'league': 'pga',
-        'status': 'unavailable',
+        'status': 'available',
         'schedule': 'unknown'
     },
     {
@@ -428,4 +428,8 @@ PRO_LEAGUES = [
 
 COLLEGE_LEAGUES = [
     'cfb', 'mcbb', 'wcbb', 'cbb', 'csb'
+]
+
+NO_TEAMS = [
+    'racing', 'golf', 'tennis'
 ]

@@ -1,6 +1,6 @@
 from pyespn.data.betting import BETTING_AVAILABLE
 from pyespn.data.leagues import PRO_LEAGUES, COLLEGE_LEAGUES
-from pyespn.data.standings import STANDINGS_TYPE_MAP
+from pyespn.data.standings import STANDINGS_AVAILABLE
 from pyespn.exceptions import (LeagueNotSupportedError, LeagueNotAvailableError,
                                InvalidLeagueError, JSONNotProvidedError)
 from functools import wraps
@@ -12,7 +12,7 @@ def requires_standings_available(func):
     """Decorator to check if betting is available before executing a method."""
     @wraps(func)
     def wrapper(self, *args, **kwargs):
-        if self.league_abbv not in STANDINGS_TYPE_MAP:
+        if self.league_abbv not in STANDINGS_AVAILABLE:
             raise LeagueNotSupportedError(
                 self.league_abbv,
                 f"Standings is not available for {self.league_abbv}."

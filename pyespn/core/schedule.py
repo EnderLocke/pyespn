@@ -45,8 +45,8 @@ def get_regular_season_schedule_core(league_abbv, espn_instance, season, season_
                                      '1' corresponds to the preseason, and '3' corresponds to the postseason.
 
     Returns:
-        Schedule: A `Schedule` object containing the schedule for the specified season and league.
-                  This includes the list of weeks and events for that season.
+        list[Schedule]: A `Schedule` object containing the schedule for the specified season and league.
+                        This includes the list of weeks and events for that season.
 
     Note:
         This function works primarily for NFL and college football leagues. It retrieves the weeks' data from the ESPN API

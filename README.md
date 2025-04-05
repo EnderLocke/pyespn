@@ -20,4 +20,5 @@ not all api end points are available for all leagues,
 
 i am working on adding in exceptions but you could get odd errors if say you try recruiting rankings for the nfl
 
-please see [detailed documents](https://enderlocke.github.io/pyespn/) with 
+please see [detailed documents](https://enderlocke.github.io/pyespn/)  
+and read the [CHANGELOG.md](CHANGELOG.md)

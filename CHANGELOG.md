@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.1
+* added function to client/team to pull a seasons roster
+* adding in tests and fixed some of the long running tests
+* added in vehicle class to pull current vehicles for athletse with vehicles (i.e. racing leagues)
+* added in client function to pull all athletes for a season
+  * big note this is a lot of calls for both american and european football
+* added in client function to pull manufactures for the current year versus teams for racing leagues
+* adding in class for stats for players / teams
+* added in standings class to pull racing (Eventually tennis amd assume golf rankings)
+* pga / golf is now available
+* atp/ tennis is now available
+* added function to pull a seasons results to team class / pyespn client
+* added im image class and connected to team logos and venue images
+* added in func to pull stats for a team/all teams of a league
+* added in call for coaches
+* 
+
 ## 0.3.0
 * lots of changes
   * doc strings across codebase
