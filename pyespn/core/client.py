@@ -29,10 +29,14 @@ class PYESPN:
         BETTING_PROVIDERS (dict): A mapping of available betting providers for the current league.
         LEAGUE_DIVISION_BETTING_KEYS (list): A list of league division betting keys for the current league.
         DEFAULT_BETTING_PROVIDER (dict): The default betting provider for the current league.
-        teams (list): A list of teams in the current league.
-        betting_futures (dict): A mapping of betting futures for the current season.
-        schedules (dict): A mapping of regular season schedules for the current season.
-        league (dict): A dictionary containing data for the current league.
+        teams (List[Teams]): A list of teams in the current league.
+        standings (dict): a dict of standings for a year
+        betting_futures (dict): a dict of betting for a year
+        recruit_rankings (dict): a dict with season and a list of recruit rankings for a year
+        drafts (dict): a dict with draft data in a list with key as season
+        athletes (dict): a dict of all athletes with season as a key
+        schedules (List[Schedule]): A mapping of regular season schedules for the current season.
+        league (League): A league object containing data for the current league.
 
     Examples:
         >>> from pyespn import PYESPN
@@ -559,14 +563,44 @@ class PYESPN:
             team.load_season_roster(season=season)
 
     def load_season_team_stats(self, season):
+        """
+        Loads seasonal statistical data for each team in the league.
+
+        Iterates through all teams in the current league instance and calls each team's
+        `load_team_season_stats` method, passing in the specified season. This typically
+        includes team-level metrics such as points scored, allowed, total yardage, turnovers, etc.
+
+        Args:
+            season (int): The season year for which team stats should be retrieved.
+        """
         for team in self.teams:
             team.load_team_season_stats(season=season)
 
     def load_season_teams_results(self, season):
+        """
+        Loads win/loss and game result data for each team in the specified season.
+
+        For each team in the league, this method calls `load_season_results`, which
+        fetches the outcomes of all games played during the season, including opponent
+        data, scores, home/away context, and dates.
+
+        Args:
+            season (int): The season year for which game results should be retrieved.
+        """
         for team in self.teams:
             team.load_season_results(season=season)
 
     def load_season_coaches(self, season):
+        """
+        Loads coaching staff information for each team for the specified season.
+
+        This method calls each team's `load_season_coaches` method, which typically
+        retrieves data such as head coach, offensive/defensive coordinators, tenure,
+        and any mid-season coaching changes.
+
+        Args:
+            season (int): The season year for which coaching data should be retrieved.
+        """
         for team in self.teams:
             team.load_season_coaches(season=season)
 
