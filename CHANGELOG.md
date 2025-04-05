@@ -13,6 +13,7 @@
 * atp/ tennis is now available
 * added function to pull a seasons results to team class / pyespn client
 * added im image class and connected to team logos and venue images
+* added in func to pull stats for a team/all teams of a league
 * 
 
 ## 0.3.0

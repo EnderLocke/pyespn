@@ -2,7 +2,7 @@ from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
 from pyespn.classes.image import Image
-from pyespn.classes.stat import Record
+from pyespn.classes.stat import Record, Stat
 from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -65,6 +65,7 @@ class Team:
         """
         self.espn_instance = espn_instance
         self.records = {}
+        self.stats = {}
         if team_json:
             self.team_json = team_json
         else:
@@ -106,6 +107,17 @@ class Team:
         self.venue_json = self.team_json.get("venue", {})
 
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
+
+    def load_team_season_stats(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics?lang=en&region=us'
+        stats_content = fetch_espn_data(url)
+        all_stats = []
+        for stat in stats_content.get('splits', []):
+            all_stats.append(Stat(stat_json=stat,
+                                  espn_instance=self.espn_instance))
+        self.stats[season] = {}
 
     def get_team_colors(self) -> dict:
         """

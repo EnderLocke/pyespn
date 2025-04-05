@@ -558,6 +558,10 @@ class PYESPN:
         for team in self.teams:
             team.load_season_roster(season=season)
 
+    def load_season_team_stats(self, season):
+        for team in self.teams:
+            team.load_team_season_stats(season=season)
+
     def load_season_teams_results(self, season):
         for team in self.teams:
             team.load_season_results(season=season)
