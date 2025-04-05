@@ -169,9 +169,6 @@ class Player:
         This method fetches and assigns the player's historical stats using the ESPN API.
         The stats are stored in the `self.stats` attribute.
 
-        Args:
-            None
-
         Returns:
             None
         """

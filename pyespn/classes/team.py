@@ -223,9 +223,6 @@ class Team:
             Updates the `self.records` dictionary with a list of `Record` instances representing
             seasonal game results.
 
-        Raises:
-            Any exceptions raised by `fetch_espn_data` or malformed API responses are not
-            explicitly handled here.
         """
 
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
