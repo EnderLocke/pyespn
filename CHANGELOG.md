@@ -1,7 +1,8 @@
 # Changelog
 
 ## 0.3.2
-*
+* added in epl
+* 
 
 ## 0.3.1
 * added function to client/team to pull a seasons roster
