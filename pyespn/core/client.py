@@ -576,6 +576,11 @@ class PYESPN:
         for team in self.teams:
             team.load_team_season_stats(season=season)
 
+    def load_seasons_betting_records(self, season):
+
+        for team in self.teams:
+            team.load_season_betting_records(season=season)
+
     def load_season_teams_results(self, season) -> None:
         """
         Loads win/loss and game result data for each team in the specified season.

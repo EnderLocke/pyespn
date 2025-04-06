@@ -68,6 +68,7 @@ class Team:
         self.records = {}
         self.stats = {}
         self.coaches = {}
+        self.betting = {}
         if team_json:
             self.team_json = team_json
         else:
@@ -274,6 +275,20 @@ class Team:
                                         espn_instance=self.espn_instance))
 
         self.coaches[season] = coach_records
+
+    def load_season_betting_records(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        betting = []
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/0/teams/{self.team_id}/odds-records'
+        season_content = fetch_espn_data(url)
+        pages = season_content.get('pageCount', 0)
+        for page in range(1, pages + 1):
+            page_url = url + f'?page={page}'
+            paged_content = fetch_espn_data(page_url)
+            for bet in paged_content.get('items', []):
+                betting.append(Record(record_json=bet,
+                                      espn_instance=self.espn_instance))
+        self.betting[season] = betting
 
     def to_dict(self) -> dict:
         """
