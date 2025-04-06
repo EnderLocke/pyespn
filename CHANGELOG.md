@@ -2,6 +2,8 @@
 
 ## 0.3.2
 * added in epl
+* added in pulling betting records for a season for teams/league
+* fixed pulling team stats
 * 
 
 ## 0.3.1
