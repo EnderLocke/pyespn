@@ -5,6 +5,7 @@ from pyespn.classes.image import Image
 from pyespn.classes.stat import Record, Stat
 from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
+from pyespn.exceptions import API400Error
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -113,12 +114,17 @@ class Team:
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
 
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics?lang=en&region=us'
-        stats_content = fetch_espn_data(url)
         all_stats = []
-        for stat in stats_content.get('splits', []):
-            all_stats.append(Stat(stat_json=stat,
-                                  espn_instance=self.espn_instance))
-        self.stats[season] = {}
+        try:
+            stats_content = fetch_espn_data(url)
+            for categories in stats_content.get('splits', {}).get('categories', []):
+                for stat in categories.get('stats', []):
+                    all_stats.append(Stat(stat_json=stat,
+                                          espn_instance=self.espn_instance))
+        except API400Error as e:
+            pass
+
+        self.stats[season] = all_stats
 
     def get_team_colors(self) -> dict:
         """
