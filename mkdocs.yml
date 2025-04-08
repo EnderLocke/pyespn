@@ -20,11 +20,13 @@ nav:
     - Player: classes/player_class.md
     - Record: classes/record_class.md
     - Recruit: classes/recruit_class.md
+    - Schedule: classes/schedule_class.md
     - Standings: classes/standings_class.md
     - Stats: classes/stat_class.md
     - Team: classes/teams_class.md
     - Venue: classes/venue_class.md
     - Vehicle: classes/vehicle_class.md
+    - Week: classes/week_class.md
   - Discover: discover.md
   - Postman: postman.md
   - About:

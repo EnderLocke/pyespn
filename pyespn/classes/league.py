@@ -10,34 +10,46 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 @validate_json("league_json")
 class League:
     """
-    Represents a sports league with associated details, such as teams, events, and rankings.
+    Represents a sports league with associated data such as teams, events, rankings,
+    betting futures, and statistical leaders.
+
+    This class provides methods for loading and managing league-level data retrieved
+    from the ESPN API, including season-specific information, betting data, and
+    statistical leaderboards.
 
     Attributes:
-        espn_instance (PyESPN): The ESPN API instance used to fetch data.
+        espn_instance (PyESPN): The main interface for interacting with ESPN's API.
         league_json (dict): The raw JSON data representing the league.
-        ref (str): The reference ID of the league.
-        id (str): The unique ID of the league.
-        name (str): The name of the league.
-        display_name (str): The display name of the league.
-        abbreviation (str): The abbreviation of the league.
-        short_name (str): The short name of the league.
-        slug (str): A URL-friendly string for the league.
-        is_tournament (bool): Flag indicating if the league is a tournament.
-        season (dict): The current season details for the league.
-        seasons (list): A list of seasons for the league.
-        franchises (list): A list of franchises in the league.
-        teams (list): A list of teams participating in the league.
-        group (dict): The group associated with the league.
-        groups (list): A list of groups in the league.
-        events (list): A list of events related to the league.
-        notes (str): Additional notes about the league.
-        rankings (list): Rankings of teams or players within the league.
-        draft (dict): The draft details of the league.
-        links (list): Hyperlinks associated with the league's data.
+        ref (str): Reference URL for the league.
+        id (str): The unique identifier for the league.
+        name (str): Full name of the league.
+        display_name (str): Human-readable display name for the league.
+        abbreviation (str): Abbreviated name of the league.
+        short_name (str): Shortened name version of the league.
+        slug (str): URL-friendly version of the league's name.
+        is_tournament (bool): Whether the league is a tournament format.
+        season (dict): Details for the current season.
+        seasons (list): A list of past and present seasons.
+        franchises (list): Franchises associated with the league.
+        teams (list): List of teams in the league.
+        group (dict): Group metadata the league is associated with.
+        groups (list): Collection of groups within the league.
+        events (list): Events related to the league.
+        notes (str): Additional notes or commentary on the league.
+        rankings (list): Ranking data for the league.
+        draft (dict): Draft data associated with the league.
+        links (list): External or internal links related to the league.
+        league_leaders (dict): Cached leader category objects per season.
+        betting_futures (dict): Cached betting futures data per season.
 
     Methods:
-        __repr__(): Returns a string representation of the League instance.
-        _set_league_json(): Populates the attributes of the League instance from the given JSON.
+        __repr__(): Returns a formatted string representation of the league.
+        _set_league_json(): Internal method to populate league attributes from JSON.
+        load_season_free_agents(season): Placeholder for loading free agent data for a season.
+        get_all_seasons_futures(season): Loads and processes all betting futures for the given season.
+        _process_bet(bet, season): Internal helper to create a Betting object from a bet JSON.
+        fetch_leader_category(category, season): Loads and returns a LeaderCategory object.
+        load_season_league_leaders(season): Loads statistical leaders for a given season.
     """
 
     def __init__(self, espn_instance, league_json: dict):
