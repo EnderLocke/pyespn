@@ -373,11 +373,36 @@ class PYESPN:
         for team in self.teams:
             team.load_team_season_stats(season=season)
 
-    def load_season_league_stat_leaders(self, season):
+    def load_season_league_stat_leaders(self, season) -> None:
+        """
+        Loads the league's statistical leaders for the specified season.
+
+        This method retrieves the statistical leaders for the given season
+        by calling the `load_season_league_leaders` method on the league object.
+
+        Args:
+            season (str or int): The season for which the league's stat leaders
+                                should be loaded. This can be a string (e.g., "2023")
+                                or an integer (e.g., 2023).
+
+        Returns:
+            None: This method doesn't return any value. It performs an action
+                  on the league object to load the stat leaders.
+        """
         self.league.load_season_league_leaders(season=season)
 
-    def load_seasons_betting_records(self, season):
+    def load_seasons_betting_records(self, season) -> None:
+        """
+        Loads the betting records for each team in the specified season.
 
+        This method iterates over all the teams in the instance and calls the
+        `load_season_betting_records` method on each team to load their
+        respective betting records for the given season.
+
+        Args:
+            season (str or int): The season for which the betting records need to be loaded.
+                                This can be a string (e.g., "2023") or an integer (e.g., 2023).
+        """
         for team in self.teams:
             team.load_season_betting_records(season=season)
 

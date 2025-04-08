@@ -136,7 +136,7 @@ class League:
         """
         return Betting(betting_json=bet, espn_instance=self.espn_instance)
 
-    def fetch_leader_category(self, category, season):
+    def fetch_leader_category(self, category, season) -> LeaderCategory:
         """
         Fetches leader category data for a specific category in the given season.
 
