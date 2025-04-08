@@ -299,16 +299,6 @@ class PYESPN:
                                                     league_abbv=self.league_abbv,
                                                     espn_instance=self)
 
-    def get_league_info(self) -> "League":
-        """
-        Retrieves information about the league.
-
-        Returns:
-            League: The league's information.
-        """
-        return get_league_info_core(league_abbv=self.league_abbv,
-                                    espn_instance=self)
-
     def get_regular_seasons_schedule(self, season: int) -> list["Schedule"]:
         """
         Retrieves the regular season schedule for a given season.
