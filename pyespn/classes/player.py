@@ -17,48 +17,64 @@ class Player:
         api_ref (str | None): API reference link for the player.
         id (str | None): The unique identifier for the player.
         uid (str | None): The ESPN UID for the player.
-        flag (dict | None): a dict with players nationality/flag (mostly for racing).
         guid (str | None): The GUID associated with the player.
         type (str | None): The type of player (e.g., 'athlete').
-        alternate_ids (str | None): Alternative ID for the player.
-        first_name (str | None): The player's first name.
-        last_name (str | None): The player's last name.
-        full_name (str | None): The player's full name.
-        display_name (str | None): The player's display name.
-        short_name (str | None): A shorter version of the player's name.
-        weight (int | None): The player's weight in pounds.
-        display_weight (str | None): Formatted string of the player's weight.
-        height (int | None): The player's height in inches.
-        display_height (str | None): Formatted string of the player's height.
-        age (int | None): The player's age.
-        date_of_birth (str | None): The player's date of birth (YYYY-MM-DD).
-        debut_year (int | None): The player's debut year.
-        links (list[dict]): A list of links related to the player.
-        birth_city (str | None): The player's birth city.
-        birth_state (str | None): The player's birth state.
-        college_ref (str | None): Reference link to the player's college.
-        slug (str | None): The player's slug identifier.
-        jersey (str | None): The player's jersey number.
-        position_ref (str | None): Reference link to the player's position.
-        position_id (str | None): The player's position ID.
-        position_name (str | None): The full name of the player's position.
-        position_display_name (str | None): The display name of the position.
-        position_abbreviation (str | None): The abbreviation of the position.
-        position_leaf (bool | None): Indicates if the position is a leaf node.
-        position_parent_ref (str | None): Reference link to the parent position.
-        linked (str | None): Linked player information.
-        team_ref (str | None): Reference link to the player's team.
-        statistics_ref (str | None): Reference link to the player's statistics.
-        contracts_ref (str | None): Reference link to the player's contracts.
-        experience_years (int | None): The number of years of experience the player has.
-        active (bool | None): Indicates whether the player is currently active.
-        status_id (str | None): The player's status ID.
-        status_name (str | None): The player's status name.
-        status_type (str | None): The type of player status.
-        status_abbreviation (str | None): Abbreviated form of the player's status.
-        statistics_log_ref (str | None): Reference link to the player's statistics log.
+        flag (dict | None): The player's flag data (for nationality, mainly in racing).
+        citizenship (str | None): The player's citizenship code.
+        experience (dict | int | None): Raw experience data from API.
+        experience_years (int | None): Number of years of experience.
+        event_log (dict | None): Reference to player's event log.
+        stats_log (dict | None): Raw statistics log.
+        alternate_ids (str | None): Alternate ID, e.g., SDR ID.
+        first_name (str | None): The player’s first name.
+        last_name (str | None): The player’s last name.
+        full_name (str | None): The player’s full name.
+        display_name (str | None): Display name.
+        short_name (str | None): Shortened name.
+        weight (int | None): Weight in pounds.
+        display_weight (str | None): Formatted display weight.
+        height (int | None): Height in inches.
+        display_height (str | None): Formatted display height.
+        age (int | None): Age.
+        date_of_birth (str | None): Date of birth (YYYY-MM-DD).
+        debut_year (int | None): Debut year.
+        college_athlete_ref (str | None): Ref to the college athlete profile.
+        links (list[dict]): Related links for the player.
+        birth_city (str | None): City of birth.
+        birth_state (str | None): State of birth.
+        college_ref (str | None): College reference.
+        slug (str | None): URL slug for the player.
+        jersey (str | None): Jersey number.
+        position_ref (str | None): API reference for position.
+        position_id (str | None): Position ID.
+        position_name (str | None): Full position name.
+        position_display_name (str | None): Position display label.
+        position_abbreviation (str | None): Position abbreviation (e.g., "QB").
+        position_leaf (bool | None): Whether it's a leaf node in hierarchy.
+        position_parent_ref (str | None): Reference to parent position node.
+        linked (str | None): Linked player info, if available.
+        team_ref (str | None): Ref to current team.
+        statistics_ref (str | None): Ref to statistical summary.
+        contracts_ref (str | None): Ref to contract data.
+        active (bool | None): Whether the player is active.
+        status_id (str | None): Status ID.
+        status_name (str | None): Status name.
+        status_type (str | None): Status type (e.g., "Active", "Injured").
+        status_abbreviation (str | None): Abbreviation of status.
+        statistics_log_ref (str | None): Ref to full stat log.
+        vehicles (list[Vehicle] | None): List of vehicles (racing-specific).
+        stats (dict): Historical statistics loaded via `load_player_historical_stats()`.
 
     Methods:
+        __repr__() -> str:
+            Returns a string representation of the Player instance, including full name, position abbreviation, and jersey number.
+
+        _set_player_data() -> None:
+            Internal method that parses and assigns player data from the provided JSON.
+
+        load_player_historical_stats() -> None:
+            Loads the historical statistics for the player and stores them in the `stats` attribute.
+
         to_dict() -> dict:
             Returns the raw player JSON data as a dictionary.
     """

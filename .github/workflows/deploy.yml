@@ -54,9 +54,6 @@ jobs:
       - name: Upload to Test PyPI
         run: python -m twine upload --repository testpypi dist/*.whl --config-file /tmp/.pypirc --verbose
 
-      - name: Test MkDocs Build
-        run: mkdocs build --strict
-
   build-package:
     name: Deploy to PyPI
     needs: pytest
@@ -80,7 +77,7 @@ jobs:
           apt-get update
           apt-get install -y sudo
           sudo apt-get install -y pandoc
-          pip install twine pypandoc mkdocs mkdocs-material mkdocstrings mkdocstrings-python 
+          pip install twine pypandoc 
 
       - name: Build Package
         run: python setup.py bdist_wheel
@@ -88,5 +85,61 @@ jobs:
       - name: Upload to PyPI
         run: python -m twine upload --repository pypi dist/*.whl --config-file /tmp/.pypirc
 
-      - name: Deploy Documentation to GitHub Pages
-        run: mkdocs gh-deploy --force
+
+  test-mkdocs:
+    name: Test Build mkdocs
+    environment: preprod
+    needs: test-build-package
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/preprod'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material mkdocstrings mkdocstrings-python
+
+      - name: Test MkDocs Build
+        run: mkdocs build --strict
+
+  deploy-mkdocs:
+    name: Deploy mkdocs
+    needs: build-package
+    environment: prod
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/prod'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material mkdocstrings mkdocstrings-python
+
+      - name: Build the MkDocs site
+        run: mkdocs build
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/EnderLocke/pyespn.git
+          git checkout --orphan gh-pages
+          git add .
+          git commit -m "Deploy MkDocs site"
+          git push origin gh-pages --force
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
