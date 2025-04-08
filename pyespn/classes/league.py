@@ -2,7 +2,7 @@ from pyespn.core.decorators import validate_json
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.exceptions import API400Error
-from pyespn.classes.stat import Record
+from pyespn.classes.betting import Betting
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -91,7 +91,7 @@ class League:
 
     def load_season_futures(self, season):
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        futures = []
+        betting_futures = []
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/futures'
 
         try:
@@ -106,13 +106,30 @@ class League:
 
                 for future in as_completed(future_to_page):
                     page_data = future.result()
-                    for bet in page_data.get('items', []):
-                        futures.append(Record(record_json=bet,
-                                              espn_instance=self.espn_instance))
 
-            self.betting_futures[season] = futures
+                    with ThreadPoolExecutor() as bet_executor:
+                        bet_futures = {
+                            bet_executor.submit(self._process_bet, bet): bet
+                            for bet in page_data.get('items', [])
+                        }
+
+                        # Process each bet as its future completes
+                        for bet_future in as_completed(bet_futures):
+                            betting_futures.append(bet_future.result())
+
+            self.betting_futures[season] = betting_futures
 
         except API400Error as e:
             print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")
 
-        
+    def _process_bet(self, bet):
+        """
+        Processes an individual bet and returns a Betting object.
+
+        Args:
+            bet (dict): The betting data for an individual bet.
+
+        Returns:
+            Betting: The Betting object corresponding to the provided data.
+        """
+        return Betting(betting_json=bet, espn_instance=self.espn_instance)
