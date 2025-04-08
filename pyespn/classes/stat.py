@@ -1,3 +1,5 @@
+from pyespn.classes.player import Player
+from pyespn.utilities import fetch_espn_data, get_team_id
 
 
 class Stat:
@@ -118,6 +120,71 @@ class Record:
         self.description = self.record_json.get('description')
         self.type = self.record_json.get('type')
         self.name = self.record_json.get('name')
-        for stat in self.record_json.get('stats'):
+        for stat in self.record_json.get('stats', []):
             self.stats.append(Stat(stat_json=stat,
                                    espn_instance=self.espn_instance))
+
+
+class LeaderCategory:
+
+    def __init__(self, leader_cat_json, espn_instance, season):
+        self.leader_cat_json = leader_cat_json
+        self.espn_instance = espn_instance
+        self.athletes = {}
+        self.season = season
+        self._load_leaders_data()
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Leader Category instance.
+
+        Returns:
+            str: A formatted string with the leader info.
+        """
+        return f"<LeaderCategory | {self.season}-{self.display_name}>"
+
+    def _load_leaders_data(self):
+        self.abbreviation = self.leader_cat_json.get('abbreviation')
+        self.name = self.leader_cat_json.get('name')
+        self.abbreviation = self.leader_cat_json.get('abbreviation')
+        self.display_name = self.leader_cat_json.get('displayName')
+        all_athletes = []
+        for ath in self.leader_cat_json.get('leaders', []):
+            all_athletes.append(Leader(leader_json=ath,
+                                       espn_instance=self.espn_instance))
+            pass
+        self.athletes[self.season] = all_athletes
+
+
+class Leader:
+
+    def __init__(self, leader_json, espn_instance):
+        self.leader_json = leader_json
+        self.espn_instance = espn_instance
+        self.athlete = None
+        self.team = None
+        self._load_leader_data()
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Leader instance.
+
+        Returns:
+            str: A formatted string with the Leader Info.
+        """
+
+
+        return f"<Leader | {self.athlete.full_name}-{self.value}: {self.team.name}>"
+
+    def _load_leader_data(self):
+        self.value = self.leader_json.get('value', 0)
+        self.rel = self.leader_json.get('rel')
+        if 'athlete' in self.rel:
+            athlete_content = fetch_espn_data(self.leader_json.get('athlete', {}).get('$ref'))
+            self.athlete = Player(player_json=athlete_content,
+                                  espn_instance=self.espn_instance)
+        if 'team' in self.leader_json:
+            team_id = get_team_id(self.leader_json.get('team', {}).get('$ref'))
+            self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+
+        pass

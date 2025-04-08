@@ -176,7 +176,7 @@ class Line:
             msg += f'{self.team.name} | {self.value}'
 
         if self.athlete:
-            msg += f'{self.athlete.name} | {self.value}'
+            msg += f'{self.athlete.full_name} | {self.value}'
 
         return f"<Betting Line: {msg}>"
 

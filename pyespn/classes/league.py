@@ -2,7 +2,8 @@ from pyespn.core.decorators import validate_json
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.exceptions import API400Error
-from pyespn.classes.stat import Record
+from pyespn.classes.betting import Betting
+from pyespn.classes.stat import LeaderCategory
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -49,6 +50,7 @@ class League:
         """
         self.league_json = league_json
         self.espn_instance = espn_instance
+        self.league_leaders = {}
         self.betting_futures = {}
         self._set_league_json()
 
@@ -91,7 +93,7 @@ class League:
 
     def load_season_futures(self, season):
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        futures = []
+        betting_futures = []
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/futures'
 
         try:
@@ -106,13 +108,79 @@ class League:
 
                 for future in as_completed(future_to_page):
                     page_data = future.result()
-                    for bet in page_data.get('items', []):
-                        futures.append(Record(record_json=bet,
-                                              espn_instance=self.espn_instance))
 
-            self.betting_futures[season] = futures
+                    with ThreadPoolExecutor() as bet_executor:
+                        bet_futures = {
+                            bet_executor.submit(self._process_bet, bet): bet
+                            for bet in page_data.get('items', [])
+                        }
+
+                        # Process each bet as its future completes
+                        for bet_future in as_completed(bet_futures):
+                            betting_futures.append(bet_future.result())
+
+            self.betting_futures[season] = betting_futures
 
         except API400Error as e:
             print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")
 
-        
+    def _process_bet(self, bet):
+        """
+        Processes an individual bet and returns a Betting object.
+
+        Args:
+            bet (dict): The betting data for an individual bet.
+
+        Returns:
+            Betting: The Betting object corresponding to the provided data.
+        """
+        return Betting(betting_json=bet, espn_instance=self.espn_instance)
+
+    def fetch_leader_category(self, category, season):
+        """
+        Fetches leader category data for a specific category in the given season.
+
+        Args:
+            category (dict): The category data to be processed.
+            season (str): The season for which the leader data is fetched.
+
+        Returns:
+            LeaderCategory: The LeaderCategory object created for this category.
+        """
+        return LeaderCategory(leader_cat_json=category,
+                              espn_instance=self.espn_instance,
+                              season=season)
+
+    def load_season_league_leaders(self, season):
+        """
+        Fetches the league leaders for the given season using futures to process categories concurrently.
+
+        Args:
+            season (str): The season for which the league leaders are fetched.
+        """
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/leaders'
+
+        try:
+            leaders_content = fetch_espn_data(url)
+            leaders = []
+
+            with ThreadPoolExecutor() as executor:
+                # Submit a task for each category to fetch leader data concurrently
+                future_to_category = {
+                    executor.submit(self.fetch_leader_category, category, season): category
+                    for category in leaders_content.get('categories', [])
+                }
+
+                # Collect results as they complete
+                for future in as_completed(future_to_category):
+                    try:
+                        category_data = future.result()
+                        leaders.append(category_data)
+                    except Exception as e:
+                        print(f"Error fetching leader category: {e}")
+
+            self.league_leaders[season] = leaders
+
+        except API400Error as e:
+            print(f"Failed to fetch league leaders for season {season}: {e}")

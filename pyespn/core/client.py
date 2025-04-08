@@ -87,18 +87,6 @@ class PYESPN:
         """
         return f"<PyESPN | League {self.league_abbv}>"
 
-    def _load_teams_data(self):
-        """
-        Loads data for all teams in the current league and stores them in the `teams` attribute.
-        """
-        for team in self.TEAM_ID_MAPPING:
-            try:
-                team_cls = self.get_team_info(team_id=team['team_id'])
-                self.teams.append(team_cls)
-            except API400Error as e:
-                # right now i am assuming if it doesn't exist here its not in the data
-                pass
-
     def _load_teams_datav2(self):
         """
         Loads data for all teams in the current league using concurrency and stores them in the `teams` attribute.
@@ -123,7 +111,9 @@ class PYESPN:
             team_cls (Team or None): The team instance if found, otherwise None.
         """
         try:
-            team_cls = self.get_team_info(team_id=team['team_id'])
+            team_cls = get_team_info_core(team_id=team['team_id'],
+                                          league_abbv=self.league_abbv,
+                                          espn_instance=self)
             return team_cls
         except API400Error:
             return None  # Skip teams that don't exist in the data
@@ -235,20 +225,6 @@ class PYESPN:
                                   league_abbv=self.league_abbv,
                                   espn_instnace=self)
 
-    def get_team_info(self, team_id) -> "Team":
-        """
-        Retrieves detailed information about a team.
-
-        Args:
-            team_id (str): The ID of the team.
-
-        Returns:
-            Team: The team's information.
-        """
-        return get_team_info_core(team_id=team_id,
-                                  league_abbv=self.league_abbv,
-                                  espn_instance=self)
-
     def get_season_team_stats(self, season) -> dict:
         """
         Retrieves statistics for teams during a specific season.
@@ -293,57 +269,6 @@ class PYESPN:
         return get_players_historical_stats_core(player_id=player_id,
                                                  espn_instance=self,
                                                  league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_league_year_champion_futures(self, season, provider=None) -> list:
-        """
-        Retrieves betting odds for the league champion for a given season.
-
-        Args:
-            season (str): The season for which to retrieve the champion futures.
-            provider (str, optional): The betting provider to use.
-
-        Returns:
-            list: The league champion futures for the specified season.
-        """
-        this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
-        return get_year_league_champions_futures_core(season=season,
-                                                      league_abbv=self.league_abbv,
-                                                      provider=this_provider)
-
-    @requires_betting_available
-    def get_league_year_division_champs_futures(self, season, division, provider=None) -> list:
-        """
-        Retrieves betting odds for division champions for a given season and division.
-
-        Args:
-            season (str): The season for which to retrieve division champion futures.
-            division (str): The division for which to retrieve betting odds.
-            provider (str, optional): The betting provider to use.
-
-        Returns:
-            list: The division champion futures for the specified season and division.
-        """
-        this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
-        return get_division_champ_futures_core(season=season,
-                                               division=division,
-                                               league_abbv=self.league_abbv,
-                                               provider=this_provider)
-
-    @requires_betting_available
-    def get_all_seasons_futures(self, season) -> list:
-        """
-        Retrieves all betting futures for a given season.
-
-        Args:
-            season (str): The season for which to retrieve betting futures.
-
-        Returns:
-            list: All betting futures for the specified season.
-        """
-        return get_season_futures_core(season=season,
-                                       league_abbv=self.league_abbv,
-                                       espn_instance=self)
 
     def get_awards(self, season) -> list[dict]:
         """
@@ -447,6 +372,9 @@ class PYESPN:
         """
         for team in self.teams:
             team.load_team_season_stats(season=season)
+
+    def load_season_league_stat_leaders(self, season):
+        self.league.load_season_league_leaders(season=season)
 
     def load_seasons_betting_records(self, season):
 
