@@ -87,18 +87,6 @@ class PYESPN:
         """
         return f"<PyESPN | League {self.league_abbv}>"
 
-    def _load_teams_data(self):
-        """
-        Loads data for all teams in the current league and stores them in the `teams` attribute.
-        """
-        for team in self.TEAM_ID_MAPPING:
-            try:
-                team_cls = self.get_team_info(team_id=team['team_id'])
-                self.teams.append(team_cls)
-            except API400Error as e:
-                # right now i am assuming if it doesn't exist here its not in the data
-                pass
-
     def _load_teams_datav2(self):
         """
         Loads data for all teams in the current league using concurrency and stores them in the `teams` attribute.
