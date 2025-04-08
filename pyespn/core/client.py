@@ -31,7 +31,6 @@ class PYESPN:
         DEFAULT_BETTING_PROVIDER (dict): The default betting provider for the current league.
         teams (List[Teams]): A list of teams in the current league.
         standings (dict): a dict of standings for a year
-        betting_futures (dict): a dict of betting for a year
         recruit_rankings (dict): a dict with season and a list of recruit rankings for a year
         drafts (dict): a dict with draft data in a list with key as season
         athletes (dict): a dict of all athletes with season as a key
@@ -132,7 +131,7 @@ class PYESPN:
         Args:
             season (str): The season for which to load betting futures.
         """
-        self.betting_futures[season] = self.league.get_all_seasons_futures(season=season)
+        self.league.get_all_seasons_futures(season=season)
 
     def load_regular_season_schedule(self, season: int):
         """
