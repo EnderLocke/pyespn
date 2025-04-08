@@ -123,7 +123,9 @@ class PYESPN:
             team_cls (Team or None): The team instance if found, otherwise None.
         """
         try:
-            team_cls = self.get_team_info(team_id=team['team_id'])
+            team_cls = get_team_info_core(team_id=team['team_id'],
+                                          league_abbv=self.league_abbv,
+                                          espn_instance=self)
             return team_cls
         except API400Error:
             return None  # Skip teams that don't exist in the data
@@ -234,20 +236,6 @@ class PYESPN:
         return get_game_info_core(event_id=event_id,
                                   league_abbv=self.league_abbv,
                                   espn_instnace=self)
-
-    def get_team_info(self, team_id) -> "Team":
-        """
-        Retrieves detailed information about a team.
-
-        Args:
-            team_id (str): The ID of the team.
-
-        Returns:
-            Team: The team's information.
-        """
-        return get_team_info_core(team_id=team_id,
-                                  league_abbv=self.league_abbv,
-                                  espn_instance=self)
 
     def get_season_team_stats(self, season) -> dict:
         """
