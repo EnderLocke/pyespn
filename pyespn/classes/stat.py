@@ -1,5 +1,5 @@
 from pyespn.classes.player import Player
-from pyespn.utilities import fetch_espn_data, get_team_id
+from pyespn.utilities import fetch_espn_data, get_team_id, get_athlete_id
 
 
 class Stat:
@@ -192,6 +192,7 @@ class LeaderCategory:
         for ath in self.leader_cat_json.get('leaders', []):
             all_athletes.append(Leader(leader_json=ath,
                                        espn_instance=self.espn_instance,
+                                       season=self.season,
                                        rank=rank))
             rank += 1
         self.athletes[self.season] = all_athletes
@@ -220,7 +221,7 @@ class Leader:
         _load_leader_data(): Loads the leader data from the provided JSON, initializing athlete, team, and value.
     """
 
-    def __init__(self, leader_json, espn_instance, rank):
+    def __init__(self, leader_json, espn_instance, season, rank):
         """
         Initializes a Leader instance with the given leader data.
 
@@ -232,6 +233,7 @@ class Leader:
         self.leader_json = leader_json
         self.espn_instance = espn_instance
         self.rank = rank
+        self.season = season
         self.athlete = None
         self.team = None
         self._load_leader_data()
@@ -244,7 +246,7 @@ class Leader:
             str: A formatted string with the Leader Info.
         """
 
-        return f"<Leader | {self.athlete.full_name}-{self.value}: {self.team.name}>"
+        return f"<Leader - {self.rank} | {self.athlete.full_name}-{self.value}: {self.team.name}>"
 
     def _load_leader_data(self):
         """
@@ -262,10 +264,20 @@ class Leader:
         """
         self.value = self.leader_json.get('value', 0)
         self.rel = self.leader_json.get('rel')
-        if 'athlete' in self.rel:
-            athlete_content = fetch_espn_data(self.leader_json.get('athlete', {}).get('$ref'))
-            self.athlete = Player(player_json=athlete_content,
-                                  espn_instance=self.espn_instance)
+
         if 'team' in self.leader_json:
             team_id = get_team_id(self.leader_json.get('team', {}).get('$ref'))
             self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+
+        if 'athlete' in self.rel:
+            try:
+                athlete_id = get_athlete_id(self.leader_json.get('athlete', {}).get('$ref'))
+                self.athlete = self.team.get_player_by_season_id(season=self.season, player_id=athlete_id)
+            except Exception as e:
+                print(e)
+            finally:
+                if not self.athlete:
+                    #print('athlete not found')
+                    athlete_content = fetch_espn_data(self.leader_json.get('athlete', {}).get('$ref'))
+                    self.athlete = Player(player_json=athlete_content,
+                                          espn_instance=self.espn_instance)
