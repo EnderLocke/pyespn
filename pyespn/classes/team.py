@@ -300,7 +300,7 @@ class Team:
             self.betting[season] = futures
 
         except API400Error as e:
-            print(f"Failed to fetch futures data for season {season} | team {self.name} | id {self.team_id}: {e}")
+            print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")
 
     def to_dict(self) -> dict:
         """
