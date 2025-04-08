@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.3.2
-* added in epl
+* added in epl / soccer
 * added in pulling betting records for a season for teams/ teams in a league
 * fixed pulling team stats
 * removed client functions that are now found within other classes. i.e. betting calls are available in teams
