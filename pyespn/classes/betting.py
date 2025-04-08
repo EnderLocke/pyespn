@@ -190,8 +190,8 @@ class Line:
         try:
             if 'athlete' in self.book_json:
                 athlete_id = get_athlete_id(self.book_json.get('athlete', {}).get('$ref'))
-                self.athlete = self.espn_instance.get_player_by_season_id(season=self.provider_instance.betting_instance.season,
-                                                                          player_id=athlete_id)
+                self.athlete = self.espn_instance.check_teams_for_player_by_season(season=self.provider_instance.betting_instance.season,
+                                                                                   player_id=athlete_id)
                 if not self.athlete:
 
                     self.ref = self.book_json.get('athlete').get('$ref')
