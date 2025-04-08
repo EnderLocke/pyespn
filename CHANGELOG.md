@@ -9,6 +9,7 @@
 * added func to load futures (betting) for league class for a season
 * removed get_team_info call from client
   * all this data is in the .teams once the client loads
+* removed betting calls from client as the data is in classes teams and league now
 * 
 
 ## 0.3.1
