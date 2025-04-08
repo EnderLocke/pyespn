@@ -92,6 +92,22 @@ class League:
         url = f''
 
     def load_season_futures(self, season):
+        """
+        Loads and processes betting futures for a given season.
+
+        This method retrieves betting futures data for the specified season using the ESPN API.
+        It handles pagination and concurrent data fetching using thread pools for improved performance.
+        Each betting item is processed individually through `_process_bet` and collected into a list.
+
+        The processed futures are stored in `self.betting_futures` under the specified season key.
+
+        Args:
+            season (int or str): The season year to fetch futures data for.
+
+        Raises:
+            API400Error: If the ESPN API returns a 400-level error during data fetching, an error message
+                         will be printed including the season, team name, and team ID.
+        """
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         betting_futures = []
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/futures'
