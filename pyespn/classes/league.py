@@ -108,6 +108,10 @@ class League:
             API400Error: If the ESPN API returns a 400-level error during data fetching, an error message
                          will be printed including the season, team name, and team ID.
         """
+        for team in self.espn_instance.teams:
+            if season not in team.roster:
+                team.load_season_roster(season=season)
+
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         betting_futures = []
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/futures'
