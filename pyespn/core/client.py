@@ -270,57 +270,6 @@ class PYESPN:
                                                  espn_instance=self,
                                                  league_abbv=self.league_abbv)
 
-    @requires_betting_available
-    def get_league_year_champion_futures(self, season, provider=None) -> list:
-        """
-        Retrieves betting odds for the league champion for a given season.
-
-        Args:
-            season (str): The season for which to retrieve the champion futures.
-            provider (str, optional): The betting provider to use.
-
-        Returns:
-            list: The league champion futures for the specified season.
-        """
-        this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
-        return get_year_league_champions_futures_core(season=season,
-                                                      league_abbv=self.league_abbv,
-                                                      provider=this_provider)
-
-    @requires_betting_available
-    def get_league_year_division_champs_futures(self, season, division, provider=None) -> list:
-        """
-        Retrieves betting odds for division champions for a given season and division.
-
-        Args:
-            season (str): The season for which to retrieve division champion futures.
-            division (str): The division for which to retrieve betting odds.
-            provider (str, optional): The betting provider to use.
-
-        Returns:
-            list: The division champion futures for the specified season and division.
-        """
-        this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
-        return get_division_champ_futures_core(season=season,
-                                               division=division,
-                                               league_abbv=self.league_abbv,
-                                               provider=this_provider)
-
-    @requires_betting_available
-    def get_all_seasons_futures(self, season) -> list:
-        """
-        Retrieves all betting futures for a given season.
-
-        Args:
-            season (str): The season for which to retrieve betting futures.
-
-        Returns:
-            list: All betting futures for the specified season.
-        """
-        return get_season_futures_core(season=season,
-                                       league_abbv=self.league_abbv,
-                                       espn_instance=self)
-
     def get_awards(self, season) -> list[dict]:
         """
         Retrieves awards for a given season.
