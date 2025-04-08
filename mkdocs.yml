@@ -15,7 +15,7 @@ nav:
     - Leader: classes/leader_class.md
     - Leader Category: classes/leader_category_class.md
     - League: classes/league_class.md
-    - Line: classes/line.md
+    - Line: classes/line_class.md
     - Manufacturer: classes/manufacturer_class.md
     - Player: classes/player_class.md
     - Record: classes/record_class.md
