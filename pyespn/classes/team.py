@@ -53,6 +53,30 @@ class Team:
 
         to_dict() -> dict:
             Returns the raw team JSON data as a dictionary.
+
+        get_player_by_season_id(season, player_id) -> Player:
+            Finds and returns the Player object that matches the given player_id for a specific season.
+
+        __repr__() -> str:
+            Returns a string representation of the Team instance.
+
+        _load_team_data() -> None:
+            Extracts and sets the team data from the provided JSON.
+
+        load_team_season_stats(season) -> None:
+            Fetches and loads team-level statistical data for a specific season using concurrent requests.
+
+        load_season_roster(season) -> None:
+            Loads the team roster for a given season, using concurrent API requests to fetch player data.
+
+        load_season_results(season) -> None:
+            Retrieves and stores seasonal game records for the team.
+
+        load_season_coaches(season) -> None:
+            Loads the coaching staff for the team in the specified season.
+
+        load_season_betting_records(season) -> None:
+            Fetches and loads the betting odds records for a specific team and season using concurrent requests.
     """
 
     def __init__(self, espn_instance, team_json):

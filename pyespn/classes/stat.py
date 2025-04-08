@@ -8,7 +8,24 @@ class Stat:
 
     Attributes:
         stat_json (dict): The raw JSON data containing the statistical information.
-        espn_instance: The ESPN API instance used for retrieving additional data.
+        espn_instance (PYESPN): The ESPN API instance used for retrieving additional data.
+        category (str): The category of the stat (e.g., 'batting', 'pitching').
+        season (int): The season in which the stats were recorded.
+        player_id (str): The unique ID of the player.
+        stat_value (float | int): The value of the stat.
+        stat_type_abbreviation (str): Abbreviation of the stat type.
+        description (str): A description of the stat.
+        name (str): The name of the stat (e.g., 'home runs', 'strikeouts').
+        type (str): The type of stat (e.g., 'single', 'accumulated').
+        per_game_value (float | None): The value per game, if available.
+        rank (int | None): The player's rank in the stat category.
+
+    Methods:
+        __repr__() -> str:
+            Returns a string representation of the Stat instance, including the stat name, season, and value.
+
+        _set_stats_data() -> None:
+            Extracts and sets the statistical attributes from the provided JSON data.
     """
 
     def __init__(self, stat_json, espn_instance):

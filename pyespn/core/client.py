@@ -7,7 +7,7 @@ from pyespn.exceptions import API400Error
 from pyespn.utilities import lookup_league_api_info
 from .decorators import *
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 import concurrent.futures
 
 if TYPE_CHECKING:
@@ -31,7 +31,6 @@ class PYESPN:
         DEFAULT_BETTING_PROVIDER (dict): The default betting provider for the current league.
         teams (List[Teams]): A list of teams in the current league.
         standings (dict): a dict of standings for a year
-        betting_futures (dict): a dict of betting for a year
         recruit_rankings (dict): a dict with season and a list of recruit rankings for a year
         drafts (dict): a dict with draft data in a list with key as season
         athletes (dict): a dict of all athletes with season as a key
@@ -64,7 +63,6 @@ class PYESPN:
         self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
         self.teams = []
         self.standings = {}
-        self.betting_futures = {}
         self.schedules = {}
         self.recruit_rankings = {}
         self.drafts = {}
@@ -132,7 +130,7 @@ class PYESPN:
         Args:
             season (str): The season for which to load betting futures.
         """
-        self.betting_futures[season] = self.league.get_all_seasons_futures(season=season)
+        self.league.get_all_seasons_futures(season=season)
 
     def load_regular_season_schedule(self, season: int):
         """
@@ -473,7 +471,7 @@ class PYESPN:
                                                             espn_instance=self,
                                                             league_abbv=self.league_abbv)
 
-    def check_teams_for_player_by_season(self, season, player_id):
+    def check_teams_for_player_by_season(self, season, player_id) -> Optional["Player"]:
         """
         Searches through all teams for a specific player by season and player ID.
 
