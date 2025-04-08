@@ -7,7 +7,7 @@ from pyespn.exceptions import API400Error
 from pyespn.utilities import lookup_league_api_info
 from .decorators import *
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 import concurrent.futures
 
 if TYPE_CHECKING:
@@ -31,7 +31,6 @@ class PYESPN:
         DEFAULT_BETTING_PROVIDER (dict): The default betting provider for the current league.
         teams (List[Teams]): A list of teams in the current league.
         standings (dict): a dict of standings for a year
-        betting_futures (dict): a dict of betting for a year
         recruit_rankings (dict): a dict with season and a list of recruit rankings for a year
         drafts (dict): a dict with draft data in a list with key as season
         athletes (dict): a dict of all athletes with season as a key
@@ -64,7 +63,6 @@ class PYESPN:
         self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
         self.teams = []
         self.standings = {}
-        self.betting_futures = {}
         self.schedules = {}
         self.recruit_rankings = {}
         self.drafts = {}
@@ -86,18 +84,6 @@ class PYESPN:
             str: A formatted string with class details
         """
         return f"<PyESPN | League {self.league_abbv}>"
-
-    def _load_teams_data(self):
-        """
-        Loads data for all teams in the current league and stores them in the `teams` attribute.
-        """
-        for team in self.TEAM_ID_MAPPING:
-            try:
-                team_cls = self.get_team_info(team_id=team['team_id'])
-                self.teams.append(team_cls)
-            except API400Error as e:
-                # right now i am assuming if it doesn't exist here its not in the data
-                pass
 
     def _load_teams_datav2(self):
         """
@@ -123,7 +109,9 @@ class PYESPN:
             team_cls (Team or None): The team instance if found, otherwise None.
         """
         try:
-            team_cls = self.get_team_info(team_id=team['team_id'])
+            team_cls = get_team_info_core(team_id=team['team_id'],
+                                          league_abbv=self.league_abbv,
+                                          espn_instance=self)
             return team_cls
         except API400Error:
             return None  # Skip teams that don't exist in the data
@@ -132,7 +120,8 @@ class PYESPN:
         """
         Loads data for the current league and stores it in the `league` attribute.
         """
-        self.league = self.get_league_info()
+        self.league = get_league_info_core(league_abbv=self.league_abbv,
+                                           espn_instance=self)
 
     def load_seasons_futures(self, season):
         """
@@ -141,7 +130,7 @@ class PYESPN:
         Args:
             season (str): The season for which to load betting futures.
         """
-        self.betting_futures[season] = self.get_all_seasons_futures(season=season)
+        self.league.get_all_seasons_futures(season=season)
 
     def load_regular_season_schedule(self, season: int):
         """
@@ -235,20 +224,6 @@ class PYESPN:
                                   league_abbv=self.league_abbv,
                                   espn_instnace=self)
 
-    def get_team_info(self, team_id) -> "Team":
-        """
-        Retrieves detailed information about a team.
-
-        Args:
-            team_id (str): The ID of the team.
-
-        Returns:
-            Team: The team's information.
-        """
-        return get_team_info_core(team_id=team_id,
-                                  league_abbv=self.league_abbv,
-                                  espn_instance=self)
-
     def get_season_team_stats(self, season) -> dict:
         """
         Retrieves statistics for teams during a specific season.
@@ -294,185 +269,6 @@ class PYESPN:
                                                  espn_instance=self,
                                                  league_abbv=self.league_abbv)
 
-    @requires_betting_available
-    def get_league_year_champion_futures(self, season, provider=None) -> list:
-        """
-        Retrieves betting odds for the league champion for a given season.
-
-        Args:
-            season (str): The season for which to retrieve the champion futures.
-            provider (str, optional): The betting provider to use.
-
-        Returns:
-            list: The league champion futures for the specified season.
-        """
-        this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
-        return get_year_league_champions_futures_core(season=season,
-                                                      league_abbv=self.league_abbv,
-                                                      provider=this_provider)
-
-    @requires_betting_available
-    def get_league_year_division_champs_futures(self, season, division, provider=None) -> list:
-        """
-        Retrieves betting odds for division champions for a given season and division.
-
-        Args:
-            season (str): The season for which to retrieve division champion futures.
-            division (str): The division for which to retrieve betting odds.
-            provider (str, optional): The betting provider to use.
-
-        Returns:
-            list: The division champion futures for the specified season and division.
-        """
-        this_provider = provider if provider else self.DEFAULT_BETTING_PROVIDER
-        return get_division_champ_futures_core(season=season,
-                                               division=division,
-                                               league_abbv=self.league_abbv,
-                                               provider=this_provider)
-
-    @requires_betting_available
-    def get_team_year_ats_away(self, team_id, season) -> dict:
-        """
-        Retrieves the team's against the spread (ATS) performance for away games in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for away games.
-        """
-        return get_team_year_ats_away_core(team_id=team_id,
-                                           season=season,
-                                           league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_home_favorite(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance for home games as a favorite in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for home games as a favorite.
-        """
-        return get_team_year_ats_home_favorite_core(team_id=team_id,
-                                                    season=season,
-                                                    league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_away_underdog(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance for away games as an underdog in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for away games as an underdog.
-        """
-        return get_team_year_ats_away_underdog_core(team_id=team_id,
-                                                    season=season,
-                                                    league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_favorite(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance as a favorite in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance as a favorite.
-        """
-        return get_team_year_ats_favorite_core(team_id=team_id,
-                                               season=season,
-                                               league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_home(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance for home games in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for home games.
-        """
-        return get_team_year_ats_home_core(team_id=team_id,
-                                           season=season,
-                                           league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_overall(self, team_id, season) -> dict:
-        """
-        Retrieves the team's overall ATS performance for a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's overall ATS performance.
-        """
-        return get_team_year_ats_overall_core(team_id=team_id,
-                                              season=season,
-                                              league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_underdog(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance as an underdog in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance as an underdog.
-        """
-        return get_team_year_ats_underdog_core(team_id=team_id,
-                                               season=season,
-                                               league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_home_underdog(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance for home games as an underdog in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for home games as an underdog.
-        """
-        return get_team_year_ats_home_underdog_core(team_id=team_id,
-                                                    season=season,
-                                                    league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_all_seasons_futures(self, season) -> list:
-        """
-        Retrieves all betting futures for a given season.
-
-        Args:
-            season (str): The season for which to retrieve betting futures.
-
-        Returns:
-            list: All betting futures for the specified season.
-        """
-        return get_season_futures_core(season=season,
-                                       league_abbv=self.league_abbv,
-                                       espn_instance=self)
-
     def get_awards(self, season) -> list[dict]:
         """
         Retrieves awards for a given season.
@@ -500,16 +296,6 @@ class PYESPN:
         self.standings[season] = get_standings_core(season=season,
                                                     league_abbv=self.league_abbv,
                                                     espn_instance=self)
-
-    def get_league_info(self) -> "League":
-        """
-        Retrieves information about the league.
-
-        Returns:
-            League: The league's information.
-        """
-        return get_league_info_core(league_abbv=self.league_abbv,
-                                    espn_instance=self)
 
     def get_regular_seasons_schedule(self, season: int) -> list["Schedule"]:
         """
@@ -575,6 +361,39 @@ class PYESPN:
         """
         for team in self.teams:
             team.load_team_season_stats(season=season)
+
+    def load_season_league_stat_leaders(self, season) -> None:
+        """
+        Loads the league's statistical leaders for the specified season.
+
+        This method retrieves the statistical leaders for the given season
+        by calling the `load_season_league_leaders` method on the league object.
+
+        Args:
+            season (str or int): The season for which the league's stat leaders
+                                should be loaded. This can be a string (e.g., "2023")
+                                or an integer (e.g., 2023).
+
+        Returns:
+            None: This method doesn't return any value. It performs an action
+                  on the league object to load the stat leaders.
+        """
+        self.league.load_season_league_leaders(season=season)
+
+    def load_seasons_betting_records(self, season) -> None:
+        """
+        Loads the betting records for each team in the specified season.
+
+        This method iterates over all the teams in the instance and calls the
+        `load_season_betting_records` method on each team to load their
+        respective betting records for the given season.
+
+        Args:
+            season (str or int): The season for which the betting records need to be loaded.
+                                This can be a string (e.g., "2023") or an integer (e.g., 2023).
+        """
+        for team in self.teams:
+            team.load_season_betting_records(season=season)
 
     def load_season_teams_results(self, season) -> None:
         """
@@ -651,3 +470,24 @@ class PYESPN:
         self.manufacturers[season] = get_manufacturers_core(season=season,
                                                             espn_instance=self,
                                                             league_abbv=self.league_abbv)
+
+    def check_teams_for_player_by_season(self, season, player_id) -> Optional["Player"]:
+        """
+        Searches through all teams for a specific player by season and player ID.
+
+        Iterates over each team in `self.teams` and checks if the player with the given
+        `player_id` was on the roster during the specified `season`. Returns the first
+        matching athlete found.
+
+        Args:
+            season (int or str): The season year to search within each team.
+            player_id (int or str): The unique identifier of the player to find.
+
+        Returns:
+            Player or None: The matching player object if found; otherwise, None.
+        """
+        athlete = None
+        for team in self.teams:
+            athlete = team.get_player_by_season_id(season=season,
+                                                   player_id=player_id)
+        return athlete

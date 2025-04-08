@@ -6,16 +6,25 @@ from pyespn.classes.stat import Record
 
 class Standings:
     """
-    Represents the standings for a racing league, including athletes, manufacturers, and records.
+    Represents the standings for a racing league, including athletes, manufacturers, and performance records.
 
     This class initializes and processes standings data from a given JSON structure, fetching
-    additional details for athletes and manufacturers as needed.
+    additional details for athletes and manufacturers via the ESPN API.
 
     Attributes:
-        standings_json (dict): Stores the raw standings JSON data.
-        espn_instance (object): Reference to the ESPN API instance.
-        standings (list): A list of dictionaries containing athlete, manufacturer, and record data.
-        standings_type_name (str): The display name for the standings category.
+        standings_json (dict): Raw JSON data containing the standings structure.
+        espn_instance (object): An instance of the ESPN API handler (PyESPN).
+        standings (list): A list of dictionaries, each containing:
+            - 'athlete' (Player or None): The athlete in the standing.
+            - 'manufacturer' (Manufacturer or None): The associated manufacturer.
+            - 'record' (list of Record): A list of performance records.
+        standings_type_name (str): The display name for the standings category (e.g., "Drivers", "Constructors").
+        this_athlete (Player or None): Temporary reference to the currently processed athlete.
+        this_manufacturer (Manufacturer or None): Temporary reference to the currently processed manufacturer.
+
+    Methods:
+        __repr__(): Returns a string representation of the standings.
+        _load_standings_data(): Parses JSON and populates the standings with athletes, manufacturers, and records.
     """
 
     def __init__(self, standings_json, espn_instance):

@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.2
+* added in epl / soccer
+* added in pulling betting records for a season for teams/ teams in a league
+* fixed pulling team stats
+* removed client functions that are now found within other classes. i.e. betting calls are available in teams
+* fixed some functions to use futures, this probably wont improve much performance but if a call hangs it could help
+* added func to load futures (betting) for league class for a season
+* removed get_team_info call from client
+  * all this data is in the .teams once the client loads
+* removed betting calls from client as the data is in classes teams and league now
+* added in call for league leaders for a season in league class
+* removed get_league_info call from client as all the data is in the league variable once client is loaded
+* added functions to client to search teams rosters for a given season for a player
+* added in auto load for rosters for given season for both betting futures and league leaders to reduce calls to api
+* 
+
 ## 0.3.1
 * added function to client/team to pull a seasons roster
 * adding in tests and fixed some of the long running tests

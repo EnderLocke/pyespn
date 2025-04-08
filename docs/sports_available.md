@@ -26,3 +26,22 @@
 | f1              | F1               |
 | nascar          | NASCAR Premier   |
 | indy            | IRL              |
+
+## 🎾 Tennis 🎾
+
+| League Abbreviation | League Name |
+|---------------------|-------------|
+| atp                 | atp         |
+
+
+## ⛳️ Golf ⛳️
+
+| League Abbreviation | League Name |
+|---------------------|-------------|
+| pga                 | pga         |
+
+## ⚽️ European Football/Soccer ⚽️
+
+| League Abbreviation | League Name            |
+|---------------------|------------------------|
+| epl                 | english pramier league |

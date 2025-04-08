@@ -1,0 +1,124 @@
+{
+"teams": [
+        {
+            "team_name": "Brighton & Hove Albion",
+            "team_city": "Brighton & Hove Albion",
+            "team_id": 331,
+            "team_abbv": "BHA"
+        },
+        {
+            "team_name": "Brentford",
+            "team_city": "Brentford",
+            "team_id": 337,
+            "team_abbv": "BRE"
+        },
+        {
+            "team_name": "AFC Bournemouth",
+            "team_city": "AFC Bournemouth",
+            "team_id": 349,
+            "team_abbv": "BOU"
+        },
+        {
+            "team_name": "Arsenal",
+            "team_city": "Arsenal",
+            "team_id": 359,
+            "team_abbv": "ARS"
+        },
+        {
+            "team_name": "Manchester United",
+            "team_city": "Manchester United",
+            "team_id": 360,
+            "team_abbv": "MAN"
+        },
+        {
+            "team_name": "Newcastle United",
+            "team_city": "Newcastle United",
+            "team_id": 361,
+            "team_abbv": "NEW"
+        },
+        {
+            "team_name": "Aston Villa",
+            "team_city": "Aston Villa",
+            "team_id": 362,
+            "team_abbv": "AVL"
+        },
+        {
+            "team_name": "Chelsea",
+            "team_city": "Chelsea",
+            "team_id": 363,
+            "team_abbv": "CHE"
+        },
+        {
+            "team_name": "Liverpool",
+            "team_city": "Liverpool",
+            "team_id": 364,
+            "team_abbv": "LIV"
+        },
+        {
+            "team_name": "Tottenham Hotspur",
+            "team_city": "Tottenham Hotspur",
+            "team_id": 367,
+            "team_abbv": "TOT"
+        },
+        {
+            "team_name": "Everton",
+            "team_city": "Everton",
+            "team_id": 368,
+            "team_abbv": "EVE"
+        },
+        {
+            "team_name": "Fulham",
+            "team_city": "Fulham",
+            "team_id": 370,
+            "team_abbv": "FUL"
+        },
+        {
+            "team_name": "West Ham United",
+            "team_city": "West Ham United",
+            "team_id": 371,
+            "team_abbv": "WHU"
+        },
+        {
+            "team_name": "Ipswich Town",
+            "team_city": "Ipswich Town",
+            "team_id": 373,
+            "team_abbv": "IPS"
+        },
+        {
+            "team_name": "Leicester City",
+            "team_city": "Leicester City",
+            "team_id": 375,
+            "team_abbv": "LEI"
+        },
+        {
+            "team_name": "Southampton",
+            "team_city": "Southampton",
+            "team_id": 376,
+            "team_abbv": "SOU"
+        },
+        {
+            "team_name": "Wolverhampton Wanderers",
+            "team_city": "Wolverhampton Wanderers",
+            "team_id": 380,
+            "team_abbv": "WOL"
+        },
+        {
+            "team_name": "Manchester City",
+            "team_city": "Manchester City",
+            "team_id": 382,
+            "team_abbv": "MNC"
+        },
+        {
+            "team_name": "Crystal Palace",
+            "team_city": "Crystal Palace",
+            "team_id": 384,
+            "team_abbv": "CRY"
+        },
+        {
+            "team_name": "Nottingham Forest",
+            "team_city": "Nottingham Forest",
+            "team_id": 393,
+            "team_abbv": "NFO"
+        }
+    ]
+}

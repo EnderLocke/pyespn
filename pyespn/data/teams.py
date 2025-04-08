@@ -11,7 +11,8 @@ LEAGUE_TEAMS_MAPPING = {
     'mlb': mlb_teams_data,
     'f1': f1_teams_data,
     'nascar': nascar_teams_data,
-    'indy': indy_teams_data
+    'indy': indy_teams_data,
+    'epl': epl_teams_data
 }
 
 team_files_path = './files/'
