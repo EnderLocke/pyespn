@@ -3,6 +3,7 @@ from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.exceptions import API400Error
 from pyespn.classes.betting import Betting
+from pyespn.classes.stat import LeaderCategory
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -133,3 +134,20 @@ class League:
             Betting: The Betting object corresponding to the provided data.
         """
         return Betting(betting_json=bet, espn_instance=self.espn_instance)
+
+
+    def load_season_league_leaders(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/leaders'
+        leaders_content = fetch_espn_data(url)
+
+        leaders = []
+
+        for category in leaders_content.get('categories', []):
+            leaders.append(LeaderCategory(leader_cat_json=category,
+                                          espn_instance=self.espn_instance,
+                                          season=season))
+            pass
+
+        pass

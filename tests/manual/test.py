@@ -10,7 +10,7 @@ if __name__ == '__main__':
     espn = PYESPN('nfl')
     #espn.load_season_teams_results(season=2024)
     #espn.load_standings(season=season)
-    espn.league.load_season_futures(season=2024)
+    espn.load_season_league_stat_leaders(season=2024)
     #espn.load_season_team_stats(season=2024)
     #espn.load_regular_season_schedule(season=season)
     espn.load_seasons_betting_records(season=2024)
