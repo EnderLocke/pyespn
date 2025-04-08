@@ -436,6 +436,9 @@ class PYESPN:
         for team in self.teams:
             team.load_team_season_stats(season=season)
 
+    def load_season_league_stat_leaders(self, season):
+        self.league.load_season_league_leaders(season=season)
+
     def load_seasons_betting_records(self, season):
 
         for team in self.teams:
