@@ -198,8 +198,37 @@ class LeaderCategory:
 
 
 class Leader:
+    """
+    Represents a statistical leader in a specific category for a given season.
+
+    The Leader class encapsulates information about an athlete (Player) and their
+    team in the context of a statistical category. It fetches relevant data from
+    the provided JSON, stores the athlete and team information, and tracks the
+    leader's rank and statistical value.
+
+    Attributes:
+        leader_json (dict): The JSON data for the leader.
+        espn_instance (object): The instance of the ESPN-related class for interacting with ESPN data.
+        rank (int): The rank of the athlete in the leader category.
+        athlete (Player or None): The Player instance representing the athlete who is the leader.
+        team (Team or None): The Team instance representing the team of the leader.
+        value (float): The statistical value of the leader in the category.
+        rel (dict or None): The relationship data in the leader JSON, which may contain references to athlete and team data.
+
+    Methods:
+        __repr__(): Returns a string representation of the Leader instance.
+        _load_leader_data(): Loads the leader data from the provided JSON, initializing athlete, team, and value.
+    """
 
     def __init__(self, leader_json, espn_instance, rank):
+        """
+        Initializes a Leader instance with the given leader data.
+
+        Args:
+            leader_json (dict): The JSON data representing the leader's information.
+            espn_instance (object): An instance of the ESPN class for interacting with ESPN data.
+            rank (int): The rank of the athlete in the leader category.
+        """
         self.leader_json = leader_json
         self.espn_instance = espn_instance
         self.rank = rank
@@ -219,6 +248,19 @@ class Leader:
         return f"<Leader | {self.athlete.full_name}-{self.value}: {self.team.name}>"
 
     def _load_leader_data(self):
+        """
+        Loads the leader's data from the provided JSON.
+
+        This method extracts the statistical value, the athlete reference, and
+        the team reference from the leader's JSON data. It fetches the athlete
+        information by calling `fetch_espn_data` if an athlete reference exists,
+        and it fetches the team information by calling `get_team_id` and
+        `get_team_by_id` if a team reference exists.
+
+        This method initializes the athlete and team attributes, as well as the
+        statistical value and rank.
+
+        """
         self.value = self.leader_json.get('value', 0)
         self.rel = self.leader_json.get('rel')
         if 'athlete' in self.rel:
@@ -228,5 +270,3 @@ class Leader:
         if 'team' in self.leader_json:
             team_id = get_team_id(self.leader_json.get('team', {}).get('$ref'))
             self.team = self.espn_instance.get_team_by_id(team_id=team_id)
-
-        pass
