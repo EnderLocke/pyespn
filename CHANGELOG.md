@@ -5,6 +5,7 @@
 * added in pulling betting records for a season for teams/ teams in a league
 * fixed pulling team stats
 * removed client functions that are now found within other classes. i.e. betting calls are available in teams
+* fixed some functions to use futures, this probably wont improve much performance but if a call hangs it could help
 * 
 
 ## 0.3.1
