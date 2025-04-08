@@ -12,6 +12,8 @@
 * removed betting calls from client as the data is in classes teams and league now
 * added in call for league leaders for a season in league class
 * removed get_league_info call from client as all the data is in the league variable once client is loaded
+* added functions to client to search teams rosters for a given season for a player
+* added in auto load for rosters for given season for both betting futures and league leaders to reduce calls to api
 * 
 
 ## 0.3.1
