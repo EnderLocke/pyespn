@@ -420,6 +420,14 @@ LEAGUE_API_MAPPING = [
         'status': 'unavailable',
         'schedule': 'unknown'
     },
+    {
+        'id': 53,
+        'league_abbv': 'epl',
+        'sport': 'soccer',
+        'league': 'eng.1',
+        'status': 'available',
+        'schedule': 'daily'
+    },
 ]
 
 PRO_LEAGUES = [

@@ -331,134 +331,6 @@ class PYESPN:
                                                provider=this_provider)
 
     @requires_betting_available
-    def get_team_year_ats_away(self, team_id, season) -> dict:
-        """
-        Retrieves the team's against the spread (ATS) performance for away games in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for away games.
-        """
-        return get_team_year_ats_away_core(team_id=team_id,
-                                           season=season,
-                                           league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_home_favorite(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance for home games as a favorite in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for home games as a favorite.
-        """
-        return get_team_year_ats_home_favorite_core(team_id=team_id,
-                                                    season=season,
-                                                    league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_away_underdog(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance for away games as an underdog in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for away games as an underdog.
-        """
-        return get_team_year_ats_away_underdog_core(team_id=team_id,
-                                                    season=season,
-                                                    league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_favorite(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance as a favorite in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance as a favorite.
-        """
-        return get_team_year_ats_favorite_core(team_id=team_id,
-                                               season=season,
-                                               league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_home(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance for home games in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for home games.
-        """
-        return get_team_year_ats_home_core(team_id=team_id,
-                                           season=season,
-                                           league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_overall(self, team_id, season) -> dict:
-        """
-        Retrieves the team's overall ATS performance for a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's overall ATS performance.
-        """
-        return get_team_year_ats_overall_core(team_id=team_id,
-                                              season=season,
-                                              league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_underdog(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance as an underdog in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance as an underdog.
-        """
-        return get_team_year_ats_underdog_core(team_id=team_id,
-                                               season=season,
-                                               league_abbv=self.league_abbv)
-
-    @requires_betting_available
-    def get_team_year_ats_home_underdog(self, team_id, season) -> dict:
-        """
-        Retrieves the team's ATS performance for home games as an underdog in a given season.
-
-        Args:
-            team_id (str): The ID of the team.
-            season (str): The season for which to retrieve ATS data.
-
-        Returns:
-            dict: The team's ATS performance for home games as an underdog.
-        """
-        return get_team_year_ats_home_underdog_core(team_id=team_id,
-                                                    season=season,
-                                                    league_abbv=self.league_abbv)
-
-    @requires_betting_available
     def get_all_seasons_futures(self, season) -> list:
         """
         Retrieves all betting futures for a given season.
@@ -575,6 +447,11 @@ class PYESPN:
         """
         for team in self.teams:
             team.load_team_season_stats(season=season)
+
+    def load_seasons_betting_records(self, season):
+
+        for team in self.teams:
+            team.load_season_betting_records(season=season)
 
     def load_season_teams_results(self, season) -> None:
         """

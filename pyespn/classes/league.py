@@ -1,4 +1,9 @@
 from pyespn.core.decorators import validate_json
+from pyespn.utilities import lookup_league_api_info, fetch_espn_data
+from pyespn.data.version import espn_api_version as v
+from pyespn.exceptions import API400Error
+from pyespn.classes.stat import Record
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 @validate_json("league_json")
@@ -44,6 +49,7 @@ class League:
         """
         self.league_json = league_json
         self.espn_instance = espn_instance
+        self.betting_futures = {}
         self._set_league_json()
 
     def __repr__(self) -> str:
@@ -78,6 +84,35 @@ class League:
         self.rankings = self.league_json.get("rankings")
         self.draft = self.league_json.get("draft")
         self.links = self.league_json.get("links", [])
-        
-        
+
+    def load_season_free_agents(self, season):
+        # todo this seems to always return nothing
+        url = f''
+
+    def load_season_futures(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        futures = []
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/futures'
+
+        try:
+            season_content = fetch_espn_data(url)
+            pages = season_content.get('pageCount', 0)
+
+            with ThreadPoolExecutor() as executor:
+                future_to_page = {
+                    executor.submit(fetch_espn_data, f'{url}?page={page}'): page
+                    for page in range(1, pages + 1)
+                }
+
+                for future in as_completed(future_to_page):
+                    page_data = future.result()
+                    for bet in page_data.get('items', []):
+                        futures.append(Record(record_json=bet,
+                                              espn_instance=self.espn_instance))
+
+            self.betting_futures[season] = futures
+
+        except API400Error as e:
+            print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")
+
         

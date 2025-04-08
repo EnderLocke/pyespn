@@ -38,9 +38,19 @@ class Stat:
         self.season = self.stat_json.get('season')
         self.player_id = self.stat_json.get('player_id')
         self.stat_value = self.stat_json.get('stat_value')
+        if not self.stat_value:
+            self.stat_value = self.stat_json.get('value')
+
         self.stat_type_abbreviation = self.stat_json.get('stat_type_abbreviation')
+        if not self.stat_type_abbreviation:
+            self.stat_type_abbreviation = self.stat_json.get('abbreviation')
         self.description = self.stat_json.get('description')
         self.name = self.stat_json.get('name')
+        if not self.name:
+            self.name = self.stat_json.get("displayName")
+        self.type = self.stat_json.get('type')
+        self.per_game_value = self.stat_json.get('perGameValue')
+        self.rank = self.stat_json.get('rank')
 
 
 class Record:

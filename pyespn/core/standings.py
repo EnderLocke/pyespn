@@ -25,7 +25,10 @@ def get_standings_core(season, league_abbv, espn_instance):
 
     """
     api_info = lookup_league_api_info(league_abbv=league_abbv)
-    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/standings'
+    if api_info.get('sport') == 'soccer':
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/1/standings'
+    else:
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/standings'
     content = fetch_espn_data(url)
     page_count = content.get('pageCount')
 
