@@ -123,7 +123,7 @@ class Team:
                     all_stats.append(Stat(stat_json=stat,
                                           espn_instance=self.espn_instance))
         except API400Error as e:
-            pass
+            print(f"Failed to fetch stats data for season {season} | team {self.name} | id {self.team_id}: {e}")
 
         self.stats[season] = all_stats
 
@@ -231,15 +231,27 @@ class Team:
             seasonal game results.
 
         """
-
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
-        results_content = fetch_espn_data(url)
         season_records = []
-        for result in results_content.get('items', []):
-            season_records.append(Record(record_json=result,
-                                         espn_instance=self.espn_instance))
-        self.records[season] = season_records
+
+        try:
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(fetch_espn_data, url)
+                results_content = future.result(timeout=10)  # timeout in seconds
+
+                for result in results_content.get('items', []):
+                    season_records.append(Record(record_json=result,
+                                                 espn_instance=self.espn_instance))
+
+            self.records[season] = season_records
+
+        except TimeoutError:
+            print(f"Timeout while fetching season records for season {season} | team {self.name} | id {self.team_id}")
+        except API400Error as e:
+            print(f"API error while fetching season records for season {season} | team {self.name} | id {self.team_id}: {e}")
+        except Exception as e:
+            print(f"Unexpected error while fetching season records for season {season} | team {self.name} | id {self.team_id}: {e}")
 
     def load_season_coaches(self, season):
         """
@@ -277,6 +289,20 @@ class Team:
         self.coaches[season] = coach_records
 
     def load_season_betting_records(self, season):
+        """
+        Fetches and loads the betting odds records for a specific team and season using concurrent requests.
+
+        This method queries the ESPN API for team-specific betting records for the given season. It handles
+        pagination and leverages a thread pool to fetch data pages concurrently, improving performance. The
+        fetched data is parsed into `Record` instances and stored in the `self.betting` dictionary under
+        the specified season.
+
+        Args:
+            season (int): The season year to fetch betting odds records for.
+
+        Raises:
+            API400Error: If the ESPN API returns a 400 error (e.g., invalid season or unavailable data).
+        """
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         futures = []
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/0/teams/{self.team_id}/odds-records'
