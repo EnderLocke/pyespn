@@ -91,7 +91,27 @@ class League:
         # todo this seems to always return nothing
         url = f''
 
-    def load_season_futures(self, season):
+    def get_all_seasons_futures(self, season):
+        """
+        Loads and processes betting futures for a given season.
+
+        This method retrieves betting futures data for the specified season using the ESPN API.
+        It handles pagination and concurrent data fetching using thread pools for improved performance.
+        Each betting item is processed individually through `_process_bet` and collected into a list.
+
+        The processed futures are stored in `self.betting_futures` under the specified season key.
+
+        Args:
+            season (int or str): The season year to fetch futures data for.
+
+        Raises:
+            API400Error: If the ESPN API returns a 400-level error during data fetching, an error message
+                         will be printed including the season, team name, and team ID.
+        """
+        for team in self.espn_instance.teams:
+            if season not in team.roster:
+                team.load_season_roster(season=season)
+
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         betting_futures = []
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/futures'
@@ -111,7 +131,7 @@ class League:
 
                     with ThreadPoolExecutor() as bet_executor:
                         bet_futures = {
-                            bet_executor.submit(self._process_bet, bet): bet
+                            bet_executor.submit(self._process_bet, bet, season): bet
                             for bet in page_data.get('items', [])
                         }
 
@@ -124,7 +144,7 @@ class League:
         except API400Error as e:
             print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")
 
-    def _process_bet(self, bet):
+    def _process_bet(self, bet, season):
         """
         Processes an individual bet and returns a Betting object.
 
@@ -134,7 +154,7 @@ class League:
         Returns:
             Betting: The Betting object corresponding to the provided data.
         """
-        return Betting(betting_json=bet, espn_instance=self.espn_instance)
+        return Betting(betting_json=bet, espn_instance=self.espn_instance, season=season)
 
     def fetch_leader_category(self, category, season) -> LeaderCategory:
         """
@@ -158,6 +178,11 @@ class League:
         Args:
             season (str): The season for which the league leaders are fetched.
         """
+
+        for team in self.espn_instance.teams:
+            if season not in team.roster:
+                team.load_season_roster(season=season)
+
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/leaders'
 

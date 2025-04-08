@@ -122,7 +122,8 @@ class PYESPN:
         """
         Loads data for the current league and stores it in the `league` attribute.
         """
-        self.league = self.get_league_info()
+        self.league = get_league_info_core(league_abbv=self.league_abbv,
+                                           espn_instance=self)
 
     def load_seasons_futures(self, season):
         """
@@ -131,7 +132,7 @@ class PYESPN:
         Args:
             season (str): The season for which to load betting futures.
         """
-        self.betting_futures[season] = self.get_all_seasons_futures(season=season)
+        self.betting_futures[season] = self.league.get_all_seasons_futures(season=season)
 
     def load_regular_season_schedule(self, season: int):
         """
@@ -297,16 +298,6 @@ class PYESPN:
         self.standings[season] = get_standings_core(season=season,
                                                     league_abbv=self.league_abbv,
                                                     espn_instance=self)
-
-    def get_league_info(self) -> "League":
-        """
-        Retrieves information about the league.
-
-        Returns:
-            League: The league's information.
-        """
-        return get_league_info_core(league_abbv=self.league_abbv,
-                                    espn_instance=self)
 
     def get_regular_seasons_schedule(self, season: int) -> list["Schedule"]:
         """
@@ -481,3 +472,24 @@ class PYESPN:
         self.manufacturers[season] = get_manufacturers_core(season=season,
                                                             espn_instance=self,
                                                             league_abbv=self.league_abbv)
+
+    def check_teams_for_player_by_season(self, season, player_id):
+        """
+        Searches through all teams for a specific player by season and player ID.
+
+        Iterates over each team in `self.teams` and checks if the player with the given
+        `player_id` was on the roster during the specified `season`. Returns the first
+        matching athlete found.
+
+        Args:
+            season (int or str): The season year to search within each team.
+            player_id (int or str): The unique identifier of the player to find.
+
+        Returns:
+            Player or None: The matching player object if found; otherwise, None.
+        """
+        athlete = None
+        for team in self.teams:
+            athlete = team.get_player_by_season_id(season=season,
+                                                   player_id=player_id)
+        return athlete

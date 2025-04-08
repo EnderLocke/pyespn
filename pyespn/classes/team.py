@@ -78,6 +78,19 @@ class Team:
         self.home_venue = Venue(venue_json=self.venue_json,
                                 espn_instance=self.espn_instance)
 
+    def get_player_by_season_id(self, season, player_id) -> "Player":
+        """
+        Finds and returns the Team object that matches the given team_id.
+
+        Args:
+            season (int or str): the season to pull the athlete from
+            player_id (int or str): The ID of the player to find.
+
+        Returns:
+            Player: The matching Team object, or None if not found.
+        """
+        return next((player for player in self.roster.get(season, []) if str(player.id) == str(player_id)), None)
+
     def __repr__(self) -> str:
         """
         Returns a string representation of the Team instance.

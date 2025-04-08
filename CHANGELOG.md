@@ -11,6 +11,7 @@
   * all this data is in the .teams once the client loads
 * removed betting calls from client as the data is in classes teams and league now
 * added in call for league leaders for a season in league class
+* removed get_league_info call from client as all the data is in the league variable once client is loaded
 * 
 
 ## 0.3.1

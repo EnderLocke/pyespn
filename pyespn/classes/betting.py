@@ -1,6 +1,6 @@
 from pyespn.classes.player import Player
 from pyespn.classes.team import Team
-from pyespn.utilities import fetch_espn_data
+from pyespn.utilities import fetch_espn_data, get_athlete_id
 from pyespn.exceptions import API400Error, JSONNotProvidedError
 from pyespn.core.decorators import validate_json
 
@@ -25,7 +25,7 @@ class Betting:
             Returns a string representation of the Betting instance.
     """
 
-    def __init__(self, espn_instance, betting_json: dict):
+    def __init__(self, espn_instance, season, betting_json: dict):
         """
         Initializes a Betting instance.
 
@@ -35,6 +35,7 @@ class Betting:
         """
         self.betting_json = betting_json
         self.espn_instance = espn_instance
+        self.season = season
         self.providers = []
         self._set_betting_data()
 
@@ -57,6 +58,7 @@ class Betting:
         self.display_name = self.betting_json.get('displayName')
         for provider in self.betting_json.get('futures'):
             self.providers.append(Provider(espn_instance=self.espn_instance,
+                                           betting_instance=self,
                                            line_json=provider))
 
 
@@ -84,7 +86,7 @@ class Provider:
                 Returns a string representation of the Provider instance.
         """
 
-    def __init__(self, espn_instance, line_json):
+    def __init__(self, espn_instance, betting_instance, line_json):
         """
         Initializes a Provider instance.
 
@@ -94,6 +96,7 @@ class Provider:
         """
         self.line_json = line_json
         self.espn_instance = espn_instance
+        self.betting_instance = betting_instance
         self._set_betting_provider_data()
 
     def __repr__(self) -> str:
@@ -186,11 +189,16 @@ class Line:
         """
         try:
             if 'athlete' in self.book_json:
-                self.ref = self.book_json.get('athlete').get('$ref')
-                content = fetch_espn_data(self.ref)
+                athlete_id = get_athlete_id(self.book_json.get('athlete', {}).get('$ref'))
+                self.athlete = self.espn_instance.check_teams_for_player_by_season(season=self.provider_instance.betting_instance.season,
+                                                                                   player_id=athlete_id)
+                if not self.athlete:
 
-                self.athlete = Player(espn_instance=self.espn_instance,
-                                      player_json=content)
+                    self.ref = self.book_json.get('athlete').get('$ref')
+                    content = fetch_espn_data(self.ref)
+
+                    self.athlete = Player(espn_instance=self.espn_instance,
+                                          player_json=content)
 
             if 'team' in self.book_json:
                 self.ref = self.book_json.get('team').get('$ref')
@@ -200,6 +208,7 @@ class Line:
                                  team_json=content)
 
             self.value = self.book_json.get('value')
-        except (API400Error, JSONNotProvidedError) as e:
-            pass
-
+        except API400Error as e:
+            print(f'api error {e}')
+        except JSONNotProvidedError as e:
+            print(f'json error {e}')
