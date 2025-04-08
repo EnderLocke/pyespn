@@ -88,7 +88,8 @@ jobs:
 
   test-mkdocs:
     name: Test Build mkdocs
-    environment: prod
+    environment: preprod
+    needs: test-build-package
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -109,6 +110,7 @@ jobs:
 
   deploy-mkdocs:
     name: Deploy mkdocs
+    needs: build-package
     environment: prod
     runs-on: ubuntu-latest
     steps:
