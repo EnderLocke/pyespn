@@ -122,7 +122,8 @@ class PYESPN:
         """
         Loads data for the current league and stores it in the `league` attribute.
         """
-        self.league = self.get_league_info()
+        self.league = get_league_info_core(league_abbv=self.league_abbv,
+                                           espn_instance=self)
 
     def load_seasons_futures(self, season):
         """
