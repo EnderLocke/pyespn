@@ -472,3 +472,24 @@ class PYESPN:
         self.manufacturers[season] = get_manufacturers_core(season=season,
                                                             espn_instance=self,
                                                             league_abbv=self.league_abbv)
+
+    def check_teams_for_player_by_season(self, season, player_id):
+        """
+        Searches through all teams for a specific player by season and player ID.
+
+        Iterates over each team in `self.teams` and checks if the player with the given
+        `player_id` was on the roster during the specified `season`. Returns the first
+        matching athlete found.
+
+        Args:
+            season (int or str): The season year to search within each team.
+            player_id (int or str): The unique identifier of the player to find.
+
+        Returns:
+            Player or None: The matching player object if found; otherwise, None.
+        """
+        athlete = None
+        for team in self.teams:
+            athlete = team.get_player_by_season_id(season=season,
+                                                   player_id=player_id)
+        return athlete
