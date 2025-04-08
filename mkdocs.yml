@@ -7,21 +7,24 @@ nav:
   - Client: pyespn.md
   - Exceptions: exceptions.md
   - Classes:
-    - League: classes/league_class.md
-    - Team: classes/teams_class.md
-    - Player: classes/player_class.md
-    - Recruit: classes/recruit_class.md
     - Betting: classes/betting_class.md
+    - Circuit: classes/circuit_class.md
     - Draft: classes/draft_class.md
     - Event: classes/event_class.md
+    - Image: classes/image_class.md
+    - Leader: classes/leader_class.md
+    - Leader Category: classes/leader_category_class.md
+    - League: classes/league_class.md
+    - Line: classes/line.md
+    - Manufacturer: classes/manufacturer_class.md
+    - Player: classes/player_class.md
+    - Record: classes/record_class.md
+    - Recruit: classes/recruit_class.md
+    - Standings: classes/standings_class.md
+    - Stats: classes/stat_class.md
+    - Team: classes/teams_class.md
     - Venue: classes/venue_class.md
     - Vehicle: classes/vehicle_class.md
-    - Circuit: classes/circuit_class.md
-    - Manufacturer: classes/manufacturer_class.md
-    - Stats: classes/stat_class.md
-    - Image: classes/image_class.md
-    - Record: classes/record_class.md
-    - Standings: classes/standings_class.md
   - Discover: discover.md
   - Postman: postman.md
   - About:
