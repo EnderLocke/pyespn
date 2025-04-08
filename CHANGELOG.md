@@ -7,6 +7,8 @@
 * removed client functions that are now found within other classes. i.e. betting calls are available in teams
 * fixed some functions to use futures, this probably wont improve much performance but if a call hangs it could help
 * added func to load futures (betting) for league class for a season
+* removed get_team_info call from client
+  * all this data is in the .teams once the client loads
 * 
 
 ## 0.3.1
