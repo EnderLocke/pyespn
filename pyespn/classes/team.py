@@ -112,19 +112,47 @@ class Team:
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
 
     def load_team_season_stats(self, season):
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        """
+        Fetches and loads team-level statistical data for a specific season, using threading to fetch multiple pages concurrently.
 
+        This method sends a request to the ESPN API to retrieve team statistics for the given season. It will send requests for
+        multiple pages of data if necessary, and each page is fetched concurrently using a thread pool. The method parses the
+        response and instantiates `Stat` objects for each statistic found under the `categories` section of the response.
+        All parsed statistics are then stored in the `self.stats` dictionary, keyed by the provided season.
+
+        Args:
+            season (int): The season year for which statistics should be retrieved.
+
+        Raises:
+            API400Error: If the API responds with a 400-level error. A message is printed, and no data is stored for the season.
+        """
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics?lang=en&region=us'
+
         all_stats = []
         try:
             stats_content = fetch_espn_data(url)
-            for categories in stats_content.get('splits', {}).get('categories', []):
-                for stat in categories.get('stats', []):
-                    all_stats.append(Stat(stat_json=stat,
-                                          espn_instance=self.espn_instance))
+            pages = stats_content.get('pageCount', 0)
+
+            # Using ThreadPoolExecutor to fetch multiple pages concurrently
+            with ThreadPoolExecutor() as executor:
+                future_to_page = {
+                    executor.submit(fetch_espn_data, f'{url}?page={page}'): page
+                    for page in range(1, pages + 1)
+                }
+
+                # Collect results as they complete
+                for future in as_completed(future_to_page):
+                    page_data = future.result()
+                    for categories in page_data.get('splits', {}).get('categories', []):
+                        for stat in categories.get('stats', []):
+                            all_stats.append(Stat(stat_json=stat,
+                                                  espn_instance=self.espn_instance))
+
         except API400Error as e:
             print(f"Failed to fetch stats data for season {season} | team {self.name} | id {self.team_id}: {e}")
 
+        # Store the fetched stats data
         self.stats[season] = all_stats
 
     def get_team_colors(self) -> dict:
