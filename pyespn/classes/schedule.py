@@ -62,7 +62,7 @@ class Schedule:
         else:
             raise ScheduleTypeUnknownError(league_abbv=self.espn_instance.league_abbv)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the schedule instance.
 
@@ -71,7 +71,7 @@ class Schedule:
         """
         return f"<Schedule | {self.season} {self.schedule_type} season>"
 
-    def _set_schedule_daily_data(self):
+    def _set_schedule_daily_data(self) -> None:
         """
         Constructs the schedule for leagues using a daily schedule format.
 
@@ -105,7 +105,7 @@ class Schedule:
                                    start_date=start_date,
                                    end_date=end_date))
 
-    def _set_schedule_weekly_data(self):
+    def _set_schedule_weekly_data(self) -> None:
         """
         Constructs the schedule for leagues using a weekly schedule format.
 
@@ -204,7 +204,7 @@ class Week:
 
         self._set_week_datav2()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the week instance.
 

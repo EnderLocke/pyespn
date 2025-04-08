@@ -7,7 +7,7 @@ from pyespn.exceptions import API400Error
 from pyespn.utilities import lookup_league_api_info
 from .decorators import *
 from datetime import datetime
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 import concurrent.futures
 
 if TYPE_CHECKING:
@@ -471,7 +471,7 @@ class PYESPN:
                                                             espn_instance=self,
                                                             league_abbv=self.league_abbv)
 
-    def check_teams_for_player_by_season(self, season, player_id):
+    def check_teams_for_player_by_season(self, season, player_id) -> Optional["Player"]:
         """
         Searches through all teams for a specific player by season and player ID.
 
