@@ -58,7 +58,7 @@ jobs:
     name: Deploy to PyPI
     needs: pytest
     runs-on: ubuntu-latest
-    environment: preprod
+    environment: prod
     container:
       image: python:3.11
     if: github.ref == 'refs/heads/prod'
