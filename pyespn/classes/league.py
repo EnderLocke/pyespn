@@ -174,6 +174,11 @@ class League:
         Args:
             season (str): The season for which the league leaders are fetched.
         """
+
+        for team in self.espn_instance.teams:
+            if season not in team.roster:
+                team.load_season_roster(season=season)
+
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/leaders'
 
