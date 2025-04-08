@@ -132,7 +132,7 @@ class PYESPN:
         Args:
             season (str): The season for which to load betting futures.
         """
-        self.betting_futures[season] = self.get_all_seasons_futures(season=season)
+        self.betting_futures[season] = self.league.get_all_seasons_futures(season=season)
 
     def load_regular_season_schedule(self, season: int):
         """
