@@ -244,7 +244,6 @@ class Leader:
             str: A formatted string with the Leader Info.
         """
 
-
         return f"<Leader | {self.athlete.full_name}-{self.value}: {self.team.name}>"
 
     def _load_leader_data(self):
