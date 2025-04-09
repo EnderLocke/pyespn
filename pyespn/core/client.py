@@ -63,7 +63,6 @@ class PYESPN:
         self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
         self.teams = []
         self.standings = {}
-        self.schedules = {}
         self.recruit_rankings = {}
         self.drafts = {}
         self.manufacturers = {}
