@@ -123,6 +123,11 @@ class Team:
         """
         return f"<Team | {self.location} {self.name} ({self.abbreviation}) - {self.get_league()}>"
 
+    def load_season_roster_box_score(self, season):
+
+        for player in self.roster.get(season, []):
+            player.load_player_box_scores_season(season=season)
+
     def _load_team_data(self):
         """
         Extracts and sets team data from the provided JSON.
