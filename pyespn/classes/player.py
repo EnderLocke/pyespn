@@ -94,6 +94,7 @@ class Player:
         self.player_json = player_json
         self.espn_instance = espn_instance
         self.stats = {}
+        self.stats_game_log = {}
         self._set_player_data()
 
     def __repr__(self) -> str:
