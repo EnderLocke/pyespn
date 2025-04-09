@@ -117,6 +117,25 @@ class League:
                                                                   espn_instance=self.espn_instance,
                                                                   season=season)
 
+    def get_event_by_season(self, season, event_id) -> "Event":
+        """
+        Finds and returns the Team object that matches the given team_id.
+
+        Args:
+            season (int or str): the season to pull the athlete from
+            event_id (int or str): The ID of the event to find.
+
+        Returns:
+            Event: The matching Event object, or None if not found.
+        """
+        this_event = None
+        for week in self.schedules.get(season, []).weeks:
+            for event in week.events:
+                if str(event.event_id) == str(event_id):
+                    this_event = event
+
+        return this_event
+
     def get_all_seasons_futures(self, season):
         """
         Loads and processes betting futures for a given season.
