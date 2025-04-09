@@ -6,6 +6,10 @@ from pyespn.core import get_regular_season_schedule_core
 from pyespn.classes.betting import Betting
 from pyespn.classes.stat import LeaderCategory
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pyespn.classes import Event
 
 
 @validate_json("league_json")
