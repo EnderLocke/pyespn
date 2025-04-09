@@ -78,7 +78,6 @@ class Team:
         load_season_betting_records(season) -> None:
             Fetches and loads the betting odds records for a specific team and season using concurrent requests.
     """
-
     def __init__(self, espn_instance, team_json):
         """
         Initializes a Team instance.
