@@ -1,6 +1,8 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.vehicle import Vehicle
-from pyespn.utilities import fetch_espn_data, lookup_league_api_info
+from pyespn.classes.event import Event
+from pyespn.classes.stat import Record
+from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
 from pyespn.data.version import espn_api_version as v
 
 
@@ -206,17 +208,32 @@ class Player:
         for page in range(0, pages + 1):
             paged_url = url + f'?page={page}'
             event_log_content = fetch_espn_data(paged_url)
-            for event in event_log_content.get('events', {}).get('items', []):
-                event_list.append(event)
+            for event_log in event_log_content.get('events', {}).get('items', []):
+                event_list.append(event_log)
 
+        event_stats_log = []
+        for event in event_list:
+            event_id = get_an_id(event.get('event', {}).get('$ref'), 'events')
+            event_find = self.espn_instance.league.get_event_by_season(season=season,
+                                                                       event_id=event_id)
+            if not event_find:
+                event_content = fetch_espn_data(event.get('event', {}).get('$ref'))
+                event_find = Event(event_json=event_content,
+                                   espn_instance=self.espn_instance)
 
-        # todo check for event in teams season data
-        #  load up stats
-        #  looks like i need to move schedule to league class
-        pass
+            stats_content = fetch_espn_data(event.get('statistics', {}).get('$ref'))
+            for split in stats_content.get('splits', []):
+                stats = []
+                for category in split.get('categories'):
+                    stats.append(Record(record_json=category,
+                                        espn_instance=self.espn_instance))
+                    event_record = {
+                        'event': event_find,
+                        'stats': stats,
+                    }
+                    event_stats_log.append(event_record)
 
-        pass
-
+        self.stats_game_log = event_stats_log
 
 
     def load_player_contracts(self):
