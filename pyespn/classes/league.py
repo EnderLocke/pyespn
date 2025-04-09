@@ -2,6 +2,7 @@ from pyespn.core.decorators import validate_json
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.exceptions import API400Error
+from pyespn.core import get_regular_season_schedule_core
 from pyespn.classes.betting import Betting
 from pyespn.classes.stat import LeaderCategory
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -112,7 +113,9 @@ class League:
             season (int): The season for which to load the schedule.
         """
 
-        self.schedules[season] = self.espn_instance.get_regular_seasons_schedule(season=season)
+        self.schedules[season] = get_regular_season_schedule_core(league_abbv=self.espn_instance.league_abbv,
+                                                                  espn_instance=self.espn_instance,
+                                                                  season=season)
 
     def get_all_seasons_futures(self, season):
         """

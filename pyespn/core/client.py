@@ -286,20 +286,6 @@ class PYESPN:
                                                     league_abbv=self.league_abbv,
                                                     espn_instance=self)
 
-    def get_regular_seasons_schedule(self, season: int) -> list["Schedule"]:
-        """
-        Retrieves the regular season schedule for a given season.
-
-        Args:
-            season (int): The season for which to retrieve the schedule.
-
-        Returns:
-            list[Schedule]: The regular season schedule for the specified season.
-        """
-        return get_regular_season_schedule_core(league_abbv=self.league_abbv,
-                                                espn_instance=self,
-                                                season=season)
-
     def get_team_by_id(self, team_id) -> "Team":
         """
         Finds and returns the Team object that matches the given team_id.
