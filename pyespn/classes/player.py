@@ -203,10 +203,10 @@ class Player:
 
         url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
         page_content = fetch_espn_data(url)
-        pages = page_content.get('pageCount', 0)
+        pages = page_content.get('events', {}).get('pageCount', 0)
 
         event_list = []
-        for page in range(0, pages + 1):
+        for page in range(1, pages + 1):
             paged_url = url + f'?page={page}'
             event_log_content = fetch_espn_data(paged_url)
             for event_log in event_log_content.get('events', {}).get('items', []):
