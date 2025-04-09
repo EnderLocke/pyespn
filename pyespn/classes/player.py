@@ -1,5 +1,7 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.vehicle import Vehicle
+from pyespn.utilities import fetch_espn_data, lookup_league_api_info
+from pyespn.data.version import espn_api_version as v
 
 
 @validate_json('player_json')
@@ -192,6 +194,34 @@ class Player:
         self.stats = self.get_players_historical_stats_core(player_id=self.id,
                                                             league_abbv=self.espn_instance.league_abbv,
                                                             espn_instance=self.espn_instance)
+
+    def load_player_box_scores_season(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
+        page_content = fetch_espn_data(url)
+        pages = page_content.get('pageCount', 0)
+
+        event_list = []
+        for page in range(0, pages + 1):
+            paged_url = url + f'?page={page}'
+            event_log_content = fetch_espn_data(paged_url)
+            for event in event_log_content.get('events', {}).get('items', []):
+                event_list.append(event)
+
+
+        # todo check for event in teams season data
+        #  load up stats
+        #  looks like i need to move schedule to league class
+        pass
+
+        pass
+
+
+
+    def load_player_contracts(self):
+        # todo i haven't seen this filled in at all yet in the api
+        url = f'http://sports.core.api.espn.com/{v}/sports/football/leagues/nfl/athletes/4360807/contracts?lang=en&region=us'
 
     def to_dict(self) -> dict:
         """
