@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3
+* moved schedule functions out of client and into league class
+* 
+
 ## 0.3.2
 * added in epl / soccer
 * added in pulling betting records for a season for teams/ teams in a league
