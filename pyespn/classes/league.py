@@ -63,6 +63,7 @@ class League:
         self.league_json = league_json
         self.espn_instance = espn_instance
         self.league_leaders = {}
+        self.schedules = {}
         self.betting_futures = {}
         self._set_league_json()
 
@@ -102,6 +103,16 @@ class League:
     def load_season_free_agents(self, season):
         # todo this seems to always return nothing
         url = f''
+
+    def load_regular_season_schedule(self, season: int):
+        """
+        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+
+        Args:
+            season (int): The season for which to load the schedule.
+        """
+
+        self.schedules[season] = self.espn_instance.get_regular_seasons_schedule(season=season)
 
     def get_all_seasons_futures(self, season):
         """

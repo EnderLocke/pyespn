@@ -132,16 +132,6 @@ class PYESPN:
         """
         self.league.get_all_seasons_futures(season=season)
 
-    def load_regular_season_schedule(self, season: int):
-        """
-        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
-
-        Args:
-            season (int): The season for which to load the schedule.
-        """
-
-        self.schedules[season] = self.get_regular_seasons_schedule(season=season)
-
     def load_year_draft(self, season: int) -> None:
         """
         Loads draft data for a given season and stores it in the drafts dictionary.
@@ -157,8 +147,7 @@ class PYESPN:
         """
 
         self.drafts[season] = load_draft_data_core(season=season,
-                                                   league_abbv=self.league_abbv,
-                                                   espn_instance=self)
+                                                   league_abbv=self.league_abbv,                                           espn_instance=self)
 
     def get_player_info(self, player_id) -> "Player":
         """
