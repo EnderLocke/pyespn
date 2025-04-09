@@ -2,7 +2,7 @@ from pyespn.core.decorators import validate_json
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.exceptions import API400Error
-from pyespn.core import get_regular_season_schedule_core
+from pyespn.core.schedule import get_regular_season_schedule_core
 from pyespn.classes.betting import Betting
 from pyespn.classes.stat import LeaderCategory
 from concurrent.futures import ThreadPoolExecutor, as_completed
