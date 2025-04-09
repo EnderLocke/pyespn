@@ -1,5 +1,3 @@
-from pyespn.classes.venue import Venue
-from pyespn.classes.team import Team
 from pyespn.core.decorators import validate_json
 
 
@@ -43,6 +41,8 @@ class Event:
             event_json (dict): The JSON data containing event details.
             espn_instance (PYESPN): The parent `PYESPN` instance for API interaction.
         """
+        from pyespn.classes.venue import Venue
+
         self.event_json = event_json
         self.espn_instance = espn_instance
         self.url_ref = self.event_json.get('$ref')
