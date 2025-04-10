@@ -1,4 +1,7 @@
 from pyespn.core.decorators import validate_json
+from pyespn.classes.betting import GameOdds
+from pyespn.utilities import fetch_espn_data, lookup_league_api_info
+from pyespn.data.version import espn_api_version as v
 
 
 @validate_json("event_json")
@@ -42,7 +45,7 @@ class Event:
             espn_instance (PYESPN): The parent `PYESPN` instance for API interaction.
         """
         from pyespn.classes.venue import Venue
-
+        self.competition = None
         self.event_json = event_json
         self.espn_instance = espn_instance
         self.url_ref = self.event_json.get('$ref')
@@ -58,6 +61,7 @@ class Event:
         self.home_team = None
         self.away_team = None
         self._load_teams()
+        self._load_competition_data()
 
     def _load_teams(self):
         """
@@ -89,8 +93,18 @@ class Event:
         """
         return f"<Event | {self.short_name} {self.date}>"
 
-    def load_competition_data(self):
-        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671849/competitions/401671849'
+    def load_betting_odds(self):
+
+        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671849/competitions/401671849/odds?lang=en&region=us'
+
+    def _load_competition_data(self):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
+        competition_content = fetch_espn_data(url)
+
+        self.competition = Competition(competition_json=competition_content,
+                                       espn_instance=self.espn_instance,
+                                       event_instance=self)
 
     def to_dict(self) -> dict:
         """
@@ -100,3 +114,51 @@ class Event:
             dict: The event's raw JSON data.
         """
         return self.event_json
+
+
+class Competition:
+    pass
+
+    def __init__(self, competition_json, espn_instance, event_instance):
+        self.competition_json = competition_json
+        self.espn_instance = espn_instance
+        self.event_instance = event_instance
+        self._load_competition_data()
+
+    def _load_competition_data(self):
+        self.id = self.competition_json.get("id")
+        self.uid = self.competition_json.get("uid")
+        self.date = self.competition_json.get("date")
+        self.attendance = self.competition_json.get("attendance")
+        self.type = self.competition_json.get("type")  # This might itself be a dict
+        self.time_valid = self.competition_json.get("timeValid")
+        self.geo_broadcast = self.competition_json.get("geoBroadcast")  # Might be a list of dicts
+        self.play_by_play_available = self.competition_json.get("playByPlayAvailable")
+        self.play_by_play_source = self.competition_json.get("playByPlaySource")
+        self.boxscore_available = self.competition_json.get("boxscoreAvailable")
+        self.roster_available = self.competition_json.get("rosterAvailable")
+        self.broadcasts = self.competition_json.get("broadcasts")  # Likely a list of dicts
+        self.status = self.competition_json.get("status")  # A dict with displayClock, period, etc.
+        self.venue = self.competition_json.get("venue")  # A dict
+        self.competitors = self.competition_json.get("competitors")  # A list of team info
+        self.notes = self.competition_json.get("notes")  # Might be optional
+        self.start_date = self.competition_json.get("startDate")
+        self.neutral_site = self.competition_json.get("neutralSite")
+        self.conference_competition = self.competition_json.get("conferenceCompetition")
+        self.recent = self.competition_json.get("recent")
+        self.location = self.competition_json.get("location")
+        self.weather = self.competition_json.get("weather")  # Optional dict
+        self.format = self.competition_json.get("format")
+        self.leaders = self.competition_json.get("leaders")  # Usually a list of stats leaders
+        self.headlines = self.competition_json.get("headlines")
+        self.odds = self.competition_json.get("odds")  # List of betting odds
+        self.notes = self.competition_json.get("notes")
+        self.tickets = self.competition_json.get("tickets")
+        self.group = self.competition_json.get("group")
+        self.start_time_tbd = self.competition_json.get("startTimeTBD")
+        self.targeting_data = self.competition_json.get("targetingData")
+        self.qualifiers = self.competition_json.get("qualifiers")
+        self.timeout_format = self.competition_json.get("timeoutFormat")
+        self.game_package = self.competition_json.get("gamePackage")
+        self.predictions_available = self.competition_json.get("predictionsAvailable")
+        self.clock = self.competition_json.get("clock")
