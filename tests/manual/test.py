@@ -10,7 +10,7 @@ if __name__ == '__main__':
     espn = PYESPN('nfl')
     espn.league.load_regular_season_schedule(season=season)
     espn.load_season_rosters(season=season)
-    espn.teams[0].load_season_roster_box_score(season=season)
+    #espn.teams[0].load_season_roster_box_score(season=season)
     #espn.load_season_teams_results(season=2024)
     #espn.load_standings(season=season)
     #espn.load_season_league_stat_leaders(season=2024)

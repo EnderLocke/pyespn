@@ -285,6 +285,12 @@ class PYESPN:
                                                     league_abbv=self.league_abbv,
                                                     espn_instance=self)
 
+    def load_seasons_box_scores(self, season):
+
+        self.load_season_rosters(season=season)
+        for team in self.teams:
+            team.load_season_roster_box_score(season=season)
+
     def get_team_by_id(self, team_id) -> "Team":
         """
         Finds and returns the Team object that matches the given team_id.

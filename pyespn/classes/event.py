@@ -89,6 +89,9 @@ class Event:
         """
         return f"<Event | {self.short_name} {self.date}>"
 
+    def load_competition_data(self):
+        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671849/competitions/401671849'
+
     def to_dict(self) -> dict:
         """
         Converts the Event instance to its original JSON dictionary.
