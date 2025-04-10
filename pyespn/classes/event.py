@@ -62,6 +62,7 @@ class Event:
         self.away_team = None
         self._load_teams()
         self._load_competition_data()
+        self._load_betting_odds()
 
     def _load_teams(self):
         """
@@ -93,9 +94,23 @@ class Event:
         """
         return f"<Event | {self.short_name} {self.date}>"
 
-    def load_betting_odds(self):
+    def _load_betting_odds(self):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
+        page_content = fetch_espn_data(url)
+        pages = page_content.get('pageCount', 0)
 
-        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671849/competitions/401671849/odds?lang=en&region=us'
+        event_odds = []
+
+        for page in range(1, pages + 1):
+            page_url = url + f'?page={page}'
+            odds_content = fetch_espn_data(page_url)
+            for odd in odds_content.get('items', []):
+                # todo can i use provider?
+
+
+                pass
+
 
     def _load_competition_data(self):
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
@@ -117,7 +132,6 @@ class Event:
 
 
 class Competition:
-    pass
 
     def __init__(self, competition_json, espn_instance, event_instance):
         self.competition_json = competition_json
@@ -148,7 +162,7 @@ class Competition:
         self.roster_available = self.competition_json.get("rosterAvailable")
         self.broadcasts = self.competition_json.get("broadcasts")  # Likely a list of dicts
         self.status = self.competition_json.get("status")  # A dict with displayClock, period, etc.
-        self.venue = self.competition_json.get("venue")  # A dict
+        self.venue = self.event_instance.event_venue
         self.competitors = self.competition_json.get("competitors")  # A list of team info
         self.notes = self.competition_json.get("notes")  # Might be optional
         self.start_date = self.competition_json.get("startDate")
