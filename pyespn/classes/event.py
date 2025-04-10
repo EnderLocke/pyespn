@@ -125,6 +125,15 @@ class Competition:
         self.event_instance = event_instance
         self._load_competition_data()
 
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Competition instance.
+
+        Returns:
+            str: A formatted string with the events/competition data.
+        """
+        return f"<Competition | {self.start_date}>"
+
     def _load_competition_data(self):
         self.id = self.competition_json.get("id")
         self.uid = self.competition_json.get("uid")
