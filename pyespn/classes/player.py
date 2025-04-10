@@ -1,7 +1,7 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.vehicle import Vehicle
 from pyespn.classes.event import Event
-from pyespn.classes.stat import Record
+from pyespn.classes.stat import StatCategory
 from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
 from pyespn.data.version import espn_api_version as v
 
@@ -221,21 +221,20 @@ class Player:
                 event_content = fetch_espn_data(event.get('event', {}).get('$ref'))
                 event_find = Event(event_json=event_content,
                                    espn_instance=self.espn_instance)
+            stats = []
+            if event.get('played'):
+                stats_content = fetch_espn_data(event.get('statistics', {}).get('$ref'))
 
-            stats_content = fetch_espn_data(event.get('statistics', {}).get('$ref'))
-            for split in stats_content.get('splits', []):
-                stats = []
-                for category in split.get('categories'):
-                    stats.append(Record(record_json=category,
-                                        espn_instance=self.espn_instance))
-                    event_record = {
-                        'event': event_find,
-                        'stats': stats,
-                    }
-                    event_stats_log.append(event_record)
+                for category in stats_content.get('splits', {}).get('categories'):
+                    stats.append(StatCategory(record_json=category,
+                                              espn_instance=self.espn_instance))
+            event_record = {
+                'event': event_find,
+                'stats': stats,
+            }
+            event_stats_log.append(event_record)
 
-        self.stats_game_log = event_stats_log
-
+        self.stats_game_log[season] = event_stats_log
 
     def load_player_contracts(self):
         # todo i haven't seen this filled in at all yet in the api

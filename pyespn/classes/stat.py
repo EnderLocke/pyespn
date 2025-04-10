@@ -298,3 +298,7 @@ class Leader:
                     athlete_content = fetch_espn_data(self.leader_json.get('athlete', {}).get('$ref'))
                     self.athlete = Player(player_json=athlete_content,
                                           espn_instance=self.espn_instance)
+
+
+class StatCategory(Record):
+    pass

@@ -1,6 +1,7 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data, get_an_id, get_athlete_id
 from pyespn.data.version import espn_api_version as v
-from pyespn.classes import Player, Stat
+from pyespn.classes.player import Player
+from pyespn.classes.stat import Stat
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 import requests
