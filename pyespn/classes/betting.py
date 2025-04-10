@@ -1,4 +1,4 @@
-from pyespn.utilities import fetch_espn_data, get_athlete_id
+from pyespn.utilities import fetch_espn_data, get_team_id, get_athlete_id, camel_to_snake
 from pyespn.exceptions import API400Error, JSONNotProvidedError
 from pyespn.core.decorators import validate_json
 
@@ -222,6 +222,12 @@ class GameOdds:
         self.event_instance = event_instance
         self._load_odds_data()
 
+    def __repr__(self):
+        """
+        Returns a string representation of the GameOdds instance.
+        """
+        return f"<GameOdds | {self.provider}>"
+
     def _load_odds_data(self):
         self.provider = self.odds_json.get('provider', {}).get('name', 'unknown')
         self.over_under = self.odds_json.get('overUnder')
@@ -231,7 +237,48 @@ class GameOdds:
         self.under_odds = self.odds_json.get('underOdds')
         self.money_line_winner = self.odds_json.get('moneylineWinner')
         self.spread_winner = self.odds_json.get("spreadWinner")
-        self.away_team_odds = Odds(odds_json=self.odds_json.get('awayTeamOdds'))
+        self.away_team_odds = Odds(odds_json=self.odds_json.get('awayTeamOdds'),
+                                   espn_instance=self.espn_instance,
+                                   event_instance=self.event_instance)
+        self.home_team_odds = Odds(odds_json=self.odds_json.get('homeTeamOdds'),
+                                   espn_instance=self.espn_instance,
+                                   event_instance=self.event_instance)
+        # todo do i need this
+        self.open = BetValue(bet_name='open',
+                             bet_json=self.odds_json.get('open'),
+                             espn_instance=self.espn_instance)
+        self.close = BetValue(bet_name='close',
+                              bet_json=self.odds_json.get('close'),
+                              espn_instance=self.espn_instance)
+        self.current = BetValue(bet_name='current',
+                                bet_json=self.odds_json.get('close'),
+                                espn_instance=self.espn_instance)
+
+class OddsType:
+
+    def __init__(self, odds_name, odds_type_json, espn_instance):
+        self.name = odds_name
+        self.odds_type_json = odds_type_json
+        self.espn_instance = espn_instance
+        self.odds = {}
+        self._load_odds_type_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the OddsType instance.
+        """
+        return f"<OddsType | {self.name}>"
+
+    def _load_odds_type_data(self):
+        self.odds['point_spread'] = BetValue(bet_name='point_spread',
+                                             bet_json=self.odds_type_json.get('pointSpread', {}),
+                                             espn_instance=self.espn_instance)
+        self.odds['spread'] = BetValue(bet_name='spread',
+                                       bet_json=self.odds_type_json.get('spread', {}),
+                                       espn_instance=self.espn_instance)
+        self.odds['money_line'] = BetValue(bet_name='money_line',
+                                           bet_json=self.odds_type_json.get('moneyLine', {}),
+                                           espn_instance=self.espn_instance)
 
 
 class Odds:
@@ -240,16 +287,48 @@ class Odds:
         self.odds_json = odds_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
+        self._load_odds_json()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Odds instance.
+        """
+        return f"<Odds | {self.team.name}>"
 
     def _load_odds_json(self):
         self.favorite = self.odds_json.get('favorite')
         self.underdog = self.odds_json.get('underdog')
         self.money_line = self.odds_json.get('moneyLine')
         self.spread_odds = self.odds_json.get('spreadOdds')
+        team_id = get_team_id(self.odds_json.get('team', {}).get('$ref'))
+        self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+        self.open = OddsType(odds_name='open',
+                             odds_type_json=self.odds_json.get('open'),
+                             espn_instance=self.espn_instance)
+        self.close = OddsType(odds_name='close',
+                              odds_type_json=self.odds_json.get('close'),
+                              espn_instance=self.espn_instance)
+        self.current = OddsType(odds_name='current',
+                                odds_type_json=self.odds_json.get('current'),
+                                espn_instance=self.espn_instance)
 
 
 class BetValue:
 
-    def __init__(self, bet_json, espn_instance):
+    def __init__(self, bet_name, bet_json, espn_instance):
+        self.name = bet_name
         self.bet_json = bet_json
         self.espn_instance = espn_instance
+        self._load_bet_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the BetValue instance.
+        """
+        return f"<BetValue | {self.name}>"
+
+    def _load_bet_data(self):
+        for key, value in self.bet_json.items():
+            snake_key = camel_to_snake(key)
+            setattr(self, snake_key, value)
+

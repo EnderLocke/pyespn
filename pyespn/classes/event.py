@@ -60,6 +60,7 @@ class Event:
         self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
         self.home_team = None
         self.away_team = None
+        self.odds = None
         self._load_teams()
         self._load_competition_data()
         self._load_betting_odds()
@@ -106,11 +107,9 @@ class Event:
             page_url = url + f'?page={page}'
             odds_content = fetch_espn_data(page_url)
             for odd in odds_content.get('items', []):
-                # todo can i use provider?
-
-
-                pass
-
+                event_odds.append(GameOdds(odds_json=odd,
+                                           espn_instance=self.espn_instance,
+                                           event_instance=self))
 
     def _load_competition_data(self):
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
