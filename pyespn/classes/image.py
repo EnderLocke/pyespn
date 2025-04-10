@@ -31,7 +31,7 @@ class Image:
 
     def __repr__(self):
         """
-        Returns a string representation of the Manufacturer instance.
+        Returns a string representation of the Image instance.
         """
         return f"<Image | {self.name}>"
 
