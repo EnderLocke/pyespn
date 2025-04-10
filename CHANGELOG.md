@@ -3,6 +3,7 @@
 ## 0.3.3
 * moved schedule functions out of client and into league class
 * added in function to team/client to load box scores for a roster for a season
+* added in call from event to pull competition data
 * 
 
 ## 0.3.2
