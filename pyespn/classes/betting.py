@@ -237,22 +237,37 @@ class GameOdds:
         self.under_odds = self.odds_json.get('underOdds')
         self.money_line_winner = self.odds_json.get('moneylineWinner')
         self.spread_winner = self.odds_json.get("spreadWinner")
-        self.away_team_odds = Odds(odds_json=self.odds_json.get('awayTeamOdds'),
-                                   espn_instance=self.espn_instance,
-                                   event_instance=self.event_instance)
-        self.home_team_odds = Odds(odds_json=self.odds_json.get('homeTeamOdds'),
-                                   espn_instance=self.espn_instance,
-                                   event_instance=self.event_instance)
-        # todo do i need this
-        self.open = BetValue(bet_name='open',
-                             bet_json=self.odds_json.get('open'),
-                             espn_instance=self.espn_instance)
-        self.close = BetValue(bet_name='close',
-                              bet_json=self.odds_json.get('close'),
-                              espn_instance=self.espn_instance)
-        self.current = BetValue(bet_name='current',
-                                bet_json=self.odds_json.get('close'),
-                                espn_instance=self.espn_instance)
+
+        if self.provider == 'Bet 365':
+            away_dicts = []
+            home_dicts = []
+            other_dicts = []
+            for key, value in self.odds_json.get('teamOdds'):
+                if 'home' in str(key).lower():
+                    home_dicts.append({key: value})
+                elif 'away' in str(key).lower():
+                    away_dicts.append({key: value})
+                else:
+                    other_dicts.append({key,value})
+            print('bet 365 not integrated yet')
+        else:
+            self.away_team_odds = Odds(odds_json=self.odds_json.get('awayTeamOdds'),
+                                       espn_instance=self.espn_instance,
+                                       event_instance=self.event_instance)
+            self.home_team_odds = Odds(odds_json=self.odds_json.get('homeTeamOdds'),
+                                       espn_instance=self.espn_instance,
+                                       event_instance=self.event_instance)
+            # todo do i need this
+            self.open = BetValue(bet_name='open',
+                                 bet_json=self.odds_json.get('open'),
+                                 espn_instance=self.espn_instance)
+            self.close = BetValue(bet_name='close',
+                                  bet_json=self.odds_json.get('close'),
+                                  espn_instance=self.espn_instance)
+            self.current = BetValue(bet_name='current',
+                                    bet_json=self.odds_json.get('close'),
+                                    espn_instance=self.espn_instance)
+
 
 class OddsType:
 
@@ -261,6 +276,7 @@ class OddsType:
         self.odds_type_json = odds_type_json
         self.espn_instance = espn_instance
         self.odds = {}
+        self.favorite = self.odds_type_json.get('favorite')
         self._load_odds_type_data()
 
     def __repr__(self):
