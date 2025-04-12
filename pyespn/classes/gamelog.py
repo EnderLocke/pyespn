@@ -82,10 +82,15 @@ class Play:
         # todo this is probably its own class
         self.probability = self.play_json.get('probability')
         self.stat_yardage = self.play_json.get('statYardage')
-        team_id = get_team_id(self.play_json.get('team', {}).get('$ref'))
-        self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+        if 'team' in self.play_json:
+            team_id = get_team_id(self.play_json.get('team', {}).get('$ref'))
+            self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+        else:
+            self.team = None
         # todo these look like a list of athletes
         self.participants = self.play_json.get('participants')
+        self.shooting_play = self.play_json.get('shootingPlay')
+        self.coordinate = self.play_json.get('coordinate')
 
 
 
