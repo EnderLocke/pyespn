@@ -144,7 +144,7 @@ class Event:
                                   event_instance=self,
                                   drive_instance=None))
 
-        self.drives = plays
+        self.plays = plays
 
     def _load_drive_data(self):
         url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
