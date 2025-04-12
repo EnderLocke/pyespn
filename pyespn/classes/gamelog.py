@@ -38,16 +38,19 @@ class Drive:
         for play in self.drive_json.get('plays', {}).get('items'):
             plays.append(Play(play_json=play,
                               espn_instance=self.espn_instance,
-                              event_instance=self.event_instance))
+                              event_instance=self.event_instance,
+                              drive_instance=self))
         self.plays = plays
 
 
 class Play:
 
-    def __init__(self, play_json, espn_instance, event_instance):
+    def __init__(self, play_json, espn_instance, event_instance,
+                 drive_instance):
         self.play_json = play_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
+        self.drive_instnace = drive_instance
         self._load_play_data()
 
     def _load_play_data(self):
@@ -70,6 +73,7 @@ class Play:
         self.end = self.play_json.get('end')
         self.wallclock = self.play_json.get('wallclock')
         self.modified = self.play_json.get('modified')
+        # todo this is probably its own class
         self.probability = self.play_json.get('probability')
         self.stat_yardage = self.play_json.get('statYardage')
         team_id = get_team_id(self.play_json.get('team', {}).get('$ref'))
