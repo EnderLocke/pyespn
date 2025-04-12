@@ -1,6 +1,7 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.vehicle import Vehicle
 from pyespn.classes.event import Event
+from pyespn.classes.image import Image
 from pyespn.classes.stat import StatCategory
 from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
 from pyespn.data.version import espn_api_version as v
@@ -175,6 +176,10 @@ class Player:
         self.status_type = status.get('type')
         self.status_abbreviation = status.get('abbreviation')
 
+        self.headshot = self.player_json.get('headshot')
+        if self.headshot:
+            self.headshot = Image(image_json=self.headshot,
+                                  espn_instance=self.espn_instance)
         self.statistics_log_ref = self.player_json.get('statisticslog', {}).get('$ref')
 
         if 'vehicles' in self.player_json:

@@ -15,7 +15,12 @@ def get_team_id(url):
         >>> get_team_id(url)
         12345
     """
-    team_id = url.split('/')[url.split('/').index('teams') + 1].split('?')[0]
+    try:
+        team_id = url.split('/')[url.split('/').index('teams') + 1].split('?')[0]
+    except AttributeError as e:
+        print(url)
+        print(e)
+        return None
     return int(team_id)
 
 

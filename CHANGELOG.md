@@ -5,6 +5,8 @@
 * added in function to team/client to load box scores for a roster for a season
 * added in call from event to pull competition data
 * added in event call to build out odds
+* added in headshot to player class
+* added in drives and plays data (nfl)
 * 
 
 ## 0.3.2
@@ -21,6 +23,7 @@
 * removed get_league_info call from client as all the data is in the league variable once client is loaded
 * added functions to client to search teams rosters for a given season for a player
 * added in auto load for rosters for given season for both betting futures and league leaders to reduce calls to api
+* added in pbp for basketball leagues
 * 
 
 ## 0.3.1

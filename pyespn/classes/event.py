@@ -1,5 +1,6 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.betting import GameOdds
+from pyespn.classes.gamelog import Drive, Play
 from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
 from pyespn.data.version import espn_api_version as v
 
@@ -61,9 +62,13 @@ class Event:
         self.home_team = None
         self.away_team = None
         self.odds = None
+        self.drives = None
+        self.plays = None
+        self.api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         self._load_teams()
         self._load_competition_data()
         self._load_betting_odds()
+        self._load_play_by_play()
 
     def _load_teams(self):
         """
@@ -96,8 +101,7 @@ class Event:
         return f"<Event | {self.short_name} {self.date}>"
 
     def _load_betting_odds(self):
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
+        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -112,13 +116,51 @@ class Event:
         self.odds = event_odds
 
     def _load_competition_data(self):
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
+        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
         competition_content = fetch_espn_data(url)
 
         self.competition = Competition(competition_json=competition_content,
                                        espn_instance=self.espn_instance,
                                        event_instance=self)
+
+    def _load_play_by_play(self):
+        if self.api_info['sport'] == 'basketball':
+            self._load_basketball_plays()
+        elif self.api_info['sport'] == 'football':
+            self._load_drive_data()
+
+    def _load_basketball_plays(self):
+        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/plays'
+        page_content = fetch_espn_data(url)
+        pages = page_content.get('pageCount', 0)
+
+        plays = []
+        for page in range(1, pages + 1):
+            page_url = url + f'?page={page}'
+            play_content = fetch_espn_data(page_url)
+            for play in play_content.get('items', []):
+                plays.append(Play(play_json=play,
+                                  espn_instance=self.espn_instance,
+                                  event_instance=self,
+                                  drive_instance=None))
+
+        self.plays = plays
+
+    def _load_drive_data(self):
+        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
+        page_content = fetch_espn_data(url)
+        pages = page_content.get('pageCount', 0)
+
+        drives = []
+        for page in range(1, pages + 1):
+            page_url = url + f'?page={page}'
+            drive_content = fetch_espn_data(page_url)
+            for drive in drive_content.get('items', []):
+                drives.append(Drive(drive_json=drive,
+                                    espn_instance=self.espn_instance,
+                                    event_instance=self))
+
+        self.drives = drives
 
     def to_dict(self) -> dict:
         """
@@ -182,5 +224,9 @@ class Competition:
         self.qualifiers = self.competition_json.get("qualifiers")
         self.timeout_format = self.competition_json.get("timeoutFormat")
         self.game_package = self.competition_json.get("gamePackage")
+        self.officials = self.competition_json.get('officials')
         self.predictions_available = self.competition_json.get("predictionsAvailable")
         self.clock = self.competition_json.get("clock")
+        # nba has series
+        self.series = self.competition_json.get('series')
+
