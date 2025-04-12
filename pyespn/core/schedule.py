@@ -7,35 +7,6 @@ if TYPE_CHECKING:
     from pyespn.classes import Schedule
 
 
-def get_weekly_schedule_core(league_abbv, espn_instance, season, week) -> Schedule:
-    """
-    Retrieves the weekly schedule of events for a specific season and week for a given league.
-
-    Args:
-        league_abbv (str): The abbreviation for the league (e.g., 'nfl', 'nba').
-        espn_instance (object): An instance of the ESPN class used for interaction with the ESPN API.
-        season (int): The season year for which the weekly schedule is to be fetched.
-        week (int): The week number within the season (e.g., week 1, week 2).
-
-    Returns:
-        Schedule: A `Schedule` object containing the weekly schedule of events for the specified season and week.
-
-    Note:
-        The function fetches the schedule data and processes it into a `Schedule` object for easier handling.
-    """
-    api_info = lookup_league_api_info(league_abbv=league_abbv)
-
-    url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/weeks/{week}/events?lang=en&region=us'
-    content = fetch_espn_data(url)
-
-    for event_url in content.get('items', []):
-        event_content = fetch_espn_data(event_url['$ref'])
-        weekly_schedule = Schedule(schedule_json=event_content,
-                                   espn_instance=espn_instance,
-                                   season=season)
-    return weekly_schedule
-
-
 # todo 1 is preseason 2 is regular season and 3 is postseason
 def get_regular_season_schedule_core(league_abbv, espn_instance, season, season_type='2') -> "Schedule":
     """
