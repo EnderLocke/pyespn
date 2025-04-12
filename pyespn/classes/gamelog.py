@@ -50,8 +50,14 @@ class Play:
         self.play_json = play_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
-        self.drive_instnace = drive_instance
+        self.drive_instance = drive_instance
         self._load_play_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Play instance.
+        """
+        return f"<Play | {self.team.name} | {self.short_text}>"
 
     def _load_play_data(self):
         self.ref = self.play_json.get('$ref')
