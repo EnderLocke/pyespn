@@ -9,7 +9,9 @@ nav:
   - Classes:
     - Betting: classes/betting_class.md
     - Circuit: classes/circuit_class.md
+    - Competition: classes/competition_class.md
     - Draft: classes/draft_class.md
+    - Drive: classes/drive_class.md
     - Event: classes/event_class.md
     - Image: classes/image_class.md
     - Leader: classes/leader_class.md
@@ -17,6 +19,7 @@ nav:
     - League: classes/league_class.md
     - Line: classes/line_class.md
     - Manufacturer: classes/manufacturer_class.md
+    - Play: classes/play_class.md
     - Player: classes/player_class.md
     - Record: classes/record_class.md
     - Recruit: classes/recruit_class.md
