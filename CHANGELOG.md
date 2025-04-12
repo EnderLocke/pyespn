@@ -41,7 +41,6 @@
 * added im image class and connected to team logos and venue images
 * added in func to pull stats for a team/all teams of a league
 * added in call for coaches
-* 
 
 ## 0.3.0
 * lots of changes
