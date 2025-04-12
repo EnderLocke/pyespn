@@ -11,31 +11,54 @@ class Event:
     """
     Represents a sports event within the ESPN API framework.
 
-    This class encapsulates event details such as the event's name, date, venue,
-    and the competing teams.
+    This class acts as a central unit for encapsulating all relevant data associated with
+    a sporting event, including participating teams, venue details, drives (football),
+    play-by-play actions (basketball), competition metadata, and betting odds.
 
     Attributes:
-        event_json (dict): The raw JSON data representing the event.
-        espn_instance (PYESPN): The ESPN API instance for fetching additional data.
-        url_ref (str): The API reference URL for the event.
-        event_id (int): The unique identifier of the event.
-        date (str): The date of the event.
-        event_name (str): The full name of the event.
-        short_name (str): The short name or abbreviation of the event.
-        competition_type (str): The type of competition (e.g., "regular", "playoff").
-        venue_json (dict): The raw JSON data representing the event venue.
-        event_venue (Venue): A `Venue` instance representing the event's location.
-        event_notes (list): Additional notes about the event.
-        home_team (Team or None): The first competing team, initialized after `_load_teams()` runs.
-        away_team (Team or None): The second competing team, initialized after `_load_teams()` runs.
+        event_json (dict): The raw JSON data from ESPN describing the event.
+        espn_instance (PYESPN): The active ESPN API interface used for data lookups.
+        url_ref (str): ESPN API reference URL to this event.
+        event_id (int): Unique identifier for the event.
+        date (str): Date and time of the event in ISO format.
+        event_name (str): Full name of the event.
+        short_name (str): Abbreviated name of the event.
+        competition_type (str): Type of competition (e.g. "regular", "postseason").
+        venue_json (dict): Raw JSON data representing the venue.
+        event_venue (Venue): Venue object built from the venue JSON.
+        event_notes (list): Optional notes or metadata about the event.
+        home_team (Team): Team object representing the home team.
+        away_team (Team): Team object representing the away team.
+        api_info (dict): League-specific metadata used to construct ESPN URLs.
+        competition (Competition): An object containing metadata about the specific competition.
+        odds (list[GameOdds]): List of betting odds (if available).
+        drives (list[Drive] or None): A list of `Drive` instances for football games.
+        plays (list[Play] or None): A list of `Play` instances for basketball games.
 
     Methods:
         _load_teams():
-            Fetches and assigns the competing teams using API references.
+            Populates home_team and away_team attributes from competitors JSON.
+
+        _load_betting_odds():
+            Fetches and parses multi-page betting odds data.
+
+        _load_competition_data():
+            Loads metadata about the specific competition instance.
+
+        _load_play_by_play():
+            Routes to appropriate play-by-play loader depending on sport type.
+
+        _load_basketball_plays():
+            Loads all basketball plays as `Play` objects.
+
+        _load_drive_data():
+            Loads all football drives as `Drive` objects.
 
         to_dict() -> dict:
-            Returns the raw JSON representation of the event.
+            Returns the original raw JSON for this event.
 
+        __repr__() -> str:
+            A readable string representation showing the event short name and date.
     """
 
     def __init__(self, event_json: dict, espn_instance):
@@ -102,6 +125,14 @@ class Event:
         return f"<Event | {self.short_name} {self.date}>"
 
     def _load_betting_odds(self):
+        """
+        Private method to fetch and assign betting odds for the event.
+
+        This method constructs the appropriate URL using event and league data, then retrieves
+        and parses odds data from each available page. The results are stored in the `self.odds` list
+        as `GameOdds` instances.
+        """
+
         url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
@@ -128,6 +159,12 @@ class Event:
         self.odds = event_odds
 
     def _load_competition_data(self):
+        """
+        Private method to fetch and assign competition details for the event.
+
+        This method retrieves the competition data for the event and initializes a `Competition`
+        object using the JSON data, storing it in the `self.competition` attribute.
+        """
         url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
         competition_content = fetch_espn_data(url)
 
@@ -136,12 +173,24 @@ class Event:
                                        event_instance=self)
 
     def _load_play_by_play(self):
+        """
+        Private method to load play-by-play data for the event.
+
+        This method routes the data fetching logic based on the sport type—calling
+        `_load_basketball_plays()` for basketball and `_load_drive_data()` for football.
+        """
         if self.api_info['sport'] == 'basketball':
             self._load_basketball_plays()
         elif self.api_info['sport'] == 'football':
             self._load_drive_data()
 
     def _load_basketball_plays(self):
+        """
+        Private method to fetch and assign play-by-play data for a basketball game.
+
+        Uses multi-threaded requests to efficiently load all play pages and converts each play
+        item into a `Play` object. The complete list is assigned to `self.plays`.
+        """
         url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/plays'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
@@ -169,6 +218,12 @@ class Event:
         self.plays = plays
 
     def _load_drive_data(self):
+        """
+        Private method to fetch and assign drive data for a football game.
+
+        Retrieves all drives associated with the competition and converts each drive item
+        into a `Drive` object. The resulting list is stored in `self.drives`.
+        """
         url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
