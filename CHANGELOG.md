@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.3
+* moved schedule functions out of client and into league class
+* added in function to team/client to load box scores for a roster for a season
+* added in call from event to pull competition data
+* added in event call to build out odds
+* 
+
 ## 0.3.2
 * added in epl / soccer
 * added in pulling betting records for a season for teams/ teams in a league

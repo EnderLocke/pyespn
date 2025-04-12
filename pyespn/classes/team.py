@@ -78,7 +78,6 @@ class Team:
         load_season_betting_records(season) -> None:
             Fetches and loads the betting odds records for a specific team and season using concurrent requests.
     """
-
     def __init__(self, espn_instance, team_json):
         """
         Initializes a Team instance.
@@ -123,6 +122,11 @@ class Team:
             str: A formatted string with the team's location, name, abbreviation, and league.
         """
         return f"<Team | {self.location} {self.name} ({self.abbreviation}) - {self.get_league()}>"
+
+    def load_season_roster_box_score(self, season):
+
+        for player in self.roster.get(season, []):
+            player.load_player_box_scores_season(season=season)
 
     def _load_team_data(self):
         """

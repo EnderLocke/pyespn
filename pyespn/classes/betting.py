@@ -1,8 +1,7 @@
-from pyespn.classes.player import Player
-from pyespn.classes.team import Team
-from pyespn.utilities import fetch_espn_data, get_athlete_id
+from pyespn.utilities import fetch_espn_data, get_team_id, get_athlete_id, camel_to_snake
 from pyespn.exceptions import API400Error, JSONNotProvidedError
 from pyespn.core.decorators import validate_json
+STANDARDIZED_BETTING_PROVIDERS = ['ESPN BET', 'ESPN Bet - Live Odds']
 
 
 @validate_json("betting_json")
@@ -187,6 +186,8 @@ class Line:
         """
         Private method to parse and store betting line details, including associated teams or athletes.
         """
+        from pyespn.classes.player import Player
+        from pyespn.classes.team import Team
         try:
             if 'athlete' in self.book_json:
                 athlete_id = get_athlete_id(self.book_json.get('athlete', {}).get('$ref'))
@@ -212,3 +213,190 @@ class Line:
             print(f'api error {e}')
         except JSONNotProvidedError as e:
             print(f'json error {e}')
+
+
+class GameOdds:
+
+    def __init__(self, odds_json, espn_instance, event_instance):
+        self.odds_json = odds_json
+        self.espn_instance = espn_instance
+        self.event_instance = event_instance
+        self._load_odds_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the GameOdds instance.
+        """
+        return f"<GameOdds | {self.provider}>"
+
+    def _load_odds_data(self):
+        self.provider = self.odds_json.get('provider', {}).get('name', 'unknown')
+        self.over_under = self.odds_json.get('overUnder')
+        self.details = self.odds_json.get('details')
+        self.spread = self.odds_json.get('spread')
+        self.over_odds = self.odds_json.get('overOdds')
+        self.under_odds = self.odds_json.get('underOdds')
+        self.money_line_winner = self.odds_json.get('moneylineWinner')
+        self.spread_winner = self.odds_json.get("spreadWinner")
+
+        if self.provider not in STANDARDIZED_BETTING_PROVIDERS:
+            if self.provider == 'Bet 365':
+                away_dicts = {}
+                home_dicts = {}
+                other_dicts = {}
+                home_team = self.espn_instance.get_team_by_id(get_team_id(self.odds_json.get('bettingOdds', {}).get('homeTeam', {}).get('$ref')))
+                away_team = self.espn_instance.get_team_by_id(get_team_id(self.odds_json.get('bettingOdds', {}).get('awayTeam', {}).get('$ref')))
+
+                for key, value in self.odds_json.get('bettingOdds', {}).get('teamOdds', {}).items():
+                    if 'home' in str(key).lower():
+                        home_dicts.setdefault(key, value)
+                    elif 'away' in str(key).lower():
+                        away_dicts.setdefault(key, value)
+                    else:
+                        other_dicts.setdefault(key,value)
+                self.away_team_odds = OddsBet365(odds_json=away_dicts,
+                                                 espn_instance=self.espn_instance,
+                                                 event_instance=self.event_instance,
+                                                 gameodds_instance=self,
+                                                 team=away_team)
+                self.home_team_odds = OddsBet365(odds_json=home_dicts,
+                                                 espn_instance=self.espn_instance,
+                                                 event_instance=self.event_instance,
+                                                 gameodds_instance=self,
+                                                 team=home_team)
+                #print('bet 365 not fully integrated yet')
+            else:
+                print(f'the provider is {self.provider}')
+        else:
+            if self.provider == 'ESPN Bet - Live Odds':
+                pass
+            self.away_team_odds = Odds(odds_json=self.odds_json.get('awayTeamOdds'),
+                                       espn_instance=self.espn_instance,
+                                       event_instance=self.event_instance,
+                                       gameodds_instance=self)
+            self.home_team_odds = Odds(odds_json=self.odds_json.get('homeTeamOdds'),
+                                       espn_instance=self.espn_instance,
+                                       event_instance=self.event_instance,
+                                       gameodds_instance=self)
+            # todo do i need this
+            self.open = BetValue(bet_name='open',
+                                 bet_json=self.odds_json.get('open'),
+                                 espn_instance=self.espn_instance)
+            self.current = BetValue(bet_name='current',
+                                    bet_json=self.odds_json.get('current'),
+                                    espn_instance=self.espn_instance)
+            if self.provider == 'ESPN BET':
+                self.close = BetValue(bet_name='close',
+                                      bet_json=self.odds_json.get('close'),
+                                      espn_instance=self.espn_instance)
+
+class OddsType:
+
+    def __init__(self, odds_name, odds_type_json, espn_instance):
+        self.name = odds_name
+        self.odds_type_json = odds_type_json
+        self.espn_instance = espn_instance
+        self.odds = {}
+        self.favorite = self.odds_type_json.get('favorite')
+        self._load_odds_type_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the OddsType instance.
+        """
+        return f"<OddsType | {self.name}>"
+
+    def _load_odds_type_data(self):
+        self.odds['point_spread'] = BetValue(bet_name='point_spread',
+                                             bet_json=self.odds_type_json.get('pointSpread', {}),
+                                             espn_instance=self.espn_instance)
+        self.odds['spread'] = BetValue(bet_name='spread',
+                                       bet_json=self.odds_type_json.get('spread', {}),
+                                       espn_instance=self.espn_instance)
+        self.odds['money_line'] = BetValue(bet_name='money_line',
+                                           bet_json=self.odds_type_json.get('moneyLine', {}),
+                                           espn_instance=self.espn_instance)
+
+
+class Odds:
+
+    def __init__(self, odds_json, espn_instance, event_instance, gameodds_instance):
+        self.odds_json = odds_json
+        self.espn_instance = espn_instance
+        self.event_instance = event_instance
+        self.gameodds_instance = gameodds_instance
+        self._load_odds_json()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Odds instance.
+        """
+        return f"<Odds | {self.team.name}>"
+
+    def _load_odds_json(self):
+        self.favorite = self.odds_json.get('favorite')
+        self.underdog = self.odds_json.get('underdog')
+        self.money_line = self.odds_json.get('moneyLine')
+        self.spread_odds = self.odds_json.get('spreadOdds')
+        team_id = get_team_id(self.odds_json.get('team', {}).get('$ref'))
+        self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+        self.open = OddsType(odds_name='open',
+                             odds_type_json=self.odds_json.get('open'),
+                             espn_instance=self.espn_instance)
+        self.current = OddsType(odds_name='current',
+                                odds_type_json=self.odds_json.get('current'),
+                                espn_instance=self.espn_instance)
+        if self.gameodds_instance.provider == 'ESPN BET':
+            self.close = OddsType(odds_name='close',
+                                  odds_type_json=self.odds_json.get('close'),
+                                  espn_instance=self.espn_instance)
+
+
+class OddsBet365(Odds):
+
+    def __init__(self, odds_json, espn_instance, event_instance, gameodds_instance, team):
+        super().__init__(odds_json=odds_json,
+                         espn_instance=espn_instance,
+                         event_instance=event_instance,
+                         gameodds_instance=gameodds_instance)
+        self.team = team
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Odds instance.
+        """
+        return f"<Odds365 | {self.team.name}>"
+
+    def _load_odds_json(self):
+        try:
+            for key, value in self.odds_json.items():
+                if 'moneyline' in str(key).lower():
+                    self.money_line = value.get('value')
+                if 'spread' in str(key).lower() and 'spreadhandicap' not in str(key).lower():
+                    self.spread_odds = value.get('value')
+                if 'spreadhandicap' in str(key).lower():
+                    self.teaser_odds = value.get('value')
+        except AttributeError:
+            pass
+
+class BetValue:
+
+    def __init__(self, bet_name, bet_json, espn_instance):
+        self.name = bet_name
+        self.bet_json = bet_json
+        self.espn_instance = espn_instance
+        self._load_bet_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the BetValue instance.
+        """
+        return f"<BetValue | {self.name}>"
+
+    def _load_bet_data(self):
+        try:
+            for key, value in self.bet_json.items():
+                snake_key = camel_to_snake(key)
+                setattr(self, snake_key, value)
+        except AttributeError:
+            pass

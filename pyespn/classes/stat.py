@@ -1,4 +1,3 @@
-from pyespn.classes.player import Player
 from pyespn.utilities import fetch_espn_data, get_team_id, get_athlete_id
 
 
@@ -279,6 +278,7 @@ class Leader:
         statistical value and rank.
 
         """
+        from pyespn.classes.player import Player
         self.value = self.leader_json.get('value', 0)
         self.rel = self.leader_json.get('rel')
 
@@ -298,3 +298,7 @@ class Leader:
                     athlete_content = fetch_espn_data(self.leader_json.get('athlete', {}).get('$ref'))
                     self.athlete = Player(player_json=athlete_content,
                                           espn_instance=self.espn_instance)
+
+
+class StatCategory(Record):
+    pass

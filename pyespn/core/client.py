@@ -63,7 +63,6 @@ class PYESPN:
         self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
         self.teams = []
         self.standings = {}
-        self.schedules = {}
         self.recruit_rankings = {}
         self.drafts = {}
         self.manufacturers = {}
@@ -132,16 +131,6 @@ class PYESPN:
         """
         self.league.get_all_seasons_futures(season=season)
 
-    def load_regular_season_schedule(self, season: int):
-        """
-        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
-
-        Args:
-            season (int): The season for which to load the schedule.
-        """
-
-        self.schedules[season] = self.get_regular_seasons_schedule(season=season)
-
     def load_year_draft(self, season: int) -> None:
         """
         Loads draft data for a given season and stores it in the drafts dictionary.
@@ -157,8 +146,7 @@ class PYESPN:
         """
 
         self.drafts[season] = load_draft_data_core(season=season,
-                                                   league_abbv=self.league_abbv,
-                                                   espn_instance=self)
+                                                   league_abbv=self.league_abbv,                                           espn_instance=self)
 
     def get_player_info(self, player_id) -> "Player":
         """
@@ -297,19 +285,11 @@ class PYESPN:
                                                     league_abbv=self.league_abbv,
                                                     espn_instance=self)
 
-    def get_regular_seasons_schedule(self, season: int) -> list["Schedule"]:
-        """
-        Retrieves the regular season schedule for a given season.
+    def load_seasons_box_scores(self, season):
 
-        Args:
-            season (int): The season for which to retrieve the schedule.
-
-        Returns:
-            list[Schedule]: The regular season schedule for the specified season.
-        """
-        return get_regular_season_schedule_core(league_abbv=self.league_abbv,
-                                                espn_instance=self,
-                                                season=season)
+        self.load_season_rosters(season=season)
+        for team in self.teams:
+            team.load_season_roster_box_score(season=season)
 
     def get_team_by_id(self, team_id) -> "Team":
         """

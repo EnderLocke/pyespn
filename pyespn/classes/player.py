@@ -1,5 +1,9 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.vehicle import Vehicle
+from pyespn.classes.event import Event
+from pyespn.classes.stat import StatCategory
+from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
+from pyespn.data.version import espn_api_version as v
 
 
 @validate_json('player_json')
@@ -90,6 +94,7 @@ class Player:
         self.player_json = player_json
         self.espn_instance = espn_instance
         self.stats = {}
+        self.stats_game_log = {}
         self._set_player_data()
 
     def __repr__(self) -> str:
@@ -192,6 +197,48 @@ class Player:
         self.stats = self.get_players_historical_stats_core(player_id=self.id,
                                                             league_abbv=self.espn_instance.league_abbv,
                                                             espn_instance=self.espn_instance)
+
+    def load_player_box_scores_season(self, season):
+        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
+        page_content = fetch_espn_data(url)
+        pages = page_content.get('events', {}).get('pageCount', 0)
+
+        event_list = []
+        for page in range(1, pages + 1):
+            paged_url = url + f'?page={page}'
+            event_log_content = fetch_espn_data(paged_url)
+            for event_log in event_log_content.get('events', {}).get('items', []):
+                event_list.append(event_log)
+
+        event_stats_log = []
+        for event in event_list:
+            event_id = get_an_id(event.get('event', {}).get('$ref'), 'events')
+            event_find = self.espn_instance.league.get_event_by_season(season=season,
+                                                                       event_id=event_id)
+            if not event_find:
+                event_content = fetch_espn_data(event.get('event', {}).get('$ref'))
+                event_find = Event(event_json=event_content,
+                                   espn_instance=self.espn_instance)
+            stats = []
+            if event.get('played'):
+                stats_content = fetch_espn_data(event.get('statistics', {}).get('$ref'))
+
+                for category in stats_content.get('splits', {}).get('categories'):
+                    stats.append(StatCategory(record_json=category,
+                                              espn_instance=self.espn_instance))
+            event_record = {
+                'event': event_find,
+                'stats': stats,
+            }
+            event_stats_log.append(event_record)
+
+        self.stats_game_log[season] = event_stats_log
+
+    def load_player_contracts(self):
+        # todo i haven't seen this filled in at all yet in the api
+        url = f'http://sports.core.api.espn.com/{v}/sports/football/leagues/nfl/athletes/4360807/contracts?lang=en&region=us'
 
     def to_dict(self) -> dict:
         """

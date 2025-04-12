@@ -1,6 +1,10 @@
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
-from pyespn.classes import Schedule
+from pyespn.classes.schedule import Schedule
 from pyespn.data.version import espn_api_version as v
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pyespn.classes import Schedule
 
 
 def get_weekly_schedule_core(league_abbv, espn_instance, season, week) -> Schedule:
@@ -33,7 +37,7 @@ def get_weekly_schedule_core(league_abbv, espn_instance, season, week) -> Schedu
 
 
 # todo 1 is preseason 2 is regular season and 3 is postseason
-def get_regular_season_schedule_core(league_abbv, espn_instance, season, season_type='2') -> list[Schedule]:
+def get_regular_season_schedule_core(league_abbv, espn_instance, season, season_type='2') -> list["Schedule"]:
     """
     Retrieves the regular season schedule for a specific season and league, including all weeks.
 

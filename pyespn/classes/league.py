@@ -2,9 +2,14 @@ from pyespn.core.decorators import validate_json
 from pyespn.utilities import lookup_league_api_info, fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from pyespn.exceptions import API400Error
+from pyespn.core.schedule import get_regular_season_schedule_core
 from pyespn.classes.betting import Betting
 from pyespn.classes.stat import LeaderCategory
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pyespn.classes import Event
 
 
 @validate_json("league_json")
@@ -63,6 +68,7 @@ class League:
         self.league_json = league_json
         self.espn_instance = espn_instance
         self.league_leaders = {}
+        self.schedules = {}
         self.betting_futures = {}
         self._set_league_json()
 
@@ -102,6 +108,37 @@ class League:
     def load_season_free_agents(self, season):
         # todo this seems to always return nothing
         url = f''
+
+    def load_regular_season_schedule(self, season: int):
+        """
+        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+
+        Args:
+            season (int): The season for which to load the schedule.
+        """
+
+        self.schedules[season] = get_regular_season_schedule_core(league_abbv=self.espn_instance.league_abbv,
+                                                                  espn_instance=self.espn_instance,
+                                                                  season=season)
+
+    def get_event_by_season(self, season, event_id) -> "Event":
+        """
+        Finds and returns the Team object that matches the given team_id.
+
+        Args:
+            season (int or str): the season to pull the athlete from
+            event_id (int or str): The ID of the event to find.
+
+        Returns:
+            Event: The matching Event object, or None if not found.
+        """
+        this_event = None
+        for week in self.schedules.get(season, []).weeks:
+            for event in week.events:
+                if str(event.event_id) == str(event_id):
+                    this_event = event
+
+        return this_event
 
     def get_all_seasons_futures(self, season):
         """
