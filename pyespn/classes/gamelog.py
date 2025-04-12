@@ -18,7 +18,7 @@ class Drive:
 
     def _load_drive_data(self):
         self.description = self.drive_json.get('description')
-        self.drive_id = self.drive_json.get('id')
+        self.id = self.drive_json.get('id')
         self.sequence_number = self.drive_json.get('sequence_number')
         self.ref = self.drive_json.get('$ref')
         self.start = self.drive_json.get('start')
@@ -42,10 +42,6 @@ class Drive:
         self.plays = plays
 
 
-    def load_plays(self):
-       pass
-
-
 class Play:
 
     def __init__(self, play_json, espn_instance, event_instance):
@@ -55,6 +51,15 @@ class Play:
         self._load_play_data()
 
     def _load_play_data(self):
-        pass
+        self.ref = self.play_json.get('$ref')
+        self.id = self.play_json.get('id')
+        self.text = self.play_json.get('text')
+        self.alt_text = self.play_json.get('alternativeText')
+        self.short_text = self.play_json.get('shortText')
+        self.home_score = self.play_json.get('homeScore')
+        self.away_score = self.play_json.get('awayScore')
+        self.sequence_number = self.play_json.get('sequenceNumber')
+        self.type = self.play_json.get('type')
+
 
 
