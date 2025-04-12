@@ -3,6 +3,7 @@ from pyespn.classes.betting import GameOdds
 from pyespn.classes.gamelog import Drive, Play
 from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
 from pyespn.data.version import espn_api_version as v
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 @validate_json("event_json")
@@ -105,14 +106,25 @@ class Event:
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
-        event_odds = []
-        for page in range(1, pages + 1):
+        def fetch_and_parse_odds(page):
             page_url = url + f'?page={page}'
             odds_content = fetch_espn_data(page_url)
-            for odd in odds_content.get('items', []):
-                event_odds.append(GameOdds(odds_json=odd,
-                                           espn_instance=self.espn_instance,
-                                           event_instance=self))
+            return [
+                GameOdds(odds_json=odd,
+                         espn_instance=self.espn_instance,
+                         event_instance=self)
+                for odd in odds_content.get('items', [])
+            ]
+
+        event_odds = []
+        with ThreadPoolExecutor() as executor:
+            futures = [executor.submit(fetch_and_parse_odds, page) for page in range(1, pages + 1)]
+            for future in as_completed(futures):
+                try:
+                    event_odds.extend(future.result())
+                except Exception as e:
+                    print(f"Error fetching betting odds page: {e}")
+
         self.odds = event_odds
 
     def _load_competition_data(self):
@@ -134,15 +146,25 @@ class Event:
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
-        plays = []
-        for page in range(1, pages + 1):
+        def fetch_and_parse_plays(page):
             page_url = url + f'?page={page}'
             play_content = fetch_espn_data(page_url)
-            for play in play_content.get('items', []):
-                plays.append(Play(play_json=play,
-                                  espn_instance=self.espn_instance,
-                                  event_instance=self,
-                                  drive_instance=None))
+            return [
+                Play(play_json=play,
+                     espn_instance=self.espn_instance,
+                     event_instance=self,
+                     drive_instance=None)
+                for play in play_content.get('items', [])
+            ]
+
+        plays = []
+        with ThreadPoolExecutor() as executor:
+            futures = [executor.submit(fetch_and_parse_plays, page) for page in range(1, pages + 1)]
+            for future in as_completed(futures):
+                try:
+                    plays.extend(future.result())
+                except Exception as e:
+                    print(f"Error fetching plays page: {e}")
 
         self.plays = plays
 
@@ -151,14 +173,24 @@ class Event:
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
-        drives = []
-        for page in range(1, pages + 1):
+        def fetch_and_parse_drives(page):
             page_url = url + f'?page={page}'
             drive_content = fetch_espn_data(page_url)
-            for drive in drive_content.get('items', []):
-                drives.append(Drive(drive_json=drive,
-                                    espn_instance=self.espn_instance,
-                                    event_instance=self))
+            return [
+                Drive(drive_json=drive,
+                      espn_instance=self.espn_instance,
+                      event_instance=self)
+                for drive in drive_content.get('items', [])
+            ]
+
+        drives = []
+        with ThreadPoolExecutor() as executor:
+            futures = [executor.submit(fetch_and_parse_drives, page) for page in range(1, pages + 1)]
+            for future in as_completed(futures):
+                try:
+                    drives.extend(future.result())
+                except Exception as e:
+                    print(f"Error fetching drive data page: {e}")
 
         self.drives = drives
 
