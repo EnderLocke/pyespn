@@ -42,7 +42,6 @@ def get_regular_season_schedule_core(league_abbv, espn_instance, season, season_
         page_content = fetch_espn_data(url)
         for item in page_content.get('items', []):
             weeks_urls.append(item.get('$ref'))
-    # todo here i need to pull dates if its a
     schedule = Schedule(schedule_list=weeks_urls,
                         espn_instance=espn_instance)
 
