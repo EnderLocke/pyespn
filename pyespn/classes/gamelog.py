@@ -7,7 +7,14 @@ class Drive:
         self.drive_json = drive_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
+        self.plays = None
         self._load_drive_data()
+
+    def __repr__(self):
+        """
+        Returns a string representation of the Drive instance.
+        """
+        return f"<Drive | {self.team.name} | {self.result_display}>"
 
     def _load_drive_data(self):
         self.description = self.drive_json.get('description')
@@ -26,6 +33,14 @@ class Drive:
         self.team = self.espn_instance.get_team_by_id(team_id=team_id)
         end_team_id = get_team_id(self.drive_json.get('endTeam', {}).get('$ref'))
         self.end_team = self.espn_instance.get_team_by_id(team_id=end_team_id)
+        self.plays_ref = self.drive_json.get('plays', {}).get('$ref')
+        plays = []
+        for play in self.drive_json.get('plays', {}).get('items'):
+            plays.append(Play(play_json=play,
+                              espn_instance=self.espn_instance,
+                              event_instance=self.event_instance))
+        self.plays = plays
+
 
     def load_plays(self):
        pass
