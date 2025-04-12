@@ -1,6 +1,6 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.betting import GameOdds
-from pyespn.utilities import fetch_espn_data, lookup_league_api_info
+from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
 from pyespn.data.version import espn_api_version as v
 
 
@@ -102,7 +102,6 @@ class Event:
         pages = page_content.get('pageCount', 0)
 
         event_odds = []
-
         for page in range(1, pages + 1):
             page_url = url + f'?page={page}'
             odds_content = fetch_espn_data(page_url)
@@ -110,6 +109,7 @@ class Event:
                 event_odds.append(GameOdds(odds_json=odd,
                                            espn_instance=self.espn_instance,
                                            event_instance=self))
+        self.odds = event_odds
 
     def _load_competition_data(self):
         api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
