@@ -6,6 +6,7 @@
 * added in call from event to pull competition data
 * added in event call to build out odds
 * added in headshot to player class
+* added in drives and plays data (nfl)
 * 
 
 ## 0.3.2
