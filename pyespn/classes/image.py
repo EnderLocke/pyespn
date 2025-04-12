@@ -44,5 +44,7 @@ class Image:
         self.width = self.image_json.get('width')
         self.height = self.image_json.get('height')
         self.alt = self.image_json.get('alt')
+        if self.name == '':
+            self.name = self.alt
         self.rel = self.image_json.get('rel')
         self.last_updated = self.image_json.get('lastUpdated')

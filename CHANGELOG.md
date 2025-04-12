@@ -5,6 +5,7 @@
 * added in function to team/client to load box scores for a roster for a season
 * added in call from event to pull competition data
 * added in event call to build out odds
+* added in headshot to player class
 * 
 
 ## 0.3.2
