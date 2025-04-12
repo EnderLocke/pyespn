@@ -60,6 +60,29 @@ class Play:
         self.away_score = self.play_json.get('awayScore')
         self.sequence_number = self.play_json.get('sequenceNumber')
         self.type = self.play_json.get('type')
+        self.short_alt_text = self.play_json.get('shortAlternativeText')
+        self.period = self.play_json.get('period')
+        self.clock = self.play_json.get('clock')
+        self.scoring_play = self.play_json.get('scoringPlay')
+        self.priority = self.play_json.get('priority')
+        self.score_value = self.play_json.get('scoreValue')
+        self.start = self.play_json.get('start')
+        self.end = self.play_json.get('end')
+        self.wallclock = self.play_json.get('wallclock')
+        self.modified = self.play_json.get('modified')
+        self.probability = self.play_json.get('probability')
+        self.stat_yardage = self.play_json.get('statYardage')
+        team_id = get_team_id(self.play_json.get('team', {}).get('$ref'))
+        self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+        # todo these look like a list of athletes
+        self.participants = self.play_json.get('participants')
+
+
+
+class PlayType:
+
+    def __init__(self):
+        pass
 
 
 
