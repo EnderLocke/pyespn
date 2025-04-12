@@ -2,8 +2,44 @@ from pyespn.utilities import fetch_espn_data, get_team_id
 
 
 class Drive:
+    """
+    Represents a single drive within a sports event.
+
+    A drive typically consists of a sequence of plays executed by the offensive team,
+    and may result in a score, turnover, or punt. This class handles loading and
+    structuring that information from the ESPN API response.
+
+    Attributes:
+        drive_json (dict): Raw JSON data for the drive.
+        espn_instance (PYESPN): The ESPN API interface instance.
+        event_instance (Event): The parent event this drive belongs to.
+        plays (list[Play]): List of Play objects associated with this drive.
+        description (str): Summary of the drive.
+        id (str): Unique drive identifier.
+        sequence_number (int): Order of the drive within the event.
+        ref (str): API reference URL to this drive.
+        start (dict): Metadata about how the drive started.
+        end (dict): Metadata about how the drive ended.
+        time_elapsed (dict): Duration of the drive.
+        yards (int): Total yardage gained during the drive.
+        is_score (bool): Whether the drive resulted in a score.
+        offensive_plays (int): Number of offensive plays run during the drive.
+        result (str): Raw result string (e.g., 'Touchdown', 'Punt').
+        result_display (str): Formatted display result.
+        team (Team): Team that had possession during the drive.
+        end_team (Team): Team that was on defense at the end of the drive.
+        plays_ref (str): API reference to the list of plays in this drive.
+    """
 
     def __init__(self, drive_json, espn_instance, event_instance):
+        """
+        Initializes a Drive instance using the provided drive JSON.
+
+        Args:
+            drive_json (dict): JSON representation of the drive.
+            espn_instance (PYESPN): The ESPN API interface instance.
+            event_instance (Event): The event this drive belongs to.
+        """
         self.drive_json = drive_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
@@ -17,6 +53,10 @@ class Drive:
         return f"<Drive | {self.team.name} | {self.result_display}>"
 
     def _load_drive_data(self):
+        """
+        Internal method to parse and load data from the drive JSON payload.
+        Creates `Play` objects for each play in the drive.
+        """
         self.description = self.drive_json.get('description')
         self.id = self.drive_json.get('id')
         self.sequence_number = self.drive_json.get('sequence_number')
@@ -44,9 +84,54 @@ class Drive:
 
 
 class Play:
+    """
+    Represents a single play within an ESPN sports event.
+
+    This class parses and stores data related to an individual play, such as the
+    team involved, score, text descriptions, and various metadata about the play.
+
+    Attributes:
+        play_json (dict): Raw JSON data representing the play.
+        espn_instance (PYESPN): The parent ESPN API wrapper instance.
+        event_instance (Event): The parent event this play belongs to.
+        drive_instance (Drive or None): The parent drive (if applicable).
+        team (Team or None): The team associated with the play.
+        id (str): Unique identifier for the play.
+        text (str): Full text description of the play.
+        short_text (str): Shortened description of the play.
+        alt_text (str): Alternative description of the play.
+        short_alt_text (str): Shortened alternative text.
+        home_score (int): Score for the home team at this play.
+        away_score (int): Score for the away team at this play.
+        sequence_number (int): Play's sequence number in the event.
+        type (str): Type of the play.
+        period (dict): Information about the game period (e.g., quarter, half).
+        clock (dict): Game clock status at time of play.
+        scoring_play (bool): Whether the play resulted in scoring.
+        priority (int): Display priority of the play.
+        score_value (int): Amount of points scored on the play.
+        start (dict): Start context for the play.
+        end (dict): End context for the play.
+        wallclock (str): Wallclock timestamp of the play.
+        modified (str): Last modification time.
+        probability (dict or None): Win probability shift, if present.
+        stat_yardage (int or None): Yardage gained or lost (football-specific).
+        participants (list or None): Athletes involved in the play.
+        shooting_play (bool or None): Whether the play is a shooting play (basketball).
+        coordinate (dict or None): X/Y position of the play (if supported).
+    """
 
     def __init__(self, play_json, espn_instance, event_instance,
                  drive_instance):
+        """
+        Initializes a Play instance using the provided JSON data.
+
+        Args:
+            play_json (dict): The JSON data representing the play.
+            espn_instance (PYESPN): The ESPN API interface instance.
+            event_instance (Event): The event this play belongs to.
+            drive_instance (Drive or None): The drive this play belongs to (if applicable).
+        """
         self.play_json = play_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
@@ -60,6 +145,9 @@ class Play:
         return f"<Play | {self.team.name} | {self.short_text}>"
 
     def _load_play_data(self):
+        """
+        Internal method to parse and assign play-related data from the JSON payload.
+        """
         self.ref = self.play_json.get('$ref')
         self.id = self.play_json.get('id')
         self.text = self.play_json.get('text')
