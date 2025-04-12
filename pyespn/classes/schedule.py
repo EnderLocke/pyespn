@@ -127,12 +127,12 @@ class Schedule:
                 event_urls = []
                 for event in this_week_content.get('items', []):
                     event_urls.append(event.get('$ref'))
-
-            self.weeks.append(Week(espn_instance=self.espn_instance,
-                                   week_list=event_urls,
-                                   week_number=week_number,
-                                   start_date=start_date,
-                                   end_date=end_date))
+                if event_urls:
+                    self.weeks.append(Week(espn_instance=self.espn_instance,
+                                           week_list=event_urls,
+                                           week_number=week_number,
+                                           start_date=start_date,
+                                           end_date=end_date))
 
     def get_events(self, week_num: int) -> list["Event"]:
         """
