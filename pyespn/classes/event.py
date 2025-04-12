@@ -67,6 +67,7 @@ class Event:
         self._load_teams()
         self._load_competition_data()
         self._load_betting_odds()
+        self._load_drive_data()
 
     def _load_teams(self):
         """
@@ -121,7 +122,7 @@ class Event:
                                        espn_instance=self.espn_instance,
                                        event_instance=self)
 
-    def load_drive_data(self):
+    def _load_drive_data(self):
         url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
