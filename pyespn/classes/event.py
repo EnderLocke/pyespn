@@ -61,7 +61,9 @@ class Event:
             A readable string representation showing the event short name and date.
     """
 
-    def __init__(self, event_json: dict, espn_instance):
+    def __init__(self, event_json: dict, espn_instance,
+                 load_game_odds: bool = False,
+                 load_play_by_play: bool = False):
         """
         Initializes an Event instance with the provided JSON data.
 
@@ -91,8 +93,10 @@ class Event:
         self.api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         self._load_teams()
         self._load_competition_data()
-        self._load_betting_odds()
-        self._load_play_by_play()
+        if load_game_odds:
+            self._load_betting_odds()
+        if load_play_by_play:
+           self._load_play_by_play()
 
     def _load_teams(self):
         """
