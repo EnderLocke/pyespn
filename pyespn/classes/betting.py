@@ -435,7 +435,7 @@ class Odds:
         self.gameodds_instance = gameodds_instance
         self._load_odds_json()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Odds instance.
 
@@ -562,7 +562,7 @@ class BetValue:
         self.espn_instance = espn_instance
         self._load_bet_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the BetValue instance.
 
