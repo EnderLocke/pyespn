@@ -67,9 +67,17 @@ class Event:
         """
         Initializes an Event instance with the provided JSON data.
 
+        This constructor optionally loads betting odds and play-by-play data based on
+        the supplied flags. By default, those are not loaded unless explicitly enabled.
+
         Args:
             event_json (dict): The JSON data containing event details.
             espn_instance (PYESPN): The parent `PYESPN` instance for API interaction.
+            load_game_odds (bool, optional): If True, fetch and load the betting odds
+                                             for the event. Defaults to False.
+            load_play_by_play (bool, optional): If True, fetch and load the play-by-play
+                                                data (either drives or plays depending
+                                                on sport). Defaults to False.
         """
         from pyespn.classes.venue import Venue
         self.competition = None
