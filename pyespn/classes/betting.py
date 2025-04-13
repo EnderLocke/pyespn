@@ -216,20 +216,65 @@ class Line:
 
 
 class GameOdds:
+    """
+    Represents the overall betting odds for a specific game/event.
+
+    This class handles parsing and organizing odds data from various providers, including
+    standardized ones (like ESPN BET) and custom formats (like Bet365). It creates instances
+    of `Odds`, `OddsBet365`, and `BetValue` to model the odds for home and away teams.
+
+    Attributes:
+        odds_json (dict): Raw JSON data containing odds information.
+        espn_instance (PYESPN): The ESPN API instance used for team lookups and related methods.
+        event_instance (Event): The parent event associated with these odds.
+        provider (str): Name of the odds provider.
+        over_under (float or None): The total points line for the game.
+        details (str or None): Any extra details provided with the odds.
+        spread (float or None): The point spread for the game.
+        over_odds (float or None): Odds associated with the over.
+        under_odds (float or None): Odds associated with the under.
+        money_line_winner (str or None): The team favored in the moneyline bet.
+        spread_winner (str or None): The team favored against the spread.
+        home_team_odds (Odds or OddsBet365): Odds object for the home team.
+        away_team_odds (Odds or OddsBet365): Odds object for the away team.
+        open (BetValue, optional): Opening odds.
+        current (BetValue, optional): Current odds.
+        close (BetValue, optional): Closing odds (if available for provider).
+    """
 
     def __init__(self, odds_json, espn_instance, event_instance):
+        """
+        Initializes a GameOdds instance with raw odds data.
+
+        Args:
+            odds_json (dict): The JSON data representing odds for the event.
+            espn_instance (PYESPN): The ESPN API interface for additional data lookups.
+            event_instance (Event): The associated Event instance.
+        """
+
         self.odds_json = odds_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
         self._load_odds_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the GameOdds instance.
+
+        Returns:
+            str: A formatted string showing the odds provider name.
         """
         return f"<GameOdds | {self.provider}>"
 
     def _load_odds_data(self):
+        """
+        Parses and loads odds data from the input JSON.
+
+        Handles both standardized providers (like ESPN BET) and
+        provider-specific formats (like Bet 365). Assigns odds for
+        home and away teams and loads line details such as over/under,
+        spread, moneyline, and BetValue objects for open/current/close odds.
+        """
         self.provider = self.odds_json.get('provider', {}).get('name', 'unknown')
         self.over_under = self.odds_json.get('overUnder')
         self.details = self.odds_json.get('details')
@@ -278,7 +323,6 @@ class GameOdds:
                                        espn_instance=self.espn_instance,
                                        event_instance=self.event_instance,
                                        gameodds_instance=self)
-            # todo do i need this
             self.open = BetValue(bet_name='open',
                                  bet_json=self.odds_json.get('open'),
                                  espn_instance=self.espn_instance)
@@ -290,9 +334,32 @@ class GameOdds:
                                       bet_json=self.odds_json.get('close'),
                                       espn_instance=self.espn_instance)
 
+
 class OddsType:
+    """
+    Represents a specific type of betting odds (e.g., open, current, close).
+
+    This class parses and stores detailed betting values such as point spread,
+    spread, and money line. It uses the `BetValue` class to wrap individual bet types.
+
+    Attributes:
+        name (str): The name/type of the odds entry (e.g., "open", "current", "close").
+        odds_type_json (dict): Raw JSON containing the odds data.
+        espn_instance (PYESPN): The ESPN API instance used for constructing related data.
+        favorite (str or None): The identifier for the favored team in this odds set.
+        odds (dict): Dictionary mapping odds types to `BetValue` instances.
+                     Keys include 'point_spread', 'spread', and 'money_line'.
+    """
 
     def __init__(self, odds_name, odds_type_json, espn_instance):
+        """
+        Initializes an OddsType instance with the provided name and JSON data.
+
+        Args:
+            odds_name (str): A label for this odds set (e.g., "open", "current").
+            odds_type_json (dict): JSON data containing detailed betting values.
+            espn_instance (PYESPN): The parent ESPN API instance.
+        """
         self.name = odds_name
         self.odds_type_json = odds_type_json
         self.espn_instance = espn_instance
@@ -300,13 +367,25 @@ class OddsType:
         self.favorite = self.odds_type_json.get('favorite')
         self._load_odds_type_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the OddsType instance.
+
+        Returns:
+            str: A formatted string indicating the name of the odds type.
         """
         return f"<OddsType | {self.name}>"
 
     def _load_odds_type_data(self):
+        """
+        Parses the odds_type_json to populate the `odds` dictionary with BetValue instances.
+
+        Extracts:
+            - Point spread odds
+            - Spread odds
+            - Money line odds
+        Each is stored as a `BetValue` under a corresponding key.
+        """
         self.odds['point_spread'] = BetValue(bet_name='point_spread',
                                              bet_json=self.odds_type_json.get('pointSpread', {}),
                                              espn_instance=self.espn_instance)
@@ -319,8 +398,37 @@ class OddsType:
 
 
 class Odds:
+    """
+    Represents betting odds for a specific team within a sporting event.
+
+    This class parses and stores betting-related data such as money lines,
+    spreads, and associated odds types (open, current, and optionally close).
+
+    Attributes:
+        odds_json (dict): Raw JSON data for the odds entry.
+        espn_instance (PYESPN): The main ESPN API instance used for lookups.
+        event_instance (Event): The event this odds entry is associated with.
+        gameodds_instance (GameOdds): The higher-level odds grouping instance.
+        favorite (str): The name of the favorite team, if available.
+        underdog (str): The name of the underdog team, if available.
+        money_line (int or None): The money line value for this odds.
+        spread_odds (int or None): The spread odds value.
+        team (Team): The team associated with these odds.
+        open (OddsType): The opening odds.
+        current (OddsType): The most recent odds.
+        close (OddsType or None): The closing odds, if provided (e.g., for ESPN BET).
+    """
 
     def __init__(self, odds_json, espn_instance, event_instance, gameodds_instance):
+        """
+        Initializes an Odds instance from provided JSON data.
+
+        Args:
+            odds_json (dict): The raw JSON containing odds data for a team.
+            espn_instance (PYESPN): The parent API instance.
+            event_instance (Event): The sporting event this odds data belongs to.
+            gameodds_instance (GameOdds): The containing game odds context.
+        """
         self.odds_json = odds_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
@@ -330,10 +438,21 @@ class Odds:
     def __repr__(self):
         """
         Returns a string representation of the Odds instance.
+
+        Returns:
+            str: A string identifying the associated team.
         """
         return f"<Odds | {self.team.name}>"
 
     def _load_odds_json(self):
+        """
+        Parses the JSON data and assigns odds-related attributes.
+
+        Extracts key betting values such as favorite, underdog, money line,
+        and odds type objects (open/current/close). Also resolves and assigns
+        the associated team using the ESPN API.
+        """
+
         self.favorite = self.odds_json.get('favorite')
         self.underdog = self.odds_json.get('underdog')
         self.money_line = self.odds_json.get('moneyLine')
@@ -353,21 +472,56 @@ class Odds:
 
 
 class OddsBet365(Odds):
+    """
+    Represents a specialized Odds entry sourced from Bet365 data.
+
+    Inherits from the base `Odds` class but overrides the odds loading logic
+    to handle Bet365-specific formatting for money line, spread, and teaser odds.
+
+    Attributes:
+        odds_json (dict): Raw JSON data for the odds entry.
+        espn_instance (PYESPN): The ESPN API instance used for lookups.
+        event_instance (Event): The event this odds entry is associated with.
+        gameodds_instance (GameOdds): The parent odds grouping instance.
+        team (Team): The team this odds instance is associated with.
+        money_line (float or None): Bet365 money line value.
+        spread_odds (float or None): Bet365 spread value.
+        teaser_odds (float or None): Bet365 spread handicap value.
+    """
 
     def __init__(self, odds_json, espn_instance, event_instance, gameodds_instance, team):
+        """
+        Initializes an OddsBet365 instance with Bet365-specific odds data.
+
+        Args:
+            odds_json (dict): JSON data containing Bet365 odds.
+            espn_instance (PYESPN): Parent API instance.
+            event_instance (Event): The event associated with these odds.
+            gameodds_instance (GameOdds): The odds group this entry belongs to.
+            team (Team): The team associated with this Bet365 odds entry.
+        """
         super().__init__(odds_json=odds_json,
                          espn_instance=espn_instance,
                          event_instance=event_instance,
                          gameodds_instance=gameodds_instance)
         self.team = team
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
-        Returns a string representation of the Odds instance.
+        Returns a string representation of the OddsBet365 instance.
+
+        Returns:
+            str: A string identifying the team and provider.
         """
         return f"<Odds365 | {self.team.name}>"
 
     def _load_odds_json(self):
+        """
+        Parses the Bet365 odds JSON and sets betting attributes.
+
+        Extracts values for money line, spread, and teaser (spread handicap)
+        odds by identifying the appropriate keys using keyword matching.
+        """
         try:
             for key, value in self.odds_json.items():
                 if 'moneyline' in str(key).lower():
@@ -379,9 +533,30 @@ class OddsBet365(Odds):
         except AttributeError:
             pass
 
+
 class BetValue:
+    """
+    Represents a specific betting value or option within a betting category.
+
+    This class dynamically loads all key-value pairs from the given JSON, converting
+    the keys to snake_case and setting them as attributes.
+
+    Attributes:
+        name (str): The name of the bet or betting category.
+        bet_json (dict): The raw JSON data representing the individual bet value.
+        espn_instance (PYESPN): The parent ESPN API wrapper instance.
+        (dynamic attributes): All key-value pairs from `bet_json`, converted to snake_case.
+    """
 
     def __init__(self, bet_name, bet_json, espn_instance):
+        """
+        Initializes a BetValue instance with the given name and JSON data.
+
+        Args:
+            bet_name (str): The name or label for the betting option.
+            bet_json (dict): The raw JSON data for the bet value.
+            espn_instance (PYESPN): The main ESPN API instance.
+        """
         self.name = bet_name
         self.bet_json = bet_json
         self.espn_instance = espn_instance
@@ -390,10 +565,24 @@ class BetValue:
     def __repr__(self):
         """
         Returns a string representation of the BetValue instance.
+
+        Returns:
+            str: A formatted string identifying the betting value.
         """
         return f"<BetValue | {self.name}>"
 
     def _load_bet_data(self):
+        """
+        Parses the raw bet JSON and sets each item as an instance attribute.
+
+        Converts each key in the JSON to snake_case before assigning it. This allows
+        flexible access to all JSON properties as attributes.
+
+        Note:
+            If there's an error in setting attributes (e.g., due to invalid characters),
+            the process silently fails for that key.
+        """
+
         try:
             for key, value in self.bet_json.items():
                 snake_key = camel_to_snake(key)

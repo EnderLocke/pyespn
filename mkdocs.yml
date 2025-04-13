@@ -7,6 +7,7 @@ nav:
   - Client: pyespn.md
   - Exceptions: exceptions.md
   - Classes:
+    - Bet Value: classes/bet_value_class.md
     - Betting: classes/betting_class.md
     - Circuit: classes/circuit_class.md
     - Competition: classes/competition_class.md
@@ -14,11 +15,15 @@ nav:
     - Drive: classes/drive_class.md
     - Event: classes/event_class.md
     - Image: classes/image_class.md
+    - Game Odds: classes/game)odds_class.md
     - Leader: classes/leader_class.md
     - Leader Category: classes/leader_category_class.md
     - League: classes/league_class.md
     - Line: classes/line_class.md
     - Manufacturer: classes/manufacturer_class.md
+    - Odds: classes/odds_class.md
+    - Odds Bet365: classes/odds_bet365_classes.md
+    - Odds Type: classes/odds_type_classes.md
     - Play: classes/play_class.md
     - Player: classes/player_class.md
     - Record: classes/record_class.md
