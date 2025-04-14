@@ -1,7 +1,7 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.betting import GameOdds
 from pyespn.classes.gamelog import Drive, Play
-from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
+from pyespn.utilities import fetch_espn_data
 from pyespn.data.version import espn_api_version as v
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -98,7 +98,7 @@ class Event:
         self.odds = None
         self.drives = None
         self.plays = None
-        self.api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
+        self.api_info = self.espn_instance.api_mapping
         self._load_teams()
         self._load_competition_data()
         if load_game_odds:
