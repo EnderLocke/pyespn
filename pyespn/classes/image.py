@@ -52,21 +52,35 @@ class Image:
         Returns:
             str: A string showing the image's name.
         """
-        return f"<Image | {self.name}>"
+        return f"<Image | {self._name}>"
 
     def _load_image_data(self):
         """
         Parses the image JSON and sets image attributes such as URL, dimensions, and metadata.
         """
-        self.ref = self.image_json.get('href')
-        self.name = ' '.join(self.image_json.get('rel', []))
+        self._ref = self.image_json.get('href')
+        self._name = ' '.join(self.image_json.get('rel', []))
         self.width = self.image_json.get('width')
         self.height = self.image_json.get('height')
         self.alt = self.image_json.get('alt')
-        if self.name == '':
-            self.name = self.alt
+        if self._name == '':
+            self._name = self.alt
         self.rel = self.image_json.get('rel')
         self.last_updated = self.image_json.get('lastUpdated')
+
+    @property
+    def ref(self):
+        """
+            str: url for the image
+        """
+        return self._ref
+
+    @property
+    def name(self):
+        """
+            str: name of the image
+        """
+        return self._name
 
     def load_image(self) -> bytes:
         """
@@ -75,7 +89,7 @@ class Image:
         Returns:
             bytes: The binary content of the image.
         """
-        image_request = requests.get(self.ref)
+        image_request = requests.get(self._ref)
         image = image_request.content
         return image
 
