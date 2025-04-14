@@ -274,7 +274,10 @@ class Week:
             Event: An Event instance.
         """
         event_content = fetch_espn_data(event_url)
-        return Event(event_json=event_content, espn_instance=self.espn_instance)
+        return Event(event_json=event_content,
+                     espn_instance=self.espn_instance,
+                     load_game_odds=self.schedule_instance.load_odds,
+                     load_play_by_play=self.schedule_instance.load_plays)
 
     def get_events(self) -> list["Event"]:
         """
