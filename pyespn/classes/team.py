@@ -89,8 +89,8 @@ class Team:
         """
         self.espn_instance = espn_instance
         self.api_info = self.espn_instance.api_mapping
-        self.records = {}
-        self.stats = {}
+        self._records = {}
+        self._stats = {}
         self.coaches = {}
         self._betting = {}
         if team_json:
@@ -101,6 +101,20 @@ class Team:
         self._load_team_data()
         self.home_venue = Venue(venue_json=self.venue_json,
                                 espn_instance=self.espn_instance)
+
+    @property
+    def stats(self):
+        """
+             dict: a dict with season as the key and a list of Stat objects
+        """
+        return self._stats
+
+    @property
+    def records(self):
+        """
+             dict: a dict with season as the key and a list of Record objects
+        """
+        return self._records
 
     @property
     def betting(self):
@@ -174,7 +188,7 @@ class Team:
         This method sends a request to the ESPN API to retrieve team statistics for the given season. It will send requests for
         multiple pages of data if necessary, and each page is fetched concurrently using a thread pool. The method parses the
         response and instantiates `Stat` objects for each statistic found under the `categories` section of the response.
-        All parsed statistics are then stored in the `self.stats` dictionary, keyed by the provided season.
+        All parsed statistics are then stored in the `self._stats` dictionary, keyed by the provided season.
 
         Args:
             season (int): The season year for which statistics should be retrieved.
@@ -208,7 +222,7 @@ class Team:
             print(f"Failed to fetch stats data for season {season} | team {self.name} | id {self.team_id}: {e}")
 
         # Store the fetched stats data
-        self.stats[season] = all_stats
+        self._stats[season] = all_stats
 
     def get_team_colors(self) -> dict:
         """
@@ -308,7 +322,7 @@ class Team:
             season (int): The season year for which the team’s game records should be retrieved.
 
         Side Effects:
-            Updates the `self.records` dictionary with a list of `Record` instances representing
+            Updates the `self._records` dictionary with a list of `Record` instances representing
             seasonal game results.
 
         """
@@ -324,7 +338,7 @@ class Team:
                     season_records.append(Record(record_json=result,
                                                  espn_instance=self.espn_instance))
 
-            self.records[season] = season_records
+            self._records[season] = season_records
 
         except TimeoutError:
             print(f"Timeout while fetching season records for season {season} | team {self.name} | id {self.team_id}")
