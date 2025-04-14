@@ -46,9 +46,12 @@ class Drive:
         self.plays = None
         self._load_drive_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
-        Returns a string representation of the Drive instance.
+        Returns a human-readable string representation of the Drive instance.
+
+        Returns:
+            str: A formatted string in the form "<Drive | Team Name | Drive Result>".
         """
         return f"<Drive | {self.team.name} | {self.result_display}>"
 
@@ -81,6 +84,15 @@ class Drive:
                               event_instance=self.event_instance,
                               drive_instance=self))
         self.plays = plays
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Drive instance to its original JSON dictionary.
+
+        Returns:
+            dict: The drives's raw JSON data.
+        """
+        return self.drive_json
 
 
 class Play:

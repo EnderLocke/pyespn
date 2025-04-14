@@ -60,6 +60,15 @@ class Betting:
                                            betting_instance=self,
                                            line_json=provider))
 
+    def to_dict(self) -> dict:
+        """
+        Converts the Betting instance to its original JSON dictionary.
+
+        Returns:
+            dict: The betting's raw JSON data.
+        """
+        return self.betting_json
+
 
 @validate_json("line_json")
 class Provider:
@@ -120,6 +129,15 @@ class Provider:
             self.all_lines.append(Line(espn_instance=self.espn_instance,
                                        provider_instance=self,
                                        book_json=future_line))
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Provider instance to its original JSON dictionary.
+
+        Returns:
+            dict: The providers's raw JSON data.
+        """
+        return self.line_json
 
 
 @validate_json("book_json")
@@ -213,6 +231,15 @@ class Line:
             print(f'api error {e}')
         except JSONNotProvidedError as e:
             print(f'json error {e}')
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Line instance to its original JSON dictionary.
+
+        Returns:
+            dict: The lines's raw JSON data.
+        """
+        return self.book_json
 
 
 class GameOdds:
@@ -334,6 +361,15 @@ class GameOdds:
                                       bet_json=self.odds_json.get('close'),
                                       espn_instance=self.espn_instance)
 
+    def to_dict(self) -> dict:
+        """
+        Converts the GameOdds instance to its original JSON dictionary.
+
+        Returns:
+            dict: The game odds's raw JSON data.
+        """
+        return self.odds_json
+
 
 class OddsType:
     """
@@ -395,6 +431,15 @@ class OddsType:
         self.odds['money_line'] = BetValue(bet_name='money_line',
                                            bet_json=self.odds_type_json.get('moneyLine', {}),
                                            espn_instance=self.espn_instance)
+
+    def to_dict(self) -> dict:
+        """
+        Converts the OddsType instance to its original JSON dictionary.
+
+        Returns:
+            dict: The odds type's raw JSON data.
+        """
+        return self.odds_type_json
 
 
 class Odds:
@@ -469,6 +514,15 @@ class Odds:
             self.close = OddsType(odds_name='close',
                                   odds_type_json=self.odds_json.get('close'),
                                   espn_instance=self.espn_instance)
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Odds instance to its original JSON dictionary.
+
+        Returns:
+            dict: The odds's raw JSON data.
+        """
+        return self.odds_json
 
 
 class OddsBet365(Odds):
@@ -589,3 +643,12 @@ class BetValue:
                 setattr(self, snake_key, value)
         except AttributeError:
             pass
+
+    def to_dict(self) -> dict:
+        """
+        Converts the BetValue instance to its original JSON dictionary.
+
+        Returns:
+            dict: The betvalues's raw JSON data.
+        """
+        return self.bet_json

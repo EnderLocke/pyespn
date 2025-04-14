@@ -271,6 +271,7 @@ class Event:
         return self.event_json
 
 
+@validate_json('competition_json')
 class Competition:
 
     def __init__(self, competition_json, espn_instance, event_instance):
@@ -329,3 +330,11 @@ class Competition:
         # nba has series
         self.series = self.competition_json.get('series')
 
+    def to_dict(self) -> dict:
+        """
+        Converts the Competition instance to its original JSON dictionary.
+
+        Returns:
+            dict: The competitions's raw JSON data.
+        """
+        return self.competition_json

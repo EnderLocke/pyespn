@@ -59,3 +59,12 @@ class DraftPick:
 
         self.athlete = Player(player_json=athlete_content,
                               espn_instance=self.espn_instance)
+
+    def to_dict(self) -> dict:
+        """
+        Converts the DraftPick instance to its original JSON dictionary.
+
+        Returns:
+            dict: The draft picks's raw JSON data.
+        """
+        return self.pick_json
