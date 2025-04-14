@@ -68,9 +68,10 @@ class League:
         self._espn_instance = espn_instance
         self.api_info = self._espn_instance.api_mapping
         self._league_leaders = {}
-        self._regular_schedule = {}
+        self._regular_schedules = {}
         self._post_schedules = {}
         self._pre_schedules = {}
+        self._playin_schedules = {}
         self._betting_futures = {}
         self.load_game_odds = False
         self.load_game_play_by_play = False
@@ -124,11 +125,18 @@ class League:
         return self._league_leaders
 
     @property
+    def play_in_schedules(self):
+        """
+            dict: a dict of seasons play in games schedule with a key for season with a Schedule object with Week objects
+        """
+        return self._playin_schedules
+
+    @property
     def schedules(self):
         """
             dict: a dict of seasons regular season schedule with a key for season with a Schedule object with Week objects
         """
-        return self._regular_schedule
+        return self._regular_schedules
 
     @property
     def preseason_schedules(self):
@@ -181,11 +189,11 @@ class League:
         self.load_game_odds = load_game_odds
         self.load_game_play_by_play = load_game_play_by_play
 
-        self._regular_schedule[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
-                                                                          espn_instance=self._espn_instance,
-                                                                          season=season,
-                                                                          load_odds=self.load_game_odds,
-                                                                          load_pbp=self.load_game_play_by_play)
+        self._regular_schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
+                                                                           espn_instance=self._espn_instance,
+                                                                           season=season,
+                                                                           load_odds=self.load_game_odds,
+                                                                           load_pbp=self.load_game_play_by_play)
 
     def load_postseason_schedule(self, season,
                                  load_game_odds: bool = False,
@@ -218,7 +226,7 @@ class League:
                                                                         season=season,
                                                                         load_odds=self.load_game_odds,
                                                                         load_pbp=self.load_game_play_by_play,
-                                                                        season_type=2)
+                                                                        season_type=3)
 
     def load_preseason_schedule(self, season,
                                 load_game_odds: bool = False,
@@ -253,6 +261,39 @@ class League:
                                                                        load_pbp=self.load_game_play_by_play,
                                                                        season_type=0)
 
+    def load_playin_schedule(self, season,
+                             load_game_odds: bool = False,
+                             load_game_play_by_play: bool = False):
+        """
+        Loads and stores the playin schedule for the specified season.
+
+        This method fetches the full regular season schedule for the league associated with the current
+        ESPN instance and stores it in the internal `_post_schedules` dictionary under the provided season key.
+
+        Args:
+            season (int or str): The season year for which to load the schedule (e.g., 2023).
+            load_game_odds (bool, optional): Whether to include betting odds for each game. Defaults to False.
+            load_game_play_by_play (bool, optional): Whether to include play-by-play data for each game. Defaults to False.
+
+        Side Effects:
+            - Updates the `_playin_schedules` dictionary with a `Schedule` object containing all weeks and events
+              for the specified season.
+
+        Example:
+            >>> espn.load_regular_season_schedule(2024, load_game_odds=True)
+            >>> schedule = espn._pre_schedules[2024]
+            >>> print(schedule.weeks)
+        """
+        self.load_game_odds = load_game_odds
+        self.load_game_play_by_play = load_game_play_by_play
+
+        self._playin_schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
+                                                                          espn_instance=self._espn_instance,
+                                                                          season=season,
+                                                                          load_odds=self.load_game_odds,
+                                                                          load_pbp=self.load_game_play_by_play,
+                                                                          season_type=5)
+
     def get_event_by_season(self, season, event_id) -> "Event":
         """
         Finds and returns the Team object that matches the given team_id.
@@ -265,7 +306,7 @@ class League:
             Event: The matching Event object, or None if not found.
         """
         this_event = None
-        for week in self._regular_schedule.get(season, []).weeks:
+        for week in self._regular_schedules.get(season, []).weeks:
             for event in week.events:
                 if str(event.event_id) == str(event_id):
                     this_event = event
