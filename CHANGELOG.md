@@ -14,6 +14,7 @@
 * made sure validate_json decorator was acorss classes as needed
 * tech debt -> moved from calling lookup api function to pulling from espn client
 * tech debt -> removed v import to all classes and put it in client
+* tech debt -> teams/leage are client properties now
 * 
 
 ## 0.3.2
