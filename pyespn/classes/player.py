@@ -222,21 +222,17 @@ class Player:
         Loads the player's box score statistics for every game in the given season.
 
         This method fetches the event log for a player for a specific season using ESPN's API.
-        It iterates through each event (game) the player participated in, retrieves the game event data
-        and corresponding statistics, and stores it in the player's `_stats_game_log` cache.
+        It iterates through each event (game) the player participated in, retrieves the game event data,
+        and corresponding statistics, then stores it in the player's `_stats_game_log` cache.
 
         Args:
             season (int): The season year to load player game-by-game statistics for.
 
         Side Effects:
-            Populates the `self._stats_game_log` dictionary with a list of dictionaries containing:
-                - 'event': An `Event` object representing the game.
-                - 'stats': A list of `StatCategory` objects representing the player's stats in that game.
-
-        Example:
-            >>> player.load_player_box_scores_season(2023)
-            >>> print(player._stats_game_log[2023][0]['stats'])
-
+            Populates the `_stats_game_log` dictionary with a list of game stat dictionaries for the given season.
+            Each entry in the list is a dictionary containing:
+                - 'event' (`Event`): The event object representing the game.
+                - 'stats' (List[`StatCategory`]): A list of stat category objects for that game.
         """
         url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
         page_content = fetch_espn_data(url)
