@@ -63,19 +63,33 @@ class PYESPN:
         self._league_division_betting_keys = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self._league_abbv, [])]
         self._api_mapping = lookup_league_api_info(league_abbv=self._league_abbv)
         self._v = v
-        self.teams = []
+        self._teams = []
         self.standings = {}
         self.recruit_rankings = {}
         self.drafts = {}
         self.manufacturers = {}
         self.athletes = {}
-        self.league = None
+        self._league = None
         self._load_league_data()
         if load_teams:
             if self._api_mapping['sport'] not in NO_TEAMS:
                 self._load_teams_datav2()
             else:
                 self._load_manufacturers()
+
+    @property
+    def teams(self):
+        """
+        list[Team]: a list of teams in the league
+        """
+        return self._teams
+
+    @property
+    def league(self):
+        """
+            League: a league object representing the data for the league
+        """
+        return self._league
 
     @property
     def league_abbv(self):
@@ -139,7 +153,7 @@ class PYESPN:
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
                 if result:  # Append only if result is not None
-                    self.teams.append(result)
+                    self._teams.append(result)
 
     def fetch_team_data(self, team):
         """
@@ -163,8 +177,8 @@ class PYESPN:
         """
         Loads data for the current league and stores it in the `league` attribute.
         """
-        self.league = get_league_info_core(league_abbv=self._league_abbv,
-                                           espn_instance=self)
+        self._league = get_league_info_core(league_abbv=self._league_abbv,
+                                            espn_instance=self)
 
     def load_seasons_futures(self, season):
         """
@@ -332,7 +346,7 @@ class PYESPN:
     def load_seasons_box_scores(self, season):
 
         self.load_season_rosters(season=season)
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_roster_box_score(season=season)
 
     def get_team_by_id(self, team_id) -> "Team":
@@ -345,7 +359,7 @@ class PYESPN:
         Returns:
             Team: The matching Team object, or None if not found.
         """
-        return next((team for team in self.teams if str(team.team_id) == str(team_id)), None)
+        return next((team for team in self._teams if str(team.team_id) == str(team_id)), None)
 
     def load_season_rosters(self, season) -> None:
         """
@@ -369,7 +383,7 @@ class PYESPN:
 
         """
 
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_roster(season=season)
 
     def load_season_team_stats(self, season) -> None:
@@ -383,7 +397,7 @@ class PYESPN:
         Args:
             season (int): The season year for which team stats should be retrieved.
         """
-        for team in self.teams:
+        for team in self._teams:
             team.load_team_season_stats(season=season)
 
     def load_season_league_stat_leaders(self, season) -> None:
@@ -416,7 +430,7 @@ class PYESPN:
             season (str or int): The season for which the betting records need to be loaded.
                                 This can be a string (e.g., "2023") or an integer (e.g., 2023).
         """
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_betting_records(season=season)
 
     def load_season_teams_results(self, season) -> None:
@@ -430,7 +444,7 @@ class PYESPN:
         Args:
             season (int): The season year for which game results should be retrieved.
         """
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_results(season=season)
 
     def load_season_coaches(self, season) -> None:
@@ -444,7 +458,7 @@ class PYESPN:
         Args:
             season (int): The season year for which coaching data should be retrieved.
         """
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_coaches(season=season)
 
     def load_athletes(self, season) -> None:
@@ -499,7 +513,7 @@ class PYESPN:
         """
         Searches through all teams for a specific player by season and player ID.
 
-        Iterates over each team in `self.teams` and checks if the player with the given
+        Iterates over each team in `self._teams` and checks if the player with the given
         `player_id` was on the roster during the specified `season`. Returns the first
         matching athlete found.
 
@@ -511,7 +525,7 @@ class PYESPN:
             Player or None: The matching player object if found; otherwise, None.
         """
         athlete = None
-        for team in self.teams:
+        for team in self._teams:
             athlete = team.get_player_by_season_id(season=season,
                                                    player_id=player_id)
         return athlete
