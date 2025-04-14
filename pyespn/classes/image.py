@@ -1,3 +1,4 @@
+import requests
 
 
 class Image:
@@ -48,3 +49,14 @@ class Image:
             self.name = self.alt
         self.rel = self.image_json.get('rel')
         self.last_updated = self.image_json.get('lastUpdated')
+
+    def load_image(self) -> bytes:
+        """
+        Downloads and returns the image content from the object's reference URL.
+
+        Returns:
+            bytes: The binary content of the image.
+        """
+        image_request = requests.get(self.ref)
+        image = image_request.content
+        return image
