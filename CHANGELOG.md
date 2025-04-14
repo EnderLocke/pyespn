@@ -7,6 +7,13 @@
 * added in event call to build out odds
 * added in headshot to player class
 * added in drives and plays data (nfl)
+* added in pbp for basketball leagues
+* added function to image class to download image
+* changed some of the clients vars to properties
+* made sure to_dicts were across the classes where they are needed
+* made sure validate_json decorator was acorss classes as needed
+* tech debt -> moved from calling lookup api function to pulling from espn client
+* tech debt -> removed v import to all classes and put it in client
 * 
 
 ## 0.3.2
@@ -23,7 +30,6 @@
 * removed get_league_info call from client as all the data is in the league variable once client is loaded
 * added functions to client to search teams rosters for a given season for a player
 * added in auto load for rosters for given season for both betting futures and league leaders to reduce calls to api
-* added in pbp for basketball leagues
 * 
 
 ## 0.3.1
@@ -41,7 +47,6 @@
 * added im image class and connected to team logos and venue images
 * added in func to pull stats for a team/all teams of a league
 * added in call for coaches
-* 
 
 ## 0.3.0
 * lots of changes

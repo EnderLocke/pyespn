@@ -1,9 +1,8 @@
-from pyespn.utilities import lookup_league_api_info, fetch_espn_data
+from pyespn.utilities import fetch_espn_data
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
 from pyespn.classes.image import Image
 from pyespn.classes.stat import Record, Stat
-from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
 from pyespn.exceptions import API400Error
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -88,6 +87,7 @@ class Team:
 
         """
         self.espn_instance = espn_instance
+        self.api_info = self.espn_instance.api_mapping
         self.records = {}
         self.stats = {}
         self.coaches = {}
@@ -167,8 +167,7 @@ class Team:
         Raises:
             API400Error: If the API responds with a 400-level error. A message is printed, and no data is stored for the season.
         """
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics'
 
         all_stats = []
         try:
@@ -254,9 +253,7 @@ class Team:
             - The number of worker threads (`max_workers=10`) can be adjusted based on API rate limits.
         """
 
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info.get("sport")}/leagues/{api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
         content = fetch_espn_data(url)
         page_count = content.get('pageCount', 1)
 
@@ -300,8 +297,7 @@ class Team:
             seasonal game results.
 
         """
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
         season_records = []
 
         try:
@@ -342,8 +338,7 @@ class Team:
             Coach data is retrieved in two stages: first a summary list with URLs,
             then a second pass to fetch detailed info for each coach using those URLs.
         """
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
         coach_content = fetch_espn_data(url)
         coach_records = []
         coach_urls = []
@@ -372,9 +367,8 @@ class Team:
         Raises:
             API400Error: If the ESPN API returns a 400 error (e.g., invalid season or unavailable data).
         """
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         futures = []
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/0/teams/{self.team_id}/odds-records'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/0/teams/{self.team_id}/odds-records'
 
         try:
             season_content = fetch_espn_data(url)
@@ -407,6 +401,7 @@ class Team:
         return self.team_json
 
 
+@validate_json("manufacturer_json")
 class Manufacturer:
     """
     Represents a manufacturer in the racing league, encapsulating information about the manufacturer
@@ -461,3 +456,11 @@ class Manufacturer:
         """
         return f"<Manufacturer | {self.name}, {self.abbreviation}>"
 
+    def to_dict(self) -> dict:
+        """
+        Converts the Manufacturer instance to its original JSON dictionary.
+
+        Returns:
+            dict: The manufacturer's raw JSON data.
+        """
+        return self.leader_json

@@ -44,4 +44,4 @@
 
 | League Abbreviation | League Name            |
 |---------------------|------------------------|
-| epl                 | english pramier league |
+| epl                 | english premier league |

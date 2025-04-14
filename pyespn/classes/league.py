@@ -1,6 +1,5 @@
 from pyespn.core.decorators import validate_json
-from pyespn.utilities import lookup_league_api_info, fetch_espn_data
-from pyespn.data.version import espn_api_version as v
+from pyespn.utilities import fetch_espn_data
 from pyespn.exceptions import API400Error
 from pyespn.core.schedule import get_regular_season_schedule_core
 from pyespn.classes.betting import Betting
@@ -67,6 +66,7 @@ class League:
         """
         self.league_json = league_json
         self.espn_instance = espn_instance
+        self.api_info = self.espn_instance.api_mapping
         self.league_leaders = {}
         self.schedules = {}
         self.betting_futures = {}
@@ -161,9 +161,8 @@ class League:
             if season not in team.roster:
                 team.load_season_roster(season=season)
 
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         betting_futures = []
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/futures'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/futures'
 
         try:
             season_content = fetch_espn_data(url)
@@ -232,8 +231,7 @@ class League:
             if season not in team.roster:
                 team.load_season_roster(season=season)
 
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/leaders'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/leaders'
 
         try:
             leaders_content = fetch_espn_data(url)
@@ -258,3 +256,12 @@ class League:
 
         except API400Error as e:
             print(f"Failed to fetch league leaders for season {season}: {e}")
+
+    def to_dict(self) -> dict:
+        """
+        Converts the League instance to its original JSON dictionary.
+
+        Returns:
+            dict: The league's raw JSON data.
+        """
+        return self.league_json

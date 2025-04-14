@@ -1,5 +1,7 @@
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("vehicle_json")
 class Vehicle:
     """
     Represents a racing vehicle with details such as number, manufacturer,
@@ -50,3 +52,12 @@ class Vehicle:
         self.engine = self.vehicle_json.get('engine')
         self.tire = self.vehicle_json.get('tire')
         self.team = self.vehicle_json.get('team')
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Vehicle instance to its original JSON dictionary.
+
+        Returns:
+            dict: The vehicle's raw JSON data.
+        """
+        return self.vehicle_json

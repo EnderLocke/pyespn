@@ -3,8 +3,7 @@ from pyespn.classes.vehicle import Vehicle
 from pyespn.classes.event import Event
 from pyespn.classes.image import Image
 from pyespn.classes.stat import StatCategory
-from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
-from pyespn.data.version import espn_api_version as v
+from pyespn.utilities import fetch_espn_data, get_an_id
 
 
 @validate_json('player_json')
@@ -94,6 +93,7 @@ class Player:
         """
         self.player_json = player_json
         self.espn_instance = espn_instance
+        self.api_info = self.espn_instance.api_mapping
         self.stats = {}
         self.stats_game_log = {}
         self._set_player_data()
@@ -204,9 +204,8 @@ class Player:
                                                             espn_instance=self.espn_instance)
 
     def load_player_box_scores_season(self, season):
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
 
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
         page_content = fetch_espn_data(url)
         pages = page_content.get('events', {}).get('pageCount', 0)
 
@@ -243,7 +242,7 @@ class Player:
 
     def load_player_contracts(self):
         # todo i haven't seen this filled in at all yet in the api
-        url = f'http://sports.core.api.espn.com/{v}/sports/football/leagues/nfl/athletes/4360807/contracts?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/football/leagues/nfl/athletes/4360807/contracts?lang=en&region=us'
 
     def to_dict(self) -> dict:
         """
@@ -380,3 +379,11 @@ class Recruit:
 
         self.rank = next((int(attr.get('displayValue')) for attr in self.recruit_json.get('attributes', []) if attr.get("name", '').lower() == "rank"), None)
 
+    def to_dict(self) -> dict:
+        """
+        Converts the Recruit instance to its original JSON dictionary.
+
+        Returns:
+            dict: The recruit's raw JSON data.
+        """
+        return self.recruit_json
