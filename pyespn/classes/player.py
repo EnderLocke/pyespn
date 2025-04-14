@@ -94,9 +94,23 @@ class Player:
         self.player_json = player_json
         self.espn_instance = espn_instance
         self.api_info = self.espn_instance.api_mapping
-        self.stats = {}
-        self.stats_game_log = {}
+        self._stats = {}
+        self._stats_game_log = {}
         self._set_player_data()
+
+    @property
+    def stats_game_log(self):
+        """
+            dict: with season as a key and has a list of StatCategory Objects
+        """
+        return self._stats_game_log
+
+    @property
+    def stats(self):
+        """
+            dict: with season as key with list of Stats Objects
+        """
+        return self._stats
 
     def __repr__(self) -> str:
         """
@@ -193,18 +207,39 @@ class Player:
         Loads the historical statistics for the player.
 
         This method fetches and assigns the player's historical stats using the ESPN API.
-        The stats are stored in the `self.stats` attribute.
+        The stats are stored in the `self._stats` attribute.
 
         Returns:
             None
         """
 
-        self.stats = self.get_players_historical_stats_core(player_id=self.id,
-                                                            league_abbv=self.espn_instance.league_abbv,
-                                                            espn_instance=self.espn_instance)
+        self._stats = self.get_players_historical_stats_core(player_id=self.id,
+                                                             league_abbv=self.espn_instance.league_abbv,
+                                                             espn_instance=self.espn_instance)
 
     def load_player_box_scores_season(self, season):
+        """
+        Loads the player's box score statistics for every game in the given season.
 
+        This method fetches the event log for a player for a specific season using ESPN's API.
+        It iterates through each event (game) the player participated in, retrieves the game event data
+        and corresponding statistics, and stores it in the player's `_stats_game_log` cache.
+
+        Args:
+            season (int): The season year to load player game-by-game statistics for.
+
+        Side Effects:
+            Populates the `self._stats_game_log` dictionary with a list of dictionaries containing:
+                - 'event': An `Event` object representing the game.
+                - 'stats': A list of `StatCategory` objects representing the player's stats in that game.
+
+        Example:
+            player.load_player_box_scores_season(2023)
+            print(player._stats_game_log[2023][0]['stats'])
+
+        Raises:
+            Any network or API-related errors will bubble up from the `fetch_espn_data` function.
+        """
         url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
         page_content = fetch_espn_data(url)
         pages = page_content.get('events', {}).get('pageCount', 0)
@@ -238,7 +273,7 @@ class Player:
             }
             event_stats_log.append(event_record)
 
-        self.stats_game_log[season] = event_stats_log
+        self._stats_game_log[season] = event_stats_log
 
     def load_player_contracts(self):
         # todo i haven't seen this filled in at all yet in the api
