@@ -220,9 +220,9 @@ class League:
                                                                         load_pbp=self.load_game_play_by_play,
                                                                         season_type=2)
 
-    def load_preseason_season_schedule(self, season,
-                                       load_game_odds: bool = False,
-                                       load_game_play_by_play: bool = False):
+    def load_preseason_schedule(self, season,
+                                load_game_odds: bool = False,
+                                load_game_play_by_play: bool = False):
         """
         Loads and stores the preseason schedule for the specified season.
 
