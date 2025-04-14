@@ -547,3 +547,21 @@ class PYESPN:
             athlete = team.get_player_by_season_id(season=season,
                                                    player_id=player_id)
         return athlete
+
+    def load_season_schedule(self, season,
+                             load_preseason: bool = False,
+                             load_postseason: bool = True,
+                             load_game_odds: bool = False,
+                             load_game_play_by_play: bool = False):
+
+        self._league.load_regular_season_schedule(season=season,
+                                                  load_game_odds=load_game_odds,
+                                                  load_game_play_by_play=load_game_play_by_play)
+        if load_preseason:
+            self._league.load_preseason_schedule(season=season,
+                                                 load_game_odds=load_game_odds,
+                                                 load_game_play_by_play=load_game_play_by_play)
+        if load_postseason:
+            self._league.load_postseason_schedule(season=season,
+                                                  load_game_odds=load_game_odds,
+                                                  load_game_play_by_play=load_game_play_by_play)
