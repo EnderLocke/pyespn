@@ -144,6 +144,13 @@ class Team:
         """
         return self._roster
 
+    @property
+    def team_id(self):
+        """
+            str: the id for the team
+        """
+        return self._team_id
+
     def get_player_by_season_id(self, season, player_id) -> "Player":
         """
         Finds and returns the Team object that matches the given team_id.
@@ -176,7 +183,7 @@ class Team:
         Extracts and sets team data from the provided JSON.
         """
         self.ref = self.team_json.get('$ref')
-        self.team_id = self.team_json.get("id")
+        self._team_id = self.team_json.get("id")
         self.guid = self.team_json.get("guid")
         self.uid = self.team_json.get("uid")
         self.location = self.team_json.get("location")
@@ -210,7 +217,7 @@ class Team:
         Raises:
             API400Error: If the API responds with a 400-level error. A message is printed, and no data is stored for the season.
         """
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self._team_id}/statistics'
 
         all_stats = []
         try:
@@ -233,7 +240,7 @@ class Team:
                                                   espn_instance=self.espn_instance))
 
         except API400Error as e:
-            print(f"Failed to fetch stats data for season {season} | team {self.name} | id {self.team_id}: {e}")
+            print(f"Failed to fetch stats data for season {season} | team {self.name} | id {self._team_id}: {e}")
 
         # Store the fetched stats data
         self._stats[season] = all_stats
@@ -296,7 +303,7 @@ class Team:
             - The number of worker threads (`max_workers=10`) can be adjusted based on API rate limits.
         """
 
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/seasons/{season}/teams/{self._team_id}/athletes'
         content = fetch_espn_data(url)
         page_count = content.get('pageCount', 1)
 
@@ -340,7 +347,7 @@ class Team:
             seasonal game results.
 
         """
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self._team_id}/record?lang=en&region=us'
         season_records = []
 
         try:
@@ -355,11 +362,11 @@ class Team:
             self._records[season] = season_records
 
         except TimeoutError:
-            print(f"Timeout while fetching season records for season {season} | team {self.name} | id {self.team_id}")
+            print(f"Timeout while fetching season records for season {season} | team {self.name} | id {self._team_id}")
         except API400Error as e:
-            print(f"API error while fetching season records for season {season} | team {self.name} | id {self.team_id}: {e}")
+            print(f"API error while fetching season records for season {season} | team {self.name} | id {self._team_id}: {e}")
         except Exception as e:
-            print(f"Unexpected error while fetching season records for season {season} | team {self.name} | id {self.team_id}: {e}")
+            print(f"Unexpected error while fetching season records for season {season} | team {self.name} | id {self._team_id}: {e}")
 
     def load_season_coaches(self, season):
         """
@@ -381,7 +388,7 @@ class Team:
             Coach data is retrieved in two stages: first a summary list with URLs,
             then a second pass to fetch detailed info for each coach using those URLs.
         """
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/teams/{self._team_id}/coaches?lang=en&region=us'
         coach_content = fetch_espn_data(url)
         coach_records = []
         coach_urls = []
@@ -411,7 +418,7 @@ class Team:
             API400Error: If the ESPN API returns a 400 error (e.g., invalid season or unavailable data).
         """
         futures = []
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/0/teams/{self.team_id}/odds-records'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/0/teams/{self._team_id}/odds-records'
 
         try:
             season_content = fetch_espn_data(url)
@@ -432,7 +439,7 @@ class Team:
             self._betting[season] = futures
 
         except API400Error as e:
-            print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")
+            print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self._team_id}: {e}")
 
     def to_dict(self) -> dict:
         """
