@@ -407,6 +407,7 @@ class Team:
         return self.team_json
 
 
+@validate_json("manufacturer_json")
 class Manufacturer:
     """
     Represents a manufacturer in the racing league, encapsulating information about the manufacturer
@@ -461,3 +462,11 @@ class Manufacturer:
         """
         return f"<Manufacturer | {self.name}, {self.abbreviation}>"
 
+    def to_dict(self) -> dict:
+        """
+        Converts the Manufacturer instance to its original JSON dictionary.
+
+        Returns:
+            dict: The manufacturer's raw JSON data.
+        """
+        return self.leader_json
