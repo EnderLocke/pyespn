@@ -46,7 +46,7 @@ def get_regular_season_schedule_core(league_abbv, espn_instance,
     pages = content.get('pageCount')
     weeks_urls = []
     for page in range(1, pages + 1):
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/weeks?page={page}'
+        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/{season_type}/weeks?page={page}'
         page_content = fetch_espn_data(url)
         for item in page_content.get('items', []):
             weeks_urls.append(item.get('$ref'))
