@@ -237,8 +237,6 @@ class Player:
             player.load_player_box_scores_season(2023)
             print(player._stats_game_log[2023][0]['stats'])
 
-        Raises:
-            Any network or API-related errors will bubble up from the `fetch_espn_data` function.
         """
         url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
         page_content = fetch_espn_data(url)
