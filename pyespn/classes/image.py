@@ -76,3 +76,12 @@ class Image:
         image_request = requests.get(self.ref)
         image = image_request.content
         return image
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Image instance to its original JSON dictionary.
+
+        Returns:
+            dict: The images's raw JSON data.
+        """
+        return self.image_json

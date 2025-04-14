@@ -192,6 +192,14 @@ class Play:
         self.shooting_play = self.play_json.get('shootingPlay')
         self.coordinate = self.play_json.get('coordinate')
 
+    def to_dict(self) -> dict:
+        """
+        Converts the Play instance to its original JSON dictionary.
+
+        Returns:
+            dict: The plays's raw JSON data.
+        """
+        return self.play_json
 
 
 class PlayType:

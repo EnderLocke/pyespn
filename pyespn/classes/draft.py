@@ -1,7 +1,9 @@
 from pyespn.utilities import get_team_id, fetch_espn_data
 from pyespn.classes import Player
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("pick_json")
 class DraftPick:
     """
     Represents a draft pick in a sports league draft.
