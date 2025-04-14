@@ -78,6 +78,13 @@ class PYESPN:
                 self._load_manufacturers()
 
     @property
+    def league_abbv(self):
+        """
+            str: league abbreviation for the league client is built for
+        """
+        return self._league_abbv
+
+    @property
     def v(self):
         """
         str: api version for espn api
