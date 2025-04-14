@@ -187,7 +187,7 @@ class League:
                                                                           load_odds=self.load_game_odds,
                                                                           load_pbp=self.load_game_play_by_play)
 
-    def load_postseason_season_schedule(self, season,
+    def load_postseason_schedule(self, season,
                                         load_game_odds: bool = False,
                                         load_game_play_by_play: bool = False):
         """
