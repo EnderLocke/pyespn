@@ -3,7 +3,7 @@ from pyespn.classes.vehicle import Vehicle
 from pyespn.classes.event import Event
 from pyespn.classes.image import Image
 from pyespn.classes.stat import StatCategory
-from pyespn.utilities import fetch_espn_data, lookup_league_api_info, get_an_id
+from pyespn.utilities import fetch_espn_data, get_an_id
 from pyespn.data.version import espn_api_version as v
 
 
@@ -94,6 +94,7 @@ class Player:
         """
         self.player_json = player_json
         self.espn_instance = espn_instance
+        self.api_info = self.espn_instance.api_mapping
         self.stats = {}
         self.stats_game_log = {}
         self._set_player_data()
@@ -204,9 +205,8 @@ class Player:
                                                             espn_instance=self.espn_instance)
 
     def load_player_box_scores_season(self, season):
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
 
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
+        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
         page_content = fetch_espn_data(url)
         pages = page_content.get('events', {}).get('pageCount', 0)
 

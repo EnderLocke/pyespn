@@ -1,4 +1,4 @@
-from pyespn.utilities import fetch_espn_data, get_team_id
+from pyespn.utilities import get_team_id
 from pyespn.core.decorators import validate_json
 
 
