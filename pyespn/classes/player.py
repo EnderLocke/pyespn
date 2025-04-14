@@ -119,6 +119,13 @@ class Player:
         """
         return self._stats
 
+    @property
+    def id(self):
+        """
+            str: the id for the player
+        """
+        return self._id
+
     def __repr__(self) -> str:
         """
         Returns a string representation of the Player instance.
@@ -133,7 +140,7 @@ class Player:
         Extracts and sets player data from the provided JSON.
         """
         self.api_ref = self.player_json.get('$ref')
-        self.id = self.player_json.get('id')
+        self._id = self.player_json.get('id')
         self.uid = self.player_json.get('uid')
         self.guid = self.player_json.get('guid')
         self.type = self.player_json.get('type')
@@ -220,7 +227,7 @@ class Player:
             None
         """
 
-        self._stats = self.get_players_historical_stats_core(player_id=self.id,
+        self._stats = self.get_players_historical_stats_core(player_id=self._id,
                                                              league_abbv=self._espn_instance.league_abbv,
                                                              espn_instance=self._espn_instance)
 
@@ -241,7 +248,7 @@ class Player:
                 - 'event' (`Event`): The event object representing the game.
                 - 'stats' (List[`StatCategory`]): A list of stat category objects for that game.
         """
-        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self._id}/eventlog'
         page_content = fetch_espn_data(url)
         pages = page_content.get('events', {}).get('pageCount', 0)
 
@@ -369,7 +376,7 @@ class Recruit:
         """
         self.api_ref = self.recruit_json.get('$ref')
         self.athlete = self.recruit_json.get('athlete')
-        self.id = self.athlete.get('id')
+        self._id = self.athlete.get('id')
         self.uid = self.recruit_json.get('uid')
         self.guid = self.recruit_json.get('guid')
         self.type = self.recruit_json.get('type')
@@ -414,6 +421,20 @@ class Recruit:
         self.status_name = status.get('description')
 
         self.rank = next((int(attr.get('displayValue')) for attr in self.recruit_json.get('attributes', []) if attr.get("name", '').lower() == "rank"), None)
+
+    @property
+    def id(self):
+        """
+            str: the id for the player
+        """
+        return self._id
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def to_dict(self) -> dict:
         """
