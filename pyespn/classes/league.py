@@ -123,14 +123,28 @@ class League:
         # todo this seems to always return nothing
         url = f''
 
-    def load_regular_season_schedule(self, season: int,
+    def load_regular_season_schedule(self, season,
                                      load_game_odds: bool = False,
                                      load_game_play_by_play: bool = False):
         """
-        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+        Loads and stores the regular season schedule for the specified season.
+
+        This method fetches the full regular season schedule for the league associated with the current
+        ESPN instance and stores it in the internal `_schedules` dictionary under the provided season key.
 
         Args:
-            season (int): The season for which to load the schedule.
+            season (int or str): The season year for which to load the schedule (e.g., 2023).
+            load_game_odds (bool, optional): Whether to include betting odds for each game. Defaults to False.
+            load_game_play_by_play (bool, optional): Whether to include play-by-play data for each game. Defaults to False.
+
+        Side Effects:
+            - Updates the `_schedules` dictionary with a `Schedule` object containing all weeks and events
+              for the specified season.
+
+        Example:
+            >>> espn.load_regular_season_schedule(2024, load_game_odds=True)
+            >>> schedule = espn._schedules[2024]
+            >>> print(schedule.weeks)
         """
 
         self._schedules[season] = get_regular_season_schedule_core(league_abbv=self.espn_instance.league_abbv,
