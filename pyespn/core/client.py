@@ -5,6 +5,7 @@ from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MA
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
 from pyespn.exceptions import API400Error
 from pyespn.utilities import lookup_league_api_info
+from pyespn.data.version import espn_api_version as v
 from .decorators import *
 from datetime import datetime
 from typing import TYPE_CHECKING, Optional
@@ -55,12 +56,13 @@ class PYESPN:
             sport_league (str): The abbreviation of the league to interact with (default is 'nfl').
             load_teams (bool): Whether to load team data (default is True).
         """
-        self.league_abbv = sport_league.lower()
-        self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING.get(self.league_abbv)
-        self.BETTING_PROVIDERS = BETTING_PROVIDERS
-        self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
-        self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
-        self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
+        self._league_abbv = sport_league.lower()
+        self._team_id_mapping = LEAGUE_TEAMS_MAPPING.get(self.league_abbv)
+        self._betting_providers = BETTING_PROVIDERS
+        # todo i think this key can be removed
+        self._league_division_betting_keys = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
+        self._api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
+        self.v = v
         self.teams = []
         self.standings = {}
         self.recruit_rankings = {}
@@ -70,10 +72,38 @@ class PYESPN:
         self.league = None
         self._load_league_data()
         if load_teams:
-            if self.api_mapping['sport'] not in NO_TEAMS:
+            if self._api_mapping['sport'] not in NO_TEAMS:
                 self._load_teams_datav2()
             else:
                 self._load_manufacturers()
+
+    @property
+    def team_id_mapping(self):
+        """
+        dict: Mapping of team IDs for the current league.
+        """
+        return self._team_id_mapping
+
+    @property
+    def betting_providers(self):
+        """
+        dict: Dictionary of betting providers supported by the API.
+        """
+        return self._betting_providers
+
+    @property
+    def league_division_betting_keys(self):
+        """
+        list: List of keys representing league division betting markets.
+        """
+        return self._league_division_betting_keys
+
+    @property
+    def api_mapping(self):
+        """
+        dict: Mapping of endpoints and API config values for the current league.
+        """
+        return self._api_mapping
 
     def __repr__(self) -> str:
         """
