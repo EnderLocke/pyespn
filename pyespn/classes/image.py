@@ -1,6 +1,8 @@
+from pyespn.core.decorators import validate_json
 import requests
 
 
+@validate_json("image_json")
 class Image:
     """
     Represents an image object from the ESPN API, typically associated with players, teams, or events.

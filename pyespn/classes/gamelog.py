@@ -1,6 +1,8 @@
 from pyespn.utilities import fetch_espn_data, get_team_id
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("drive_json")
 class Drive:
     """
     Represents a single drive within a sports event.
@@ -95,6 +97,7 @@ class Drive:
         return self.drive_json
 
 
+@validate_json("play_json")
 class Play:
     """
     Represents a single play within an ESPN sports event.
@@ -133,8 +136,8 @@ class Play:
         coordinate (dict or None): X/Y position of the play (if supported).
     """
 
-    def __init__(self, play_json, espn_instance, event_instance,
-                 drive_instance):
+    def __init__(self, play_json, espn_instance,
+                 event_instance, drive_instance):
         """
         Initializes a Play instance using the provided JSON data.
 
