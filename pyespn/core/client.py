@@ -351,7 +351,18 @@ class PYESPN:
                                                     espn_instance=self)
 
     def load_seasons_box_scores(self, season):
+        """
+        Loads player-level box score data for all teams in a given season.
 
+        This method first ensures that rosters are loaded for the specified season,
+        then calls each team's method to load box score data for all players on their roster.
+
+        Args:
+            season (int): The season year for which to load box score data.
+
+        Returns:
+            None
+        """
         self.load_season_rosters(season=season)
         for team in self._teams:
             team.load_season_roster_box_score(season=season)
