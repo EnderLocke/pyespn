@@ -4,7 +4,6 @@ from pyespn.classes.event import Event
 from pyespn.classes.image import Image
 from pyespn.classes.stat import StatCategory
 from pyespn.utilities import fetch_espn_data, get_an_id
-from pyespn.data.version import espn_api_version as v
 
 
 @validate_json('player_json')
@@ -206,7 +205,7 @@ class Player:
 
     def load_player_box_scores_season(self, season):
 
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
         page_content = fetch_espn_data(url)
         pages = page_content.get('events', {}).get('pageCount', 0)
 
@@ -243,7 +242,7 @@ class Player:
 
     def load_player_contracts(self):
         # todo i haven't seen this filled in at all yet in the api
-        url = f'http://sports.core.api.espn.com/{v}/sports/football/leagues/nfl/athletes/4360807/contracts?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/football/leagues/nfl/athletes/4360807/contracts?lang=en&region=us'
 
     def to_dict(self) -> dict:
         """

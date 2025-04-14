@@ -1,6 +1,5 @@
 from pyespn.core.decorators import validate_json
 from pyespn.utilities import fetch_espn_data
-from pyespn.data.version import espn_api_version as v
 from pyespn.exceptions import API400Error
 from pyespn.core.schedule import get_regular_season_schedule_core
 from pyespn.classes.betting import Betting
@@ -163,7 +162,7 @@ class League:
                 team.load_season_roster(season=season)
 
         betting_futures = []
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/futures'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/futures'
 
         try:
             season_content = fetch_espn_data(url)
@@ -232,7 +231,7 @@ class League:
             if season not in team.roster:
                 team.load_season_roster(season=season)
 
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/leaders'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/leaders'
 
         try:
             leaders_content = fetch_espn_data(url)

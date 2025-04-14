@@ -3,7 +3,6 @@ from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
 from pyespn.classes.image import Image
 from pyespn.classes.stat import Record, Stat
-from pyespn.data.version import espn_api_version as v
 from pyespn.core.decorators import validate_json
 from pyespn.exceptions import API400Error
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -168,7 +167,7 @@ class Team:
         Raises:
             API400Error: If the API responds with a 400-level error. A message is printed, and no data is stored for the season.
         """
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/statistics'
 
         all_stats = []
         try:
@@ -254,7 +253,7 @@ class Team:
             - The number of worker threads (`max_workers=10`) can be adjusted based on API rate limits.
         """
 
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/seasons/{season}/teams/{self.team_id}/athletes'
         content = fetch_espn_data(url)
         page_count = content.get('pageCount', 1)
 
@@ -298,7 +297,7 @@ class Team:
             seasonal game results.
 
         """
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/teams/{self.team_id}/record?lang=en&region=us'
         season_records = []
 
         try:
@@ -339,7 +338,7 @@ class Team:
             Coach data is retrieved in two stages: first a summary list with URLs,
             then a second pass to fetch detailed info for each coach using those URLs.
         """
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/teams/{self.team_id}/coaches?lang=en&region=us'
         coach_content = fetch_espn_data(url)
         coach_records = []
         coach_urls = []
@@ -369,7 +368,7 @@ class Team:
             API400Error: If the ESPN API returns a 400 error (e.g., invalid season or unavailable data).
         """
         futures = []
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/0/teams/{self.team_id}/odds-records'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/0/teams/{self.team_id}/odds-records'
 
         try:
             season_content = fetch_espn_data(url)

@@ -1,4 +1,3 @@
-from pyespn.data.version import espn_api_version as v
 from pyespn.utilities import (fetch_espn_data, get_schedule_type,
                               get_an_id)
 from pyespn.exceptions import ScheduleTypeUnknownError
@@ -89,7 +88,7 @@ class Schedule:
             end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
-            week_events_url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
+            week_events_url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
             week_content = fetch_espn_data(week_events_url)
             week_pages = week_content.get('pageCount')
             week_events = []

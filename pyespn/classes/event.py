@@ -2,7 +2,6 @@ from pyespn.core.decorators import validate_json
 from pyespn.classes.betting import GameOdds
 from pyespn.classes.gamelog import Drive, Play
 from pyespn.utilities import fetch_espn_data
-from pyespn.data.version import espn_api_version as v
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -145,7 +144,7 @@ class Event:
         as `GameOdds` instances.
         """
 
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -177,7 +176,7 @@ class Event:
         This method retrieves the competition data for the event and initializes a `Competition`
         object using the JSON data, storing it in the `self.competition` attribute.
         """
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
         competition_content = fetch_espn_data(url)
 
         self.competition = Competition(competition_json=competition_content,
@@ -203,7 +202,7 @@ class Event:
         Uses multi-threaded requests to efficiently load all play pages and converts each play
         item into a `Play` object. The complete list is assigned to `self.plays`.
         """
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/plays'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/plays'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -236,7 +235,7 @@ class Event:
         Retrieves all drives associated with the competition and converts each drive item
         into a `Drive` object. The resulting list is stored in `self.drives`.
         """
-        url = f'http://sports.core.api.espn.com/{v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
+        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 

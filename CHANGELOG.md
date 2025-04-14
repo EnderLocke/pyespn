@@ -12,7 +12,8 @@
 * changed some of the clients vars to properties
 * made sure to_dicts were across the classes where they are needed
 * made sure validate_json decorator was acorss classes as needed
-* moved from calling lookup api function to pulling from espn client
+* tech debt -> moved from calling lookup api function to pulling from espn client
+* tech debt -> removed v import to all classes and put it in client
 * 
 
 ## 0.3.2
