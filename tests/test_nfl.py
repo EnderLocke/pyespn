@@ -87,13 +87,13 @@ def test_recruit_rankings(test_case):
 
 
 def get_random_nfl_team_data(team_id):
-    selected_team = next((team for team in nfl_espn.TEAM_ID_MAPPING if team["team_id"] == team_id), None)
+    selected_team = next((team for team in nfl_espn.team_id_mapping if team["team_id"] == team_id), None)
     content = nfl_espn.get_team_by_id(team_id)
 
     return selected_team, content
 
 
-@pytest.mark.parametrize("test_case", nfl_espn.TEAM_ID_MAPPING)
+@pytest.mark.parametrize("test_case", nfl_espn.team_id_mapping)
 def test_nfl_team_ids(test_case):
     local_team_data, api_team_data = get_random_nfl_team_data(test_case.get('team_id'))
 

@@ -1,7 +1,8 @@
-from pyespn.classes.player import Player
 from pyespn.utilities import fetch_espn_data, get_team_id, get_athlete_id
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("stat_json")
 class Stat:
     """
     Represents a statistical record for a player within a given season.
@@ -37,7 +38,7 @@ class Stat:
             espn_instance (PYESPN): An instance of the ESPN API client.
         """
         self.stat_json = stat_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self._set_stats_data()
 
     def __repr__(self) -> str:
@@ -71,7 +72,24 @@ class Stat:
         self.per_game_value = self.stat_json.get('perGameValue')
         self.rank = self.stat_json.get('rank')
 
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
+    def to_dict(self) -> dict:
+        """
+        Converts the Stat instance to its original JSON dictionary.
+
+        Returns:
+            dict: The stats's raw JSON data.
+        """
+        return self.stat_json
+
+
+@validate_json("record_json")
 class Record:
     """
     Represents a statistical record for a player, team, or manufacturer in ESPN's data.
@@ -104,7 +122,7 @@ class Record:
             record_json (dict): The JSON data representing the record.
             espn_instance (object): An instance of the ESPN API client.
         """
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.record_json = record_json
         self.stats = []
         self._load_record_data()
@@ -117,6 +135,13 @@ class Record:
         for easy identification.
         """
         return f"<Record | {self.display_name} ({self.abbreviation})>"
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _load_record_data(self):
         """
@@ -139,9 +164,19 @@ class Record:
         self.name = self.record_json.get('name')
         for stat in self.record_json.get('stats', []):
             self.stats.append(Stat(stat_json=stat,
-                                   espn_instance=self.espn_instance))
+                                   espn_instance=self._espn_instance))
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Record instance to its original JSON dictionary.
+
+        Returns:
+            dict: The records's raw JSON data.
+        """
+        return self.record_json
 
 
+@validate_json("leader_cat_json")
 class LeaderCategory:
     """
     Represents a category of statistical leaders for a given season.
@@ -176,7 +211,7 @@ class LeaderCategory:
             season (str or int): The season the leader category is related to.
         """
         self.leader_cat_json = leader_cat_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.athletes = {}
         self.season = season
         self._load_leaders_data()
@@ -189,6 +224,13 @@ class LeaderCategory:
             str: A formatted string with the leader info.
         """
         return f"<LeaderCategory | {self.season}-{self.display_name}>"
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _load_leaders_data(self):
         """
@@ -208,13 +250,23 @@ class LeaderCategory:
         rank = 1
         for ath in self.leader_cat_json.get('leaders', []):
             all_athletes.append(Leader(leader_json=ath,
-                                       espn_instance=self.espn_instance,
+                                       espn_instance=self._espn_instance,
                                        season=self.season,
                                        rank=rank))
             rank += 1
         self.athletes[self.season] = all_athletes
 
+    def to_dict(self) -> dict:
+        """
+        Converts the LeaderCategory instance to its original JSON dictionary.
 
+        Returns:
+            dict: The leader category's raw JSON data.
+        """
+        return self.leader_cat_json
+
+
+@validate_json("leader_json")
 class Leader:
     """
     Represents a statistical leader in a specific category for a given season.
@@ -248,7 +300,7 @@ class Leader:
             rank (int): The rank of the athlete in the leader category.
         """
         self.leader_json = leader_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.rank = rank
         self.season = season
         self.athlete = None
@@ -265,6 +317,13 @@ class Leader:
 
         return f"<Leader - {self.rank} | {self.athlete.full_name}-{self.value}: {self.team.name}>"
 
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
     def _load_leader_data(self):
         """
         Loads the leader's data from the provided JSON.
@@ -279,12 +338,13 @@ class Leader:
         statistical value and rank.
 
         """
+        from pyespn.classes.player import Player
         self.value = self.leader_json.get('value', 0)
         self.rel = self.leader_json.get('rel')
 
         if 'team' in self.leader_json:
             team_id = get_team_id(self.leader_json.get('team', {}).get('$ref'))
-            self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+            self.team = self._espn_instance.get_team_by_id(team_id=team_id)
 
         if 'athlete' in self.rel:
             try:
@@ -294,7 +354,19 @@ class Leader:
                 print(e)
             finally:
                 if not self.athlete:
-                    #print('athlete not found')
                     athlete_content = fetch_espn_data(self.leader_json.get('athlete', {}).get('$ref'))
                     self.athlete = Player(player_json=athlete_content,
-                                          espn_instance=self.espn_instance)
+                                          espn_instance=self._espn_instance)
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Leader instance to its original JSON dictionary.
+
+        Returns:
+            dict: The leaders's raw JSON data.
+        """
+        return self.leader_json
+
+
+class StatCategory(Record):
+    pass

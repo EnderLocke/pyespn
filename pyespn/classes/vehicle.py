@@ -1,5 +1,7 @@
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("vehicle_json")
 class Vehicle:
     """
     Represents a racing vehicle with details such as number, manufacturer,
@@ -28,7 +30,7 @@ class Vehicle:
             espn_instance (PYESPN): An instance of the ESPN API client.
         """
         self.vehicle_json = vehicle_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self._set_vehicle_data()
 
     def __repr__(self) -> str:
@@ -50,3 +52,19 @@ class Vehicle:
         self.engine = self.vehicle_json.get('engine')
         self.tire = self.vehicle_json.get('tire')
         self.team = self.vehicle_json.get('team')
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Vehicle instance to its original JSON dictionary.
+
+        Returns:
+            dict: The vehicle's raw JSON data.
+        """
+        return self.vehicle_json

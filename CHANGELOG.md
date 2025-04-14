@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.3.3
+* moved schedule functions out of client and into league class
+* added in function to team/client to load box scores for a roster for a season
+* added in call from event to pull competition data
+* added in event call to build out odds
+* added in headshot to player class
+* added in drives and plays data (nfl)
+* added in pbp for basketball leagues
+* added function to image class to download image
+* changed some of the clients vars to properties
+* made sure to_dicts were across the classes where they are needed
+* made sure validate_json decorator was acorss classes as needed
+* tech debt
+  * moved from calling lookup api function to pulling from espn client
+  * removed v import to all classes and put it in client
+  * teams/league are client properties now
+  * client is now property across classes
+  * league has properties betting futures and schedules now + league leaders
+  * added stats/stats_log as properties to athlete/player
+  * team class has betting and rosters/ stats/coaches and records as properties now
+  * made lots of ids properties
+* added in pass thru so that you can load odds or play by play when loading schedule
+* 
+
 ## 0.3.2
 * added in epl / soccer
 * added in pulling betting records for a season for teams/ teams in a league
@@ -31,7 +55,6 @@
 * added im image class and connected to team logos and venue images
 * added in func to pull stats for a team/all teams of a league
 * added in call for coaches
-* 
 
 ## 0.3.0
 * lots of changes
