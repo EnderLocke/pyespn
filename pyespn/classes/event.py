@@ -81,7 +81,7 @@ class Event:
         from pyespn.classes.venue import Venue
         self.competition = None
         self.event_json = event_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.url_ref = self.event_json.get('$ref')
         self.event_id = self.event_json.get('id')
         self.date = self.event_json.get('date')
@@ -90,14 +90,14 @@ class Event:
         self.competition_type = self.event_json.get('competitions', [])[0].get('type', {}).get('type')
         self.venue_json = self.event_json.get('competitions', [])[0].get('venue', {})
         self.event_venue = Venue(venue_json=self.venue_json,
-                                 espn_instance=self.espn_instance)
+                                 espn_instance=self._espn_instance)
         self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
         self._home_team = None
         self._away_team = None
         self._odds = None
         self._drives = None
         self._plays = None
-        self.api_info = self.espn_instance.api_mapping
+        self.api_info = self._espn_instance.api_mapping
         self._load_teams()
         self._load_competition_data()
         if load_game_odds:
@@ -105,6 +105,13 @@ class Event:
         if load_play_by_play:
             self.load_play_by_play()
 
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+    
     @property
     def drives(self):
         """
@@ -153,13 +160,13 @@ class Event:
         team2_id = team2.get('id')
 
         if team1.get('homeAway') == 'home':
-            self._home_team = self.espn_instance.get_team_by_id(team1_id)
+            self._home_team = self._espn_instance.get_team_by_id(team1_id)
 
-            self._away_team = self.espn_instance.get_team_by_id(team2_id)
+            self._away_team = self._espn_instance.get_team_by_id(team2_id)
         else:
-            self._home_team = self.espn_instance.get_team_by_id(team2_id)
+            self._home_team = self._espn_instance.get_team_by_id(team2_id)
 
-            self._away_team = self.espn_instance.get_team_by_id(team1_id)
+            self._away_team = self._espn_instance.get_team_by_id(team1_id)
 
     def __repr__(self) -> str:
         """
@@ -179,7 +186,7 @@ class Event:
         as `GameOdds` instances.
         """
 
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -188,7 +195,7 @@ class Event:
             odds_content = fetch_espn_data(page_url)
             return [
                 GameOdds(odds_json=odd,
-                         espn_instance=self.espn_instance,
+                         espn_instance=self._espn_instance,
                          event_instance=self)
                 for odd in odds_content.get('items', [])
             ]
@@ -211,11 +218,11 @@ class Event:
         This method retrieves the competition data for the event and initializes a `Competition`
         object using the JSON data, storing it in the `self.competition` attribute.
         """
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
         competition_content = fetch_espn_data(url)
 
         self.competition = Competition(competition_json=competition_content,
-                                       espn_instance=self.espn_instance,
+                                       espn_instance=self._espn_instance,
                                        event_instance=self)
 
     def load_play_by_play(self):
@@ -237,7 +244,7 @@ class Event:
         Uses multi-threaded requests to efficiently load all play pages and converts each play
         item into a `Play` object. The complete list is assigned to `self.plays`.
         """
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/plays'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/plays'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -246,7 +253,7 @@ class Event:
             play_content = fetch_espn_data(page_url)
             return [
                 Play(play_json=play,
-                     espn_instance=self.espn_instance,
+                     espn_instance=self._espn_instance,
                      event_instance=self,
                      drive_instance=None)
                 for play in play_content.get('items', [])
@@ -270,7 +277,7 @@ class Event:
         Retrieves all drives associated with the competition and converts each drive item
         into a `Drive` object. The resulting list is stored in `self.drives`.
         """
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -279,7 +286,7 @@ class Event:
             drive_content = fetch_espn_data(page_url)
             return [
                 Drive(drive_json=drive,
-                      espn_instance=self.espn_instance,
+                      espn_instance=self._espn_instance,
                       event_instance=self)
                 for drive in drive_content.get('items', [])
             ]
@@ -310,7 +317,7 @@ class Competition:
 
     def __init__(self, competition_json, espn_instance, event_instance):
         self.competition_json = competition_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.event_instance = event_instance
         self._load_competition_data()
 
@@ -363,6 +370,13 @@ class Competition:
         self.clock = self.competition_json.get("clock")
         # nba has series
         self.series = self.competition_json.get('series')
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def to_dict(self) -> dict:
         """

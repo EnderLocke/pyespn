@@ -92,7 +92,7 @@ class Team:
         self._records = {}
         self._stats = {}
         self._coaches = {}
-        self._betting = {}
+        self._espn_instance = {}
         if team_json:
             self.team_json = team_json
         else:
@@ -101,6 +101,13 @@ class Team:
         self._load_team_data()
         self.home_venue = Venue(venue_json=self.venue_json,
                                 espn_instance=self.espn_instance)
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     @property
     def coaches(self):
@@ -128,7 +135,7 @@ class Team:
         """
              dict: a dict with season as the key and a list of Record objects
         """
-        return self._betting
+        return self._espn_instance
 
     @property
     def roster(self):
@@ -394,7 +401,7 @@ class Team:
 
         This method queries the ESPN API for team-specific betting records for the given season. It handles
         pagination and leverages a thread pool to fetch data pages concurrently, improving performance. The
-        fetched data is parsed into `Record` instances and stored in the `self._betting` dictionary under
+        fetched data is parsed into `Record` instances and stored in the `self._espn_instance` dictionary under
         the specified season.
 
         Args:
@@ -422,7 +429,7 @@ class Team:
                         futures.append(Record(record_json=bet,
                                               espn_instance=self.espn_instance))
 
-            self._betting[season] = futures
+            self._espn_instance[season] = futures
 
         except API400Error as e:
             print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")

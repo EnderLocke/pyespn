@@ -92,12 +92,19 @@ class Player:
             player_json (dict): The raw player data retrieved from the ESPN API.
         """
         self.player_json = player_json
-        self.espn_instance = espn_instance
-        self.api_info = self.espn_instance.api_mapping
+        self._espn_instance = espn_instance
+        self.api_info = self._espn_instance.api_mapping
         self._stats = {}
         self._stats_game_log = {}
         self._set_player_data()
-
+        
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+    
     @property
     def stats_game_log(self):
         """
@@ -193,14 +200,14 @@ class Player:
         self.headshot = self.player_json.get('headshot')
         if self.headshot:
             self.headshot = Image(image_json=self.headshot,
-                                  espn_instance=self.espn_instance)
+                                  espn_instance=self._espn_instance)
         self.statistics_log_ref = self.player_json.get('statisticslog', {}).get('$ref')
 
         if 'vehicles' in self.player_json:
             self.vehicles = []
             for vehicle in self.player_json.get('vehicles'):
                 self.vehicles.append(Vehicle(vehicle_json=vehicle,
-                                             espn_instance=self.espn_instance))
+                                             espn_instance=self._espn_instance))
 
     def load_player_historical_stats(self) -> None:
         """
@@ -214,8 +221,8 @@ class Player:
         """
 
         self._stats = self.get_players_historical_stats_core(player_id=self.id,
-                                                             league_abbv=self.espn_instance.league_abbv,
-                                                             espn_instance=self.espn_instance)
+                                                             league_abbv=self._espn_instance.league_abbv,
+                                                             espn_instance=self._espn_instance)
 
     def load_player_box_scores_season(self, season):
         """
@@ -234,7 +241,7 @@ class Player:
                 - 'event' (`Event`): The event object representing the game.
                 - 'stats' (List[`StatCategory`]): A list of stat category objects for that game.
         """
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/athletes/{self.id}/eventlog'
         page_content = fetch_espn_data(url)
         pages = page_content.get('events', {}).get('pageCount', 0)
 
@@ -248,19 +255,19 @@ class Player:
         event_stats_log = []
         for event in event_list:
             event_id = get_an_id(event.get('event', {}).get('$ref'), 'events')
-            event_find = self.espn_instance.league.get_event_by_season(season=season,
+            event_find = self._espn_instance.league.get_event_by_season(season=season,
                                                                        event_id=event_id)
             if not event_find:
                 event_content = fetch_espn_data(event.get('event', {}).get('$ref'))
                 event_find = Event(event_json=event_content,
-                                   espn_instance=self.espn_instance)
+                                   espn_instance=self._espn_instance)
             stats = []
             if event.get('played'):
                 stats_content = fetch_espn_data(event.get('statistics', {}).get('$ref'))
 
                 for category in stats_content.get('splits', {}).get('categories'):
                     stats.append(StatCategory(record_json=category,
-                                              espn_instance=self.espn_instance))
+                                              espn_instance=self._espn_instance))
             event_record = {
                 'event': event_find,
                 'stats': stats,
@@ -271,7 +278,7 @@ class Player:
 
     def load_player_contracts(self):
         # todo i haven't seen this filled in at all yet in the api
-        url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/football/leagues/nfl/athletes/4360807/contracts?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/football/leagues/nfl/athletes/4360807/contracts?lang=en&region=us'
 
     def to_dict(self) -> dict:
         """
@@ -344,7 +351,7 @@ class Recruit:
             espn_instance (PYESPN): The ESPN API instance.
         """
         self.recruit_json = recruit_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self._set_recruit_data()
 
     def __repr__(self) -> str:

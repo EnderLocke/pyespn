@@ -32,13 +32,20 @@ class Venue:
         """
 
         self.venue_json = venue_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.venue_id = self.venue_json.get('id')
         self.name = self.venue_json.get('fullName')
         self.address_json = self.venue_json.get('address')
         self.grass = self.venue_json.get('grass')
         self.indoor = self.venue_json.get('indoor')
         self._images = [Image(image_json=image, espn_instance=self.espn_instance) for image in self.venue_json.get('images', [])]
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     @property
     def images(self):
@@ -109,8 +116,15 @@ class Circuit:
         This method also calls _load_circuit_data to load the data into attributes.
         """
         self.circuit_json = circuit_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self._load_circuit_data()
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _load_circuit_data(self):
         """

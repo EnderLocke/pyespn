@@ -39,7 +39,7 @@ class Standings:
         """
 
         self.standings_json = standings_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.standings = []
         self._load_standings_data()
 
@@ -76,15 +76,15 @@ class Standings:
             if 'athlete' in competitor:
                 athlete_content = fetch_espn_data(competitor.get('athlete', {}).get('$ref'))
                 this_athlete = Player(player_json=athlete_content,
-                                      espn_instance=self.espn_instance)
+                                      espn_instance=self._espn_instance)
             elif 'manufacturer' in competitor:
                 manufacturer_content = fetch_espn_data(competitor.get('manufacturer', {}).get('$ref'))
                 this_manufacturer = Manufacturer(manufacturer_json=manufacturer_content,
-                                                 espn_instance=self.espn_instance)
+                                                 espn_instance=self._espn_instance)
             records = []
             for record in competitor.get('records', []):
                 records.append(Record(record_json=record,
-                                      espn_instance=self.espn_instance))
+                                      espn_instance=self._espn_instance))
             full_athlete = {
                 'athlete': this_athlete,
                 'manufacturer': this_manufacturer,
@@ -92,6 +92,13 @@ class Standings:
             }
 
             self.standings.append(full_athlete)
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def to_dict(self) -> dict:
         """

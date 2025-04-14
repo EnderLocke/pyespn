@@ -33,7 +33,7 @@ class Betting:
             betting_json (dict): The JSON data containing betting information.
         """
         self.betting_json = betting_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.season = season
         self.providers = []
         self._set_betting_data()
@@ -45,7 +45,14 @@ class Betting:
         Returns:
             str: A formatted string with the bettings information .
         """
-        return f"<Betting | {self.display_name} - {self.espn_instance.league_abbv}>"
+        return f"<Betting | {self.display_name} - {self._espn_instance.league_abbv}>"
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _set_betting_data(self):
         """
@@ -56,7 +63,7 @@ class Betting:
         self.name = self.betting_json.get('name')
         self.display_name = self.betting_json.get('displayName')
         for provider in self.betting_json.get('futures'):
-            self.providers.append(Provider(espn_instance=self.espn_instance,
+            self.providers.append(Provider(espn_instance=self._espn_instance,
                                            betting_instance=self,
                                            line_json=provider))
 
@@ -103,7 +110,7 @@ class Provider:
             line_json (dict): The JSON data containing provider information.
         """
         self.line_json = line_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.betting_instance = betting_instance
         self._set_betting_provider_data()
 
@@ -114,7 +121,7 @@ class Provider:
         Returns:
             str: A formatted string with the Providers information .
         """
-        return f"<Provider | {self.provider_name} - {self.espn_instance.league_abbv}>"
+        return f"<Provider | {self.provider_name} - {self._espn_instance.league_abbv}>"
 
     def _set_betting_provider_data(self):
         """
@@ -126,7 +133,7 @@ class Provider:
         self.active = self.line_json.get('provider', {}).get('active')
         self.all_lines = []
         for future_line in self.line_json.get('books', []):
-            self.all_lines.append(Line(espn_instance=self.espn_instance,
+            self.all_lines.append(Line(espn_instance=self._espn_instance,
                                        provider_instance=self,
                                        book_json=future_line))
 
@@ -174,13 +181,20 @@ class Line:
             provider_instance (Provider): The betting provider for this line.
             book_json (dict): The JSON data containing betting line details.
         """
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.provider_instance = provider_instance
         self.book_json = book_json
         self.athlete = None
         self.team = None
         self.ref = None
         self._set_line_data()
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def __repr__(self) -> str:
         """
@@ -209,21 +223,21 @@ class Line:
         try:
             if 'athlete' in self.book_json:
                 athlete_id = get_athlete_id(self.book_json.get('athlete', {}).get('$ref'))
-                self.athlete = self.espn_instance.check_teams_for_player_by_season(season=self.provider_instance.betting_instance.season,
+                self.athlete = self._espn_instance.check_teams_for_player_by_season(season=self.provider_instance.betting_instance.season,
                                                                                    player_id=athlete_id)
                 if not self.athlete:
 
                     self.ref = self.book_json.get('athlete').get('$ref')
                     content = fetch_espn_data(self.ref)
 
-                    self.athlete = Player(espn_instance=self.espn_instance,
+                    self.athlete = Player(espn_instance=self._espn_instance,
                                           player_json=content)
 
             if 'team' in self.book_json:
                 self.ref = self.book_json.get('team').get('$ref')
                 content = fetch_espn_data(self.ref)
 
-                self.team = Team(espn_instance=self.espn_instance,
+                self.team = Team(espn_instance=self._espn_instance,
                                  team_json=content)
 
             self.value = self.book_json.get('value')
@@ -280,9 +294,16 @@ class GameOdds:
         """
 
         self.odds_json = odds_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.event_instance = event_instance
         self._load_odds_data()
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def __repr__(self) -> str:
         """
@@ -316,8 +337,8 @@ class GameOdds:
                 away_dicts = {}
                 home_dicts = {}
                 other_dicts = {}
-                home_team = self.espn_instance.get_team_by_id(get_team_id(self.odds_json.get('bettingOdds', {}).get('homeTeam', {}).get('$ref')))
-                away_team = self.espn_instance.get_team_by_id(get_team_id(self.odds_json.get('bettingOdds', {}).get('awayTeam', {}).get('$ref')))
+                home_team = self._espn_instance.get_team_by_id(get_team_id(self.odds_json.get('bettingOdds', {}).get('homeTeam', {}).get('$ref')))
+                away_team = self._espn_instance.get_team_by_id(get_team_id(self.odds_json.get('bettingOdds', {}).get('awayTeam', {}).get('$ref')))
 
                 for key, value in self.odds_json.get('bettingOdds', {}).get('teamOdds', {}).items():
                     if 'home' in str(key).lower():
@@ -327,12 +348,12 @@ class GameOdds:
                     else:
                         other_dicts.setdefault(key,value)
                 self.away_team_odds = OddsBet365(odds_json=away_dicts,
-                                                 espn_instance=self.espn_instance,
+                                                 espn_instance=self._espn_instance,
                                                  event_instance=self.event_instance,
                                                  gameodds_instance=self,
                                                  team=away_team)
                 self.home_team_odds = OddsBet365(odds_json=home_dicts,
-                                                 espn_instance=self.espn_instance,
+                                                 espn_instance=self._espn_instance,
                                                  event_instance=self.event_instance,
                                                  gameodds_instance=self,
                                                  team=home_team)
@@ -343,23 +364,23 @@ class GameOdds:
             if self.provider == 'ESPN Bet - Live Odds':
                 pass
             self.away_team_odds = Odds(odds_json=self.odds_json.get('awayTeamOdds'),
-                                       espn_instance=self.espn_instance,
+                                       espn_instance=self._espn_instance,
                                        event_instance=self.event_instance,
                                        gameodds_instance=self)
             self.home_team_odds = Odds(odds_json=self.odds_json.get('homeTeamOdds'),
-                                       espn_instance=self.espn_instance,
+                                       espn_instance=self._espn_instance,
                                        event_instance=self.event_instance,
                                        gameodds_instance=self)
             self.open = BetValue(bet_name='open',
                                  bet_json=self.odds_json.get('open'),
-                                 espn_instance=self.espn_instance)
+                                 espn_instance=self._espn_instance)
             self.current = BetValue(bet_name='current',
                                     bet_json=self.odds_json.get('current'),
-                                    espn_instance=self.espn_instance)
+                                    espn_instance=self._espn_instance)
             if self.provider == 'ESPN BET':
                 self.close = BetValue(bet_name='close',
                                       bet_json=self.odds_json.get('close'),
-                                      espn_instance=self.espn_instance)
+                                      espn_instance=self._espn_instance)
 
     def to_dict(self) -> dict:
         """
@@ -398,7 +419,7 @@ class OddsType:
         """
         self.name = odds_name
         self.odds_type_json = odds_type_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.odds = {}
         self.favorite = self.odds_type_json.get('favorite')
         self._load_odds_type_data()
@@ -412,6 +433,13 @@ class OddsType:
         """
         return f"<OddsType | {self.name}>"
 
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
     def _load_odds_type_data(self):
         """
         Parses the odds_type_json to populate the `odds` dictionary with BetValue instances.
@@ -424,13 +452,13 @@ class OddsType:
         """
         self.odds['point_spread'] = BetValue(bet_name='point_spread',
                                              bet_json=self.odds_type_json.get('pointSpread', {}),
-                                             espn_instance=self.espn_instance)
+                                             espn_instance=self._espn_instance)
         self.odds['spread'] = BetValue(bet_name='spread',
                                        bet_json=self.odds_type_json.get('spread', {}),
-                                       espn_instance=self.espn_instance)
+                                       espn_instance=self._espn_instance)
         self.odds['money_line'] = BetValue(bet_name='money_line',
                                            bet_json=self.odds_type_json.get('moneyLine', {}),
-                                           espn_instance=self.espn_instance)
+                                           espn_instance=self._espn_instance)
 
     def to_dict(self) -> dict:
         """
@@ -475,7 +503,7 @@ class Odds:
             gameodds_instance (GameOdds): The containing game odds context.
         """
         self.odds_json = odds_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.event_instance = event_instance
         self.gameodds_instance = gameodds_instance
         self._load_odds_json()
@@ -488,6 +516,13 @@ class Odds:
             str: A string identifying the associated team.
         """
         return f"<Odds | {self.team.name}>"
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _load_odds_json(self):
         """
@@ -503,17 +538,17 @@ class Odds:
         self.money_line = self.odds_json.get('moneyLine')
         self.spread_odds = self.odds_json.get('spreadOdds')
         team_id = get_team_id(self.odds_json.get('team', {}).get('$ref'))
-        self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+        self.team = self._espn_instance.get_team_by_id(team_id=team_id)
         self.open = OddsType(odds_name='open',
                              odds_type_json=self.odds_json.get('open'),
-                             espn_instance=self.espn_instance)
+                             espn_instance=self._espn_instance)
         self.current = OddsType(odds_name='current',
                                 odds_type_json=self.odds_json.get('current'),
-                                espn_instance=self.espn_instance)
+                                espn_instance=self._espn_instance)
         if self.gameodds_instance.provider == 'ESPN BET':
             self.close = OddsType(odds_name='close',
                                   odds_type_json=self.odds_json.get('close'),
-                                  espn_instance=self.espn_instance)
+                                  espn_instance=self._espn_instance)
 
     def to_dict(self) -> dict:
         """
@@ -613,7 +648,7 @@ class BetValue:
         """
         self.name = bet_name
         self.bet_json = bet_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self._load_bet_data()
 
     def __repr__(self) -> str:
@@ -624,6 +659,13 @@ class BetValue:
             str: A formatted string identifying the betting value.
         """
         return f"<BetValue | {self.name}>"
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _load_bet_data(self):
         """
