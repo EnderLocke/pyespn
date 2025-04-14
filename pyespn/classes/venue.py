@@ -59,6 +59,7 @@ class Venue:
         return self.venue_json
 
 
+@validate_json("circuit_json")
 class Circuit:
     """
     A class to represent a Circuit.
@@ -139,8 +140,17 @@ class Circuit:
         # You can store each diagram in a separate variable if needed, for example:
         self.diagram_urls = [diagram.get('href') for diagram in self.diagrams]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Circuit instance.
         """
         return f"<Circuit | {self.full_name}, {self.city}, {self.country}>"
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Circuit instance to its original JSON dictionary.
+
+        Returns:
+            dict: The circuit's raw JSON data.
+        """
+        return self.circuit_json
