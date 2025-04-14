@@ -7,7 +7,12 @@
 * added in event call to build out odds
 * added in headshot to player class
 * added in drives and plays data (nfl)
-* 
+* added in pbp for basketball leagues
+* added function to image class to download image
+* changed some of the clients vars to properties
+* made sure to_dicts were across the classes where they are needed
+* made sure validate_json decorator was acorss classes as needed
+*
 
 ## 0.3.2
 * added in epl / soccer
@@ -23,11 +28,6 @@
 * removed get_league_info call from client as all the data is in the league variable once client is loaded
 * added functions to client to search teams rosters for a given season for a player
 * added in auto load for rosters for given season for both betting futures and league leaders to reduce calls to api
-* added in pbp for basketball leagues
-* added function to image class to download image
-* changed some of the clients vars to properties
-* made sure to_dicts were across the classes where they are needed
-* made sure validate_json decorator was acorss classes as needed
 * 
 
 ## 0.3.1
