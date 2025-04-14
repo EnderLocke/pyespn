@@ -41,10 +41,10 @@ class Schedule:
             schedule_list (list[str]): A list of URLs pointing to weekly or daily schedule endpoints.
         """
         self.schedule_list = schedule_list
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.load_odds = load_odds
         self.load_plays = load_plays
-        self.api_info = self.espn_instance.api_mapping
+        self.api_info = self._espn_instance.api_mapping
 
         self.season = get_an_id(self.schedule_list[0], 'seasons')
         self.schedule_type = None
@@ -64,7 +64,14 @@ class Schedule:
         elif self.api_info.get('schedule') == 'daily':
             self._set_schedule_daily_data()
         else:
-            raise ScheduleTypeUnknownError(league_abbv=self.espn_instance.league_abbv)
+            raise ScheduleTypeUnknownError(league_abbv=self._espn_instance.league_abbv)
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     @property
     def weeks(self):
@@ -98,7 +105,7 @@ class Schedule:
             end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
-            week_events_url = f'http://sports.core.api.espn.com/{self.espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
+            week_events_url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
             week_content = fetch_espn_data(week_events_url)
             week_pages = week_content.get('pageCount')
             week_events = []
@@ -110,7 +117,7 @@ class Schedule:
                     week_events.append(event.get('$ref'))
                     pass
 
-            self._weeks.append(Week(espn_instance=self.espn_instance,
+            self._weeks.append(Week(espn_instance=self._espn_instance,
                                    week_list=week_events,
                                    week_number=week_number,
                                    start_date=start_date,
@@ -139,7 +146,7 @@ class Schedule:
                 for event in this_week_content.get('items', []):
                     event_urls.append(event.get('$ref'))
                 if event_urls:
-                    self._weeks.append(Week(espn_instance=self.espn_instance,
+                    self._weeks.append(Week(espn_instance=self._espn_instance,
                                            schedule_instance=self,
                                            week_list=event_urls,
                                            week_number=week_number,
@@ -223,7 +230,7 @@ class Week:
             start_date (str or datetime): The start date of the week.
             end_date (str or datetime): The end date of the week.
         """
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.schedule_instance = schedule_instance
         self.week_list = week_list
         self._events = []
@@ -233,7 +240,14 @@ class Week:
         self.week_number = week_number
 
         self._set_week_datav2()
-
+        
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+    
     @property
     def events(self):
         """
@@ -257,7 +271,7 @@ class Week:
         for event in self.week_list:
             event_content = fetch_espn_data(event)
             self._events.append(Event(event_json=event_content,
-                                     espn_instance=self.espn_instance,
+                                     espn_instance=self._espn_instance,
                                      load_game_odds=self.schedule_instance.load_odds,
                                      load_play_by_play=self.schedule_instance.load_plays))
 
@@ -289,7 +303,7 @@ class Week:
         """
         event_content = fetch_espn_data(event_url)
         return Event(event_json=event_content,
-                     espn_instance=self.espn_instance,
+                     espn_instance=self._espn_instance,
                      load_game_odds=self.schedule_instance.load_odds,
                      load_play_by_play=self.schedule_instance.load_plays)
 

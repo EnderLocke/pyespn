@@ -43,7 +43,7 @@ class Drive:
             event_instance (Event): The event this drive belongs to.
         """
         self.drive_json = drive_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.event_instance = event_instance
         self._plays = None
         self._load_drive_data()
@@ -75,13 +75,20 @@ class Drive:
         self.result = self.drive_json.get('result')
         self.result_display = self.drive_json.get('displayResult')
         team_id = get_team_id(self.drive_json.get('team', {}).get('$ref'))
-        self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+        self.team = self._espn_instance.get_team_by_id(team_id=team_id)
         end_team_id = get_team_id(self.drive_json.get('endTeam', {}).get('$ref'))
-        self.end_team = self.espn_instance.get_team_by_id(team_id=end_team_id)
+        self.end_team = self._espn_instance.get_team_by_id(team_id=end_team_id)
         self.plays_ref = self.drive_json.get('plays', {}).get('$ref')
 
         self._load_plays()
 
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+    
     @property
     def plays(self):
         """
@@ -93,7 +100,7 @@ class Drive:
         plays = []
         for play in self.drive_json.get('plays', {}).get('items'):
             plays.append(Play(play_json=play,
-                              espn_instance=self.espn_instance,
+                              espn_instance=self._espn_instance,
                               event_instance=self.event_instance,
                               drive_instance=self))
         self._plays = plays
@@ -159,7 +166,7 @@ class Play:
             drive_instance (Drive or None): The drive this play belongs to (if applicable).
         """
         self.play_json = play_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.event_instance = event_instance
         self.drive_instance = drive_instance
         self._load_play_data()
@@ -169,6 +176,13 @@ class Play:
         Returns a string representation of the Play instance.
         """
         return f"<Play | {self.team.name} | {self.short_text}>"
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _load_play_data(self):
         """
@@ -198,7 +212,7 @@ class Play:
         self.stat_yardage = self.play_json.get('statYardage')
         if 'team' in self.play_json:
             team_id = get_team_id(self.play_json.get('team', {}).get('$ref'))
-            self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+            self.team = self._espn_instance.get_team_by_id(team_id=team_id)
         else:
             self.team = None
         # todo these look like a list of athletes

@@ -42,7 +42,7 @@ class Image:
         """
 
         self.image_json = image_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self._load_image_data()
 
     def __repr__(self) -> str:
@@ -67,6 +67,13 @@ class Image:
             self._name = self.alt
         self.rel = self.image_json.get('rel')
         self.last_updated = self.image_json.get('lastUpdated')
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     @property
     def ref(self):
