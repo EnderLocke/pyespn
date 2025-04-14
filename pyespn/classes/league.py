@@ -123,7 +123,9 @@ class League:
         # todo this seems to always return nothing
         url = f''
 
-    def load_regular_season_schedule(self, season: int):
+    def load_regular_season_schedule(self, season: int,
+                                     load_game_odds: bool = False,
+                                     load_game_play_by_play: bool = False):
         """
         Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
 
@@ -132,8 +134,10 @@ class League:
         """
 
         self._schedules[season] = get_regular_season_schedule_core(league_abbv=self.espn_instance.league_abbv,
-                                                                  espn_instance=self.espn_instance,
-                                                                  season=season)
+                                                                   espn_instance=self.espn_instance,
+                                                                   season=season,
+                                                                   load_odds=load_game_odds,
+                                                                   load_stats=load_game_play_by_play)
 
     def get_event_by_season(self, season, event_id) -> "Event":
         """
