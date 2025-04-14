@@ -15,6 +15,19 @@ class Image:
         alt (str): Alternative text for the image.
         rel (list): A list of roles describing the image (e.g., "default", "profile").
         last_updated (str): The last updated timestamp of the image.
+
+    Methods:
+        __init__(image_json, espn_instance):
+            Initializes the Image object using JSON data and a reference to the ESPN API wrapper.
+
+        __repr__():
+            Returns a string representation of the Image object.
+
+        _load_image_data():
+            Parses and loads image metadata from the provided JSON data.
+
+        load_image() -> bytes:
+            Downloads and returns the binary content of the image from the reference URL.
     """
 
     def __init__(self, image_json, espn_instance):
@@ -30,9 +43,12 @@ class Image:
         self.espn_instance = espn_instance
         self._load_image_data()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Image instance.
+
+        Returns:
+            str: A string showing the image's name.
         """
         return f"<Image | {self.name}>"
 
