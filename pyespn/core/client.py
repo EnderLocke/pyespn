@@ -550,7 +550,8 @@ class PYESPN:
 
     def load_season_schedule(self, season,
                              load_preseason: bool = False,
-                             load_postseason: bool = True,
+                             load_postseason: bool = False,
+                             load_play_in: bool = False,
                              load_game_odds: bool = False,
                              load_game_play_by_play: bool = False):
         """
@@ -562,7 +563,8 @@ class PYESPN:
         Args:
             season (int): The season year for which to load the schedule.
             load_preseason (bool, optional): If True, includes the preseason schedule. Defaults to False.
-            load_postseason (bool, optional): If True, includes the postseason schedule. Defaults to True.
+            load_postseason (bool, optional): If True, includes the postseason schedule. Defaults to False.
+            load_play_in (bool, optional): If True, includes the play in schedule. Defaults to False.
             load_game_odds (bool, optional): If True, loads betting odds for each game. Defaults to False.
             load_game_play_by_play (bool, optional): If True, loads play-by-play data for each game. Defaults to False.
 
@@ -580,3 +582,7 @@ class PYESPN:
             self._league.load_postseason_schedule(season=season,
                                                   load_game_odds=load_game_odds,
                                                   load_game_play_by_play=load_game_play_by_play)
+        if load_play_in:
+            self._league.load_playin_schedule(season=season,
+                                              load_game_odds=load_game_odds,
+                                              load_game_play_by_play=load_game_play_by_play)
