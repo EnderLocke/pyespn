@@ -87,12 +87,12 @@ class Team:
             team_json (dict): The raw team data retrieved from the ESPN API.
 
         """
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.api_info = self.espn_instance.api_mapping
         self._records = {}
         self._stats = {}
         self._coaches = {}
-        self._espn_instance = {}
+        self._betting = {}
         if team_json:
             self.team_json = team_json
         else:
@@ -135,7 +135,7 @@ class Team:
         """
              dict: a dict with season as the key and a list of Record objects
         """
-        return self._espn_instance
+        return self._betting
 
     @property
     def roster(self):
@@ -429,7 +429,7 @@ class Team:
                         futures.append(Record(record_json=bet,
                                               espn_instance=self.espn_instance))
 
-            self._espn_instance[season] = futures
+            self._betting[season] = futures
 
         except API400Error as e:
             print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")

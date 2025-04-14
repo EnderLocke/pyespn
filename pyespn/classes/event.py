@@ -83,7 +83,7 @@ class Event:
         self.event_json = event_json
         self._espn_instance = espn_instance
         self.url_ref = self.event_json.get('$ref')
-        self.event_id = self.event_json.get('id')
+        self._event_id = self.event_json.get('id')
         self.date = self.event_json.get('date')
         self.event_name = self.event_json.get('name')
         self.short_name = self.event_json.get('shortName')
@@ -104,6 +104,13 @@ class Event:
             self.load_betting_odds()
         if load_play_by_play:
             self.load_play_by_play()
+
+    @property
+    def event_id(self):
+        """
+            str: the id for the event
+        """
+        return self._event_id
 
     @property
     def espn_instance(self):
@@ -186,7 +193,7 @@ class Event:
         as `GameOdds` instances.
         """
 
-        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/odds'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/{self._event_id}/odds'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -218,7 +225,7 @@ class Event:
         This method retrieves the competition data for the event and initializes a `Competition`
         object using the JSON data, storing it in the `self.competition` attribute.
         """
-        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/{self._event_id}'
         competition_content = fetch_espn_data(url)
 
         self.competition = Competition(competition_json=competition_content,
@@ -244,7 +251,7 @@ class Event:
         Uses multi-threaded requests to efficiently load all play pages and converts each play
         item into a `Play` object. The complete list is assigned to `self.plays`.
         """
-        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/plays'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/{self._event_id}/plays'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -277,7 +284,7 @@ class Event:
         Retrieves all drives associated with the competition and converts each drive item
         into a `Drive` object. The resulting list is stored in `self.drives`.
         """
-        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self.event_id}/competitions/{self.event_id}/drives'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/{self._event_id}/drives'
         page_content = fetch_espn_data(url)
         pages = page_content.get('pageCount', 0)
 
@@ -331,7 +338,7 @@ class Competition:
         return f"<Competition | {self.start_date}>"
 
     def _load_competition_data(self):
-        self.id = self.competition_json.get("id")
+        self._id = self.competition_json.get("id")
         self.uid = self.competition_json.get("uid")
         self.date = self.competition_json.get("date")
         self.attendance = self.competition_json.get("attendance")
@@ -370,6 +377,13 @@ class Competition:
         self.clock = self.competition_json.get("clock")
         # nba has series
         self.series = self.competition_json.get('series')
+
+    @property
+    def id(self):
+        """
+            str: the id for the event
+        """
+        return self._id
 
     @property
     def espn_instance(self):
