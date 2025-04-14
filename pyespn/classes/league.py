@@ -137,7 +137,7 @@ class League:
                                                                    espn_instance=self.espn_instance,
                                                                    season=season,
                                                                    load_odds=load_game_odds,
-                                                                   load_stats=load_game_play_by_play)
+                                                                   load_pbp=load_game_play_by_play)
 
     def get_event_by_season(self, season, event_id) -> "Event":
         """
