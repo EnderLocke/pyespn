@@ -91,7 +91,7 @@ class Team:
         self.api_info = self.espn_instance.api_mapping
         self._records = {}
         self._stats = {}
-        self.coaches = {}
+        self._coaches = {}
         self._betting = {}
         if team_json:
             self.team_json = team_json
@@ -101,6 +101,13 @@ class Team:
         self._load_team_data()
         self.home_venue = Venue(venue_json=self.venue_json,
                                 espn_instance=self.espn_instance)
+
+    @property
+    def coaches(self):
+        """
+             dict: a dict with season as the key and a list of Player objects
+        """
+        return self._coaches
 
     @property
     def stats(self):
@@ -360,7 +367,7 @@ class Team:
             season (int): The season year for which coaching data should be loaded.
 
         Side Effects:
-            Updates the `self.coaches` dictionary with a list of `Player` instances
+            Updates the `self._coaches` dictionary with a list of `Player` instances
             representing the coaching staff.
 
         Notes:
@@ -379,7 +386,7 @@ class Team:
             coach_records.append(Player(player_json=coach_url_response,
                                         espn_instance=self.espn_instance))
 
-        self.coaches[season] = coach_records
+        self._coaches[season] = coach_records
 
     def load_season_betting_records(self, season):
         """

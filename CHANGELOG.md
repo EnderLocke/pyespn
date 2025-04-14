@@ -18,7 +18,7 @@
   * teams/league are client properties now
   * league has properties betting futures and schedules now
   * added stats/stats_log as properties to athlete/player
-  * team class has betting and rosters/ stats and records as properties now
+  * team class has betting and rosters/ stats/coaches and records as properties now
 * added in pass thru so that you can load odds or play by play when loading schedule
 * 
 
