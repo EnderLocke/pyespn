@@ -32,13 +32,27 @@ class Venue:
         """
 
         self.venue_json = venue_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.venue_id = self.venue_json.get('id')
         self.name = self.venue_json.get('fullName')
         self.address_json = self.venue_json.get('address')
         self.grass = self.venue_json.get('grass')
         self.indoor = self.venue_json.get('indoor')
-        self.images = [Image(image_json=image, espn_instance=self.espn_instance) for image in self.venue_json.get('images', [])]
+        self._images = [Image(image_json=image, espn_instance=self.espn_instance) for image in self.venue_json.get('images', [])]
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
+    @property
+    def images(self):
+        """
+            list[Image]: a list of images for the venue
+        """
+        return self._images
 
     def __repr__(self) -> str:
         """
@@ -59,6 +73,7 @@ class Venue:
         return self.venue_json
 
 
+@validate_json("circuit_json")
 class Circuit:
     """
     A class to represent a Circuit.
@@ -101,8 +116,15 @@ class Circuit:
         This method also calls _load_circuit_data to load the data into attributes.
         """
         self.circuit_json = circuit_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self._load_circuit_data()
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _load_circuit_data(self):
         """
@@ -139,8 +161,17 @@ class Circuit:
         # You can store each diagram in a separate variable if needed, for example:
         self.diagram_urls = [diagram.get('href') for diagram in self.diagrams]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Returns a string representation of the Circuit instance.
         """
         return f"<Circuit | {self.full_name}, {self.city}, {self.country}>"
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Circuit instance to its original JSON dictionary.
+
+        Returns:
+            dict: The circuit's raw JSON data.
+        """
+        return self.circuit_json

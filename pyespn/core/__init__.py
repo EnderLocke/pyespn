@@ -19,4 +19,4 @@ from .betting import (get_year_league_champions_futures_core, get_division_champ
 from .awards import get_awards_core
 from .standings import get_standings_core
 from .leagues import get_league_info_core
-from .schedule import get_weekly_schedule_core, get_regular_season_schedule_core
+from .schedule import get_regular_season_schedule_core

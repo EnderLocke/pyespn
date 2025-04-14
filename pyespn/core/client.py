@@ -1,47 +1,55 @@
 from pyespn.core import *
 from pyespn.data.leagues import LEAGUE_API_MAPPING, NO_TEAMS
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
-from pyespn.data.betting import (BETTING_PROVIDERS, DEFAULT_BETTING_PROVIDERS_MAP,
+from pyespn.data.betting import (BETTING_PROVIDERS,
                                  LEAGUE_DIVISION_FUTURES_MAPPING)
 from pyespn.exceptions import API400Error
 from pyespn.utilities import lookup_league_api_info
+from pyespn.data.version import espn_api_version as v
 from .decorators import *
 from datetime import datetime
 from typing import TYPE_CHECKING, Optional
 import concurrent.futures
 
 if TYPE_CHECKING:
-    from pyespn.classes import Team, Player, Recruit, Event, League, Schedule  # Only imports for type checking
+    from pyespn.classes import Team, Player, Recruit, Event, League  # Only imports for type checking
 
 
 @validate_league
 class PYESPN:
     """
-    A class to interact with ESPN's API for retrieving and manipulating sports data related to leagues, teams, players, betting, schedules, drafts, and more.
+    Main client for interacting with ESPN's sports data API.
+
+    This class serves as the central entry point for retrieving and managing data
+    related to leagues, teams, players, drafts, betting, recruiting, and more.
+    It is designed to support multiple sports leagues by using a unified interface
+    and dynamic loading of league-specific components.
 
     Attributes:
-        LEAGUE_API_MAPPING (dict): A mapping of league abbreviations to corresponding league data.
-        valid_leagues (set): A set of available league abbreviations.
-        untested_leagues (set): A set of untested league abbreviations.
-        all_leagues (set): A set of unavailable league abbreviations.
-        league_abbv (str): The abbreviation of the currently selected sport league.
-        TEAM_ID_MAPPING (dict): A mapping of team IDs to corresponding team data for the current league.
-        BETTING_PROVIDERS (dict): A mapping of available betting providers for the current league.
-        LEAGUE_DIVISION_BETTING_KEYS (list): A list of league division betting keys for the current league.
-        DEFAULT_BETTING_PROVIDER (dict): The default betting provider for the current league.
-        teams (List[Teams]): A list of teams in the current league.
-        standings (dict): a dict of standings for a year
-        recruit_rankings (dict): a dict with season and a list of recruit rankings for a year
-        drafts (dict): a dict with draft data in a list with key as season
-        athletes (dict): a dict of all athletes with season as a key
-        schedules (List[Schedule]): A mapping of regular season schedules for the current season.
-        league (League): A league object containing data for the current league.
+        league_abbv (str): Abbreviation for the selected league (e.g., 'nfl', 'nba').
+        teams (List[Team]): List of all teams in the current league.
+        league (League): League-specific metadata and configuration.
+        team_id_mapping (dict): Mapping of team IDs to team data for the current league.
+        betting_providers (dict): Available betting providers for the current league.
+        league_division_betting_keys (list): Division-level betting market keys.
+        api_mapping (dict): API endpoint configuration for the current league.
+        standings (dict): Season-specific standings data.
+        drafts (dict): Draft results by season.
+        recruit_rankings (dict): Recruiting rankings by season (college leagues only).
+        athletes (dict): Athlete metadata and statistics by season.
+        manufacturers (dict): Manufacturer/team-like objects (e.g., F1 constructors).
+        v (str): ESPN API version.
 
-    Examples:
+    Args:
+        sport_league (str): Abbreviation of the league to interact with (default is `'nfl'`).
+        load_teams (bool): Whether to immediately load team data (default is `True`).
+
+    Example:
         >>> from pyespn import PYESPN
-        >>> nfl_espn = PYESPN(sport_league='nfl')
+        >>> espn = PYESPN('nfl')
+        >>> espn.teams[0].name
+        'Kansas City Chiefs'
     """
-
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
     valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'available'}
     untested_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'untested'}
@@ -55,26 +63,82 @@ class PYESPN:
             sport_league (str): The abbreviation of the league to interact with (default is 'nfl').
             load_teams (bool): Whether to load team data (default is True).
         """
-        self.league_abbv = sport_league.lower()
-        self.TEAM_ID_MAPPING = LEAGUE_TEAMS_MAPPING.get(self.league_abbv)
-        self.BETTING_PROVIDERS = BETTING_PROVIDERS
-        self.LEAGUE_DIVISION_BETTING_KEYS = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self.league_abbv, [])]
-        self.DEFAULT_BETTING_PROVIDER = DEFAULT_BETTING_PROVIDERS_MAP.get(self.league_abbv)
-        self.api_mapping = lookup_league_api_info(league_abbv=self.league_abbv)
-        self.teams = []
+        self._league_abbv = sport_league.lower()
+        self._team_id_mapping = LEAGUE_TEAMS_MAPPING.get(self._league_abbv)
+        self._betting_providers = BETTING_PROVIDERS
+        # todo i think this key can be removed
+        self._league_division_betting_keys = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self._league_abbv, [])]
+        self._api_mapping = lookup_league_api_info(league_abbv=self._league_abbv)
+        self._v = v
+        self._teams = []
         self.standings = {}
-        self.schedules = {}
         self.recruit_rankings = {}
         self.drafts = {}
         self.manufacturers = {}
         self.athletes = {}
-        self.league = None
+        self._league = None
         self._load_league_data()
         if load_teams:
-            if self.api_mapping['sport'] not in NO_TEAMS:
+            if self._api_mapping['sport'] not in NO_TEAMS:
                 self._load_teams_datav2()
             else:
                 self._load_manufacturers()
+
+    @property
+    def teams(self):
+        """
+        list[Team]: a list of teams in the league
+        """
+        return self._teams
+
+    @property
+    def league(self):
+        """
+            League: a league object representing the data for the league
+        """
+        return self._league
+
+    @property
+    def league_abbv(self):
+        """
+            str: league abbreviation for the league client is built for
+        """
+        return self._league_abbv
+
+    @property
+    def v(self):
+        """
+        str: api version for espn api
+        """
+        return self._v
+
+    @property
+    def team_id_mapping(self):
+        """
+        dict: Mapping of team IDs for the current league.
+        """
+        return self._team_id_mapping
+
+    @property
+    def betting_providers(self):
+        """
+        dict: Dictionary of betting providers supported by the API.
+        """
+        return self._betting_providers
+
+    @property
+    def league_division_betting_keys(self):
+        """
+        list: List of keys representing league division betting markets.
+        """
+        return self._league_division_betting_keys
+
+    @property
+    def api_mapping(self):
+        """
+        dict: Mapping of endpoints and API config values for the current league.
+        """
+        return self._api_mapping
 
     def __repr__(self) -> str:
         """
@@ -83,7 +147,7 @@ class PYESPN:
         Returns:
             str: A formatted string with class details
         """
-        return f"<PyESPN | League {self.league_abbv}>"
+        return f"<PyESPN | League {self._league_abbv}>"
 
     def _load_teams_datav2(self):
         """
@@ -91,12 +155,12 @@ class PYESPN:
         """
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = {executor.submit(self.fetch_team_data, team): team for team in self.TEAM_ID_MAPPING}
+            futures = {executor.submit(self.fetch_team_data, team): team for team in self._team_id_mapping}
 
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
                 if result:  # Append only if result is not None
-                    self.teams.append(result)
+                    self._teams.append(result)
 
     def fetch_team_data(self, team):
         """
@@ -110,7 +174,7 @@ class PYESPN:
         """
         try:
             team_cls = get_team_info_core(team_id=team['team_id'],
-                                          league_abbv=self.league_abbv,
+                                          league_abbv=self._league_abbv,
                                           espn_instance=self)
             return team_cls
         except API400Error:
@@ -120,8 +184,8 @@ class PYESPN:
         """
         Loads data for the current league and stores it in the `league` attribute.
         """
-        self.league = get_league_info_core(league_abbv=self.league_abbv,
-                                           espn_instance=self)
+        self._league = get_league_info_core(league_abbv=self._league_abbv,
+                                            espn_instance=self)
 
     def load_seasons_futures(self, season):
         """
@@ -131,16 +195,6 @@ class PYESPN:
             season (str): The season for which to load betting futures.
         """
         self.league.get_all_seasons_futures(season=season)
-
-    def load_regular_season_schedule(self, season: int):
-        """
-        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
-
-        Args:
-            season (int): The season for which to load the schedule.
-        """
-
-        self.schedules[season] = self.get_regular_seasons_schedule(season=season)
 
     def load_year_draft(self, season: int) -> None:
         """
@@ -157,8 +211,7 @@ class PYESPN:
         """
 
         self.drafts[season] = load_draft_data_core(season=season,
-                                                   league_abbv=self.league_abbv,
-                                                   espn_instance=self)
+                                                   league_abbv=self._league_abbv,                                           espn_instance=self)
 
     def get_player_info(self, player_id) -> "Player":
         """
@@ -171,7 +224,7 @@ class PYESPN:
             Player: The player's information in player class
         """
         return get_player_info_core(player_id=player_id,
-                                    league_abbv=self.league_abbv,
+                                    league_abbv=self._league_abbv,
                                     espn_instance=self)
 
     def get_player_ids(self) -> list:
@@ -181,7 +234,7 @@ class PYESPN:
         Returns:
             list: A list of player IDs.
         """
-        return get_player_ids_core(league_abbv=self.league_abbv)
+        return get_player_ids_core(league_abbv=self._league_abbv)
 
     @requires_college_league('recruiting')
     def get_recruiting_rankings(self, season, max_pages=None) -> list["Recruit"]:
@@ -196,16 +249,16 @@ class PYESPN:
             list[Recruit]: The recruiting rankings.
         """
         return get_recruiting_rankings_core(season=season,
-                                            league_abbv=self.league_abbv,
+                                            league_abbv=self._league_abbv,
                                             espn_instance=self,
                                             max_pages=max_pages)
 
     def load_year_recruiting_rankings(self, year: int):
         """
-        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+        Loads the regular season recruiting rankings for a given season and stores it in the `recruiting rankings` attribute.
 
         Args:
-            year (int): The season for which to load the schedule.
+            year (int): The season for which to load the recruiting rankings.
         """
 
         self.recruit_rankings = {year: self.get_recruiting_rankings(season=year)}
@@ -215,13 +268,13 @@ class PYESPN:
         Retrieves detailed information about a specific game.
 
         Args:
-            event_id (str): The ID of the game.
+            event_id (str or int): The ID of the game.
 
         Returns:
             Event: The game's information.
         """
         return get_game_info_core(event_id=event_id,
-                                  league_abbv=self.league_abbv,
+                                  league_abbv=self._league_abbv,
                                   espn_instnace=self)
 
     def get_season_team_stats(self, season) -> dict:
@@ -229,13 +282,13 @@ class PYESPN:
         Retrieves statistics for teams during a specific season.
 
         Args:
-            season (str): The season for which to retrieve stats.
+            season (str or int): The season for which to retrieve stats.
 
         Returns:
             dict: The season's team statistics.
         """
         return get_season_team_stats_core(season=season,
-                                          league_abbv=self.league_abbv)
+                                          league_abbv=self._league_abbv)
 
     @requires_pro_league('draft')
     def get_draft_pick_data(self, season, pick_round, pick) -> dict:
@@ -253,7 +306,7 @@ class PYESPN:
         return get_draft_pick_data_core(season=season,
                                         pick_round=pick_round,
                                         pick=pick,
-                                        league_abbv=self.league_abbv)
+                                        league_abbv=self._league_abbv)
 
     def get_players_historical_stats(self, player_id) -> dict:
         """
@@ -267,7 +320,7 @@ class PYESPN:
         """
         return get_players_historical_stats_core(player_id=player_id,
                                                  espn_instance=self,
-                                                 league_abbv=self.league_abbv)
+                                                 league_abbv=self._league_abbv)
 
     def get_awards(self, season) -> list[dict]:
         """
@@ -280,7 +333,7 @@ class PYESPN:
             list: The awards for the specified season.
         """
         return get_awards_core(season=season,
-                               league_abbv=self.league_abbv)
+                               league_abbv=self._league_abbv)
 
     @requires_standings_available
     def load_standings(self, season) -> None:
@@ -294,22 +347,14 @@ class PYESPN:
             None
         """
         self.standings[season] = get_standings_core(season=season,
-                                                    league_abbv=self.league_abbv,
+                                                    league_abbv=self._league_abbv,
                                                     espn_instance=self)
 
-    def get_regular_seasons_schedule(self, season: int) -> list["Schedule"]:
-        """
-        Retrieves the regular season schedule for a given season.
+    def load_seasons_box_scores(self, season):
 
-        Args:
-            season (int): The season for which to retrieve the schedule.
-
-        Returns:
-            list[Schedule]: The regular season schedule for the specified season.
-        """
-        return get_regular_season_schedule_core(league_abbv=self.league_abbv,
-                                                espn_instance=self,
-                                                season=season)
+        self.load_season_rosters(season=season)
+        for team in self._teams:
+            team.load_season_roster_box_score(season=season)
 
     def get_team_by_id(self, team_id) -> "Team":
         """
@@ -321,7 +366,7 @@ class PYESPN:
         Returns:
             Team: The matching Team object, or None if not found.
         """
-        return next((team for team in self.teams if str(team.team_id) == str(team_id)), None)
+        return next((team for team in self._teams if str(team.team_id) == str(team_id)), None)
 
     def load_season_rosters(self, season) -> None:
         """
@@ -345,7 +390,7 @@ class PYESPN:
 
         """
 
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_roster(season=season)
 
     def load_season_team_stats(self, season) -> None:
@@ -359,7 +404,7 @@ class PYESPN:
         Args:
             season (int): The season year for which team stats should be retrieved.
         """
-        for team in self.teams:
+        for team in self._teams:
             team.load_team_season_stats(season=season)
 
     def load_season_league_stat_leaders(self, season) -> None:
@@ -392,7 +437,7 @@ class PYESPN:
             season (str or int): The season for which the betting records need to be loaded.
                                 This can be a string (e.g., "2023") or an integer (e.g., 2023).
         """
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_betting_records(season=season)
 
     def load_season_teams_results(self, season) -> None:
@@ -406,7 +451,7 @@ class PYESPN:
         Args:
             season (int): The season year for which game results should be retrieved.
         """
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_results(season=season)
 
     def load_season_coaches(self, season) -> None:
@@ -420,7 +465,7 @@ class PYESPN:
         Args:
             season (int): The season year for which coaching data should be retrieved.
         """
-        for team in self.teams:
+        for team in self._teams:
             team.load_season_coaches(season=season)
 
     def load_athletes(self, season) -> None:
@@ -441,7 +486,7 @@ class PYESPN:
             - Stores the result in `self.athletes` with the season as the key.
         """
         self.athletes[season] = load_athletes_core(season=season,
-                                                   league_abbv=self.league_abbv,
+                                                   league_abbv=self._league_abbv,
                                                    espn_instance=self)
 
     def _load_manufacturers(self, season:str = None) -> None:
@@ -469,13 +514,13 @@ class PYESPN:
 
         self.manufacturers[season] = get_manufacturers_core(season=season,
                                                             espn_instance=self,
-                                                            league_abbv=self.league_abbv)
+                                                            league_abbv=self._league_abbv)
 
     def check_teams_for_player_by_season(self, season, player_id) -> Optional["Player"]:
         """
         Searches through all teams for a specific player by season and player ID.
 
-        Iterates over each team in `self.teams` and checks if the player with the given
+        Iterates over each team in `self._teams` and checks if the player with the given
         `player_id` was on the roster during the specified `season`. Returns the first
         matching athlete found.
 
@@ -487,7 +532,7 @@ class PYESPN:
             Player or None: The matching player object if found; otherwise, None.
         """
         athlete = None
-        for team in self.teams:
+        for team in self._teams:
             athlete = team.get_player_by_season_id(season=season,
                                                    player_id=player_id)
         return athlete

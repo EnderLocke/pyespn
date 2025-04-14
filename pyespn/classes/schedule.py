@@ -1,6 +1,5 @@
-from pyespn.data.version import espn_api_version as v
 from pyespn.utilities import (fetch_espn_data, get_schedule_type,
-                              get_an_id, lookup_league_api_info)
+                              get_an_id)
 from pyespn.exceptions import ScheduleTypeUnknownError
 from pyespn.classes import Event
 from datetime import datetime
@@ -31,7 +30,9 @@ class Schedule:
             each week and paginating through all available event pages.
     """
 
-    def __init__(self, espn_instance, schedule_list: list):
+    def __init__(self, espn_instance, schedule_list: list,
+                 load_odds: bool = False,
+                 load_plays: bool = False):
         """
         Initializes the Schedule instance.
 
@@ -40,11 +41,14 @@ class Schedule:
             schedule_list (list[str]): A list of URLs pointing to weekly or daily schedule endpoints.
         """
         self.schedule_list = schedule_list
-        self.espn_instance = espn_instance
-        self.league_api = lookup_league_api_info(self.espn_instance.league_abbv)
+        self._espn_instance = espn_instance
+        self.load_odds = load_odds
+        self.load_plays = load_plays
+        self.api_info = self._espn_instance.api_mapping
+
         self.season = get_an_id(self.schedule_list[0], 'seasons')
         self.schedule_type = None
-        self.weeks = []
+        self._weeks = []
 
         schedule_type_id = get_schedule_type(self.schedule_list[0])
 
@@ -55,12 +59,26 @@ class Schedule:
         elif schedule_type_id == 3:
             self.schedule_type = 'post'
 
-        if self.league_api.get('schedule') == 'weekly':
+        if self.api_info.get('schedule') == 'weekly':
             self._set_schedule_weekly_data()
-        elif self.league_api.get('schedule') == 'daily':
+        elif self.api_info.get('schedule') == 'daily':
             self._set_schedule_daily_data()
         else:
-            raise ScheduleTypeUnknownError(league_abbv=self.espn_instance.league_abbv)
+            raise ScheduleTypeUnknownError(league_abbv=self._espn_instance.league_abbv)
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
+    @property
+    def weeks(self):
+        """
+            list[Week]: a list of Week objects
+        """
+        return self._weeks
 
     def __repr__(self) -> str:
         """
@@ -87,7 +105,7 @@ class Schedule:
             end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
-            week_events_url = f'http://sports.core.api.espn.com/{v}/sports/{self.league_api.get("sport")}/leagues/{self.league_api.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
+            week_events_url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
             week_content = fetch_espn_data(week_events_url)
             week_pages = week_content.get('pageCount')
             week_events = []
@@ -99,11 +117,11 @@ class Schedule:
                     week_events.append(event.get('$ref'))
                     pass
 
-            self.weeks.append(Week(espn_instance=self.espn_instance,
-                                   week_list=week_events,
-                                   week_number=week_number,
-                                   start_date=start_date,
-                                   end_date=end_date))
+            self._weeks.append(Week(espn_instance=self._espn_instance,
+                                    week_list=week_events,
+                                    week_number=week_number,
+                                    start_date=start_date,
+                                    end_date=end_date))
 
     def _set_schedule_weekly_data(self) -> None:
         """
@@ -127,12 +145,12 @@ class Schedule:
                 event_urls = []
                 for event in this_week_content.get('items', []):
                     event_urls.append(event.get('$ref'))
-
-            self.weeks.append(Week(espn_instance=self.espn_instance,
-                                   week_list=event_urls,
-                                   week_number=week_number,
-                                   start_date=start_date,
-                                   end_date=end_date))
+                if event_urls:
+                    self._weeks.append(Week(espn_instance=self._espn_instance,
+                                            week_list=event_urls,
+                                            week_number=week_number,
+                                            start_date=start_date,
+                                            end_date=end_date))
 
     def get_events(self, week_num: int) -> list["Event"]:
         """
@@ -147,12 +165,25 @@ class Schedule:
         Raises:
             StopIteration: If no Week instance is found for the specified week number.
         """
-        week = next((week for week in self.weeks if str(week.week_number) == str(week_num)), None)
+        week = next((week for week in self._weeks if str(week.week_number) == str(week_num)), None)
 
         if week is None:
             raise ValueError(f"No events found for week number {week_num}")
 
         return week.events
+
+    def to_dict(self) -> list:
+        """
+        Converts the Schedule instance to its original list of JSON dictionaries.
+
+        Returns:
+            list: A list of dictionaries, each representing a scheduled event or game.
+
+        Note:
+            This method returns the raw schedule data as a list of dictionaries,
+            suitable for serialization or further processing.
+        """
+        return self.schedule_list
 
 
 class Week:
@@ -190,19 +221,35 @@ class Week:
         Initializes a Week instance.
 
         Args:
-            espn_instance (PyESPN): The ESPN API instance.
-            week_list (list[str]): A list of event URLs or event data references.
-            week_number (int): The numerical representation of the week.
+            espn_instance (PyESPN): The primary ESPN API wrapper instance.
+            week_list (list[str]): A list of event reference URLs (or identifiers) for games in the week.
+            week_number (int): The numerical representation of the week (e.g., 1 for Week 1).
+            start_date (str or datetime): The start date of the week.
+            end_date (str or datetime): The end date of the week.
         """
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.week_list = week_list
-        self.events = []
+        self._events = []
         self.week_number = None
         self.start_date = start_date
         self.end_date = end_date
         self.week_number = week_number
 
         self._set_week_datav2()
+        
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+    
+    @property
+    def events(self):
+        """
+            list[Event]: a list of Event objects
+        """
+        return self._events
 
     def __repr__(self) -> str:
         """
@@ -219,8 +266,10 @@ class Week:
         """
         for event in self.week_list:
             event_content = fetch_espn_data(event)
-            self.events.append(Event(event_json=event_content,
-                                     espn_instance=self.espn_instance))
+            self._events.append(Event(event_json=event_content,
+                                      espn_instance=self._espn_instance,
+                                      load_game_odds=self._espn_instance.league.load_game_odds,
+                                      load_play_by_play=self._espn_instance.league.load_game_play_by_play))
 
     def _set_week_datav2(self) -> None:
         """
@@ -234,7 +283,7 @@ class Week:
 
             for future in concurrent.futures.as_completed(futures):
                 try:
-                    self.events.append(future.result())  # Append event when future is done
+                    self._events.append(future.result())  # Append event when future is done
                 except Exception as e:
                     print(f"Error fetching event: {e}")  # Handle failed API calls gracefully
 
@@ -249,7 +298,10 @@ class Week:
             Event: An Event instance.
         """
         event_content = fetch_espn_data(event_url)
-        return Event(event_json=event_content, espn_instance=self.espn_instance)
+        return Event(event_json=event_content,
+                     espn_instance=self._espn_instance,
+                     load_game_odds=self._espn_instance.league.load_game_odds,
+                     load_play_by_play=self._espn_instance.league.load_game_play_by_play)
 
     def get_events(self) -> list["Event"]:
         """
@@ -258,4 +310,4 @@ class Week:
         Returns:
             list[Event]: A list of Event instances for the week.
         """
-        return self.events
+        return self._events

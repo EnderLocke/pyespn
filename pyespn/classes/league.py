@@ -1,10 +1,14 @@
 from pyespn.core.decorators import validate_json
-from pyespn.utilities import lookup_league_api_info, fetch_espn_data
-from pyespn.data.version import espn_api_version as v
+from pyespn.utilities import fetch_espn_data
 from pyespn.exceptions import API400Error
+from pyespn.core.schedule import get_regular_season_schedule_core
 from pyespn.classes.betting import Betting
 from pyespn.classes.stat import LeaderCategory
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pyespn.classes import Event
 
 
 @validate_json("league_json")
@@ -61,9 +65,13 @@ class League:
             league_json (dict): The raw JSON data representing the league.
         """
         self.league_json = league_json
-        self.espn_instance = espn_instance
-        self.league_leaders = {}
-        self.betting_futures = {}
+        self._espn_instance = espn_instance
+        self.api_info = self._espn_instance.api_mapping
+        self._league_leaders = {}
+        self._schedules = {}
+        self._betting_futures = {}
+        self.load_game_odds = False
+        self.load_game_play_by_play = False
         self._set_league_json()
 
     def __repr__(self) -> str:
@@ -99,9 +107,89 @@ class League:
         self.draft = self.league_json.get("draft")
         self.links = self.league_json.get("links", [])
 
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+    
+    @property
+    def league_leaders(self):
+        """
+            dict: dict with key of season with list of Categories
+        """
+        return self._league_leaders
+
+    @property
+    def schedules(self):
+        """
+            dict: a dict of seasons with a key for season with a Schedule object with Week objects  
+        """
+        return self._schedules
+
+    @property
+    def betting_futures(self):
+        """
+            dict: a dict of seasons with a key for season with a Betting objects
+        """
+        return self._betting_futures
+
     def load_season_free_agents(self, season):
         # todo this seems to always return nothing
         url = f''
+
+    def load_regular_season_schedule(self, season,
+                                     load_game_odds: bool = False,
+                                     load_game_play_by_play: bool = False):
+        """
+        Loads and stores the regular season schedule for the specified season.
+
+        This method fetches the full regular season schedule for the league associated with the current
+        ESPN instance and stores it in the internal `_schedules` dictionary under the provided season key.
+
+        Args:
+            season (int or str): The season year for which to load the schedule (e.g., 2023).
+            load_game_odds (bool, optional): Whether to include betting odds for each game. Defaults to False.
+            load_game_play_by_play (bool, optional): Whether to include play-by-play data for each game. Defaults to False.
+
+        Side Effects:
+            - Updates the `_schedules` dictionary with a `Schedule` object containing all weeks and events
+              for the specified season.
+
+        Example:
+            >>> espn.load_regular_season_schedule(2024, load_game_odds=True)
+            >>> schedule = espn._schedules[2024]
+            >>> print(schedule.weeks)
+        """
+        self.load_game_odds = load_game_odds
+        self.load_game_play_by_play = load_game_play_by_play
+
+        self._schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
+                                                                   espn_instance=self._espn_instance,
+                                                                   season=season,
+                                                                   load_odds=self.load_game_odds,
+                                                                   load_pbp=self.load_game_play_by_play)
+
+    def get_event_by_season(self, season, event_id) -> "Event":
+        """
+        Finds and returns the Team object that matches the given team_id.
+
+        Args:
+            season (int or str): the season to pull the athlete from
+            event_id (int or str): The ID of the event to find.
+
+        Returns:
+            Event: The matching Event object, or None if not found.
+        """
+        this_event = None
+        for week in self._schedules.get(season, []).weeks:
+            for event in week.events:
+                if str(event.event_id) == str(event_id):
+                    this_event = event
+
+        return this_event
 
     def get_all_seasons_futures(self, season):
         """
@@ -111,7 +199,7 @@ class League:
         It handles pagination and concurrent data fetching using thread pools for improved performance.
         Each betting item is processed individually through `_process_bet` and collected into a list.
 
-        The processed futures are stored in `self.betting_futures` under the specified season key.
+        The processed futures are stored in `self._betting_futures` under the specified season key.
 
         Args:
             season (int or str): The season year to fetch futures data for.
@@ -120,13 +208,12 @@ class League:
             API400Error: If the ESPN API returns a 400-level error during data fetching, an error message
                          will be printed including the season, team name, and team ID.
         """
-        for team in self.espn_instance.teams:
+        for team in self._espn_instance.teams:
             if season not in team.roster:
                 team.load_season_roster(season=season)
 
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
         betting_futures = []
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/futures'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/futures'
 
         try:
             season_content = fetch_espn_data(url)
@@ -151,7 +238,7 @@ class League:
                         for bet_future in as_completed(bet_futures):
                             betting_futures.append(bet_future.result())
 
-            self.betting_futures[season] = betting_futures
+            self._betting_futures[season] = betting_futures
 
         except API400Error as e:
             print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")
@@ -166,7 +253,7 @@ class League:
         Returns:
             Betting: The Betting object corresponding to the provided data.
         """
-        return Betting(betting_json=bet, espn_instance=self.espn_instance, season=season)
+        return Betting(betting_json=bet, espn_instance=self._espn_instance, season=season)
 
     def fetch_leader_category(self, category, season) -> LeaderCategory:
         """
@@ -180,7 +267,7 @@ class League:
             LeaderCategory: The LeaderCategory object created for this category.
         """
         return LeaderCategory(leader_cat_json=category,
-                              espn_instance=self.espn_instance,
+                              espn_instance=self._espn_instance,
                               season=season)
 
     def load_season_league_leaders(self, season):
@@ -191,12 +278,11 @@ class League:
             season (str): The season for which the league leaders are fetched.
         """
 
-        for team in self.espn_instance.teams:
+        for team in self._espn_instance.teams:
             if season not in team.roster:
                 team.load_season_roster(season=season)
 
-        api_info = lookup_league_api_info(league_abbv=self.espn_instance.league_abbv)
-        url = f'http://sports.core.api.espn.com/{v}/sports/{api_info["sport"]}/leagues/{api_info["league"]}/seasons/{season}/types/2/leaders'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/types/2/leaders'
 
         try:
             leaders_content = fetch_espn_data(url)
@@ -217,7 +303,16 @@ class League:
                     except Exception as e:
                         print(f"Error fetching leader category: {e}")
 
-            self.league_leaders[season] = leaders
+            self._league_leaders[season] = leaders
 
         except API400Error as e:
             print(f"Failed to fetch league leaders for season {season}: {e}")
+
+    def to_dict(self) -> dict:
+        """
+        Converts the League instance to its original JSON dictionary.
+
+        Returns:
+            dict: The league's raw JSON data.
+        """
+        return self.league_json

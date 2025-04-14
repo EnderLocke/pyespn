@@ -1,7 +1,9 @@
 from pyespn.utilities import get_team_id, fetch_espn_data
 from pyespn.classes import Player
+from pyespn.core.decorators import validate_json
 
 
+@validate_json("pick_json")
 class DraftPick:
     """
     Represents a draft pick in a sports league draft.
@@ -30,7 +32,7 @@ class DraftPick:
         """
 
         self.pick_json = pick_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.athlete = None
         self.team = None
         self._get_pick_data()
@@ -53,9 +55,24 @@ class DraftPick:
         self.overall_number = self.pick_json.get('overall')
         team_id = get_team_id(self.pick_json.get('team', {}).get('$ref'))
         athlete_url = self.pick_json.get('athlete', {}).get('$ref')
-        self.team = self.espn_instance.get_team_by_id(team_id=team_id)
+        self.team = self._espn_instance.get_team_by_id(team_id=team_id)
 
         athlete_content = fetch_espn_data(athlete_url)
 
         self.athlete = Player(player_json=athlete_content,
                               espn_instance=self.espn_instance)
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
+    def to_dict(self) -> dict:
+        """
+        Converts the DraftPick instance to its original JSON dictionary.
+
+        Returns:
+            dict: The draft picks's raw JSON data.
+        """
+        return self.pick_json
