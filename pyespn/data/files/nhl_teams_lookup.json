@@ -1,0 +1,304 @@
+{
+  "teams": [
+    {
+      "team_name": "Bruins",
+      "team_city": "Boston",
+      "team_id": 1,
+      "team_abbv": "BOS"
+    },
+    {
+      "team_name": "Sabres",
+      "team_city": "Buffalo",
+      "team_id": 2,
+      "team_abbv": "BUF"
+    },
+    {
+      "team_name": "Flames",
+      "team_city": "Calgary",
+      "team_id": 3,
+      "team_abbv": "CGY"
+    },
+    {
+      "team_name": "Blackhawks",
+      "team_city": "Chicago",
+      "team_id": 4,
+      "team_abbv": "CHI"
+    },
+    {
+      "team_name": "Red Wings",
+      "team_city": "Detroit",
+      "team_id": 5,
+      "team_abbv": "DET"
+    },
+    {
+      "team_name": "Oilers",
+      "team_city": "Edmonton",
+      "team_id": 6,
+      "team_abbv": "EDM"
+    },
+    {
+      "team_name": "Hurricanes",
+      "team_city": "Carolina",
+      "team_id": 7,
+      "team_abbv": "CAR"
+    },
+    {
+      "team_name": "Kings",
+      "team_city": "Los Angeles",
+      "team_id": 8,
+      "team_abbv": "LA"
+    },
+    {
+      "team_name": "Stars",
+      "team_city": "Dallas",
+      "team_id": 9,
+      "team_abbv": "DAL"
+    },
+    {
+      "team_name": "Canadiens",
+      "team_city": "Montreal",
+      "team_id": 10,
+      "team_abbv": "MTL"
+    },
+    {
+      "team_name": "Devils",
+      "team_city": "New Jersey",
+      "team_id": 11,
+      "team_abbv": "NJ"
+    },
+    {
+      "team_name": "Islanders",
+      "team_city": "New York",
+      "team_id": 12,
+      "team_abbv": "NYI"
+    },
+    {
+      "team_name": "Rangers",
+      "team_city": "New York",
+      "team_id": 13,
+      "team_abbv": "NYR"
+    },
+    {
+      "team_name": "Senators",
+      "team_city": "Ottawa",
+      "team_id": 14,
+      "team_abbv": "OTT"
+    },
+    {
+      "team_name": "Flyers",
+      "team_city": "Philadelphia",
+      "team_id": 15,
+      "team_abbv": "PHI"
+    },
+    {
+      "team_name": "Penguins",
+      "team_city": "Pittsburgh",
+      "team_id": 16,
+      "team_abbv": "PIT"
+    },
+    {
+      "team_name": "Avalanche",
+      "team_city": "Colorado",
+      "team_id": 17,
+      "team_abbv": "COL"
+    },
+    {
+      "team_name": "Sharks",
+      "team_city": "San Jose",
+      "team_id": 18,
+      "team_abbv": "SJ"
+    },
+    {
+      "team_name": "Blues",
+      "team_city": "St. Louis",
+      "team_id": 19,
+      "team_abbv": "STL"
+    },
+    {
+      "team_name": "Lightning",
+      "team_city": "Tampa Bay",
+      "team_id": 20,
+      "team_abbv": "TB"
+    },
+    {
+      "team_name": "Maple Leafs",
+      "team_city": "Toronto",
+      "team_id": 21,
+      "team_abbv": "TOR"
+    },
+    {
+      "team_name": "Canucks",
+      "team_city": "Vancouver",
+      "team_id": 22,
+      "team_abbv": "VAN"
+    },
+    {
+      "team_name": "Capitals",
+      "team_city": "Washington",
+      "team_id": 23,
+      "team_abbv": "WSH"
+    },
+    {
+      "team_name": "Ducks",
+      "team_city": "Anaheim",
+      "team_id": 25,
+      "team_abbv": "ANA"
+    },
+    {
+      "team_name": "Panthers",
+      "team_city": "Florida",
+      "team_id": 26,
+      "team_abbv": "FLA"
+    },
+    {
+      "team_name": "Bruins",
+      "team_city": "Boston",
+      "team_id": 1,
+      "team_abbv": "BOS"
+    },
+    {
+      "team_name": "Sabres",
+      "team_city": "Buffalo",
+      "team_id": 2,
+      "team_abbv": "BUF"
+    },
+    {
+      "team_name": "Flames",
+      "team_city": "Calgary",
+      "team_id": 3,
+      "team_abbv": "CGY"
+    },
+    {
+      "team_name": "Blackhawks",
+      "team_city": "Chicago",
+      "team_id": 4,
+      "team_abbv": "CHI"
+    },
+    {
+      "team_name": "Red Wings",
+      "team_city": "Detroit",
+      "team_id": 5,
+      "team_abbv": "DET"
+    },
+    {
+      "team_name": "Oilers",
+      "team_city": "Edmonton",
+      "team_id": 6,
+      "team_abbv": "EDM"
+    },
+    {
+      "team_name": "Hurricanes",
+      "team_city": "Carolina",
+      "team_id": 7,
+      "team_abbv": "CAR"
+    },
+    {
+      "team_name": "Kings",
+      "team_city": "Los Angeles",
+      "team_id": 8,
+      "team_abbv": "LA"
+    },
+    {
+      "team_name": "Stars",
+      "team_city": "Dallas",
+      "team_id": 9,
+      "team_abbv": "DAL"
+    },
+    {
+      "team_name": "Canadiens",
+      "team_city": "Montreal",
+      "team_id": 10,
+      "team_abbv": "MTL"
+    },
+    {
+      "team_name": "Devils",
+      "team_city": "New Jersey",
+      "team_id": 11,
+      "team_abbv": "NJ"
+    },
+    {
+      "team_name": "Islanders",
+      "team_city": "New York",
+      "team_id": 12,
+      "team_abbv": "NYI"
+    },
+    {
+      "team_name": "Rangers",
+      "team_city": "New York",
+      "team_id": 13,
+      "team_abbv": "NYR"
+    },
+    {
+      "team_name": "Senators",
+      "team_city": "Ottawa",
+      "team_id": 14,
+      "team_abbv": "OTT"
+    },
+    {
+      "team_name": "Flyers",
+      "team_city": "Philadelphia",
+      "team_id": 15,
+      "team_abbv": "PHI"
+    },
+    {
+      "team_name": "Penguins",
+      "team_city": "Pittsburgh",
+      "team_id": 16,
+      "team_abbv": "PIT"
+    },
+    {
+      "team_name": "Avalanche",
+      "team_city": "Colorado",
+      "team_id": 17,
+      "team_abbv": "COL"
+    },
+    {
+      "team_name": "Sharks",
+      "team_city": "San Jose",
+      "team_id": 18,
+      "team_abbv": "SJ"
+    },
+    {
+      "team_name": "Blues",
+      "team_city": "St. Louis",
+      "team_id": 19,
+      "team_abbv": "STL"
+    },
+    {
+      "team_name": "Lightning",
+      "team_city": "Tampa Bay",
+      "team_id": 20,
+      "team_abbv": "TB"
+    },
+    {
+      "team_name": "Maple Leafs",
+      "team_city": "Toronto",
+      "team_id": 21,
+      "team_abbv": "TOR"
+    },
+    {
+      "team_name": "Canucks",
+      "team_city": "Vancouver",
+      "team_id": 22,
+      "team_abbv": "VAN"
+    },
+    {
+      "team_name": "Capitals",
+      "team_city": "Washington",
+      "team_id": 23,
+      "team_abbv": "WSH"
+    },
+    {
+      "team_name": "Ducks",
+      "team_city": "Anaheim",
+      "team_id": 25,
+      "team_abbv": "ANA"
+    },
+    {
+      "team_name": "Panthers",
+      "team_city": "Florida",
+      "team_id": 26,
+      "team_abbv": "FLA"
+    }
+  ]
+}

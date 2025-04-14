@@ -377,7 +377,7 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'nhl',
         'sport': 'hockey',
         'league': 'nhl',
-        'status': 'unavailable',
+        'status': 'available',
         'schedule': 'daily'
     },
     {

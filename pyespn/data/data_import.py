@@ -58,3 +58,6 @@ indy_teams_data = open_json(team_lookup_file)
 
 team_lookup_file = 'files/epl_teams_ints.json'
 epl_teams_data = open_json(team_lookup_file)
+
+team_lookup_file = 'files/nhl_teams_lookup.json'
+nhl_teams_data = open_json(team_lookup_file)
