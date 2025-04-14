@@ -553,7 +553,22 @@ class PYESPN:
                              load_postseason: bool = True,
                              load_game_odds: bool = False,
                              load_game_play_by_play: bool = False):
+        """
+        Loads the schedule for a given season, including optional preseason and postseason games.
 
+        This method loads the regular season schedule by default. It can also include
+        preseason and postseason schedules, and optionally load game odds and play-by-play data.
+
+        Args:
+            season (int): The season year for which to load the schedule.
+            load_preseason (bool, optional): If True, includes the preseason schedule. Defaults to False.
+            load_postseason (bool, optional): If True, includes the postseason schedule. Defaults to True.
+            load_game_odds (bool, optional): If True, loads betting odds for each game. Defaults to False.
+            load_game_play_by_play (bool, optional): If True, loads play-by-play data for each game. Defaults to False.
+
+        Returns:
+            None
+        """
         self._league.load_regular_season_schedule(season=season,
                                                   load_game_odds=load_game_odds,
                                                   load_game_play_by_play=load_game_play_by_play)
