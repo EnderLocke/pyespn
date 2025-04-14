@@ -92,11 +92,11 @@ class Event:
         self.event_venue = Venue(venue_json=self.venue_json,
                                  espn_instance=self.espn_instance)
         self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
-        self.home_team = None
-        self.away_team = None
-        self.odds = None
-        self.drives = None
-        self.plays = None
+        self._home_team = None
+        self._away_team = None
+        self._odds = None
+        self._drives = None
+        self._plays = None
         self.api_info = self.espn_instance.api_mapping
         self._load_teams()
         self._load_competition_data()
@@ -104,6 +104,41 @@ class Event:
             self.load_betting_odds()
         if load_play_by_play:
             self.load_play_by_play()
+
+    @property
+    def drives(self):
+        """
+            list[Drive]: a list of drives for the given event
+        """
+        return self._drives
+
+    @property
+    def plays(self):
+        """
+            list[Play]: a list of drives for the given event
+        """
+        return self._plays
+
+    @property
+    def odds(self):
+        """
+            list[Betting]: a list of Odds for the given game
+        """
+        return self._odds
+
+    @property
+    def away_team(self):
+        """
+            Team: the away team as a Team object
+        """
+        return self._away_team
+
+    @property
+    def home_team(self):
+        """
+            Team: the home team as a Team object
+        """
+        return self._home_team
 
     def _load_teams(self):
         """
@@ -118,13 +153,13 @@ class Event:
         team2_id = team2.get('id')
 
         if team1.get('homeAway') == 'home':
-            self.home_team = self.espn_instance.get_team_by_id(team1_id)
+            self._home_team = self.espn_instance.get_team_by_id(team1_id)
 
-            self.away_team = self.espn_instance.get_team_by_id(team2_id)
+            self._away_team = self.espn_instance.get_team_by_id(team2_id)
         else:
-            self.home_team = self.espn_instance.get_team_by_id(team2_id)
+            self._home_team = self.espn_instance.get_team_by_id(team2_id)
 
-            self.away_team = self.espn_instance.get_team_by_id(team1_id)
+            self._away_team = self.espn_instance.get_team_by_id(team1_id)
 
     def __repr__(self) -> str:
         """
@@ -167,7 +202,7 @@ class Event:
                 except Exception as e:
                     print(f"Error fetching betting odds page: {e}")
 
-        self.odds = event_odds
+        self._odds = event_odds
 
     def _load_competition_data(self):
         """
@@ -226,7 +261,7 @@ class Event:
                 except Exception as e:
                     print(f"Error fetching plays page: {e}")
 
-        self.plays = plays
+        self._plays = plays
 
     def _load_drive_data(self):
         """
@@ -258,7 +293,7 @@ class Event:
                 except Exception as e:
                     print(f"Error fetching drive data page: {e}")
 
-        self.drives = drives
+        self._drives = drives
 
     def to_dict(self) -> dict:
         """

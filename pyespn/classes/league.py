@@ -67,9 +67,9 @@ class League:
         self.league_json = league_json
         self.espn_instance = espn_instance
         self.api_info = self.espn_instance.api_mapping
-        self.league_leaders = {}
-        self.schedules = {}
-        self.betting_futures = {}
+        self._league_leaders = {}
+        self._schedules = {}
+        self._betting_futures = {}
         self._set_league_json()
 
     def __repr__(self) -> str:
@@ -105,21 +105,60 @@ class League:
         self.draft = self.league_json.get("draft")
         self.links = self.league_json.get("links", [])
 
+    @property
+    def league_leaders(self):
+        """
+            dict: dict with key of season with list of Categories
+        """
+        return self._league_leaders
+
+    @property
+    def schedules(self):
+        """
+            dict: a dict of seasons with a key for season with a Schedule object with Week objects  
+        """
+        return self._schedules
+
+    @property
+    def betting_futures(self):
+        """
+            dict: a dict of seasons with a key for season with a Betting objects
+        """
+        return self._betting_futures
+
     def load_season_free_agents(self, season):
         # todo this seems to always return nothing
         url = f''
 
-    def load_regular_season_schedule(self, season: int):
+    def load_regular_season_schedule(self, season,
+                                     load_game_odds: bool = False,
+                                     load_game_play_by_play: bool = False):
         """
-        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+        Loads and stores the regular season schedule for the specified season.
+
+        This method fetches the full regular season schedule for the league associated with the current
+        ESPN instance and stores it in the internal `_schedules` dictionary under the provided season key.
 
         Args:
-            season (int): The season for which to load the schedule.
+            season (int or str): The season year for which to load the schedule (e.g., 2023).
+            load_game_odds (bool, optional): Whether to include betting odds for each game. Defaults to False.
+            load_game_play_by_play (bool, optional): Whether to include play-by-play data for each game. Defaults to False.
+
+        Side Effects:
+            - Updates the `_schedules` dictionary with a `Schedule` object containing all weeks and events
+              for the specified season.
+
+        Example:
+            >>> espn.load_regular_season_schedule(2024, load_game_odds=True)
+            >>> schedule = espn._schedules[2024]
+            >>> print(schedule.weeks)
         """
 
-        self.schedules[season] = get_regular_season_schedule_core(league_abbv=self.espn_instance.league_abbv,
-                                                                  espn_instance=self.espn_instance,
-                                                                  season=season)
+        self._schedules[season] = get_regular_season_schedule_core(league_abbv=self.espn_instance.league_abbv,
+                                                                   espn_instance=self.espn_instance,
+                                                                   season=season,
+                                                                   load_odds=load_game_odds,
+                                                                   load_pbp=load_game_play_by_play)
 
     def get_event_by_season(self, season, event_id) -> "Event":
         """
@@ -133,7 +172,7 @@ class League:
             Event: The matching Event object, or None if not found.
         """
         this_event = None
-        for week in self.schedules.get(season, []).weeks:
+        for week in self._schedules.get(season, []).weeks:
             for event in week.events:
                 if str(event.event_id) == str(event_id):
                     this_event = event
@@ -148,7 +187,7 @@ class League:
         It handles pagination and concurrent data fetching using thread pools for improved performance.
         Each betting item is processed individually through `_process_bet` and collected into a list.
 
-        The processed futures are stored in `self.betting_futures` under the specified season key.
+        The processed futures are stored in `self._betting_futures` under the specified season key.
 
         Args:
             season (int or str): The season year to fetch futures data for.
@@ -187,7 +226,7 @@ class League:
                         for bet_future in as_completed(bet_futures):
                             betting_futures.append(bet_future.result())
 
-            self.betting_futures[season] = betting_futures
+            self._betting_futures[season] = betting_futures
 
         except API400Error as e:
             print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")
@@ -252,7 +291,7 @@ class League:
                     except Exception as e:
                         print(f"Error fetching leader category: {e}")
 
-            self.league_leaders[season] = leaders
+            self._league_leaders[season] = leaders
 
         except API400Error as e:
             print(f"Failed to fetch league leaders for season {season}: {e}")

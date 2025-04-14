@@ -30,7 +30,9 @@ class Schedule:
             each week and paginating through all available event pages.
     """
 
-    def __init__(self, espn_instance, schedule_list: list):
+    def __init__(self, espn_instance, schedule_list: list,
+                 load_odds: bool = False,
+                 load_plays: bool = False):
         """
         Initializes the Schedule instance.
 
@@ -40,12 +42,13 @@ class Schedule:
         """
         self.schedule_list = schedule_list
         self.espn_instance = espn_instance
-
+        self.load_odds = load_odds
+        self.load_plays = load_plays
         self.api_info = self.espn_instance.api_mapping
 
         self.season = get_an_id(self.schedule_list[0], 'seasons')
         self.schedule_type = None
-        self.weeks = []
+        self._weeks = []
 
         schedule_type_id = get_schedule_type(self.schedule_list[0])
 
@@ -62,6 +65,13 @@ class Schedule:
             self._set_schedule_daily_data()
         else:
             raise ScheduleTypeUnknownError(league_abbv=self.espn_instance.league_abbv)
+
+    @property
+    def weeks(self):
+        """
+            list[Week]: a list of Week objects
+        """
+        return self._weeks
 
     def __repr__(self) -> str:
         """
@@ -100,7 +110,7 @@ class Schedule:
                     week_events.append(event.get('$ref'))
                     pass
 
-            self.weeks.append(Week(espn_instance=self.espn_instance,
+            self._weeks.append(Week(espn_instance=self.espn_instance,
                                    week_list=week_events,
                                    week_number=week_number,
                                    start_date=start_date,
@@ -129,7 +139,8 @@ class Schedule:
                 for event in this_week_content.get('items', []):
                     event_urls.append(event.get('$ref'))
                 if event_urls:
-                    self.weeks.append(Week(espn_instance=self.espn_instance,
+                    self._weeks.append(Week(espn_instance=self.espn_instance,
+                                           schedule_instance=self,
                                            week_list=event_urls,
                                            week_number=week_number,
                                            start_date=start_date,
@@ -148,7 +159,7 @@ class Schedule:
         Raises:
             StopIteration: If no Week instance is found for the specified week number.
         """
-        week = next((week for week in self.weeks if str(week.week_number) == str(week_num)), None)
+        week = next((week for week in self._weeks if str(week.week_number) == str(week_num)), None)
 
         if week is None:
             raise ValueError(f"No events found for week number {week_num}")
@@ -199,24 +210,36 @@ class Week:
     """
 
     def __init__(self, espn_instance, week_list: list,
+                 schedule_instance: Schedule,
                  week_number: int, start_date, end_date):
         """
         Initializes a Week instance.
 
         Args:
-            espn_instance (PyESPN): The ESPN API instance.
-            week_list (list[str]): A list of event URLs or event data references.
-            week_number (int): The numerical representation of the week.
+            espn_instance (PyESPN): The primary ESPN API wrapper instance.
+            week_list (list[str]): A list of event reference URLs (or identifiers) for games in the week.
+            schedule_instance (Schedule): The full season schedule object this week is part of.
+            week_number (int): The numerical representation of the week (e.g., 1 for Week 1).
+            start_date (str or datetime): The start date of the week.
+            end_date (str or datetime): The end date of the week.
         """
         self.espn_instance = espn_instance
+        self.schedule_instance = schedule_instance
         self.week_list = week_list
-        self.events = []
+        self._events = []
         self.week_number = None
         self.start_date = start_date
         self.end_date = end_date
         self.week_number = week_number
 
         self._set_week_datav2()
+
+    @property
+    def events(self):
+        """
+            list[Event]: a list of Event objects
+        """
+        return self._events
 
     def __repr__(self) -> str:
         """
@@ -233,8 +256,10 @@ class Week:
         """
         for event in self.week_list:
             event_content = fetch_espn_data(event)
-            self.events.append(Event(event_json=event_content,
-                                     espn_instance=self.espn_instance))
+            self._events.append(Event(event_json=event_content,
+                                     espn_instance=self.espn_instance,
+                                     load_game_odds=self.schedule_instance.load_odds,
+                                     load_play_by_play=self.schedule_instance.load_plays))
 
     def _set_week_datav2(self) -> None:
         """
@@ -248,7 +273,7 @@ class Week:
 
             for future in concurrent.futures.as_completed(futures):
                 try:
-                    self.events.append(future.result())  # Append event when future is done
+                    self._events.append(future.result())  # Append event when future is done
                 except Exception as e:
                     print(f"Error fetching event: {e}")  # Handle failed API calls gracefully
 
@@ -263,7 +288,10 @@ class Week:
             Event: An Event instance.
         """
         event_content = fetch_espn_data(event_url)
-        return Event(event_json=event_content, espn_instance=self.espn_instance)
+        return Event(event_json=event_content,
+                     espn_instance=self.espn_instance,
+                     load_game_odds=self.schedule_instance.load_odds,
+                     load_play_by_play=self.schedule_instance.load_plays)
 
     def get_events(self) -> list["Event"]:
         """
@@ -272,4 +300,4 @@ class Week:
         Returns:
             list[Event]: A list of Event instances for the week.
         """
-        return self.events
+        return self._events

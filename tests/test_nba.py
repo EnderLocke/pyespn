@@ -60,13 +60,13 @@ def test_nba_events(test_case):
 
 def get_random_nba_team_data(team_id):
 
-    selected_team = next((team for team in nba_espn.TEAM_ID_MAPPING if team["team_id"] == team_id), None)
+    selected_team = next((team for team in nba_espn.team_id_mapping if team["team_id"] == team_id), None)
     content = nba_espn.get_team_by_id(team_id=team_id)
 
     return selected_team, content
 
 
-@pytest.mark.parametrize("test_case", nba_espn.TEAM_ID_MAPPING)
+@pytest.mark.parametrize("test_case", nba_espn.team_id_mapping)
 def test_nba_team_ids(test_case):
     local_team_data, api_team_data = get_random_nba_team_data(test_case.get('team_id'))
 

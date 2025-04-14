@@ -38,7 +38,14 @@ class Venue:
         self.address_json = self.venue_json.get('address')
         self.grass = self.venue_json.get('grass')
         self.indoor = self.venue_json.get('indoor')
-        self.images = [Image(image_json=image, espn_instance=self.espn_instance) for image in self.venue_json.get('images', [])]
+        self._images = [Image(image_json=image, espn_instance=self.espn_instance) for image in self.venue_json.get('images', [])]
+
+    @property
+    def images(self):
+        """
+            list[Image]: a list of images for the venue
+        """
+        return self._images
 
     def __repr__(self) -> str:
         """

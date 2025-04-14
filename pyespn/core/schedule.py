@@ -8,24 +8,32 @@ if TYPE_CHECKING:
 
 
 # todo 1 is preseason 2 is regular season and 3 is postseason
-def get_regular_season_schedule_core(league_abbv, espn_instance, season, season_type='2') -> "Schedule":
+def get_regular_season_schedule_core(league_abbv, espn_instance,
+                                     season, load_odds: bool = False,
+                                     load_pbp: bool = False,
+                                     season_type='2') -> "Schedule":
     """
     Retrieves the regular season schedule for a specific season and league, including all weeks.
 
     Args:
-        league_abbv (str): The abbreviation for the league (e.g., 'nfl', 'nba').
-        espn_instance (object): An instance of the ESPN class used for interaction with the ESPN API.
-        season (int): The season year for which the schedule is to be fetched (e.g., 2023).
-        season_type (str, optional): The type of season to fetch. Default is '2' for the regular season.
-                                     '1' corresponds to the preseason, and '3' corresponds to the postseason.
+        league_abbv (str): Abbreviation of the league (e.g., 'nfl', 'cfb').
+        espn_instance (PyESPN): An instance of the ESPN API wrapper used to fetch and parse data.
+        season (int): The year of the season (e.g., 2023).
+        load_odds (bool, optional): Whether to include betting odds in the schedule. Defaults to False.
+        load_pbp (bool, optional): Whether to load play-by-play data for each event. Defaults to False.
+        season_type (str, optional): Season type as defined by ESPN:
+            - '1' = preseason
+            - '2' = regular season (default)
+            - '3' = postseason
 
     Returns:
         Schedule: A `Schedule` object containing the schedule for the specified season and league.
                         This includes the list of weeks and events for that season.
 
-    Note:
-        This function works primarily for NFL and college football leagues. It retrieves the weeks' data from the ESPN API
-        and processes it into a `Schedule` object. The function handles pagination, fetching all available pages of schedule data.
+    Notes:
+        - The function fetches data from ESPN's internal API using core URLs and pagination.
+        - The resulting `Schedule` object will have all available week URLs converted into
+          full event data structures upon initialization.
 
     Example:
         >>> schedule = get_regular_season_schedule_core('nfl', espn_instance, 2023)
@@ -43,6 +51,8 @@ def get_regular_season_schedule_core(league_abbv, espn_instance, season, season_
         for item in page_content.get('items', []):
             weeks_urls.append(item.get('$ref'))
     schedule = Schedule(schedule_list=weeks_urls,
-                        espn_instance=espn_instance)
+                        espn_instance=espn_instance,
+                        load_odds=load_odds,
+                        load_plays=load_pbp)
 
     return schedule

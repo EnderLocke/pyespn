@@ -12,8 +12,14 @@
 * changed some of the clients vars to properties
 * made sure to_dicts were across the classes where they are needed
 * made sure validate_json decorator was acorss classes as needed
-* tech debt -> moved from calling lookup api function to pulling from espn client
-* tech debt -> removed v import to all classes and put it in client
+* tech debt
+  * moved from calling lookup api function to pulling from espn client
+  * removed v import to all classes and put it in client
+  * teams/league are client properties now
+  * league has properties betting futures and schedules now + league leaders
+  * added stats/stats_log as properties to athlete/player
+  * team class has betting and rosters/ stats/coaches and records as properties now
+* added in pass thru so that you can load odds or play by play when loading schedule
 * 
 
 ## 0.3.2

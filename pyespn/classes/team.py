@@ -77,6 +77,7 @@ class Team:
         load_season_betting_records(season) -> None:
             Fetches and loads the betting odds records for a specific team and season using concurrent requests.
     """
+    
     def __init__(self, espn_instance, team_json):
         """
         Initializes a Team instance.
@@ -88,18 +89,53 @@ class Team:
         """
         self.espn_instance = espn_instance
         self.api_info = self.espn_instance.api_mapping
-        self.records = {}
-        self.stats = {}
-        self.coaches = {}
-        self.betting = {}
+        self._records = {}
+        self._stats = {}
+        self._coaches = {}
+        self._betting = {}
         if team_json:
             self.team_json = team_json
         else:
             self.team_json = {}
-        self.roster = {}
+        self._roster = {}
         self._load_team_data()
         self.home_venue = Venue(venue_json=self.venue_json,
                                 espn_instance=self.espn_instance)
+
+    @property
+    def coaches(self):
+        """
+             dict: a dict with season as the key and a list of Player objects
+        """
+        return self._coaches
+
+    @property
+    def stats(self):
+        """
+             dict: a dict with season as the key and a list of Stat objects
+        """
+        return self._stats
+
+    @property
+    def records(self):
+        """
+             dict: a dict with season as the key and a list of Record objects
+        """
+        return self._records
+
+    @property
+    def betting(self):
+        """
+             dict: a dict with season as the key and a list of Record objects
+        """
+        return self._betting
+
+    @property
+    def roster(self):
+        """
+            dict: with season as a key and a list of Player objects
+        """
+        return self._roster
 
     def get_player_by_season_id(self, season, player_id) -> "Player":
         """
@@ -112,7 +148,7 @@ class Team:
         Returns:
             Player: The matching Team object, or None if not found.
         """
-        return next((player for player in self.roster.get(season, []) if str(player.id) == str(player_id)), None)
+        return next((player for player in self._roster.get(season, []) if str(player.id) == str(player_id)), None)
 
     def __repr__(self) -> str:
         """
@@ -125,7 +161,7 @@ class Team:
 
     def load_season_roster_box_score(self, season):
 
-        for player in self.roster.get(season, []):
+        for player in self._roster.get(season, []):
             player.load_player_box_scores_season(season=season)
 
     def _load_team_data(self):
@@ -159,7 +195,7 @@ class Team:
         This method sends a request to the ESPN API to retrieve team statistics for the given season. It will send requests for
         multiple pages of data if necessary, and each page is fetched concurrently using a thread pool. The method parses the
         response and instantiates `Stat` objects for each statistic found under the `categories` section of the response.
-        All parsed statistics are then stored in the `self.stats` dictionary, keyed by the provided season.
+        All parsed statistics are then stored in the `self._stats` dictionary, keyed by the provided season.
 
         Args:
             season (int): The season year for which statistics should be retrieved.
@@ -193,7 +229,7 @@ class Team:
             print(f"Failed to fetch stats data for season {season} | team {self.name} | id {self.team_id}: {e}")
 
         # Store the fetched stats data
-        self.stats[season] = all_stats
+        self._stats[season] = all_stats
 
     def get_team_colors(self) -> dict:
         """
@@ -232,13 +268,13 @@ class Team:
         This function retrieves the roster for the specified season by:
         - Fetching paginated lists of athletes.
         - Concurrently retrieving detailed athlete data using multiple API requests.
-        - Storing the roster data in the `self.roster` dictionary.
+        - Storing the roster data in the `self._roster` dictionary.
 
         Args:
             season (int): The season year for which to load the roster.
 
         Returns:
-            None: The function updates `self.roster` with the retrieved players.
+            None: The function updates `self._roster` with the retrieved players.
 
         Raises:
             Exception: Logs any errors encountered when fetching player data.
@@ -278,7 +314,7 @@ class Team:
                 except Exception as e:
                     print(f"Failed to fetch athlete data: {e}")
 
-        self.roster[season] = athletes
+        self._roster[season] = athletes
 
     def load_season_results(self, season):
         """
@@ -293,7 +329,7 @@ class Team:
             season (int): The season year for which the team’s game records should be retrieved.
 
         Side Effects:
-            Updates the `self.records` dictionary with a list of `Record` instances representing
+            Updates the `self._records` dictionary with a list of `Record` instances representing
             seasonal game results.
 
         """
@@ -309,7 +345,7 @@ class Team:
                     season_records.append(Record(record_json=result,
                                                  espn_instance=self.espn_instance))
 
-            self.records[season] = season_records
+            self._records[season] = season_records
 
         except TimeoutError:
             print(f"Timeout while fetching season records for season {season} | team {self.name} | id {self.team_id}")
@@ -331,7 +367,7 @@ class Team:
             season (int): The season year for which coaching data should be loaded.
 
         Side Effects:
-            Updates the `self.coaches` dictionary with a list of `Player` instances
+            Updates the `self._coaches` dictionary with a list of `Player` instances
             representing the coaching staff.
 
         Notes:
@@ -350,7 +386,7 @@ class Team:
             coach_records.append(Player(player_json=coach_url_response,
                                         espn_instance=self.espn_instance))
 
-        self.coaches[season] = coach_records
+        self._coaches[season] = coach_records
 
     def load_season_betting_records(self, season):
         """
@@ -358,7 +394,7 @@ class Team:
 
         This method queries the ESPN API for team-specific betting records for the given season. It handles
         pagination and leverages a thread pool to fetch data pages concurrently, improving performance. The
-        fetched data is parsed into `Record` instances and stored in the `self.betting` dictionary under
+        fetched data is parsed into `Record` instances and stored in the `self._betting` dictionary under
         the specified season.
 
         Args:
@@ -386,7 +422,7 @@ class Team:
                         futures.append(Record(record_json=bet,
                                               espn_instance=self.espn_instance))
 
-            self.betting[season] = futures
+            self._betting[season] = futures
 
         except API400Error as e:
             print(f"Failed to fetch oddsbetting data for season {season} | team {self.name} | id {self.team_id}: {e}")

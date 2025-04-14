@@ -45,7 +45,7 @@ class Drive:
         self.drive_json = drive_json
         self.espn_instance = espn_instance
         self.event_instance = event_instance
-        self.plays = None
+        self._plays = None
         self._load_drive_data()
 
     def __repr__(self) -> str:
@@ -79,13 +79,24 @@ class Drive:
         end_team_id = get_team_id(self.drive_json.get('endTeam', {}).get('$ref'))
         self.end_team = self.espn_instance.get_team_by_id(team_id=end_team_id)
         self.plays_ref = self.drive_json.get('plays', {}).get('$ref')
+
+        self._load_plays()
+
+    @property
+    def plays(self):
+        """
+            list[Play]: a list of plays for the drive
+        """
+        return self._plays
+
+    def _load_plays(self):
         plays = []
         for play in self.drive_json.get('plays', {}).get('items'):
             plays.append(Play(play_json=play,
                               espn_instance=self.espn_instance,
                               event_instance=self.event_instance,
                               drive_instance=self))
-        self.plays = plays
+        self._plays = plays
 
     def to_dict(self) -> dict:
         """
