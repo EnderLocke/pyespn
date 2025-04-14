@@ -248,10 +248,10 @@ class PYESPN:
 
     def load_year_recruiting_rankings(self, year: int):
         """
-        Loads the regular season schedule for a given season and stores it in the `schedules` attribute.
+        Loads the regular season recruiting rankings for a given season and stores it in the `recruiting rankings` attribute.
 
         Args:
-            year (int): The season for which to load the schedule.
+            year (int): The season for which to load the recruiting rankings.
         """
 
         self.recruit_rankings = {year: self.get_recruiting_rankings(season=year)}
@@ -261,7 +261,7 @@ class PYESPN:
         Retrieves detailed information about a specific game.
 
         Args:
-            event_id (str): The ID of the game.
+            event_id (str or int): The ID of the game.
 
         Returns:
             Event: The game's information.
@@ -275,7 +275,7 @@ class PYESPN:
         Retrieves statistics for teams during a specific season.
 
         Args:
-            season (str): The season for which to retrieve stats.
+            season (str or int): The season for which to retrieve stats.
 
         Returns:
             dict: The season's team statistics.
