@@ -258,3 +258,12 @@ class League:
 
         except API400Error as e:
             print(f"Failed to fetch league leaders for season {season}: {e}")
+
+    def to_dict(self) -> dict:
+        """
+        Converts the League instance to its original JSON dictionary.
+
+        Returns:
+            dict: The league's raw JSON data.
+        """
+        return self.league_json

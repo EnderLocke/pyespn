@@ -154,6 +154,19 @@ class Schedule:
 
         return week.events
 
+    def to_dict(self) -> list:
+        """
+        Converts the Schedule instance to its original list of JSON dictionaries.
+
+        Returns:
+            list: A list of dictionaries, each representing a scheduled event or game.
+
+        Note:
+            This method returns the raw schedule data as a list of dictionaries,
+            suitable for serialization or further processing.
+        """
+        return self.schedule_list
+
 
 class Week:
     """

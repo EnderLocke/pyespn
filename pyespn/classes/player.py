@@ -380,3 +380,11 @@ class Recruit:
 
         self.rank = next((int(attr.get('displayValue')) for attr in self.recruit_json.get('attributes', []) if attr.get("name", '').lower() == "rank"), None)
 
+    def to_dict(self) -> dict:
+        """
+        Converts the Recruit instance to its original JSON dictionary.
+
+        Returns:
+            dict: The recruit's raw JSON data.
+        """
+        return self.recruit_json

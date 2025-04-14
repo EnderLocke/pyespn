@@ -1,9 +1,11 @@
-from pyespn.utilities import fetch_espn_data, get_an_id
+from pyespn.core.decorators import validate_json
+from pyespn.utilities import fetch_espn_data
 from pyespn.classes.player import Player
 from pyespn.classes.team import Manufacturer
 from pyespn.classes.stat import Record
 
 
+@validate_json("standings_json")
 class Standings:
     """
     Represents the standings for a racing league, including athletes, manufacturers, and performance records.
@@ -90,3 +92,12 @@ class Standings:
             }
 
             self.standings.append(full_athlete)
+
+    def to_dict(self) -> dict:
+        """
+        Converts the Standings instance to its original JSON dictionary.
+
+        Returns:
+            dict: The standings's raw JSON data.
+        """
+        return self.standings_json
