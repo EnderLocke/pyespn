@@ -25,6 +25,9 @@
 * added in auto load for rosters for given season for both betting futures and league leaders to reduce calls to api
 * added in pbp for basketball leagues
 * added function to image class to download image
+* changed some of the clients vars to properties
+* made sure to_dicts were across the classes where they are needed
+* made sure validate_json decorator was acorss classes as needed
 * 
 
 ## 0.3.1
