@@ -18,31 +18,38 @@ if TYPE_CHECKING:
 @validate_league
 class PYESPN:
     """
-    A class to interact with ESPN's API for retrieving and manipulating sports data related to leagues, teams, players, betting, schedules, drafts, and more.
+    Main client for interacting with ESPN's sports data API.
+
+    This class serves as the central entry point for retrieving and managing data
+    related to leagues, teams, players, drafts, betting, recruiting, and more.
+    It is designed to support multiple sports leagues by using a unified interface
+    and dynamic loading of league-specific components.
 
     Attributes:
-        LEAGUE_API_MAPPING (dict): A mapping of league abbreviations to corresponding league data.
-        valid_leagues (set): A set of available league abbreviations.
-        untested_leagues (set): A set of untested league abbreviations.
-        all_leagues (set): A set of unavailable league abbreviations.
-        league_abbv (str): The abbreviation of the currently selected sport league.
-        TEAM_ID_MAPPING (dict): A mapping of team IDs to corresponding team data for the current league.
-        BETTING_PROVIDERS (dict): A mapping of available betting providers for the current league.
-        LEAGUE_DIVISION_BETTING_KEYS (list): A list of league division betting keys for the current league.
-        DEFAULT_BETTING_PROVIDER (dict): The default betting provider for the current league.
-        teams (List[Teams]): A list of teams in the current league.
-        standings (dict): a dict of standings for a year
-        recruit_rankings (dict): a dict with season and a list of recruit rankings for a year
-        drafts (dict): a dict with draft data in a list with key as season
-        athletes (dict): a dict of all athletes with season as a key
-        schedules (List[Schedule]): A mapping of regular season schedules for the current season.
-        league (League): A league object containing data for the current league.
+        league_abbv (str): Abbreviation for the selected league (e.g., 'nfl', 'nba').
+        teams (List[Team]): List of all teams in the current league.
+        league (League): League-specific metadata and configuration.
+        team_id_mapping (dict): Mapping of team IDs to team data for the current league.
+        betting_providers (dict): Available betting providers for the current league.
+        league_division_betting_keys (list): Division-level betting market keys.
+        api_mapping (dict): API endpoint configuration for the current league.
+        standings (dict): Season-specific standings data.
+        drafts (dict): Draft results by season.
+        recruit_rankings (dict): Recruiting rankings by season (college leagues only).
+        athletes (dict): Athlete metadata and statistics by season.
+        manufacturers (dict): Manufacturer/team-like objects (e.g., F1 constructors).
+        v (str): ESPN API version.
 
-    Examples:
+    Args:
+        sport_league (str): Abbreviation of the league to interact with (default is `'nfl'`).
+        load_teams (bool): Whether to immediately load team data (default is `True`).
+
+    Example:
         >>> from pyespn import PYESPN
-        >>> nfl_espn = PYESPN(sport_league='nfl')
+        >>> espn = PYESPN('nfl')
+        >>> espn.teams[0].name
+        'Kansas City Chiefs'
     """
-
     LEAGUE_API_MAPPING = LEAGUE_API_MAPPING
     valid_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'available'}
     untested_leagues = {league['league_abbv'] for league in LEAGUE_API_MAPPING if league['status'] == 'untested'}
