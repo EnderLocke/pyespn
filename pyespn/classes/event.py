@@ -36,17 +36,17 @@ class Event:
         plays (list[Play] or None): A list of `Play` instances for basketball games.
 
     Methods:
-        _load_teams():
-            Populates home_team and away_team attributes from competitors JSON.
-
-        _load_betting_odds():
+        load_betting_odds():
             Fetches and parses multi-page betting odds data.
+
+        load_play_by_play():
+            Routes to appropriate play-by-play loader depending on sport type.
 
         _load_competition_data():
             Loads metadata about the specific competition instance.
 
-        _load_play_by_play():
-            Routes to appropriate play-by-play loader depending on sport type.
+        _load_teams():
+            Populates home_team and away_team attributes from competitors JSON.
 
         _load_basketball_plays():
             Loads all basketball plays as `Play` objects.
@@ -102,9 +102,9 @@ class Event:
         self._load_teams()
         self._load_competition_data()
         if load_game_odds:
-            self._load_betting_odds()
+            self.load_betting_odds()
         if load_play_by_play:
-           self._load_play_by_play()
+            self.load_play_by_play()
 
     def _load_teams(self):
         """
@@ -136,9 +136,9 @@ class Event:
         """
         return f"<Event | {self.short_name} {self.date}>"
 
-    def _load_betting_odds(self):
+    def load_betting_odds(self):
         """
-        Private method to fetch and assign betting odds for the event.
+        method to fetch and assign betting odds for the event.
 
         This method constructs the appropriate URL using event and league data, then retrieves
         and parses odds data from each available page. The results are stored in the `self.odds` list
@@ -184,7 +184,7 @@ class Event:
                                        espn_instance=self.espn_instance,
                                        event_instance=self)
 
-    def _load_play_by_play(self):
+    def load_play_by_play(self):
         """
         Private method to load play-by-play data for the event.
 
