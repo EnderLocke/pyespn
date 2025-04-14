@@ -24,6 +24,7 @@
 * added functions to client to search teams rosters for a given season for a player
 * added in auto load for rosters for given season for both betting futures and league leaders to reduce calls to api
 * added in pbp for basketball leagues
+* added function to image class to download image
 * 
 
 ## 0.3.1
