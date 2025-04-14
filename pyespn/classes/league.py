@@ -67,7 +67,7 @@ class League:
         self.league_json = league_json
         self.espn_instance = espn_instance
         self.api_info = self.espn_instance.api_mapping
-        self.league_leaders = {}
+        self._league_leaders = {}
         self._schedules = {}
         self._betting_futures = {}
         self._set_league_json()
@@ -104,7 +104,14 @@ class League:
         self.rankings = self.league_json.get("rankings")
         self.draft = self.league_json.get("draft")
         self.links = self.league_json.get("links", [])
-    
+
+    @property
+    def league_leaders(self):
+        """
+            dict: dict with key of season with list of Categories
+        """
+        return self._league_leaders
+
     @property
     def schedules(self):
         """
@@ -284,7 +291,7 @@ class League:
                     except Exception as e:
                         print(f"Error fetching leader category: {e}")
 
-            self.league_leaders[season] = leaders
+            self._league_leaders[season] = leaders
 
         except API400Error as e:
             print(f"Failed to fetch league leaders for season {season}: {e}")

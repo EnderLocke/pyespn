@@ -16,7 +16,7 @@
   * moved from calling lookup api function to pulling from espn client
   * removed v import to all classes and put it in client
   * teams/league are client properties now
-  * league has properties betting futures and schedules now
+  * league has properties betting futures and schedules now + league leaders
   * added stats/stats_log as properties to athlete/player
   * team class has betting and rosters/ stats/coaches and records as properties now
 * added in pass thru so that you can load odds or play by play when loading schedule
