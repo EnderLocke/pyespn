@@ -341,7 +341,7 @@ class PYESPN:
         Retrieves standings for a given season and type.
 
         Args:
-            season (str): The season for which to retrieve standings.
+            season (str or int): The season for which to retrieve standings.
 
         Returns:
             None
@@ -358,7 +358,7 @@ class PYESPN:
         then calls each team's method to load box score data for all players on their roster.
 
         Args:
-            season (int): The season year for which to load box score data.
+            season (int or int): The season year for which to load box score data.
 
         Returns:
             None
