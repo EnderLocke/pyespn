@@ -7,7 +7,6 @@ if TYPE_CHECKING:
     from pyespn.classes import Schedule
 
 
-# todo 1 is preseason 2 is regular season and 3 is postseason
 def get_regular_season_schedule_core(league_abbv, espn_instance,
                                      season, load_odds: bool = False,
                                      load_pbp: bool = False,
@@ -25,6 +24,8 @@ def get_regular_season_schedule_core(league_abbv, espn_instance,
             - '1' = preseason
             - '2' = regular season (default)
             - '3' = postseason
+            - '4' = offseason
+            - '5' = playin
 
     Returns:
         Schedule: A `Schedule` object containing the schedule for the specified season and league.

@@ -58,6 +58,8 @@ class Schedule:
             self.schedule_type = 'regular'
         elif schedule_type_id == 3:
             self.schedule_type = 'post'
+        elif schedule_type_id == 4:
+            self.schedule_type = 'play in'
 
         if self.api_info.get('schedule') == 'weekly':
             self._set_schedule_weekly_data()
