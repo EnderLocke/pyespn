@@ -135,14 +135,14 @@ class League:
         """
             dict: a dict of seasons preseason schedule with a key for season with a Schedule object with Week objects
         """
-        return self._pre_schedule
+        return self._pre_schedules
 
     @property
     def postseason_schedules(self):
         """
             dict: a dict of seasons postseason schedule with a key for season with a Schedule object with Week objects
         """
-        return self._post_schedule
+        return self._post_schedules
 
     @property
     def betting_futures(self):
