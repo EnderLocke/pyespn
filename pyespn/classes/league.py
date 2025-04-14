@@ -188,8 +188,8 @@ class League:
                                                                           load_pbp=self.load_game_play_by_play)
 
     def load_postseason_schedule(self, season,
-                                        load_game_odds: bool = False,
-                                        load_game_play_by_play: bool = False):
+                                 load_game_odds: bool = False,
+                                 load_game_play_by_play: bool = False):
         """
         Loads and stores the postseason schedule for the specified season.
 
