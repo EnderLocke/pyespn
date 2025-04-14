@@ -70,6 +70,8 @@ class League:
         self._league_leaders = {}
         self._schedules = {}
         self._betting_futures = {}
+        self.load_game_odds = False
+        self.load_game_play_by_play = False
         self._set_league_json()
 
     def __repr__(self) -> str:
@@ -161,12 +163,14 @@ class League:
             >>> schedule = espn._schedules[2024]
             >>> print(schedule.weeks)
         """
+        self.load_game_odds = load_game_odds
+        self.load_game_play_by_play = load_game_play_by_play
 
         self._schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
                                                                    espn_instance=self._espn_instance,
                                                                    season=season,
-                                                                   load_odds=load_game_odds,
-                                                                   load_pbp=load_game_play_by_play)
+                                                                   load_odds=self.load_game_odds,
+                                                                   load_pbp=self.load_game_play_by_play)
 
     def get_event_by_season(self, season, event_id) -> "Event":
         """
