@@ -367,6 +367,20 @@ class PYESPN:
         for team in self._teams:
             team.load_season_roster_box_score(season=season)
 
+    def load_season_depth_charts(self, season):
+        """
+        Loads depth charts for all teams in the league for a given season.
+
+        This method first ensures that team rosters are loaded for the specified season,
+        then iterates through each team in the league and loads their individual depth charts.
+
+        Args:
+            season (int): The season year for which to load depth chart data.
+        """
+        self.load_season_rosters(season=season)
+        for team in self._teams:
+            team.load_season_depth_chart(season=season)
+
     def get_team_by_id(self, team_id) -> "Team":
         """
         Finds and returns the Team object that matches the given team_id.
@@ -381,10 +395,11 @@ class PYESPN:
 
     def load_season_rosters(self, season) -> None:
         """
-        Loads the season roster for all teams in the league.
+        Loads the season roster for all teams in the league if not already loaded.
 
-        This method iterates through all teams and calls their `load_season_roster`
-        method to fetch and store the roster data for the specified season.
+        This method iterates through each team in the league and checks if the roster
+        for the given season is already present. If not, it calls the team's
+        `load_season_roster` method to fetch and store the data.
 
         Args:
             season (int or str): The season year for which to load rosters.
@@ -398,11 +413,11 @@ class PYESPN:
             >>> for team in espn.teams:
             >>>     print(team.roster[2023])
             [<Player | John Doe>, <Player | Jane Smith>, ...]
-
         """
 
         for team in self._teams:
-            team.load_season_roster(season=season)
+            if season not in team.roster:
+                team.load_season_roster(season=season)
 
     def load_season_team_stats(self, season) -> None:
         """
