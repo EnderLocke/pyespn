@@ -22,7 +22,6 @@ class League:
     statistical leaderboards.
 
     Attributes:
-        espn_instance (PyESPN): The main interface for interacting with ESPN's API.
         league_json (dict): The raw JSON data representing the league.
         ref (str): Reference URL for the league.
         id (str): The unique identifier for the league.
@@ -43,8 +42,6 @@ class League:
         rankings (list): Ranking data for the league.
         draft (dict): Draft data associated with the league.
         links (list): External or internal links related to the league.
-        league_leaders (dict): Cached leader category objects per season.
-        betting_futures (dict): Cached betting futures data per season.
 
     Methods:
         __repr__(): Returns a formatted string representation of the league.
@@ -164,6 +161,7 @@ class League:
         url = f''
 
     def load_regular_season_schedule(self, season,
+                                     only_current_week: bool = False,
                                      load_game_odds: bool = False,
                                      load_game_play_by_play: bool = False):
         """
@@ -174,6 +172,7 @@ class League:
 
         Args:
             season (int or str): The season year for which to load the schedule (e.g., 2023).
+            only_current_week (bool, optional): Whether to only pull the current week. Defaults to False.
             load_game_odds (bool, optional): Whether to include betting odds for each game. Defaults to False.
             load_game_play_by_play (bool, optional): Whether to include play-by-play data for each game. Defaults to False.
 
@@ -192,10 +191,12 @@ class League:
         self._regular_schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
                                                                            espn_instance=self._espn_instance,
                                                                            season=season,
+                                                                           current_week_only=only_current_week,
                                                                            load_odds=self.load_game_odds,
                                                                            load_pbp=self.load_game_play_by_play)
 
     def load_postseason_schedule(self, season,
+                                 only_current_week: bool = False,
                                  load_game_odds: bool = False,
                                  load_game_play_by_play: bool = False):
         """
@@ -224,11 +225,13 @@ class League:
         self._post_schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
                                                                         espn_instance=self._espn_instance,
                                                                         season=season,
+                                                                        current_week_only=only_current_week,
                                                                         load_odds=self.load_game_odds,
                                                                         load_pbp=self.load_game_play_by_play,
                                                                         season_type=3)
 
     def load_preseason_schedule(self, season,
+                                only_current_week: bool = False,
                                 load_game_odds: bool = False,
                                 load_game_play_by_play: bool = False):
         """
@@ -257,11 +260,13 @@ class League:
         self._pre_schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
                                                                        espn_instance=self._espn_instance,
                                                                        season=season,
+                                                                       current_week_only=only_current_week,
                                                                        load_odds=self.load_game_odds,
                                                                        load_pbp=self.load_game_play_by_play,
                                                                        season_type=0)
 
     def load_playin_schedule(self, season,
+                             only_current_week: bool = False,
                              load_game_odds: bool = False,
                              load_game_play_by_play: bool = False):
         """
@@ -290,6 +295,7 @@ class League:
         self._playin_schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
                                                                           espn_instance=self._espn_instance,
                                                                           season=season,
+                                                                          current_week_only=only_current_week,
                                                                           load_odds=self.load_game_odds,
                                                                           load_pbp=self.load_game_play_by_play,
                                                                           season_type=5)

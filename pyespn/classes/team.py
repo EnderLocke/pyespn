@@ -214,6 +214,7 @@ class Team:
         self.alternate_color = self.team_json.get("alternateColor")
         self.is_active = self.team_json.get("isActive")
         self.is_all_star = self.team_json.get("isAllStar")
+        self.form = self.team_json.get('form')
 
         self.logos = [Image(image_json=logo, espn_instance=self.espn_instance) for logo in self.team_json.get("logos", [])]
         self.venue_json = self.team_json.get("venue", {})
@@ -389,6 +390,10 @@ class Team:
                     print(f"Failed to fetch athlete data: {e}")
 
         self._roster[season] = athletes
+
+    def load_seasons_events(self, season):
+
+        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2024/teams/30/events'
 
     def load_season_results(self, season):
         """
