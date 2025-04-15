@@ -564,6 +564,7 @@ class PYESPN:
         return athlete
 
     def load_season_schedule(self, season,
+                             load_only_current_week: bool = False,
                              load_preseason: bool = False,
                              load_postseason: bool = False,
                              load_play_in: bool = False,
@@ -577,8 +578,9 @@ class PYESPN:
 
         Args:
             season (int): The season year for which to load the schedule.
-            load_preseason (bool, optional): If True, includes the preseason schedule. Defaults to False.
-            load_postseason (bool, optional): If True, includes the postseason schedule. Defaults to False.
+            load_only_current_week (bool, optional): If True, only loads the current weeks data. Defaults to False.
+            load_preseason (bool, optional): If True, includes loading the preseason schedule. Defaults to False.
+            load_postseason (bool, optional): If True, includes loading the postseason schedule. Defaults to False.
             load_play_in (bool, optional): If True, includes the play in schedule. Defaults to False.
             load_game_odds (bool, optional): If True, loads betting odds for each game. Defaults to False.
             load_game_play_by_play (bool, optional): If True, loads play-by-play data for each game. Defaults to False.
@@ -587,6 +589,7 @@ class PYESPN:
             None
         """
         self._league.load_regular_season_schedule(season=season,
+
                                                   load_game_odds=load_game_odds,
                                                   load_game_play_by_play=load_game_play_by_play)
         if load_preseason:

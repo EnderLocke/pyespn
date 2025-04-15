@@ -10,27 +10,46 @@ class Schedule:
     """
     Represents a sports league schedule, capable of handling both weekly and daily formats.
 
+    This class is responsible for loading and organizing schedule data for a given season,
+    including determining the current week, fetching events, and storing them in `Week` objects.
+
     Attributes:
         espn_instance (PYESPN): The ESPN API wrapper instance.
         schedule_list (list[str]): A list of URLs referencing weekly or daily schedule endpoints.
-        schedule_type (str): The type of schedule ('pre', 'regular', or 'post').
+        schedule_type (str): The type of schedule ('pre', 'regular', 'post', 'off', or 'play in').
         season (int): The season year, parsed from the schedule URL.
         weeks (list[Week]): A list of Week instances containing schedule events.
+        current_week (Week or None): The Week instance that corresponds to the current date, if applicable.
+
+    Args:
+        espn_instance (PYESPN): The ESPN API wrapper instance.
+        schedule_list (list[str]): A list of URLs pointing to schedule data for the season.
+        load_current_week_only (bool): If True, only the current week will be processed.
+        load_odds (bool): If True, odds data will be loaded for each event.
+        load_plays (bool): If True, play-by-play data will be loaded for each event.
 
     Methods:
         get_events(week: int) -> list[Event]:
-            Retrieves the list of Event instances for the given week index.
+            Retrieves the list of Event instances for the given week number.
 
         _set_schedule_weekly_data() -> None:
-            Builds the schedule using ESPN's weekly format by iterating over each week's schedule endpoint
-            and paginating through event data.
+            Loads and processes weekly-formatted schedule data, detecting the current week.
 
         _set_schedule_daily_data() -> None:
-            Builds the schedule using ESPN's daily format by constructing date-based event queries for
-            each week and paginating through all available event pages.
+            Loads and processes daily-formatted schedule data, detecting the current week.
+
+        to_dict() -> list:
+            Returns the original list of schedule URLs, suitable for serialization or debugging.
+
+    Notes:
+        - The class automatically determines whether the league uses a weekly or daily schedule
+          based on API metadata.
+        - The current week is determined by comparing today's date with the start and end dates
+          of each weekly/daily block.
     """
 
     def __init__(self, espn_instance, schedule_list: list,
+                 load_current_week_only: bool = False,
                  load_odds: bool = False,
                  load_plays: bool = False):
         """
@@ -42,6 +61,7 @@ class Schedule:
         """
         self.schedule_list = schedule_list
         self._espn_instance = espn_instance
+        self.only_current_week = load_current_week_only
         self.load_odds = load_odds
         self.load_plays = load_plays
         self.api_info = self._espn_instance.api_mapping
@@ -140,7 +160,8 @@ class Schedule:
                               week_number=week_number,
                               start_date=start_date,
                               end_date=end_date))
-            self._weeks.append(this_week)
+            if not self.only_current_week:
+                self._weeks.append(this_week)
             if current_week:
                 self._current_week = this_week
 

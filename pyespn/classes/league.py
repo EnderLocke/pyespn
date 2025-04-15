@@ -164,6 +164,7 @@ class League:
         url = f''
 
     def load_regular_season_schedule(self, season,
+                                     only_current_week: bool = False,
                                      load_game_odds: bool = False,
                                      load_game_play_by_play: bool = False):
         """
@@ -174,6 +175,7 @@ class League:
 
         Args:
             season (int or str): The season year for which to load the schedule (e.g., 2023).
+            only_current_week (bool, optional): Whether to only pull the current week. Defaults to False.
             load_game_odds (bool, optional): Whether to include betting odds for each game. Defaults to False.
             load_game_play_by_play (bool, optional): Whether to include play-by-play data for each game. Defaults to False.
 
@@ -192,6 +194,7 @@ class League:
         self._regular_schedules[season] = get_regular_season_schedule_core(league_abbv=self._espn_instance.league_abbv,
                                                                            espn_instance=self._espn_instance,
                                                                            season=season,
+                                                                           current_week_only=only_current_week,
                                                                            load_odds=self.load_game_odds,
                                                                            load_pbp=self.load_game_play_by_play)
 

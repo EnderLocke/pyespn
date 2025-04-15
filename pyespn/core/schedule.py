@@ -8,7 +8,9 @@ if TYPE_CHECKING:
 
 
 def get_regular_season_schedule_core(league_abbv, espn_instance,
-                                     season, load_odds: bool = False,
+                                     season,
+                                     current_week_only: bool = False,
+                                     load_odds: bool = False,
                                      load_pbp: bool = False,
                                      season_type='2') -> "Schedule":
     """
@@ -18,6 +20,7 @@ def get_regular_season_schedule_core(league_abbv, espn_instance,
         league_abbv (str): Abbreviation of the league (e.g., 'nfl', 'cfb').
         espn_instance (PyESPN): An instance of the ESPN API wrapper used to fetch and parse data.
         season (int): The year of the season (e.g., 2023).
+        current_week_only (bool, optional): Whether to only pull the current week. Defaults to False.
         load_odds (bool, optional): Whether to include betting odds in the schedule. Defaults to False.
         load_pbp (bool, optional): Whether to load play-by-play data for each event. Defaults to False.
         season_type (str, optional): Season type as defined by ESPN:
@@ -53,6 +56,7 @@ def get_regular_season_schedule_core(league_abbv, espn_instance,
             weeks_urls.append(item.get('$ref'))
     schedule = Schedule(schedule_list=weeks_urls,
                         espn_instance=espn_instance,
+                        load_current_week_only=current_week_only,
                         load_odds=load_odds,
                         load_plays=load_pbp)
 
