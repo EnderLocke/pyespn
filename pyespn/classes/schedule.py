@@ -113,8 +113,8 @@ class Schedule:
         for week_url in self.schedule_list:
             api_url = week_url
             week_content = fetch_espn_data(api_url)
-            start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d")
-            end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d")
+            start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d").replace(tzinfo=timezone.utc)
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
             week_events_url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
@@ -144,8 +144,8 @@ class Schedule:
         """
         for week_url in self.schedule_list:
             weekly_content = fetch_espn_data(url=week_url)
-            start_date = datetime.strptime(weekly_content.get('startDate')[:10], "%Y-%m-%d")
-            end_date = datetime.strptime(weekly_content.get('endDate')[:10], "%Y-%m-%d")
+            start_date = datetime.strptime(weekly_content.get('startDate')[:10], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            end_date = datetime.strptime(weekly_content.get('endDate')[:10], "%Y-%m-%d").replace(tzinfo=timezone.utc)
             self.now = datetime.now(timezone.utc)
 
             if start_date <= self.now <= end_date:
