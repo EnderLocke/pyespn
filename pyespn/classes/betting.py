@@ -547,7 +547,7 @@ class Odds:
         self.current = OddsType(odds_name='current',
                                 odds_type_json=self.odds_json.get('current'),
                                 espn_instance=self._espn_instance)
-        if self.gameodds_instance.provider == 'ESPN BET':
+        if self.gameodds_instance.provider.upper() == 'ESPN BET':
             self.close = OddsType(odds_name='close',
                                   odds_type_json=self.odds_json.get('close'),
                                   espn_instance=self._espn_instance)
