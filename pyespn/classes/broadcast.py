@@ -1,3 +1,8 @@
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pyespn import PYESPN
+    from pyespn.classes import Event
 
 
 class Broadcast:
@@ -44,7 +49,7 @@ class Broadcast:
         return f"<Official | {self.broadcast_type_name} | {self.station}>"
 
     @property
-    def espn_instance(self):
+    def espn_instance(self) -> "PYESPN":
         """
         Returns the ESPN API wrapper instance associated with this broadcast.
 
@@ -54,7 +59,7 @@ class Broadcast:
         return self._espn_instance
 
     @property
-    def event_instance(self):
+    def event_instance(self) -> "Event":
         """
         Returns the event associated with this broadcast.
 
