@@ -332,7 +332,7 @@ class GameOdds:
         self.money_line_winner = self.odds_json.get('moneylineWinner')
         self.spread_winner = self.odds_json.get("spreadWinner")
 
-        if self.provider not in STANDARDIZED_BETTING_PROVIDERS:
+        if self.provider.lower() not in [p.lower() for p in STANDARDIZED_BETTING_PROVIDERS]:
             if self.provider == 'Bet 365':
                 away_dicts = {}
                 home_dicts = {}
