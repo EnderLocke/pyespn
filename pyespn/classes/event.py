@@ -375,6 +375,8 @@ class Competition:
         self.officials = self.competition_json.get('officials')
         self.predictions_available = self.competition_json.get("predictionsAvailable")
         self.clock = self.competition_json.get("clock")
+        self.time_of_day = self.competition_json.get('timeOfDay')
+        self.duration = self.competition_json.get("duration")
         # nba has series
         self.series = self.competition_json.get('series')
 
