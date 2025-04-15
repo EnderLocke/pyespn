@@ -7,7 +7,7 @@
 * added in current_week/todays_events across schedule/week classes
 * event has a today indicator
 * added in indicators in week/events if it is today/this week
-* added in current_week propery in schedule class
+* added in current_week property in schedule class
 * added in events_today property in weeks class
 * 
 
