@@ -1,6 +1,7 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.betting import GameOdds
 from pyespn.classes.gamelog import Drive, Play
+from pyespn.classes.official import Official
 from pyespn.utilities import fetch_espn_data
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
@@ -102,6 +103,7 @@ class Event:
         self._odds = None
         self._drives = None
         self._plays = None
+        self._officials = None
         self.api_info = self._espn_instance.api_mapping
         self._load_teams()
         self._load_competition_data()
@@ -109,6 +111,13 @@ class Event:
             self.load_betting_odds()
         if load_play_by_play:
             self.load_play_by_play()
+
+    @property
+    def officials(self):
+        """
+            list[Official]: a list of the officials for the event
+        """
+        return self._officials
 
     @property
     def today(self):
@@ -198,19 +207,40 @@ class Event:
 
     def load_boxscore(self):
         # todo it looks like to get stats i have to loop thru competitors
-        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671707/competitions/401671707/competitors/30/statistics?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/401671707/competitors/30/statistics?lang=en&region=us'
         pass
 
     def load_broadcasts(self):
-        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671707/competitions/401671707/broadcasts?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/{self._event_id}/broadcasts'
         pass
 
     def load_officials(self):
-        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671707/competitions/401671707/officials?lang=en&region=us'
+        """
+        Loads and initializes the officials assigned to this event.
 
+        This method fetches the list of officials from the ESPN API and creates
+        `Official` instances for each one, attaching them to the current event.
+
+        The data is pulled using the event and competition ID, and each official is
+        passed references to the ESPN instance and the current event.
+
+        Returns:
+            None
+
+        Example:
+            >>> event.load_officials()
+            >>> for official in event.officials:
+            >>>     print(official.name)
+        """
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/{self._event_id}/officials'
+        official_content = fetch_espn_data(url)
+        for official in official_content.get('items', []):
+            self._officials.append(Official(official_json=official,
+                                            espn_instance=self._espn_instance,
+                                            event_instance=self))
 
     def load_game_leaders(self):
-        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671707/competitions/401671707/leaders?lang=en&region=us'
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/{self._event_id}/leaders'
 
     def load_betting_odds(self):
         """
