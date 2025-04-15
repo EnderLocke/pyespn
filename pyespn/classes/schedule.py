@@ -150,16 +150,16 @@ class Schedule:
 
                 for event in week_page_content.get('items', []):
                     week_events.append(event.get('$ref'))
-
-            this_week = (Week(espn_instance=self._espn_instance,
-                              week_list=week_events,
-                              week_number=week_number,
-                              start_date=start_date,
-                              end_date=end_date))
-            if not self.only_current_week:
-                self._weeks.append(this_week)
-            if current_week:
-                self._current_week = this_week
+            if not self.only_current_week or current_week:
+                this_week = (Week(espn_instance=self._espn_instance,
+                                  week_list=week_events,
+                                  week_number=week_number,
+                                  start_date=start_date,
+                                  end_date=end_date))
+                if not self.only_current_week:
+                    self._weeks.append(this_week)
+                if current_week:
+                    self._current_week = this_week
 
     def _set_schedule_weekly_data(self) -> None:
         """
