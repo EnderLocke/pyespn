@@ -50,7 +50,7 @@ def fetch_espn_data(url: str) -> dict:
         url (str): The URL from which to fetch the data.
 
     Returns:
-        dict: The parsed JSON response from the URL if successful, otherwise None.
+        dict or None: The parsed JSON response from the URL if successful, otherwise None.
 
     Raises:
         NoDataReturnedError: If the response contains no items or an unexpected response code is encountered.
@@ -58,7 +58,7 @@ def fetch_espn_data(url: str) -> dict:
         ValueError: If the response cannot be parsed as JSON.
 
     Example:
-        >>> url = "https://api.espn.com/v1/sports/football"
+        >>> url = "https://api.espn.com/v2/sports/football"
         >>> data = fetch_espn_data(url)
     """
 
@@ -71,7 +71,8 @@ def fetch_espn_data(url: str) -> dict:
 
         items_count = content.get('items', '').__len__
         content_count = content.__len__
-        if items_count == 0 and content_count != 5:
+        #if items_count == 0 and content_count != 5:
+        if items_count == 0 and 'items' in content:
             raise NoDataReturnedError(code=content.get('status', {}).get('code'))
 
         return content
@@ -81,4 +82,3 @@ def fetch_espn_data(url: str) -> dict:
         print(f"Data error: {ve}")
 
     return None  # Return None if there is an error
-
