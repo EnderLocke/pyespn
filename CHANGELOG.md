@@ -3,6 +3,7 @@
 ## 0.3.4
 * adding in preseason/postseason schedules
   * also play in for nba
+* added in depthchart api endpoints
 * 
 
 ## 0.3.3
