@@ -391,6 +391,10 @@ class Team:
 
         self._roster[season] = athletes
 
+    def load_seasons_events(self, season):
+
+        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2024/teams/30/events'
+
     def load_season_results(self, season):
         """
         Retrieves and stores seasonal game records for the team.

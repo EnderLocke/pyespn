@@ -196,6 +196,22 @@ class Event:
         """
         return f"<Event | {self.short_name} {self.date}>"
 
+    def load_boxscore(self):
+        # todo it looks like to get stats i have to loop thru competitors
+        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671707/competitions/401671707/competitors/30/statistics?lang=en&region=us'
+        pass
+
+    def load_broadcasts(self):
+        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671707/competitions/401671707/broadcasts?lang=en&region=us'
+        pass
+
+    def load_officials(self):
+        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671707/competitions/401671707/officials?lang=en&region=us'
+
+
+    def load_game_leaders(self):
+        url = f'http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401671707/competitions/401671707/leaders?lang=en&region=us'
+
     def load_betting_odds(self):
         """
         method to fetch and assign betting odds for the event.
