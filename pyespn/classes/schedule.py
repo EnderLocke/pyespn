@@ -2,7 +2,7 @@ from pyespn.utilities import (fetch_espn_data, get_schedule_type,
                               get_an_id)
 from pyespn.exceptions import ScheduleTypeUnknownError
 from pyespn.classes import Event
-from datetime import datetime
+from datetime import datetime, timezone
 import concurrent.futures
 
 
@@ -48,6 +48,7 @@ class Schedule:
 
         self.season = get_an_id(self.schedule_list[0], 'seasons')
         self.schedule_type = None
+        self._current_week = None
         self._weeks = []
 
         schedule_type_id = get_schedule_type(self.schedule_list[0])
@@ -69,6 +70,13 @@ class Schedule:
             self._set_schedule_daily_data()
         else:
             raise ScheduleTypeUnknownError(league_abbv=self._espn_instance.league_abbv)
+
+    @property
+    def current_week(self):
+        """
+            Week: the current week in the season
+        """
+        return self._current_week
 
     @property
     def espn_instance(self):
@@ -138,6 +146,13 @@ class Schedule:
             weekly_content = fetch_espn_data(url=week_url)
             start_date = datetime.strptime(weekly_content.get('startDate')[:10], "%Y-%m-%d")
             end_date = datetime.strptime(weekly_content.get('endDate')[:10], "%Y-%m-%d")
+            self.now = datetime.now(timezone.utc)
+
+            if start_date <= self.now <= end_date:
+                current_week = True
+            else:
+                current_week = False
+
             api_url = week_url.split('?')[0] + f'/events'
             week_content = fetch_espn_data(api_url)
             week_pages = week_content.get('pageCount')
@@ -150,11 +165,14 @@ class Schedule:
                 for event in this_week_content.get('items', []):
                     event_urls.append(event.get('$ref'))
                 if event_urls:
-                    self._weeks.append(Week(espn_instance=self._espn_instance,
-                                            week_list=event_urls,
-                                            week_number=week_number,
-                                            start_date=start_date,
-                                            end_date=end_date))
+                    this_week = Week(espn_instance=self._espn_instance,
+                                     week_list=event_urls,
+                                     week_number=week_number,
+                                     start_date=start_date,
+                                     end_date=end_date)
+                    self._weeks.append(this_week)
+                    if current_week:
+                        self._current_week = this_week
 
     def get_events(self, week_num: int) -> list["Event"]:
         """
@@ -234,6 +252,7 @@ class Week:
         self._espn_instance = espn_instance
         self.week_list = week_list
         self._events = []
+        self._events_today = []
         self.week_number = None
         self.start_date = start_date
         self.end_date = end_date
@@ -287,7 +306,10 @@ class Week:
 
             for future in concurrent.futures.as_completed(futures):
                 try:
-                    self._events.append(future.result())  # Append event when future is done
+                    f = future.result()
+                    self._events.append(f)  # Append event when future is done
+                    if f.today:
+                        self._events_today.append(f)
                 except Exception as e:
                     print(f"Error fetching event: {e}")  # Handle failed API calls gracefully
 

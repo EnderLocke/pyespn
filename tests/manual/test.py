@@ -9,7 +9,6 @@ if __name__ == '__main__':
 
     espn = PYESPN('nfl')
     espn.load_season_rosters(season=season)
-    espn.teams[0].load_season_depth_chart(season=season)
     espn.load_season_schedule(season=season, load_game_odds=True)
     espn.league.load_regular_season_schedule(season=season, load_game_odds=True)
     #espn.load_season_rosters(season=season)

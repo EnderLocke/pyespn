@@ -3,6 +3,7 @@ from pyespn.classes.betting import GameOdds
 from pyespn.classes.gamelog import Drive, Play
 from pyespn.utilities import fetch_espn_data
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
 
 
 @validate_json("event_json")
@@ -85,6 +86,10 @@ class Event:
         self.url_ref = self.event_json.get('$ref')
         self._event_id = self.event_json.get('id')
         self.date = self.event_json.get('date')
+        event_datetime = datetime.strptime(self.date, "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)
+        now_utc = datetime.now(timezone.utc)
+        self._today = event_datetime.date() == now_utc.date()
+
         self.event_name = self.event_json.get('name')
         self.short_name = self.event_json.get('shortName')
         self.competition_type = self.event_json.get('competitions', [])[0].get('type', {}).get('type')
@@ -104,6 +109,13 @@ class Event:
             self.load_betting_odds()
         if load_play_by_play:
             self.load_play_by_play()
+
+    @property
+    def today(self):
+        """
+            bool: if the game is today
+        """
+        return self._today
 
     @property
     def event_id(self):
