@@ -10,6 +10,7 @@
 * added in current_week property in schedule class
 * added in events_today property in weeks class
 * added in function to event to load the officials for it
+* added in function to add broadcast info to event
 * 
 
 ## 0.3.3

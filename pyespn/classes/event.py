@@ -2,6 +2,7 @@ from pyespn.core.decorators import validate_json
 from pyespn.classes.betting import GameOdds
 from pyespn.classes.gamelog import Drive, Play
 from pyespn.classes.official import Official
+from pyespn.classes.broadcast import Broadcast
 from pyespn.utilities import fetch_espn_data
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
@@ -103,7 +104,8 @@ class Event:
         self._odds = None
         self._drives = None
         self._plays = None
-        self._officials = None
+        self._officials = []
+        self._broadcasts = []
         self.api_info = self._espn_instance.api_mapping
         self._load_teams()
         self._load_competition_data()
@@ -211,8 +213,26 @@ class Event:
         pass
 
     def load_broadcasts(self):
+        """
+        Loads broadcast information for the current event from the ESPN API.
+
+        This method fetches broadcast data for the specific event and appends
+        each broadcast to the `_broadcasts` attribute as a `Broadcast` instance.
+
+        Returns:
+            None
+
+        Example:
+            >>> event.load_broadcasts()
+            >>> for broadcast in event.broadcasts:
+            >>>     print(broadcast.display_name)
+        """
         url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/{self._event_id}/broadcasts'
-        pass
+        broadcast_content = fetch_espn_data(url)
+        for broadcast in broadcast_content.get('items', []):
+            self._broadcasts.append(Broadcast(broadcast_json=broadcast,
+                                              espn_instance=self._espn_instance,
+                                              event_instance=self))
 
     def load_officials(self):
         """

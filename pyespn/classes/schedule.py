@@ -408,3 +408,23 @@ class Week:
         """
         for event in self._events:
             event.load_officials()
+
+    def load_event_broadcasts(self):
+        """
+        Loads broadcast data for all events in the week.
+
+        This method iterates through each `Event` instance in the `_events` list
+        and calls its `load_broadcasts` method to fetch and store associated
+        broadcast information.
+
+        Returns:
+            None
+
+        Example:
+            >>> week.load_event_broadcasts()
+            >>> for event in week.events:
+            >>>     print(event.broadcasts)
+        """
+        for event in self._events:
+            event.load_broadcasts()
+
