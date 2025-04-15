@@ -92,6 +92,8 @@ class Event:
         event_datetime = datetime.strptime(self.date, "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)
         now_utc = datetime.now(timezone.utc)
         self._today = event_datetime.date() == now_utc.date()
+        self.status = self.event_json.get('status')
+        self.situation = self.event_json.get('situation')
 
         self.event_name = self.event_json.get('name')
         self.short_name = self.event_json.get('shortName')
@@ -118,9 +120,11 @@ class Event:
 
 
     def _load_competitors_data(self):
-
+        competitors_data = []
         for competitor in self.competitors:
-
+            competitors_data.append(Competitor(competitor_json=competitor,
+                                               espn_instance=self._espn_instance,
+                                               event_instance=self))
             pass
 
         pass
