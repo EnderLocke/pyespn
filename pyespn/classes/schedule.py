@@ -358,7 +358,7 @@ class Week:
                 except Exception as e:
                     print(f"Error fetching event: {e}")  # Handle failed API calls gracefully
 
-    def _fetch_event(self, event_url) -> Event:
+    def _fetch_event(self, event_url) -> "Event":
         """
         Fetches event data from the given URL.
 
