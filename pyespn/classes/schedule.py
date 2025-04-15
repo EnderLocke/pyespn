@@ -294,7 +294,10 @@ class Week:
     @property
     def events_today(self):
         """
-            list[Event]: a list of Event objects happening today
+        list[Event]: A list of Event objects scheduled for today.
+
+        This property returns only the events whose scheduled date matches today's date (UTC).
+        Useful for quickly accessing games or matches occurring on the current day.
         """
         return self._events_today
 
