@@ -386,3 +386,45 @@ class Week:
             list[Event]: A list of Event instances for the week.
         """
         return self._events
+
+    def load_event_officials(self):
+        """
+        Loads officials for all events in the week.
+
+        Iterates through all Event instances associated with this Week and calls
+        `load_officials` on each to fetch and attach their respective officials data
+        from the ESPN API.
+
+        This enriches each event in the week with information about referees,
+        umpires, or other officiating personnel.
+
+        Returns:
+            None
+
+        Example:
+            >>> week.load_event_officials()
+            >>> for event in week.events:
+            >>>     print(event.officials)
+        """
+        for event in self._events:
+            event.load_officials()
+
+    def load_event_broadcasts(self):
+        """
+        Loads broadcast data for all events in the week.
+
+        This method iterates through each `Event` instance in the `_events` list
+        and calls its `load_broadcasts` method to fetch and store associated
+        broadcast information.
+
+        Returns:
+            None
+
+        Example:
+            >>> week.load_event_broadcasts()
+            >>> for event in week.events:
+            >>>     print(event.broadcasts)
+        """
+        for event in self._events:
+            event.load_broadcasts()
+

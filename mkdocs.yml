@@ -10,8 +10,10 @@ nav:
   - Classes:
     - Bet Value: classes/bet_value_class.md
     - Betting: classes/betting_class.md
+    - Broadcast: classes/broadcast_class.md
     - Circuit: classes/circuit_class.md
     - Competition: classes/competition_class.md
+    - Depth Chart: classes/depth_chart_class.md
     - Draft: classes/draft_class.md
     - Drive: classes/drive_class.md
     - Event: classes/event_class.md
@@ -25,8 +27,10 @@ nav:
     - Odds: classes/odds_class.md
     - Odds Bet365: classes/odds_bet365_class.md
     - Odds Type: classes/odds_type_class.md
+    - Official: classes/official_class.md
     - Play: classes/play_class.md
     - Player: classes/player_class.md
+    - Position: classes/position_class.md
     - Record: classes/record_class.md
     - Recruit: classes/recruit_class.md
     - Schedule: classes/schedule_class.md
