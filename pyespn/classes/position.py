@@ -65,6 +65,7 @@ class Position:
         self.display_name = this_json.get('displayName')
         self.abbreviation = this_json.get('abbreviation')
         self.leaf = this_json.get('leaf')
+        self.parent_ref = this_json.get('parent', {}).get('$ref')
         rank = 1
         for athlete in self.position_json.get('athletes'):
             athlete_url = athlete.get('athlete', {}).get('$ref')
