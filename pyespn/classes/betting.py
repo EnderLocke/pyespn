@@ -258,7 +258,7 @@ class Line:
 
 class GameOdds:
     """
-    Represents the overall betting odds for a specific game/event.
+    Represents the overall betting odds for a specific game or event.
 
     This class handles parsing and organizing odds data from various providers, including
     standardized ones (like ESPN BET) and custom formats (like Bet365). It creates instances
@@ -280,7 +280,11 @@ class GameOdds:
         away_team_odds (Odds or OddsBet365): Odds object for the away team.
         open (BetValue, optional): Opening odds.
         current (BetValue, optional): Current odds.
-        close (BetValue, optional): Closing odds (if available for provider).
+        close (BetValue, optional): Closing odds.
+
+    Note:
+        The `close` attribute will be an empty object (`{}`) if the game has not started yet or
+        if the closing odds are not yet available from the provider.
     """
 
     def __init__(self, odds_json, espn_instance, event_instance):
@@ -332,7 +336,7 @@ class GameOdds:
         self.money_line_winner = self.odds_json.get('moneylineWinner')
         self.spread_winner = self.odds_json.get("spreadWinner")
 
-        if self.provider not in STANDARDIZED_BETTING_PROVIDERS:
+        if self.provider.lower() not in [p.lower() for p in STANDARDIZED_BETTING_PROVIDERS]:
             if self.provider == 'Bet 365':
                 away_dicts = {}
                 home_dicts = {}
@@ -377,7 +381,9 @@ class GameOdds:
             self.current = BetValue(bet_name='current',
                                     bet_json=self.odds_json.get('current'),
                                     espn_instance=self._espn_instance)
-            if self.provider == 'ESPN BET':
+            if self.provider.upper() == 'ESPN BET':
+                # todo need to update this if the game has been played, otherwise
+                #  its not closed yet
                 self.close = BetValue(bet_name='close',
                                       bet_json=self.odds_json.get('close'),
                                       espn_instance=self._espn_instance)
@@ -545,7 +551,7 @@ class Odds:
         self.current = OddsType(odds_name='current',
                                 odds_type_json=self.odds_json.get('current'),
                                 espn_instance=self._espn_instance)
-        if self.gameodds_instance.provider == 'ESPN BET':
+        if self.gameodds_instance.provider.upper() == 'ESPN BET':
             self.close = OddsType(odds_name='close',
                                   odds_type_json=self.odds_json.get('close'),
                                   espn_instance=self._espn_instance)

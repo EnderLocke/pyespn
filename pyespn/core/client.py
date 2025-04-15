@@ -147,7 +147,7 @@ class PYESPN:
         Returns:
             str: A formatted string with class details
         """
-        return f"<PyESPN | League {self._league_abbv}>"
+        return f"<PyESPN | {self._league_abbv}>"
 
     def _load_teams_datav2(self):
         """
@@ -341,7 +341,7 @@ class PYESPN:
         Retrieves standings for a given season and type.
 
         Args:
-            season (str): The season for which to retrieve standings.
+            season (str or int): The season for which to retrieve standings.
 
         Returns:
             None
@@ -351,10 +351,35 @@ class PYESPN:
                                                     espn_instance=self)
 
     def load_seasons_box_scores(self, season):
+        """
+        Loads player-level box score data for all teams in a given season.
 
+        This method first ensures that rosters are loaded for the specified season,
+        then calls each team's method to load box score data for all players on their roster.
+
+        Args:
+            season (int or int): The season year for which to load box score data.
+
+        Returns:
+            None
+        """
         self.load_season_rosters(season=season)
         for team in self._teams:
             team.load_season_roster_box_score(season=season)
+
+    def load_season_depth_charts(self, season):
+        """
+        Loads depth charts for all teams in the league for a given season.
+
+        This method first ensures that team rosters are loaded for the specified season,
+        then iterates through each team in the league and loads their individual depth charts.
+
+        Args:
+            season (int): The season year for which to load depth chart data.
+        """
+        self.load_season_rosters(season=season)
+        for team in self._teams:
+            team.load_season_depth_chart(season=season)
 
     def get_team_by_id(self, team_id) -> "Team":
         """
@@ -370,10 +395,11 @@ class PYESPN:
 
     def load_season_rosters(self, season) -> None:
         """
-        Loads the season roster for all teams in the league.
+        Loads the season roster for all teams in the league if not already loaded.
 
-        This method iterates through all teams and calls their `load_season_roster`
-        method to fetch and store the roster data for the specified season.
+        This method iterates through each team in the league and checks if the roster
+        for the given season is already present. If not, it calls the team's
+        `load_season_roster` method to fetch and store the data.
 
         Args:
             season (int or str): The season year for which to load rosters.
@@ -387,11 +413,11 @@ class PYESPN:
             >>> for team in espn.teams:
             >>>     print(team.roster[2023])
             [<Player | John Doe>, <Player | Jane Smith>, ...]
-
         """
 
         for team in self._teams:
-            team.load_season_roster(season=season)
+            if season not in team.roster:
+                team.load_season_roster(season=season)
 
     def load_season_team_stats(self, season) -> None:
         """
@@ -536,3 +562,42 @@ class PYESPN:
             athlete = team.get_player_by_season_id(season=season,
                                                    player_id=player_id)
         return athlete
+
+    def load_season_schedule(self, season,
+                             load_preseason: bool = False,
+                             load_postseason: bool = False,
+                             load_play_in: bool = False,
+                             load_game_odds: bool = False,
+                             load_game_play_by_play: bool = False):
+        """
+        Loads the schedule for a given season, including optional preseason and postseason games.
+
+        This method loads the regular season schedule by default. It can also include
+        preseason and postseason schedules, and optionally load game odds and play-by-play data.
+
+        Args:
+            season (int): The season year for which to load the schedule.
+            load_preseason (bool, optional): If True, includes the preseason schedule. Defaults to False.
+            load_postseason (bool, optional): If True, includes the postseason schedule. Defaults to False.
+            load_play_in (bool, optional): If True, includes the play in schedule. Defaults to False.
+            load_game_odds (bool, optional): If True, loads betting odds for each game. Defaults to False.
+            load_game_play_by_play (bool, optional): If True, loads play-by-play data for each game. Defaults to False.
+
+        Returns:
+            None
+        """
+        self._league.load_regular_season_schedule(season=season,
+                                                  load_game_odds=load_game_odds,
+                                                  load_game_play_by_play=load_game_play_by_play)
+        if load_preseason:
+            self._league.load_preseason_schedule(season=season,
+                                                 load_game_odds=load_game_odds,
+                                                 load_game_play_by_play=load_game_play_by_play)
+        if load_postseason:
+            self._league.load_postseason_schedule(season=season,
+                                                  load_game_odds=load_game_odds,
+                                                  load_game_play_by_play=load_game_play_by_play)
+        if load_play_in:
+            self._league.load_playin_schedule(season=season,
+                                              load_game_odds=load_game_odds,
+                                              load_game_play_by_play=load_game_play_by_play)

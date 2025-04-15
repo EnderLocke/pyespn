@@ -2,6 +2,7 @@ from pyespn.utilities import fetch_espn_data
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
 from pyespn.classes.image import Image
+from pyespn.classes.roster import DepthChart
 from pyespn.classes.stat import Record, Stat
 from pyespn.core.decorators import validate_json
 from pyespn.exceptions import API400Error
@@ -93,6 +94,7 @@ class Team:
         self._stats = {}
         self._coaches = {}
         self._betting = {}
+        self._depth_charts = {}
         if team_json:
             self.team_json = team_json
         else:
@@ -115,6 +117,13 @@ class Team:
              dict: a dict with season as the key and a list of Player objects
         """
         return self._coaches
+
+    @property
+    def depth_charts(self):
+        """
+             dict: a dict with season as the key and a list of Player objects organized by position in depth chart
+        """
+        return self._depth_charts
 
     @property
     def stats(self):
@@ -174,7 +183,16 @@ class Team:
         return f"<Team | {self.location} {self.name} ({self.abbreviation}) - {self.get_league()}>"
 
     def load_season_roster_box_score(self, season):
+        """
+        Loads season box score data for all players on the roster for a given season.
 
+        This method iterates through the team's roster for the specified season
+        and calls each player's `load_player_box_scores_season` method to
+        populate their individual game statistics.
+
+        Args:
+            season (int): The season year to load box score data for.
+        """
         for player in self._roster.get(season, []):
             player.load_player_box_scores_season(season=season)
 
@@ -199,8 +217,26 @@ class Team:
 
         self.logos = [Image(image_json=logo, espn_instance=self.espn_instance) for logo in self.team_json.get("logos", [])]
         self.venue_json = self.team_json.get("venue", {})
+        self._check_venue_data()
 
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
+
+    def _check_venue_data(self):
+        """
+        Ensures venue data is populated for the team.
+
+        If `venue_json` is empty, this method fetches updated franchise data from the ESPN API
+        and attempts to extract the `venue` information, updating the instance's `venue_json` attribute.
+
+        This is typically used as a fallback to guarantee venue data is available for a team.
+
+        Note:
+            Requires valid `api_info` and `_team_id` attributes to construct the correct API URL.
+        """
+        if self.venue_json == {}:
+            url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/franchises/{self._team_id}'
+            franchise_content = fetch_espn_data(url)
+            self.venue_json = franchise_content.get('venue', {})
 
     def load_team_season_stats(self, season):
         """
@@ -274,6 +310,30 @@ class Team:
             str: The league abbreviation (e.g., 'nfl', 'nba', 'cfb').
         """
         return self.espn_instance.league_abbv
+
+    def load_season_depth_chart(self, season):
+        """
+        Loads the team's depth chart for a specific season.
+
+        Fetches depth chart data from the ESPN API and constructs `DepthChart` objects for each item.
+        The resulting depth charts are stored in the `depth_charts` attribute, keyed by season.
+
+        Args:
+            season (int): The season year for which to load the depth chart.
+
+        Note:
+            Requires valid `api_info` and `_team_id` attributes to build the API request URL.
+        """
+
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/teams/{self._team_id}/depthcharts'
+        depth_chart_content = fetch_espn_data(url)
+        depth_charts = []
+        for depth_chart in depth_chart_content.get('items', {}):
+            depth_charts.append(DepthChart(depth_chart_json=depth_chart,
+                                           espn_instance=self._espn_instance,
+                                           team_instance=self))
+
+        self.depth_charts[season] = depth_charts
 
     def load_season_roster(self, season) -> None:
         """
@@ -513,4 +573,4 @@ class Manufacturer:
         Returns:
             dict: The manufacturer's raw JSON data.
         """
-        return self.leader_json
+        return self.manufacturer_json

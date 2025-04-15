@@ -50,7 +50,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'baseball',
         'league': 'college-softball',
         'status': 'available',
-        'schedule': 'unknown'
+        'schedule': 'daily'
 },
     {
         'id': 7,
@@ -66,7 +66,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'racing',
         'league': 'f1',
         'status': 'available',
-        'schedule': 'unknown'
+        'schedule': 'weekly'
     },
     {
         'id': 9,
@@ -90,7 +90,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'baseball',
         'league': 'mlb',
         'status': 'available',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 12,
@@ -146,7 +146,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'mens-olympics-basketball',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 19,
@@ -154,7 +154,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'fiba',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 20,
@@ -162,7 +162,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'nba-development',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 21,
@@ -170,7 +170,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'nba-summer-golden-state',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 22,
@@ -178,7 +178,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'nba-summer-las-vegas',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 23,
@@ -186,7 +186,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'nba-summer-orlando',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 24,
@@ -194,7 +194,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'nba-summer-sacramento',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 25,
@@ -202,7 +202,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'nba-summer-utah',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 26,
@@ -210,7 +210,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'nbl',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 27,
@@ -218,7 +218,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'womens-olympics-basketball',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 28,
@@ -226,7 +226,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'basketball',
         'league': 'womens-college-basketball',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 29,
@@ -234,7 +234,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'tennis',
         'league': 'atp',
         'status': 'available',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 30,
@@ -242,7 +242,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'tennis',
         'league': 'wta',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 31,
@@ -377,8 +377,8 @@ LEAGUE_API_MAPPING = [
         'league_abbv': 'nhl',
         'sport': 'hockey',
         'league': 'nhl',
-        'status': 'unavailable',
-        'schedule': 'unknown'
+        'status': 'available',
+        'schedule': 'daily'
     },
     {
         'id': 48,
@@ -386,7 +386,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'hockey',
         'league': 'mens-college-hockey',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 49,
@@ -402,7 +402,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'hockey',
         'league': 'olympics-mens-ice-hockey',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 51,
@@ -410,7 +410,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'hockey',
         'league': 'olympics-womens-ice-hockey',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 52,
@@ -418,7 +418,7 @@ LEAGUE_API_MAPPING = [
         'sport': 'hockey',
         'league': 'mens-college-hockey',
         'status': 'unavailable',
-        'schedule': 'unknown'
+        'schedule': 'daily'
     },
     {
         'id': 53,

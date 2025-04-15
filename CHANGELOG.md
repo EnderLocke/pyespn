@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.4
+* adding in preseason/postseason schedules
+  * also play in for nba
+* added in depthchart api endpoints
+* 
+
 ## 0.3.3
 * moved schedule functions out of client and into league class
 * added in function to team/client to load box scores for a roster for a season
