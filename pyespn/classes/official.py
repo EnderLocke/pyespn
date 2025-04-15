@@ -37,7 +37,7 @@ class Official:
 
     def __repr__(self) -> str:
         """
-        Returns a string representation of the official instance.
+        Returns a string representation of the Official instance.
 
         Returns:
             str: A formatted string with the official information .
@@ -76,4 +76,3 @@ class Official:
         self.position_display_name = self.official_json.get('position', {}).get('displayName')
         self.position_id = self.official_json.get('position', {}).get('id')
         self.order = self.official_json.get('order')
-
