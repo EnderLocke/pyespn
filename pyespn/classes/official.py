@@ -44,6 +44,20 @@ class Official:
         """
         return f"<Official | {self.display_name} | {self.position_name}>"
 
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
+    @property
+    def event_instance(self):
+        """
+            Event: the Event instance associated with the class
+        """
+        return self._event_instance
+
     def _load_official_data(self):
         """
         Parses and assigns official details from the raw JSON data.
