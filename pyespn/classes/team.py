@@ -199,8 +199,15 @@ class Team:
 
         self.logos = [Image(image_json=logo, espn_instance=self.espn_instance) for logo in self.team_json.get("logos", [])]
         self.venue_json = self.team_json.get("venue", {})
+        self._check_venue_data()
 
         self.links = {link["rel"][0]: link["href"] for link in self.team_json.get("links", []) if "rel" in link}
+
+    def _check_venue_data(self):
+        if self.venue_json == {}:
+            url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/franchises/{self._team_id}'
+            franchise_content = fetch_espn_data(url)
+            self.venue_json = franchise_content.get('venue', {})
 
     def load_team_season_stats(self, season):
         """
