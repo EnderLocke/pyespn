@@ -256,9 +256,23 @@ class Week:
         self.week_number = None
         self.start_date = start_date
         self.end_date = end_date
+        self.now = datetime.now(timezone.utc)
+
+        if start_date <= self.now <= end_date:
+            self._current_week = True
+        else:
+            self._current_week = False
+
         self.week_number = week_number
 
         self._set_week_datav2()
+
+    @property
+    def current_week(self):
+        """
+            bool: true if this weeks events is the current week
+        """
+        return self._current_week
         
     @property
     def espn_instance(self):
