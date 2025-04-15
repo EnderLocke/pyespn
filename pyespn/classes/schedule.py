@@ -137,20 +137,19 @@ class Schedule:
                 current_week = True
             else:
                 current_week = False
-
-            week_number = get_an_id(url=api_url,
-                                    slug='weeks')
-            week_events_url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
-            week_content = fetch_espn_data(week_events_url)
-            week_pages = week_content.get('pageCount')
-            week_events = []
-            for week in range(1, week_pages + 1):
-                week_page_url = week_events_url + f"&page={week}"
-                week_page_content = fetch_espn_data(week_page_url)
-
-                for event in week_page_content.get('items', []):
-                    week_events.append(event.get('$ref'))
             if not self.only_current_week or current_week:
+                week_number = get_an_id(url=api_url,
+                                        slug='weeks')
+                week_events_url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
+                week_content = fetch_espn_data(week_events_url)
+                week_pages = week_content.get('pageCount')
+                week_events = []
+                for week in range(1, week_pages + 1):
+                    week_page_url = week_events_url + f"&page={week}"
+                    week_page_content = fetch_espn_data(week_page_url)
+
+                    for event in week_page_content.get('items', []):
+                        week_events.append(event.get('$ref'))
                 this_week = (Week(espn_instance=self._espn_instance,
                                   week_list=week_events,
                                   week_number=week_number,
@@ -179,20 +178,20 @@ class Schedule:
             else:
                 current_week = False
 
-            api_url = week_url.split('?')[0] + f'/events'
-            week_content = fetch_espn_data(api_url)
-            week_pages = week_content.get('pageCount')
-            week_number = get_an_id(url=api_url,
-                                    slug='weeks')
-            for week_page in range(1, week_pages + 1):
-                weekly_url = api_url + f'?page={week_page}'
-                this_week_content = fetch_espn_data(weekly_url)
-                event_urls = []
-                for event in this_week_content.get('items', []):
-                    event_urls.append(event.get('$ref'))
-                if event_urls:
-                    if not self.only_current_week or current_week:
+            if not self.only_current_week or current_week:
 
+                api_url = week_url.split('?')[0] + f'/events'
+                week_content = fetch_espn_data(api_url)
+                week_pages = week_content.get('pageCount')
+                week_number = get_an_id(url=api_url,
+                                        slug='weeks')
+                for week_page in range(1, week_pages + 1):
+                    weekly_url = api_url + f'?page={week_page}'
+                    this_week_content = fetch_espn_data(weekly_url)
+                    event_urls = []
+                    for event in this_week_content.get('items', []):
+                        event_urls.append(event.get('$ref'))
+                    if event_urls:
                         this_week = Week(espn_instance=self._espn_instance,
                                          week_list=event_urls,
                                          week_number=week_number,
