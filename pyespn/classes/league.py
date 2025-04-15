@@ -22,7 +22,6 @@ class League:
     statistical leaderboards.
 
     Attributes:
-        espn_instance (PyESPN): The main interface for interacting with ESPN's API.
         league_json (dict): The raw JSON data representing the league.
         ref (str): Reference URL for the league.
         id (str): The unique identifier for the league.
@@ -43,8 +42,6 @@ class League:
         rankings (list): Ranking data for the league.
         draft (dict): Draft data associated with the league.
         links (list): External or internal links related to the league.
-        league_leaders (dict): Cached leader category objects per season.
-        betting_futures (dict): Cached betting futures data per season.
 
     Methods:
         __repr__(): Returns a formatted string representation of the league.
