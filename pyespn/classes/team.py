@@ -2,6 +2,7 @@ from pyespn.utilities import fetch_espn_data
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
 from pyespn.classes.image import Image
+from pyespn.classes.roster import DepthChart
 from pyespn.classes.stat import Record, Stat
 from pyespn.core.decorators import validate_json
 from pyespn.exceptions import API400Error
@@ -93,6 +94,7 @@ class Team:
         self._stats = {}
         self._coaches = {}
         self._betting = {}
+        self._depth_charts = {}
         if team_json:
             self.team_json = team_json
         else:
@@ -115,6 +117,13 @@ class Team:
              dict: a dict with season as the key and a list of Player objects
         """
         return self._coaches
+
+    @property
+    def depth_charts(self):
+        """
+             dict: a dict with season as the key and a list of Player objects organized by position in depth chart
+        """
+        return self._depth_charts
 
     @property
     def stats(self):
@@ -281,6 +290,18 @@ class Team:
             str: The league abbreviation (e.g., 'nfl', 'nba', 'cfb').
         """
         return self.espn_instance.league_abbv
+
+    def load_season_depth_chart(self, season):
+
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/seasons/{season}/teams/{self._team_id}/depthcharts'
+        depth_chart_content = fetch_espn_data(url)
+        depth_charts = []
+        for depth_chart in depth_chart_content.get('items', {}):
+            depth_charts.append(DepthChart(depth_chart_json=depth_chart,
+                                           espn_instance=self._espn_instance,
+                                           team_instance=self))
+
+        self.depth_charts[season] = depth_charts
 
     def load_season_roster(self, season) -> None:
         """
@@ -520,4 +541,4 @@ class Manufacturer:
         Returns:
             dict: The manufacturer's raw JSON data.
         """
-        return self.leader_json
+        return self.manufacturer_json
