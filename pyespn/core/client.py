@@ -147,7 +147,7 @@ class PYESPN:
         Returns:
             str: A formatted string with class details
         """
-        return f"<PyESPN | League {self._league_abbv}>"
+        return f"<PyESPN | {self._league_abbv}>"
 
     def _load_teams_datav2(self):
         """
