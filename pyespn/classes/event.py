@@ -115,6 +115,13 @@ class Event:
             self.load_play_by_play()
 
     @property
+    def broadcast(self):
+        """
+            list[Official]: a list of the broadcasts for the event
+        """
+        return self._broadcasts
+
+    @property
     def officials(self):
         """
             list[Official]: a list of the officials for the event
