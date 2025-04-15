@@ -258,7 +258,7 @@ class Line:
 
 class GameOdds:
     """
-    Represents the overall betting odds for a specific game/event.
+    Represents the overall betting odds for a specific game or event.
 
     This class handles parsing and organizing odds data from various providers, including
     standardized ones (like ESPN BET) and custom formats (like Bet365). It creates instances
@@ -280,7 +280,11 @@ class GameOdds:
         away_team_odds (Odds or OddsBet365): Odds object for the away team.
         open (BetValue, optional): Opening odds.
         current (BetValue, optional): Current odds.
-        close (BetValue, optional): Closing odds (if available for provider).
+        close (BetValue, optional): Closing odds.
+
+    Note:
+        The `close` attribute will be an empty object (`{}`) if the game has not started yet or
+        if the closing odds are not yet available from the provider.
     """
 
     def __init__(self, odds_json, espn_instance, event_instance):
