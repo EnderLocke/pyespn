@@ -10,6 +10,7 @@ if __name__ == '__main__':
     espn = PYESPN('mlb')
     espn.load_season_rosters(season=season)
     espn.load_season_schedule(season=season, load_only_current_week=True)  #, load_game_odds=True)
+
     espn.league.load_regular_season_schedule(season=season, load_game_odds=True)
     #espn.load_season_rosters(season=season)
     #espn.teams[0].load_season_roster_box_score(season=season)
