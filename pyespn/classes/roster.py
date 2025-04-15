@@ -27,8 +27,8 @@ class DepthChart:
             team_instance (Team): The team associated with the depth chart.
         """
         self.depth_chart_json = depth_chart_json
-        self.espn_instance = espn_instance
-        self.team_instance = team_instance
+        self._espn_instance = espn_instance
+        self._team_instance = team_instance
         self.positions = {}
         self._load_depth_chart_data()
 
@@ -53,8 +53,22 @@ class DepthChart:
         self.id = self.depth_chart_json.get('id')
         for key, value in self.depth_chart_json.get('positions', {}).items():
             self.positions[key] = Position(position_json=value,
-                                           espn_instance=self.espn_instance,
-                                           team_instance=self.team_instance)
+                                           espn_instance=self._espn_instance,
+                                           team_instance=self._team_instance)
+
+    @property
+    def team_instance(self):
+        """
+            Team: the team instance associated with the depth chart
+        """
+        return self._team_instance
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def to_dict(self) -> dict:
         """

@@ -34,7 +34,7 @@ class Position:
             team_instance (Team): The team this position belongs to.
         """
         self.position_json = position_json
-        self.espn_instance = espn_instance
+        self._espn_instance = espn_instance
         self.team_instance = team_instance
         self.depth_chart = {}
         self._load_position_data()
@@ -47,6 +47,13 @@ class Position:
             str: A formatted string with the positions's attributes.
         """
         return f"<Position | {self.abbreviation}>"
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
 
     def _load_position_data(self):
         """
