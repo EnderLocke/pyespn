@@ -566,6 +566,7 @@ class PYESPN:
     def load_season_schedule(self, season,
                              load_only_current_week: bool = False,
                              load_preseason: bool = False,
+                             load_regular_season: bool = True,
                              load_postseason: bool = False,
                              load_play_in: bool = False,
                              load_game_odds: bool = False,
@@ -588,19 +589,23 @@ class PYESPN:
         Returns:
             None
         """
-        self._league.load_regular_season_schedule(season=season,
-
-                                                  load_game_odds=load_game_odds,
-                                                  load_game_play_by_play=load_game_play_by_play)
+        if load_regular_season:
+            self._league.load_regular_season_schedule(season=season,
+                                                      only_current_week=load_only_current_week,
+                                                      load_game_odds=load_game_odds,
+                                                      load_game_play_by_play=load_game_play_by_play)
         if load_preseason:
             self._league.load_preseason_schedule(season=season,
+                                                 only_current_week=load_only_current_week,
                                                  load_game_odds=load_game_odds,
                                                  load_game_play_by_play=load_game_play_by_play)
         if load_postseason:
             self._league.load_postseason_schedule(season=season,
+                                                  only_current_week=load_only_current_week,
                                                   load_game_odds=load_game_odds,
                                                   load_game_play_by_play=load_game_play_by_play)
         if load_play_in:
             self._league.load_playin_schedule(season=season,
+                                              only_current_week=load_only_current_week,
                                               load_game_odds=load_game_odds,
                                               load_game_play_by_play=load_game_play_by_play)
