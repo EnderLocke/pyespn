@@ -162,14 +162,14 @@ class Team:
 
     def get_player_by_season_id(self, season, player_id) -> "Player":
         """
-        Finds and returns the Team object that matches the given team_id.
+        Finds and returns the Player object that matches the given player_id.
 
         Args:
             season (int or str): the season to pull the athlete from
             player_id (int or str): The ID of the player to find.
 
         Returns:
-            Player: The matching Team object, or None if not found.
+            Player: The matching Player object, or None if not found.
         """
         return next((player for player in self._roster.get(season, []) if str(player.id) == str(player_id)), None)
 
