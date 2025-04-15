@@ -1,7 +1,6 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.betting import GameOdds
 from pyespn.classes.gamelog import Drive, Play
-from pyespn.classes.team import Competitor
 from pyespn.classes.official import Official
 from pyespn.classes.broadcast import Broadcast
 from pyespn.utilities import fetch_espn_data
@@ -102,33 +101,49 @@ class Event:
         self.event_venue = Venue(venue_json=self.venue_json,
                                  espn_instance=self._espn_instance)
         self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
-        self.competitors = self.event_json.get('competitions', {}).get('competitors')
+        self.competition_list = self.event_json.get('competitions', [])
+        self.competitors_list = self.competition_list[0].get('competitors')
         self._home_team = None
         self._away_team = None
         self._odds = None
         self._drives = None
         self._plays = None
+        self._winner = None
         self._officials = []
         self._broadcasts = []
+        self._competitors = []
         self.api_info = self._espn_instance.api_mapping
         self._load_teams()
         self._load_competition_data()
+        self._load_competitors_data()
         if load_game_odds:
             self.load_betting_odds()
         if load_play_by_play:
             self.load_play_by_play()
 
-
     def _load_competitors_data(self):
-        competitors_data = []
-        for competitor in self.competitors:
-            competitors_data.append(Competitor(competitor_json=competitor,
-                                               espn_instance=self._espn_instance,
-                                               event_instance=self))
-            pass
+        from pyespn.classes.team import Competitor
+        for competitor in self.competitors_list:
+            this_competitor = Competitor(competitor_json=competitor,
+                                         espn_instance=self._espn_instance,
+                                         event_instance=self)
+            self._competitors.append(this_competitor)
+            if this_competitor.winner:
+                self._winner = this_competitor.team
 
-        pass
+    @property
+    def winner(self):
+        """
+            Team: team object of the winner
+        """
+        return self._winner
 
+    @property
+    def competitors(self):
+        """
+            list[Competitor]: a list of competitors in the event
+        """
+        return self._competitors
 
     @property
     def broadcast(self):

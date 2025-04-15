@@ -590,8 +590,17 @@ class Competitor:
         self._load_competitor_data()
 
     def _load_competitor_data(self):
+        self.id = self.competitor_json.get('id')
+        self.team = self._espn_instance.get_team_by_id(team_id=self.id)
 
-       pass
+        self.home_away = self.competitor_json.get('homeAway')
+        self.winner = self.competitor_json.get('winner')
+        self.order = self.competitor_json.get('order')
+        self.type = self.competitor_json.get('type')
+        self.score = self.competitor_json.get('score')
+        self.linescore = self.competitor_json.get('linescore')
+        self.leaders = self.competitor_json.get('leaders')
+        self.statistics = self.competitor_json.get('statistics')
 
     @property
     def espn_instance(self):
@@ -606,3 +615,12 @@ class Competitor:
             Event: the Event instance associated with the class
         """
         return self._event_instance
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Competitor instance.
+
+        Returns:
+            str: A formatted string with the Competitor data.
+        """
+        return f"<Competitor | {self.team.name} - {'W' if self.winner else 'L'}>"
