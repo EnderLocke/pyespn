@@ -115,6 +115,13 @@ class Schedule:
             week_content = fetch_espn_data(api_url)
             start_date = datetime.strptime(week_content.get('startDate')[:10], "%Y-%m-%d").replace(tzinfo=timezone.utc)
             end_date = datetime.strptime(week_content.get('endDate')[:10], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            self.now = datetime.now(timezone.utc)
+
+            if start_date <= self.now <= end_date:
+                current_week = True
+            else:
+                current_week = False
+
             week_number = get_an_id(url=api_url,
                                     slug='weeks')
             week_events_url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info.get("sport")}/leagues/{self.api_info.get("league")}/events?dates={start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
@@ -127,13 +134,15 @@ class Schedule:
 
                 for event in week_page_content.get('items', []):
                     week_events.append(event.get('$ref'))
-                    pass
 
-            self._weeks.append(Week(espn_instance=self._espn_instance,
-                                    week_list=week_events,
-                                    week_number=week_number,
-                                    start_date=start_date,
-                                    end_date=end_date))
+            this_week = (Week(espn_instance=self._espn_instance,
+                              week_list=week_events,
+                              week_number=week_number,
+                              start_date=start_date,
+                              end_date=end_date))
+            self._weeks.append(this_week)
+            if current_week:
+                self._current_week = this_week
 
     def _set_schedule_weekly_data(self) -> None:
         """
@@ -266,6 +275,12 @@ class Week:
         self.week_number = week_number
 
         self._set_week_datav2()
+    @property
+    def events_today(self):
+        """
+            list[Event]: a list of Event objects happening today
+        """
+        return self._events_today
 
     @property
     def current_week(self):
