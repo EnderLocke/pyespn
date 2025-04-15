@@ -579,3 +579,30 @@ class Manufacturer:
             dict: The manufacturer's raw JSON data.
         """
         return self.manufacturer_json
+
+
+class Competitor:
+
+    def __init__(self, competitor_json, espn_instance, event_instance):
+        self.competitor_json = competitor_json
+        self._espn_instance = espn_instance
+        self._event_instance = event_instance
+        self._load_competitor_data()
+
+    def _load_competitor_data(self):
+
+       pass
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
+    @property
+    def event_instance(self):
+        """
+            Event: the Event instance associated with the class
+        """
+        return self._event_instance

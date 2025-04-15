@@ -1,6 +1,7 @@
 from pyespn.core.decorators import validate_json
 from pyespn.classes.betting import GameOdds
 from pyespn.classes.gamelog import Drive, Play
+from pyespn.classes.team import Competitor
 from pyespn.classes.official import Official
 from pyespn.classes.broadcast import Broadcast
 from pyespn.utilities import fetch_espn_data
@@ -99,6 +100,7 @@ class Event:
         self.event_venue = Venue(venue_json=self.venue_json,
                                  espn_instance=self._espn_instance)
         self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
+        self.competitors = self.event_json.get('competitions', {}).get('competitors')
         self._home_team = None
         self._away_team = None
         self._odds = None
@@ -113,6 +115,16 @@ class Event:
             self.load_betting_odds()
         if load_play_by_play:
             self.load_play_by_play()
+
+
+    def _load_competitors_data(self):
+
+        for competitor in self.competitors:
+
+            pass
+
+        pass
+
 
     @property
     def broadcast(self):

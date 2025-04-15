@@ -1,13 +1,13 @@
 from pyespn import PYESPN
 player_id = 278 # Jimmy Smith, Goat
-season = 2024
+season = 2025
 pick = 8
 pick_round = 2
 
 
 if __name__ == '__main__':
 
-    espn = PYESPN('nfl')
+    espn = PYESPN('mlb')
     espn.load_season_rosters(season=season)
     espn.load_season_schedule(season=season)  #, load_game_odds=True)
     for week in espn.league.schedules[season].weeks:
