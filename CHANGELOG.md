@@ -4,6 +4,8 @@
 * adding in preseason/postseason schedules
   * also play in for nba
 * added in depthchart api endpoints
+* added in current_week/todays_events across schedule/week classes
+* event has a today indicator
 * 
 
 ## 0.3.3
