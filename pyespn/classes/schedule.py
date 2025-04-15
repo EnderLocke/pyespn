@@ -179,7 +179,6 @@ class Schedule:
                 current_week = False
 
             if not self.only_current_week or current_week:
-
                 api_url = week_url.split('?')[0] + f'/events'
                 week_content = fetch_espn_data(api_url)
                 week_pages = week_content.get('pageCount')
