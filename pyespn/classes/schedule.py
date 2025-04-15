@@ -21,13 +21,6 @@ class Schedule:
         weeks (list[Week]): A list of Week instances containing schedule events.
         current_week (Week or None): The Week instance that corresponds to the current date, if applicable.
 
-    Args:
-        espn_instance (PYESPN): The ESPN API wrapper instance.
-        schedule_list (list[str]): A list of URLs pointing to schedule data for the season.
-        load_current_week_only (bool): If True, only the current week will be processed.
-        load_odds (bool): If True, odds data will be loaded for each event.
-        load_plays (bool): If True, play-by-play data will be loaded for each event.
-
     Methods:
         get_events(week: int) -> list[Event]:
             Retrieves the list of Event instances for the given week number.
@@ -57,7 +50,10 @@ class Schedule:
 
         Args:
             espn_instance (PYESPN): The ESPN API wrapper instance.
-            schedule_list (list[str]): A list of URLs pointing to weekly or daily schedule endpoints.
+            schedule_list (list[str]): A list of URLs pointing to schedule data for the season.
+            load_current_week_only (bool): If True, only the current week will be processed.
+            load_odds (bool): If True, odds data will be loaded for each event.
+            load_plays (bool): If True, play-by-play data will be loaded for each event.
         """
         self.schedule_list = schedule_list
         self._espn_instance = espn_instance
@@ -243,12 +239,10 @@ class Week:
     Represents a week's worth of games for a league schedule.
 
     Attributes:
-        espn_instance (PYESPN): The ESPN API instance used to retrieve event data.
         week_list (list[str]): A list of event URLs or event data references for the week.
         week_number (int): The numerical representation of the week (e.g., Week 1, Week 2).
         start_date (str): The start date of the week (ISO 8601 format or as provided).
         end_date (str): The end date of the week (ISO 8601 format or as provided).
-        events (list[Event]): A list of Event instances corresponding to each game in the week.
 
     Methods:
         __repr__() -> str:
@@ -296,6 +290,7 @@ class Week:
         self.week_number = week_number
 
         self._set_week_datav2()
+
     @property
     def events_today(self):
         """
