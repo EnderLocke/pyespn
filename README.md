@@ -56,6 +56,8 @@ espn.load_season_rosters(season=season)
 espn.load_season_schedule(season=season, load_postseason=True)
 for team in espn.teams:
     print(team.name)
+    for athlete in team.roster.get(season, []):
+        print(athlete.name)
 ```
 
 ## Extras
