@@ -91,6 +91,8 @@ class Event:
         event_datetime = datetime.strptime(self.date, "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)
         now_utc = datetime.now(timezone.utc)
         self._today = event_datetime.date() == now_utc.date()
+        self.status = self.event_json.get('status')
+        self.situation = self.event_json.get('situation')
 
         self.event_name = self.event_json.get('name')
         self.short_name = self.event_json.get('shortName')
@@ -99,20 +101,56 @@ class Event:
         self.event_venue = Venue(venue_json=self.venue_json,
                                  espn_instance=self._espn_instance)
         self.event_notes = self.event_json.get('competitions', [])[0].get('notes', [])
+        self.competition_list = self.event_json.get('competitions', [])
+        self.competitors_list = self.competition_list[0].get('competitors')
         self._home_team = None
         self._away_team = None
         self._odds = None
         self._drives = None
         self._plays = None
+        self._winner = None
         self._officials = []
         self._broadcasts = []
+        self._competitors = []
         self.api_info = self._espn_instance.api_mapping
         self._load_teams()
         self._load_competition_data()
+        self._load_competitors_data()
         if load_game_odds:
             self.load_betting_odds()
         if load_play_by_play:
             self.load_play_by_play()
+
+    def _load_competitors_data(self):
+        from pyespn.classes.team import Competitor
+        for competitor in self.competitors_list:
+            this_competitor = Competitor(competitor_json=competitor,
+                                         espn_instance=self._espn_instance,
+                                         event_instance=self)
+            self._competitors.append(this_competitor)
+            if this_competitor.winner:
+                self._winner = this_competitor.team
+
+    @property
+    def winner(self):
+        """
+            Team: team object of the winner
+        """
+        return self._winner
+
+    @property
+    def competitors(self):
+        """
+            list[Competitor]: a list of competitors in the event
+        """
+        return self._competitors
+
+    @property
+    def broadcast(self):
+        """
+            list[Official]: a list of the broadcasts for the event
+        """
+        return self._broadcasts
 
     @property
     def officials(self):
@@ -403,7 +441,8 @@ class Competition:
     def __init__(self, competition_json, espn_instance, event_instance):
         self.competition_json = competition_json
         self._espn_instance = espn_instance
-        self.event_instance = event_instance
+        self._event_instance = event_instance
+        self._score = None
         self._load_competition_data()
 
     def __repr__(self) -> str:
@@ -429,7 +468,7 @@ class Competition:
         self.roster_available = self.competition_json.get("rosterAvailable")
         self.broadcasts = self.competition_json.get("broadcasts")  # Likely a list of dicts
         self.status = self.competition_json.get("status")  # A dict with displayClock, period, etc.
-        self.venue = self.event_instance.event_venue
+        self.venue = self._event_instance.event_venue
         self.competitors = self.competition_json.get("competitors")  # A list of team info
         self.notes = self.competition_json.get("notes")  # Might be optional
         self.start_date = self.competition_json.get("startDate")
@@ -457,6 +496,20 @@ class Competition:
         self.duration = self.competition_json.get("duration")
         # nba has series
         self.series = self.competition_json.get('series')
+
+    @property
+    def event_instance(self):
+        """
+            Event: the Event instance associated with the class
+        """
+        return self._event_instance
+
+    @property
+    def score(self):
+        """
+            Score: score object with the competitors score details by period and overall
+        """
+        return self._score
 
     @property
     def id(self):

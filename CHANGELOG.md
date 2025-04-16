@@ -11,6 +11,8 @@
 * added in events_today property in weeks class
 * added in function to event to load the officials for it
 * added in function to add broadcast info to event
+* added in event functions to build out the competitors
+* added in winner property in event that holds the winner object
 * 
 
 ## 0.3.3

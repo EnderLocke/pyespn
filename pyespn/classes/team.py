@@ -2,6 +2,7 @@ from pyespn.utilities import fetch_espn_data
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
 from pyespn.classes.image import Image
+from pyespn.classes.score import Score
 from pyespn.classes.roster import DepthChart
 from pyespn.classes.stat import Record, Stat
 from pyespn.core.decorators import validate_json
@@ -89,7 +90,7 @@ class Team:
 
         """
         self._espn_instance = espn_instance
-        self.api_info = self.espn_instance.api_mapping
+        self.api_info = self._espn_instance.api_mapping
         self._records = {}
         self._stats = {}
         self._coaches = {}
@@ -579,3 +580,55 @@ class Manufacturer:
             dict: The manufacturer's raw JSON data.
         """
         return self.manufacturer_json
+
+
+class Competitor:
+
+    def __init__(self, competitor_json, espn_instance, event_instance):
+        self.competitor_json = competitor_json
+        self._espn_instance = espn_instance
+        self._event_instance = event_instance
+        self._load_competitor_data()
+
+    def _load_competitor_data(self):
+        self.id = self.competitor_json.get('id')
+        self.team = self._espn_instance.get_team_by_id(team_id=self.id)
+
+        self.home_away = self.competitor_json.get('homeAway')
+        self.winner = self.competitor_json.get('winner')
+        self.order = self.competitor_json.get('order')
+        self.type = self.competitor_json.get('type')
+        self.score_json = self.competitor_json.get('score')
+        self.linescore = self.competitor_json.get('linescore')
+        self.leaders = self.competitor_json.get('leaders')
+        self.statistics = self.competitor_json.get('statistics')
+        self._load_score_data()
+
+    def _load_score_data(self):
+        self.score = Score(espn_instance=self._espn_instance,
+                           event_instance=self._event_instance,
+                           team_id=self.id)
+
+
+    @property
+    def espn_instance(self):
+        """
+            PYESPN: the espn client instance associated with the class
+        """
+        return self._espn_instance
+
+    @property
+    def event_instance(self):
+        """
+            Event: the Event instance associated with the class
+        """
+        return self._event_instance
+
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the Competitor instance.
+
+        Returns:
+            str: A formatted string with the Competitor data.
+        """
+        return f"<Competitor | {self.team.name} - {'W' if self.winner else 'L'}>"
