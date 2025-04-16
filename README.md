@@ -47,6 +47,16 @@ espn.load_season_schedule(season=season, load_postseason=True)
 The data is organized throughout classes, our detailed documents have detailed out each class, but most of the 
 data you will look for will be with the .teams or .league attribute to the client
 
+```py
+from pyespn import PYESPN
+
+season = 2024
+espn = PYESPN('nfl')
+espn.load_season_rosters(season=season)
+espn.load_season_schedule(season=season, load_postseason=True)
+for team in espn.teams:
+    print(team.name)
+```
 
 ## Extras
 
