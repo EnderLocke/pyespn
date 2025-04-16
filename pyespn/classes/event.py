@@ -245,11 +245,6 @@ class Event:
         """
         return f"<Event | {self.short_name} {self.date}>"
 
-    def load_boxscore(self):
-        # todo it looks like to get stats i have to loop thru competitors
-        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_id}/competitions/401671707/competitors/30/statistics?lang=en&region=us'
-        pass
-
     def load_broadcasts(self):
         """
         Loads broadcast information for the current event from the ESPN API.
