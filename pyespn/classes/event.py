@@ -441,7 +441,8 @@ class Competition:
     def __init__(self, competition_json, espn_instance, event_instance):
         self.competition_json = competition_json
         self._espn_instance = espn_instance
-        self.event_instance = event_instance
+        self._event_instance = event_instance
+        self._score = None
         self._load_competition_data()
 
     def __repr__(self) -> str:
@@ -467,7 +468,7 @@ class Competition:
         self.roster_available = self.competition_json.get("rosterAvailable")
         self.broadcasts = self.competition_json.get("broadcasts")  # Likely a list of dicts
         self.status = self.competition_json.get("status")  # A dict with displayClock, period, etc.
-        self.venue = self.event_instance.event_venue
+        self.venue = self._event_instance.event_venue
         self.competitors = self.competition_json.get("competitors")  # A list of team info
         self.notes = self.competition_json.get("notes")  # Might be optional
         self.start_date = self.competition_json.get("startDate")
@@ -495,6 +496,20 @@ class Competition:
         self.duration = self.competition_json.get("duration")
         # nba has series
         self.series = self.competition_json.get('series')
+
+    @property
+    def event_instance(self):
+        """
+            Event: the Event instance associated with the class
+        """
+        return self._event_instance
+
+    @property
+    def score(self):
+        """
+            Score: score object with the competitors score details by period and overall
+        """
+        return self._score
 
     @property
     def id(self):
