@@ -1,4 +1,5 @@
 from pyespn.core import *
+from pyespn.data.limits import records_per_page as rpp
 from pyespn.data.leagues import LEAGUE_API_MAPPING, NO_TEAMS
 from pyespn.data.teams import LEAGUE_TEAMS_MAPPING
 from pyespn.data.betting import (BETTING_PROVIDERS,
@@ -70,6 +71,7 @@ class PYESPN:
         self._league_division_betting_keys = [key for key in LEAGUE_DIVISION_FUTURES_MAPPING.get(self._league_abbv, [])]
         self._api_mapping = lookup_league_api_info(league_abbv=self._league_abbv)
         self._v = v
+        self._rpp = rpp
         self._teams = []
         self.standings = {}
         self.recruit_rankings = {}
@@ -83,6 +85,13 @@ class PYESPN:
                 self._load_teams_datav2()
             else:
                 self._load_manufacturers()
+
+    @property
+    def rpp(self):
+        """
+        int: number of records per page
+        """
+        return self._rpp
 
     @property
     def teams(self):
