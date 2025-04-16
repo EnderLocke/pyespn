@@ -4,7 +4,7 @@ from pyespn.classes.player import Player
 from pyespn.classes.image import Image
 from pyespn.classes.score import Score
 from pyespn.classes.roster import DepthChart
-from pyespn.classes.stat import Record, Stat
+from pyespn.classes.stat import Record, Stat, StatCategory
 from pyespn.core.decorators import validate_json
 from pyespn.exceptions import API400Error
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -588,6 +588,8 @@ class Competitor:
         self.competitor_json = competitor_json
         self._espn_instance = espn_instance
         self._event_instance = event_instance
+        self._team_game_stats = []
+        self._athlete_game_stats = []
         self._load_competitor_data()
 
     def _load_competitor_data(self):
@@ -599,6 +601,7 @@ class Competitor:
         self.order = self.competitor_json.get('order')
         self.type = self.competitor_json.get('type')
         self.score_json = self.competitor_json.get('score')
+        self.api_info = self._espn_instance.api_mapping
         self.linescore = self.competitor_json.get('linescore')
         self.leaders = self.competitor_json.get('leaders')
         self.statistics = self.competitor_json.get('statistics')
@@ -608,6 +611,28 @@ class Competitor:
         self.score = Score(espn_instance=self._espn_instance,
                            event_instance=self._event_instance,
                            team_id=self.id)
+
+    def load_boxscore(self):
+        url = f'http://sports.core.api.espn.com/{self._espn_instance.v}/sports/{self.api_info["sport"]}/leagues/{self.api_info["league"]}/events/{self._event_instance._event_id}/competitions/{self._event_instance._event_id}/competitors/{self.id}/statistics'
+        content = fetch_espn_data(url)
+        categories_list = content.get('splits', {}).get('categories', [])
+
+        for category in categories_list:
+            stats = category.get('stats')
+            athletes = category.get('athletes')
+            for stat in stats:
+                self._team_game_stats.append(StatCategory(record_json=stat,
+                                                          espn_instance=self._espn_instance))
+            for athlete in athletes:
+                athlete_ref = athlete.get('athlete')
+                stats_ref = athlete.get('statistics')
+                # todo get these data/points
+                this_athlete_stats = {
+                    'athlete': None,
+                    'stats': None
+                }
+                pass
+        pass
 
 
     @property
