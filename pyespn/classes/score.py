@@ -19,12 +19,11 @@ class LineScore:
         return f"<LineScore ({self.period}) | {self.display_value}>"
 
     def _load_linescore_data(self):
-        with self.linescore_json as lj:
-            self.value = lj.get('value')
-            self.display_value = lj.get('displayValue')
-            self.period = lj.get('period')
-            self.source = lj.get('source')
-            self.ref = lj.get('$ref')
+        self.value = self.linescore_json.get('value')
+        self.display_value = self.linescore_json.get('displayValue')
+        self.period = self.linescore_json.get('period')
+        self.source = self.linescore_json.get('source')
+        self.ref = self.linescore_json.get('$ref')
 
     @property
     def espn_instance(self):
