@@ -23,6 +23,7 @@ nav:
     - Leader Category: classes/leader_category_class.md
     - League: classes/league_class.md
     - Line: classes/line_class.md
+    - Line Score: classes/line_score_class.md
     - Manufacturer: classes/manufacturer_class.md
     - Odds: classes/odds_class.md
     - Odds Bet365: classes/odds_bet365_class.md
@@ -34,6 +35,7 @@ nav:
     - Record: classes/record_class.md
     - Recruit: classes/recruit_class.md
     - Schedule: classes/schedule_class.md
+    - Score: classes/score_class.md
     - Standings: classes/standings_class.md
     - Stats: classes/stat_class.md
     - Team: classes/teams_class.md
