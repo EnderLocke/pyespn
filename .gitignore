@@ -1,3 +1,5 @@
 /.venv/
 /pyespn.egg-info/
 /.pytest_cache/
+/site/
+/.idea/
