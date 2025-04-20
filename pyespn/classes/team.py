@@ -624,8 +624,10 @@ class Competitor:
                 self._team_game_stats.append(StatCategory(record_json=stat,
                                                           espn_instance=self._espn_instance))
             for athlete in athletes:
-                athlete_ref = athlete.get('athlete')
-                stats_ref = athlete.get('statistics')
+                athlete_ref = athlete.get('athlete', {}).get('$ref')
+                athlete_id = get_athlete_id(athlete_ref)
+                # todo check if athlete exists if they do pull them otherwise api
+                stats_ref = athlete.get('statistics', {}).get('$ref')
                 # todo get these data/points
                 this_athlete_stats = {
                     'athlete': None,
