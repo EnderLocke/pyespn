@@ -2,7 +2,37 @@
 This section is still a work in progress
 
 ## Fork Repo
+fork our repo to your own repository (you can absolutely offer us a pr back after your work!)
 
+## uv
+we use [uv](https://docs.astral.sh/uv/getting-started/) to manage our pacakge. 
+
+### install uv
+
+please download uv
+
+```
+pip install uv
+```
+
+### sync requirements
+sync your environment to the needed environment
+
+```
+uv sync
+```
+
+if you need/want to use venv instead of .venv run this command
+
+```
+python3.11 -m venv venv && source venv/bin/activate && uv sync
+```
+
+if you use venv instaed of .venv you will need to also use the --active flag for uv to use the right venv
+
+```
+uv sync --active
+```
 
 ## Adding a League
 to add a league to pyespn there are a few files that are needed. 
