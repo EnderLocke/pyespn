@@ -11,6 +11,8 @@ dependencies = [
     "mkdocs-material>=9.6.7",
     "mkdocstrings>=0.29.1",
     "mkdocstrings-python>=1.16.8",
+    "pytest>=8.3.5",
+    "pytest-check>=2.5.3",
     "requests>=2.32.3",
     "tqdm>=4.67.1",
 ]
