@@ -1,4 +1,4 @@
-from pyespn.utilities import fetch_espn_data
+from pyespn.utilities import fetch_espn_data, get_athlete_id
 from pyespn.classes.venue import Venue
 from pyespn.classes.player import Player
 from pyespn.classes.image import Image
