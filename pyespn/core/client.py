@@ -11,6 +11,8 @@ from .decorators import *
 from datetime import datetime
 from typing import TYPE_CHECKING, Optional
 import concurrent.futures
+from pyespn.core.golf import get_pga_event_core
+
 
 if TYPE_CHECKING:
     from pyespn.classes import Team, Player, Recruit, Event, League  # Only imports for type checking
@@ -157,6 +159,10 @@ class PYESPN:
             str: A formatted string with class details
         """
         return f"<PyESPN | {self._league_abbv}>"
+    
+    def get_pga_event(self, event_id: int) -> dict:
+        return get_pga_event_core(event_id=event_id)
+
 
     def _load_teams_datav2(self):
         """
@@ -618,3 +624,4 @@ class PYESPN:
                                               only_current_week=load_only_current_week,
                                               load_game_odds=load_game_odds,
                                               load_game_play_by_play=load_game_play_by_play)
+    

@@ -20,3 +20,4 @@ from .awards import get_awards_core
 from .standings import get_standings_core
 from .leagues import get_league_info_core
 from .schedule import get_regular_season_schedule_core
+from .golf import get_pga_event_core

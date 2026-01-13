@@ -428,6 +428,15 @@ LEAGUE_API_MAPPING = [
         'status': 'available',
         'schedule': 'daily'
     },
+    {
+        'id': 54,
+        'league_abbv': 'pga',
+        'sport': 'golf',
+        'league': 'pga',
+        'status': 'available',
+        'schedule': 'daily'
+
+    },
 ]
 
 PRO_LEAGUES = [
@@ -439,5 +448,5 @@ COLLEGE_LEAGUES = [
 ]
 
 NO_TEAMS = [
-    'racing', 'golf', 'tennis'
+    'racing', 'golf', 'tennis', 'pga'
 ]
